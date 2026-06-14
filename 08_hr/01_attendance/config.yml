@@ -1,0 +1,10 @@
+expected_department_count: 5
+expected_year: 2024
+expected_month: 1
+min_rows: 300
+max_rows: 1600
+max_imputed_ratio: 0.15
+standard_work_hours: 8.0
+overtime_warning_hours: 45.0
+overtime_danger_hours: 60.0
+annual_paid_leave_days: 20
