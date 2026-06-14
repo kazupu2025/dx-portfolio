@@ -1,0 +1,8 @@
+expected_warehouse_count: 5
+expected_year: 2024
+expected_month: 1
+min_rows: 400
+max_rows: 1000
+max_imputed_ratio: 0.15
+stockout_alert_threshold: 0
+low_stock_ratio_threshold: 0.20
