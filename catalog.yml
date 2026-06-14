@@ -1,0 +1,413 @@
+# DX ポートフォリオ タスクカタログ
+# 業種×部署×DX化ユースケースの一覧
+# id が null = まだシステム化されていないアイデア
+
+# ── 小売 ──────────────────────────────────────────────
+- id: "A-01"
+  name: "売上データ分析パイプライン"
+  industry: "小売"
+  department: "営業・販売"
+  status: "production-ready"
+  priority: "A"
+  path: "01_retail/01_sales_analysis"
+  description: "複数店舗（xlsx/csv混在）の売上データをクレンジング・分析・可視化。Streamlit Webアプリで提供"
+  demo: "streamlit run app.py"
+
+- id: "B-10"
+  name: "発注最適化・需要予測パイプライン"
+  industry: "小売"
+  department: "物流・在庫"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "過去売上からProphet等で需要予測し、適正発注量を自動算出してエクセル出力"
+  demo: null
+
+- id: null
+  name: "顧客購買履歴 RFM 分析"
+  industry: "小売"
+  department: "営業・販売"
+  status: "idea"
+  priority: null
+  path: null
+  description: "Recency・Frequency・Monetary で顧客をセグメント分類し、施策優先度を可視化"
+  demo: null
+
+- id: null
+  name: "シフト自動作成・人件費最適化"
+  industry: "小売"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "売上予測をベースに最適シフトを自動提案し、時間外コストと予算対比を可視化"
+  demo: null
+
+- id: null
+  name: "返品・クレームデータ集計レポート"
+  industry: "小売"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "返品理由・商品カテゴリ別のクレーム件数と金額を集計し、品質改善ポイントを特定"
+  demo: null
+
+# ── 製造 ──────────────────────────────────────────────
+- id: "A-06"
+  name: "品質検査データ異常値検出レポート"
+  industry: "製造"
+  department: "生産・品質"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "検査データの統計的外れ値を検出し、不良率トレンドと工程別ヒートマップを可視化"
+  demo: null
+
+- id: "B-09"
+  name: "設備稼働ログ異常予兆検知"
+  industry: "製造"
+  department: "生産・品質"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "センサーログから稼働パターンの異常を早期検知し、計画外停止を事前に防止"
+  demo: null
+
+- id: null
+  name: "原材料コスト変動レポート"
+  industry: "製造"
+  department: "経理・財務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "原材料価格の変動を仕入伝票から自動集計し、原価率への影響と前年比を可視化"
+  demo: null
+
+- id: null
+  name: "生産計画 vs 実績 差異分析"
+  industry: "製造"
+  department: "生産・品質"
+  status: "idea"
+  priority: null
+  path: null
+  description: "計画数・実績数・不良数の差異を工程別に分析し、ボトルネック工程を特定"
+  demo: null
+
+- id: null
+  name: "作業員別生産性レポート"
+  industry: "製造"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "ライン別・作業者別の生産数・不良率を集計し、OJT計画の優先対象を算出"
+  demo: null
+
+# ── 医療・介護 ─────────────────────────────────────────
+- id: "A-07"
+  name: "患者来院データ・ピーク時間可視化"
+  industry: "医療・介護"
+  department: "受付・CS"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "時間帯・曜日別の来院数を集計してピーク時間を可視化し、受付体制の最適化を支援"
+  demo: null
+
+- id: null
+  name: "スタッフシフト最適化レポート"
+  industry: "医療・介護"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "来院数予測を元に最適スタッフ配置を算出し、残業・休日出勤コストを削減"
+  demo: null
+
+- id: null
+  name: "薬品在庫管理・発注アラート"
+  industry: "医療・介護"
+  department: "物流・在庫"
+  status: "idea"
+  priority: null
+  path: null
+  description: "薬品在庫の消費速度から発注タイミングを自動通知し、欠品・過剰在庫を防止"
+  demo: null
+
+- id: null
+  name: "介護記録データ集計・傾向分析"
+  industry: "医療・介護"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "介護記録から利用者ごとの身体・認知状態のトレンドを集計し、ケアプランを支援"
+  demo: null
+
+# ── 金融・保険 ─────────────────────────────────────────
+- id: "A-04"
+  name: "経費精算データ集計・月次レポート"
+  industry: "金融・保険"
+  department: "経理・財務"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "経費精算データを部門・費目別に集計し、予算対比・前月比の月次レポートを自動生成"
+  demo: null
+
+- id: "B-11"
+  name: "与信スコアリングデータ整備"
+  industry: "金融・保険"
+  department: "経理・財務"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "顧客財務データを標準化・クレンジングし、与信審査モデルへのインプット品質を向上"
+  demo: null
+
+- id: null
+  name: "請求書突合・差異検出"
+  industry: "金融・保険"
+  department: "経理・財務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "請求書データと入金記録を自動突合し、未収・差異をリアルタイム検出してアラート"
+  demo: null
+
+- id: null
+  name: "契約更新アラート・期限管理"
+  industry: "金融・保険"
+  department: "営業・販売"
+  status: "idea"
+  priority: null
+  path: null
+  description: "保険契約の更新期限をスコアリングし、優先アプローチ先を自動ランキング出力"
+  demo: null
+
+# ── 物流・倉庫 ─────────────────────────────────────────
+- id: "A-03"
+  name: "在庫データクレンジング・欠品検知"
+  industry: "物流・倉庫"
+  department: "物流・在庫"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "複数倉庫の在庫データを統合クレンジングし、欠品リスク品目を自動検出・レポート"
+  demo: null
+
+- id: null
+  name: "配送ルート効率化レポート"
+  industry: "物流・倉庫"
+  department: "物流・在庫"
+  status: "idea"
+  priority: null
+  path: null
+  description: "配送実績データから非効率ルートを特定し、燃料費・時間コスト削減額を試算"
+  demo: null
+
+- id: null
+  name: "ドライバー稼働時間・残業管理"
+  industry: "物流・倉庫"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "運行記録から拘束時間・休息時間を自動集計し、法令違反リスクをアラート通知"
+  demo: null
+
+- id: null
+  name: "倉庫作業員 KPI 集計"
+  industry: "物流・倉庫"
+  department: "生産・品質"
+  status: "idea"
+  priority: null
+  path: null
+  description: "ピッキング数・エラー率・時間当たり作業量をスタッフ別に集計・比較可視化"
+  demo: null
+
+# ── 飲食 ──────────────────────────────────────────────
+- id: "A-02"
+  name: "飲食×日次売上・廃棄ロス集計レポート"
+  industry: "飲食"
+  department: "営業・販売"
+  status: "production-ready"
+  priority: "A"
+  path: "06_restaurant/01_daily_sales"
+  description: "飲食店5店舗の日次売上を集計し、廃棄ロス率（廃棄額÷売上額）を算出。5%超の店舗をアラート表示する経営支援レポート。"
+  demo: "cd 06_restaurant/01_daily_sales && streamlit run app.py"
+
+- id: "B-13"
+  name: "原価管理・食材ロス分析"
+  industry: "飲食"
+  department: "購買・仕入"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "仕入データとPOS連携で食材ごとの使用率・廃棄率・原価率を管理し改善提案"
+  demo: null
+
+- id: null
+  name: "予約キャンセル率分析・収益影響試算"
+  industry: "飲食"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "キャンセル発生パターンを分析し、機会損失額を定量化して対策の優先度を提示"
+  demo: null
+
+- id: null
+  name: "アルバイトシフト管理・人件費集計"
+  industry: "飲食"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "シフト実績から時給・残業・社保コストを自動集計し、売上対人件費率を可視化"
+  demo: null
+
+# ── 不動産 ────────────────────────────────────────────
+- id: "A-08"
+  name: "物件問い合わせ・成約率分析レポート"
+  industry: "不動産"
+  department: "営業・販売"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "問い合わせから成約までのファネル分析で担当者別・エリア別の転換率を可視化"
+  demo: null
+
+- id: "B-14"
+  name: "賃貸物件管理・空室率レポート"
+  industry: "不動産"
+  department: "営業・販売"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "管理物件の空室状況・稼働率・入退去履歴を自動集計し、オーナー向けレポートを生成"
+  demo: null
+
+- id: null
+  name: "管理費・修繕費コスト分析"
+  industry: "不動産"
+  department: "経理・財務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "物件別の管理コストを集計し、修繕計画の優先順位と収支改善ポイントを算出"
+  demo: null
+
+- id: null
+  name: "入居者対応履歴・クレーム集計"
+  industry: "不動産"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "入居者からの問い合わせ・クレームをカテゴリ分類し、対応工数と頻出課題を可視化"
+  demo: null
+
+# ── 人事・採用 ────────────────────────────────────────
+- id: "A-05"
+  name: "勤怠データ集計・残業アラートレポート"
+  industry: "人事・採用"
+  department: "人事・労務"
+  status: "idea"
+  priority: "A"
+  path: null
+  description: "勤怠データを部門別に集計し、残業上限超過・有休消化率のアラートを自動生成"
+  demo: null
+
+- id: null
+  name: "採用歩留まり率分析"
+  industry: "人事・採用"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "応募〜内定〜入社の各フェーズの通過率をチャネル別・職種別に分析し改善策を提示"
+  demo: null
+
+- id: null
+  name: "研修効果測定レポート"
+  industry: "人事・採用"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "研修前後のスキルアセスメントデータを集計し、研修効果と費用対効果を可視化"
+  demo: null
+
+- id: null
+  name: "人件費推移・予実差異レポート"
+  industry: "人事・採用"
+  department: "経理・財務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "月次人件費を部門・雇用形態別に集計し、予算対比・前年比のトレンドを可視化"
+  demo: null
+
+# ── 教育・研修 ────────────────────────────────────────
+- id: "B-12"
+  name: "受講生成績・退学リスクスコア"
+  industry: "教育・研修"
+  department: "受付・CS"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "成績・出席・提出率から退学リスクを早期検出し、支援介入の優先度を算出"
+  demo: null
+
+- id: null
+  name: "出席率・成績推移レポート"
+  industry: "教育・研修"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "クラス・科目別の出席率と成績分布を集計し、指導品質改善の根拠データを生成"
+  demo: null
+
+- id: null
+  name: "講師稼働・コマ数管理"
+  industry: "教育・研修"
+  department: "人事・労務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "講師別の担当コマ数・稼働時間・時給コストを集計し、適正配置と過負荷を分析"
+  demo: null
+
+# ── サービス ──────────────────────────────────────────
+- id: "B-15"
+  name: "問い合わせログ分類・対応時間分析"
+  industry: "サービス"
+  department: "受付・CS"
+  status: "idea"
+  priority: "B"
+  path: null
+  description: "問い合わせをカテゴリ自動分類し、担当者別・カテゴリ別の対応時間と解決率を分析"
+  demo: null
+
+- id: null
+  name: "顧客満足度スコア集計・トレンド分析"
+  industry: "サービス"
+  department: "受付・CS"
+  status: "idea"
+  priority: null
+  path: null
+  description: "アンケートデータからNPS・CSATを集計し、スコア変動トレンドとサービス改善優先度を可視化"
+  demo: null
+
+- id: null
+  name: "サービス別売上・原価レポート"
+  industry: "サービス"
+  department: "経理・財務"
+  status: "idea"
+  priority: null
+  path: null
+  description: "サービスメニュー別の売上・原価・粗利率を集計し、収益性改善ポイントを特定"
+  demo: null
