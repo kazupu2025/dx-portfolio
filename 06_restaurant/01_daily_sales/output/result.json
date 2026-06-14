@@ -1,0 +1,167 @@
+{
+  "passed": 20,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "csv_exists",
+      "category": "存在",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "log_exists",
+      "category": "存在",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "schema",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "date_nan",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "sales_amount_nan",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "store_name_nan",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "waste_qty_nan",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 8,
+      "name": "waste_amount_nan",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 9,
+      "name": "date_format",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 10,
+      "name": "date_range",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 11,
+      "name": "sales_amount_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 12,
+      "name": "numeric_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 13,
+      "name": "waste_qty_nonneg",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 14,
+      "name": "waste_amount_nonneg",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 15,
+      "name": "store_count",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 16,
+      "name": "store_sales_nonzero",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 17,
+      "name": "row_count",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 18,
+      "name": "price_consistency",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 19,
+      "name": "no_duplicates",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 20,
+      "name": "store_name_format",
+      "category": "品質",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}
