@@ -58,11 +58,11 @@
   name: "品質検査データ異常値検出レポート"
   industry: "製造"
   department: "生産・品質"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
-  description: "検査データの統計的外れ値を検出し、不良率トレンドと工程別ヒートマップを可視化"
-  demo: null
+  path: "02_manufacturing/01_quality_inspection"
+  description: "5工程の品質検査データを集計し、統計的外れ値（±3σ）と工程別不良率アラートを自動検出する品質管理システム"
+  demo: "cd 02_manufacturing/01_quality_inspection && streamlit run app.py"
 
 - id: "B-09"
   name: "設備稼働ログ異常予兆検知"
