@@ -1,8 +1,11 @@
 import pandas as pd
 import numpy as np
+import yaml
 from pathlib import Path
 
-WASTE_ALERT_THRESHOLD = 0.05
+with open("config.yml", encoding="utf-8") as _f:
+    _config = yaml.safe_load(_f)
+WASTE_ALERT_THRESHOLD = _config.get("waste_loss_alert_threshold", 0.05)
 
 df = pd.read_csv("output/cleaned_sales_202401.csv", encoding="utf-8-sig")
 
@@ -48,18 +51,20 @@ if "date" in df.columns:
 # 4. 異常値検出（±2σ）
 lines.append("## 4. 異常値検出（±2σ）\n")
 anomalies = []
-for store, grp in df.groupby("store_name"):
-    if "sales_amount" in grp.columns and len(grp) > 2:
-        mean = grp["sales_amount"].mean()
-        std = grp["sales_amount"].std()
-        if std > 0:
-            outliers = grp[np.abs(grp["sales_amount"] - mean) > 2 * std]
-            for _, row in outliers.iterrows():
-                date_str = str(row.get("date", "不明"))[:10]
-                anomalies.append(
-                    f"- {store} | {date_str} | {row['sales_amount']:,.0f}円"
-                    f"（平均 {mean:,.0f}円 から {(row['sales_amount']-mean)/std:+.1f}σ）"
-                )
+if "date" in df.columns:
+    daily_store = df.groupby(["store_name", "date"])["sales_amount"].sum().reset_index()
+    for store, grp in daily_store.groupby("store_name"):
+        if len(grp) > 2:
+            mean = grp["sales_amount"].mean()
+            std = grp["sales_amount"].std()
+            if std > 0:
+                outliers = grp[np.abs(grp["sales_amount"] - mean) > 2 * std]
+                for _, row in outliers.iterrows():
+                    date_str = str(row.get("date", "不明"))[:10]
+                    anomalies.append(
+                        f"- {store} | {date_str} | {row['sales_amount']:,.0f}円"
+                        f"（日次合計平均 {mean:,.0f}円 から {(row['sales_amount']-mean)/std:+.1f}σ）"
+                    )
 if anomalies:
     lines.extend(anomalies)
 else:
