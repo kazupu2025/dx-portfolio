@@ -1,0 +1,9 @@
+expected_store_count: 5
+expected_year: 2024
+expected_month: 1
+min_rows: 500
+max_rows: 1200
+max_imputed_ratio: 0.15
+price_mismatch_tolerance: 1.0
+waste_loss_alert_threshold: 0.05
+store_name_exceptions: []

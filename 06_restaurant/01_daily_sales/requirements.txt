@@ -1,0 +1,9 @@
+pandas
+openpyxl
+matplotlib
+seaborn
+japanize-matplotlib
+streamlit>=1.30.0
+pyyaml
+pytest
+tabulate
