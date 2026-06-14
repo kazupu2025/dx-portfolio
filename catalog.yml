@@ -191,11 +191,11 @@
   name: "在庫データクレンジング・欠品検知"
   industry: "物流・倉庫"
   department: "物流・在庫"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
+  path: "05_logistics/01_inventory"
   description: "複数倉庫の在庫データを統合クレンジングし、欠品リスク品目を自動検出・レポート"
-  demo: null
+  demo: "cd 05_logistics/01_inventory && streamlit run app.py"
 
 - id: null
   name: "配送ルート効率化レポート"
