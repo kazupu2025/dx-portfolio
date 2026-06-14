@@ -150,11 +150,11 @@
   name: "経費精算データ集計・月次レポート"
   industry: "金融・保険"
   department: "経理・財務"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
-  description: "経費精算データを部門・費目別に集計し、予算対比・前月比の月次レポートを自動生成"
-  demo: null
+  path: "04_finance/01_expense"
+  description: "5部門の経費精算データを集計し、予算消化率と超過アラートを月次レポートで提供する経費管理システム"
+  demo: "cd 04_finance/01_expense && streamlit run app.py"
 
 - id: "B-11"
   name: "与信スコアリングデータ整備"
