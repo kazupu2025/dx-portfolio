@@ -22,7 +22,7 @@ C:\Users\realp\miniconda3\python.exe -c "import pandas; print('OK')"
 ### Step 2: output ディレクトリを作成する
 
 ```bash
-mkdir -p output
+C:\Users\realp\miniconda3\python.exe -c "import pathlib; pathlib.Path('output').mkdir(exist_ok=True); print('output/ OK')"
 ```
 
 ### Step 3: クレンジングスクリプトを output/cleanse.py に書く
