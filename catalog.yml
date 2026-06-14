@@ -314,11 +314,11 @@
   name: "勤怠データ集計・残業アラートレポート"
   industry: "人事・採用"
   department: "人事・労務"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
-  description: "勤怠データを部門別に集計し、残業上限超過・有休消化率のアラートを自動生成"
-  demo: null
+  path: "08_hr/01_attendance"
+  description: "5部門の勤怠データを集計し、残業上限超過（45h警告/60h危険）・有休消化率のアラートを自動生成するパイプライン"
+  demo: "cd 08_hr/01_attendance && streamlit run app.py"
 
 - id: null
   name: "採用歩留まり率分析"
