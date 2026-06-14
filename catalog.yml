@@ -109,11 +109,11 @@
   name: "患者来院データ・ピーク時間可視化"
   industry: "医療・介護"
   department: "受付・CS"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
-  description: "時間帯・曜日別の来院数を集計してピーク時間を可視化し、受付体制の最適化を支援"
-  demo: null
+  path: "03_healthcare/01_patient_visit"
+  description: "5診療科の来院データを集計し、時間帯×曜日ヒートマップでピーク負荷を可視化。長時間待ちアラートで受付体制の最適化を支援"
+  demo: "cd 03_healthcare/01_patient_visit && streamlit run app.py"
 
 - id: null
   name: "スタッフシフト最適化レポート"

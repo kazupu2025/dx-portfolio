@@ -1,0 +1,56 @@
+{
+  "passed": 7,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "report_exists",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "all_sections_present",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "all_depts_in_report",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "insight_keywords",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "peak_section_content",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "numeric_counts_present",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "wait_alert_section",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}
