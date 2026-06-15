@@ -113,6 +113,7 @@ def build_matrix(df: pd.DataFrame) -> go.Figure:
         margin=dict(l=0, r=0, t=10, b=0),
         paper_bgcolor="rgba(0,0,0,0)",
         clickmode="event+select",
+        dragmode="select",
         xaxis=dict(
             side="bottom", tickfont=dict(size=13),
             categoryorder="array", categoryarray=depts,
