@@ -242,11 +242,11 @@
   name: "原価管理・食材ロス分析"
   industry: "飲食"
   department: "購買・仕入"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "仕入データとPOS連携で食材ごとの使用率・廃棄率・原価率を管理し改善提案"
-  demo: null
+  path: "06_restaurant/02_cost_management"
+  description: "5店舗の食材仕入データをカテゴリ別に集計し、廃棄ロス率と廃棄コスト上位食材をアラート付きで可視化する原価管理システム"
+  demo: "cd 06_restaurant/02_cost_management && streamlit run app.py"
 
 - id: null
   name: "予約キャンセル率分析・収益影響試算"
