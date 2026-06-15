@@ -1,0 +1,24 @@
+2026-06-16 05:18:27,098 INFO === cleanse.py 開始 ===
+2026-06-16 05:18:27,099 INFO 読み込み: 01_受講生データ_A班_202401.csv
+2026-06-16 05:18:27,128 INFO 読み込み: 02_student_data_B_202401.csv
+2026-06-16 05:18:27,130 INFO 読み込み: 03_受講生データ_C班_202401.csv
+2026-06-16 05:18:27,134 INFO 統合行数: 1000
+2026-06-16 05:18:27,170 INFO 出力: C:\Users\realp\Desktop\claude_code_TRY\dx-portfolio\09_education\01_dropout_risk\output\cleaned_dropout_202401.csv (1000行)
+2026-06-16 05:18:27,175 INFO リスク分類: {'低リスク': 691, '中リスク': 270, '高リスク': 39}
+2026-06-16 05:18:27,175 INFO === cleanse.py 完了 ===
+2026-06-16 05:19:03,111 INFO === cleanse.py 開始 ===
+2026-06-16 05:19:03,112 INFO 読み込み: 01_受講生データ_A班_202401.csv
+2026-06-16 05:19:03,118 INFO 読み込み: 02_student_data_B_202401.csv
+2026-06-16 05:19:03,121 INFO 読み込み: 03_受講生データ_C班_202401.csv
+2026-06-16 05:19:03,124 INFO 統合行数: 1000
+2026-06-16 05:19:03,147 INFO 出力: C:\Users\realp\Desktop\claude_code_TRY\dx-portfolio\09_education\01_dropout_risk\output\cleaned_dropout_202401.csv (1000行)
+2026-06-16 05:19:03,147 INFO リスク分類: {'低リスク': 691, '中リスク': 270, '高リスク': 39}
+2026-06-16 05:19:03,147 INFO === cleanse.py 完了 ===
+2026-06-16 05:19:50,806 INFO === cleanse.py 開始 ===
+2026-06-16 05:19:50,806 INFO 読み込み: 01_受講生データ_A班_202401.csv
+2026-06-16 05:19:50,816 INFO 読み込み: 02_student_data_B_202401.csv
+2026-06-16 05:19:50,819 INFO 読み込み: 03_受講生データ_C班_202401.csv
+2026-06-16 05:19:50,823 INFO 統合行数: 1000
+2026-06-16 05:19:50,862 INFO 出力: C:\Users\realp\Desktop\claude_code_TRY\dx-portfolio\09_education\01_dropout_risk\output\cleaned_dropout_202401.csv (1000行)
+2026-06-16 05:19:50,863 INFO リスク分類: {'低リスク': 691, '中リスク': 270, '高リスク': 39}
+2026-06-16 05:19:50,863 INFO === cleanse.py 完了 ===

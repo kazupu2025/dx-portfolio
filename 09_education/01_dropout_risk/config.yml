@@ -1,0 +1,14 @@
+expected_student_count: 200
+expected_subject_count: 5
+expected_course_count: 3
+min_rows: 800
+max_rows: 1500
+high_risk_threshold: 40
+medium_risk_threshold: 65
+attendance_weight: 0.35
+midterm_weight: 0.25
+final_weight: 0.20
+assignment_weight: 0.15
+engagement_weight: 0.05
+low_attendance_alert: 70.0
+low_score_alert: 50.0
