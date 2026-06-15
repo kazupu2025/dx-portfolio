@@ -273,11 +273,11 @@
   name: "物件問い合わせ・成約率分析レポート"
   industry: "不動産"
   department: "営業・販売"
-  status: "idea"
+  status: "production-ready"
   priority: "A"
-  path: null
-  description: "問い合わせから成約までのファネル分析で担当者別・エリア別の転換率を可視化"
-  demo: null
+  path: "07_realestate/01_inquiry"
+  description: "5エリアの物件問い合わせデータをファネル分析し、エリア別・担当者別・経路別の成約率を可視化する営業支援システム"
+  demo: "cd 07_realestate/01_inquiry && streamlit run app.py"
 
 - id: "B-14"
   name: "賃貸物件管理・空室率レポート"
