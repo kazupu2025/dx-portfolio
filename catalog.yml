@@ -65,14 +65,14 @@
   demo: "cd 02_manufacturing/01_quality_inspection && streamlit run app.py"
 
 - id: "B-09"
-  name: "設備稼働ログ異常予兆検知"
-  industry: "製造"
+  name: "製造×設備稼働ログ異常予兆検知"
+  industry: "製造業"
   department: "生産・品質"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "センサーログから稼働パターンの異常を早期検知し、計画外停止を事前に防止"
-  demo: null
+  path: "02_manufacturing/02_equipment_log"
+  description: "5台の製造設備センサーログからローリング統計ベースの異常予兆を検知し、CRITICAL/WARNING アラートと連続予兆パターンを可視化する設備保全システム"
+  demo: "cd 02_manufacturing/02_equipment_log && streamlit run app.py"
 
 - id: null
   name: "原材料コスト変動レポート"
