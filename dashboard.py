@@ -70,47 +70,57 @@ def build_matrix(df: pd.DataFrame) -> go.Figure:
         .reindex(index=industries, columns=depts, fill_value=0)
     )
 
-    # go.Heatmap は選択イベントを発火しないため Scatter マーカー方式に変更
-    x_all, y_all, colors_all, text_all = [], [], [], []
+    z = pivot.values.tolist()
+    text_grid = [[str(v) if v > 0 else "" for v in row] for row in z]
+
+    # Layer 1: Heatmap（見た目担当）
+    fig = go.Figure(go.Heatmap(
+        z=z,
+        x=depts,
+        y=industries,
+        text=text_grid,
+        texttemplate="%{text}",
+        textfont={"size": 18, "color": "white"},
+        colorscale=[[0, "#1e293b"], [0.001, "#1e3a5f"], [1, "#2563eb"]],
+        showscale=False,
+        xgap=3, ygap=3,
+        hoverinfo="skip",
+    ))
+
+    # Layer 2: 透明 Scatter（クリックイベント担当）
+    # Heatmap は on_select を発火しないため、同座標に不可視マーカーを重ねる
+    x_pts, y_pts, hovers = [], [], []
     for ind in industries:
         for dept in depts:
-            v = int(pivot.loc[ind, dept]) if (ind in pivot.index and dept in pivot.columns) else 0
-            x_all.append(dept)
-            y_all.append(ind)
-            text_all.append(str(v) if v > 0 else "")
-            colors_all.append("#2563eb" if v >= 2 else "#1e3a5f" if v == 1 else "#1e293b")
+            v = int(pivot.loc[ind, dept])
+            x_pts.append(dept)
+            y_pts.append(ind)
+            hovers.append(f"<b>{ind} × {dept}</b><br>{v} 件")
 
-    fig = go.Figure(go.Scatter(
-        x=x_all, y=y_all,
-        mode="markers+text",
-        marker=dict(
-            size=44,
-            color=colors_all,
-            symbol="square",
-            line=dict(width=2, color="#0f172a"),
-        ),
-        text=text_all,
-        textfont=dict(size=16, color="white"),
-        hovertemplate="<b>%{y} × %{x}</b><extra></extra>",
-        selected=dict(marker=dict(color="#60a5fa", size=46)),
-        unselected=dict(marker=dict(opacity=0.7)),
+    fig.add_trace(go.Scatter(
+        x=x_pts, y=y_pts,
+        mode="markers",
+        marker=dict(size=48, color="rgba(0,0,0,0)", symbol="square"),
+        hovertemplate="%{customdata}<extra></extra>",
+        customdata=hovers,
+        showlegend=False,
+        selected=dict(marker=dict(color="rgba(96,165,250,0.35)", size=48)),
+        unselected=dict(marker=dict(color="rgba(0,0,0,0)", size=48)),
     ))
+
     fig.update_layout(
-        height=400,
-        margin=dict(l=0, r=10, t=10, b=0),
+        height=370,
+        margin=dict(l=0, r=0, t=10, b=0),
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="#0f172a",
         clickmode="event+select",
         xaxis=dict(
             side="bottom", tickfont=dict(size=13),
-            showgrid=False, zeroline=False,
             categoryorder="array", categoryarray=depts,
         ),
         yaxis=dict(
             tickfont=dict(size=13),
-            showgrid=False, zeroline=False,
-            categoryorder="array",
-            categoryarray=list(reversed(industries)),
+            categoryorder="array", categoryarray=industries,
+            autorange="reversed",
         ),
     )
     return fig
@@ -143,12 +153,14 @@ def main():
         use_container_width=True,
     )
 
-    # クリックイベントから業種・部署を取得
+    # クリックイベントから業種・部署を取得（Scatter層 = curve_number 1 のみ）
     click_industry, click_dept = None, None
     if event and hasattr(event, "selection") and event.selection.points:
-        pt = event.selection.points[0]
-        click_industry = pt.get("y")
-        click_dept = pt.get("x")
+        for pt in event.selection.points:
+            if pt.get("curve_number", 0) == 1:
+                click_industry = pt.get("y")
+                click_dept = pt.get("x")
+                break
 
     st.divider()
 
