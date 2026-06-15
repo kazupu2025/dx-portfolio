@@ -1,0 +1,12 @@
+expected_area_count: 5
+expected_year: 2024
+expected_month: 1
+min_rows: 300
+max_rows: 1500
+max_imputed_ratio: 0.10
+conversion_alert_threshold: 0.10
+stages:
+  - 問い合わせ
+  - 内見
+  - 申し込み
+  - 成約
