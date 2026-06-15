@@ -1,0 +1,8 @@
+[22:07:07] === B-09 クレンジング開始 ===
+[22:07:07]   Loaded 01_旋盤機A_センサーログ_202401.csv: 744 rows (enc=utf-8-sig)
+[22:07:07]   Loaded 02_pressB_sensor_log_202401.csv: 744 rows (enc=utf-8-sig)
+[22:07:07]   Loaded 03_溶接機C_センサーログ_202401.csv: 744 rows (enc=utf-8-sig)
+[22:07:07]   Loaded 04_旋盤機D_センサーログ_202401.csv: 744 rows (enc=utf-8-sig)
+[22:07:07]   Loaded 05_コンプレッサE_センサーログ_202401.csv: 744 rows (enc=utf-8-sig)
+[22:07:07] 結合後: 3720 rows
+[22:07:07] === 出力完了: C:\Users\realp\Desktop\claude_code_TRY\dx-portfolio\02_manufacturing\02_equipment_log\output\cleaned_sensor_202401.csv (3720 rows) ===

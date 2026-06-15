@@ -1,0 +1,8 @@
+expected_equipment_count: 5
+sensor_columns: ["temperature", "vibration", "pressure", "rpm"]
+rolling_window_hours: 24
+sigma_threshold: 3.0
+warning_sigma: 2.0
+min_rows: 3000
+max_rows: 5000
+alert_consecutive_hours: 2
