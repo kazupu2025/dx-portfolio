@@ -1,0 +1,7 @@
+expected_area_count: 5
+expected_property_type_count: 5
+min_rows: 100
+max_rows: 1000
+max_imputed_ratio: 0.10
+vacancy_alert_threshold: 0.20
+high_repair_threshold: 100000
