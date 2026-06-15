@@ -1,0 +1,8 @@
+expected_operator_count: 8
+expected_category_count: 6
+expected_channel_count: 4
+min_rows: 400
+max_rows: 700
+response_time_alert_minutes: 60
+resolution_rate_alert: 0.80
+escalation_rate_alert: 0.10
