@@ -66,7 +66,7 @@
 
 - id: "B-09"
   name: "製造×設備稼働ログ異常予兆検知"
-  industry: "製造業"
+  industry: "製造"
   department: "生産・品質"
   status: "production-ready"
   priority: "B"
