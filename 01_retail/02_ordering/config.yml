@@ -1,0 +1,10 @@
+expected_product_count: 50
+expected_category_count: 5
+min_rows: 4000
+max_rows: 10000
+forecast_days: 31
+moving_avg_window: 7
+safety_stock_z: 1.65
+lead_time_days: 3
+stockout_alert_threshold: 0.10
+overstock_days_threshold: 30
