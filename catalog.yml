@@ -386,11 +386,11 @@
   name: "問い合わせログ分類・対応時間分析"
   industry: "サービス"
   department: "受付・CS"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "問い合わせをカテゴリ自動分類し、担当者別・カテゴリ別の対応時間と解決率を分析"
-  demo: null
+  path: "10_service/01_inquiry_log"
+  description: "500件の問い合わせログをキーワードベース自動分類（6カテゴリ）し、担当者別解決率・カテゴリ別対応時間・時間帯別受付傾向を可視化するCS支援システム"
+  demo: "cd 10_service/01_inquiry_log && streamlit run app.py"
 
 - id: null
   name: "顧客満足度スコア集計・トレンド分析"
