@@ -283,11 +283,11 @@
   name: "賃貸物件管理・空室率レポート"
   industry: "不動産"
   department: "営業・販売"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "管理物件の空室状況・稼働率・入退去履歴を自動集計し、オーナー向けレポートを生成"
-  demo: null
+  path: "07_realestate/02_rental_management"
+  description: "5エリアの賃貸物件データからエリア別空室率・物件タイプ別純収益を集計し、空室率20%超のエリアをアラート付きで可視化する物件管理システム"
+  demo: "cd 07_realestate/02_rental_management && streamlit run app.py"
 
 - id: null
   name: "管理費・修繕費コスト分析"
