@@ -355,11 +355,11 @@
   name: "受講生成績・退学リスクスコア"
   industry: "教育・研修"
   department: "受付・CS"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "成績・出席・提出率から退学リスクを早期検出し、支援介入の優先度を算出"
-  demo: null
+  path: "09_education/01_dropout_risk"
+  description: "200受講生×5科目の成績・出席・提出率データに加重スコアカード方式の退学リスクスコアを付与し、高/中/低リスク分類と科目別・コース別リスク要因を可視化する早期警戒システム"
+  demo: "cd 09_education/01_dropout_risk && streamlit run app.py"
 
 - id: null
   name: "出席率・成績推移レポート"
