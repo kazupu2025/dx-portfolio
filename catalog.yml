@@ -17,11 +17,11 @@
   name: "発注最適化・需要予測パイプライン"
   industry: "小売"
   department: "物流・在庫"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "過去売上からProphet等で需要予測し、適正発注量を自動算出してエクセル出力"
-  demo: null
+  path: "01_retail/02_ordering"
+  description: "50商品の過去3ヶ月日次売上から移動平均+曜日係数+トレンドモデルで2024年1月需要を予測し、欠品リスクと過剰在庫を商品別にアラート表示する発注最適化システム"
+  demo: "cd 01_retail/02_ordering && streamlit run app.py"
 
 - id: null
   name: "顧客購買履歴 RFM 分析"
