@@ -160,11 +160,11 @@
   name: "与信スコアリングデータ整備"
   industry: "金融・保険"
   department: "経理・財務"
-  status: "idea"
+  status: "production-ready"
   priority: "B"
-  path: null
-  description: "顧客財務データを標準化・クレンジングし、与信審査モデルへのインプット品質を向上"
-  demo: null
+  path: "04_finance/02_credit_scoring"
+  description: "500件の申込データにスコアカード方式の与信スコアを付与し、高/中/低リスク分類と職業・負債比率によるリスク要因を可視化する与信管理システム"
+  demo: "cd 04_finance/02_credit_scoring && streamlit run app.py"
 
 - id: null
   name: "請求書突合・差異検出"
