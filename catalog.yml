@@ -74,6 +74,16 @@
   description: "5台の製造設備センサーログからローリング統計ベースの異常予兆を検知し、CRITICAL/WARNING アラートと連続予兆パターンを可視化する設備保全システム"
   demo: "cd 02_manufacturing/02_equipment_log && streamlit run app.py"
 
+- id: "C-18"
+  name: "原価差異分析パイプライン"
+  industry: "製造"
+  department: "経理・財務"
+  status: "production-ready"
+  priority: "C"
+  path: "02_manufacturing/03_cost_variance"
+  description: "3製造ライン×20製品の計画原価vs実績原価を集計し、材料費・労務費・製造間接費の差異額と差異率を製品・ライン別に可視化する原価管理システム"
+  demo: "cd 02_manufacturing/03_cost_variance && streamlit run app.py"
+
 - id: null
   name: "原材料コスト変動レポート"
   industry: "製造"
@@ -115,15 +125,15 @@
   description: "5診療科の来院データを集計し、時間帯×曜日ヒートマップでピーク負荷を可視化。長時間待ちアラートで受付体制の最適化を支援"
   demo: "cd 03_healthcare/01_patient_visit && streamlit run app.py"
 
-- id: null
-  name: "スタッフシフト最適化レポート"
+- id: "C-16"
+  name: "シフト希望・配置分析パイプライン"
   industry: "医療・介護"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "来院数予測を元に最適スタッフ配置を算出し、残業・休日出勤コストを削減"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "03_healthcare/02_shift_optimization"
+  description: "医療・介護施設3拠点のスタッフシフト希望データをクレンジングし、役職別夜勤比率・連続夜勤リスク・施設別希望充足率を分析するシフト管理支援システム"
+  demo: "cd 03_healthcare/02_shift_optimization && streamlit run app.py"
 
 - id: null
   name: "薬品在庫管理・発注アラート"
@@ -196,6 +206,16 @@
   path: "05_logistics/01_inventory"
   description: "複数倉庫の在庫データを統合クレンジングし、欠品リスク品目を自動検出・レポート"
   demo: "cd 05_logistics/01_inventory && streamlit run app.py"
+
+- id: "C-17"
+  name: "配送コスト分析パイプライン"
+  industry: "物流・倉庫"
+  department: "経理・財務"
+  status: "production-ready"
+  priority: "C"
+  path: "05_logistics/02_delivery_cost"
+  description: "5ルート×4車種の配送ログから燃料費・高速代・人件費を集計し、ルート別コスト効率（円/km）と車種別損益を可視化するコスト削減支援システム"
+  demo: "cd 05_logistics/02_delivery_cost && streamlit run app.py"
 
 - id: null
   name: "配送ルート効率化レポート"
