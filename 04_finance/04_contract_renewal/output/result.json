@@ -1,0 +1,151 @@
+{
+  "passed": 18,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "csv_exists",
+      "category": "存在",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "row_count_gte_400",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "required_columns",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "contract_no_unique",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "start_date_format",
+      "category": "フォーマット",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "customer_code_variety",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "insurance_type_four_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 8,
+      "name": "agent_name_five_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 9,
+      "name": "annual_premium_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 10,
+      "name": "end_date_gte_start_date",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 11,
+      "name": "days_to_expiry_consistency",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 12,
+      "name": "renewal_status_valid_values",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 13,
+      "name": "expired_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 14,
+      "name": "urgent_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 15,
+      "name": "source_file_exists",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 16,
+      "name": "missing_rate_lte_15pct",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 17,
+      "name": "source_file_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 18,
+      "name": "contract_years_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}
