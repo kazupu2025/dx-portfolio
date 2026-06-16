@@ -94,15 +94,15 @@
   description: "3製造ライン×20製品の計画原価vs実績原価を集計し、材料費・労務費・製造間接費の差異額と差異率を製品・ライン別に可視化する原価管理システム"
   demo: "cd 02_manufacturing/03_cost_variance && streamlit run app.py"
 
-- id: null
-  name: "原材料コスト変動レポート"
+- id: "C-28"
+  name: "原材料コスト変動レポートパイプライン"
   industry: "製造"
   department: "経理・財務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "原材料価格の変動を仕入伝票から自動集計し、原価率への影響と前年比を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "02_manufacturing/05_material_cost"
+  description: "20原材料×440件の仕入伝票からカテゴリ別コスト・前月比変動率を集計し、急騰・急落品目をアラート表示する原価管理支援システム"
+  demo: "cd 02_manufacturing/05_material_cost && streamlit run app.py"
 
 - id: "C-25"
   name: "生産計画 vs 実績 差異分析パイプライン"
@@ -145,15 +145,15 @@
   description: "医療・介護施設3拠点のスタッフシフト希望データをクレンジングし、役職別夜勤比率・連続夜勤リスク・施設別希望充足率を分析するシフト管理支援システム"
   demo: "cd 03_healthcare/02_shift_optimization && streamlit run app.py"
 
-- id: null
-  name: "薬品在庫管理・発注アラート"
+- id: "C-29"
+  name: "薬品在庫管理・発注アラートパイプライン"
   industry: "医療・介護"
   department: "物流・在庫"
-  status: "idea"
-  priority: null
-  path: null
-  description: "薬品在庫の消費速度から発注タイミングを自動通知し、欠品・過剰在庫を防止"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "03_healthcare/03_medicine_inventory"
+  description: "50薬品×400件の在庫データから病棟別欠品・警告品目を集計し、残日数ベースの発注優先順位と在庫金額構成を可視化する薬品管理システム"
+  demo: "cd 03_healthcare/03_medicine_inventory && streamlit run app.py"
 
 - id: null
   name: "介護記録データ集計・傾向分析"
@@ -380,15 +380,15 @@
   description: "研修前後のスキルアセスメントデータを集計し、研修効果と費用対効果を可視化"
   demo: null
 
-- id: null
-  name: "人件費推移・予実差異レポート"
+- id: "C-30"
+  name: "人件費推移・予実差異レポートパイプライン"
   industry: "人事・採用"
   department: "経理・財務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "月次人件費を部門・雇用形態別に集計し、予算対比・前年比のトレンドを可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "08_hr/02_labor_cost"
+  description: "5部門×3雇用区分×12ヶ月の人件費データから予実差異・超過部門を集計し、雇用区分別コスト構成と月別トレンドを可視化する人件費管理システム"
+  demo: "cd 08_hr/02_labor_cost && streamlit run app.py"
 
 # ── 教育・研修 ────────────────────────────────────────
 - id: "B-12"
