@@ -1,0 +1,5 @@
+system_name: "配送コスト分析"
+industry: "物流・倉庫"
+department: "経理・財務"
+expected_record_count: 400
+cost_alert_threshold: 500  # cost_per_km のアラート閾値
