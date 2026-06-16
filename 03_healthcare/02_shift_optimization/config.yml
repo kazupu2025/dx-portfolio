@@ -1,0 +1,5 @@
+system_name: "シフト分析"
+industry: "医療・介護"
+department: "人事・労務"
+expected_record_count: 450
+night_shift_max_consecutive: 3  # 連続夜勤アラート閾値
