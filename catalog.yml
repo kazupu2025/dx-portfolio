@@ -237,15 +237,15 @@
   description: "配送実績データから非効率ルートを特定し、燃料費・時間コスト削減額を試算"
   demo: null
 
-- id: null
-  name: "ドライバー稼働時間・残業管理"
+- id: "C-22"
+  name: "ドライバー勤怠・拘束時間管理パイプライン"
   industry: "物流・倉庫"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "運行記録から拘束時間・休息時間を自動集計し、法令違反リスクをアラート通知"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "05_logistics/03_driver_attendance"
+  description: "600件の運行記録から拘束時間・実労働時間を集計し、改善基準（拘束13h/労働9h）超過ドライバーと営業所別違反率を可視化する法令遵守支援システム"
+  demo: "cd 05_logistics/03_driver_attendance && streamlit run app.py"
 
 - id: null
   name: "倉庫作業員 KPI 集計"
@@ -329,15 +329,15 @@
   description: "5エリアの賃貸物件データからエリア別空室率・物件タイプ別純収益を集計し、空室率20%超のエリアをアラート付きで可視化する物件管理システム"
   demo: "cd 07_realestate/02_rental_management && streamlit run app.py"
 
-- id: null
-  name: "管理費・修繕費コスト分析"
+- id: "C-23"
+  name: "不動産 管理費・修繕費コスト分析パイプライン"
   industry: "不動産"
   department: "経理・財務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "物件別の管理コストを集計し、修繕計画の優先順位と収支改善ポイントを算出"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "07_realestate/03_maintenance_cost"
+  description: "50物件×505件の修繕・管理コストをエリア別・費用カテゴリ別に集計し、高コスト物件ランキングと緊急工事比率を可視化するコスト管理システム"
+  demo: "cd 07_realestate/03_maintenance_cost && streamlit run app.py"
 
 - id: null
   name: "入居者対応履歴・クレーム集計"
@@ -411,15 +411,15 @@
   description: "クラス・科目別の出席率と成績分布を集計し、指導品質改善の根拠データを生成"
   demo: null
 
-- id: null
-  name: "講師稼働・コマ数管理"
+- id: "C-24"
+  name: "講師稼働・コマ数管理パイプライン"
   industry: "教育・研修"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "講師別の担当コマ数・稼働時間・時給コストを集計し、適正配置と過負荷を分析"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "09_education/02_instructor_workload"
+  description: "20講師×950コマの稼働データから専門分野別・雇用区分別の人件費と稼働負荷を集計し、過負荷講師と費用対効果を可視化する適正配置支援システム"
+  demo: "cd 09_education/02_instructor_workload && streamlit run app.py"
 
 # ── サービス ──────────────────────────────────────────
 - id: "B-15"
