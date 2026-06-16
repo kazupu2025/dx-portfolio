@@ -1,0 +1,5 @@
+system_name: "原価差異分析"
+industry: "製造"
+department: "経理・財務"
+expected_record_count: 380
+variance_alert_ratio: 0.10
