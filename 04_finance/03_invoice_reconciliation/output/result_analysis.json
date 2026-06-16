@@ -1,0 +1,70 @@
+{
+  "passed": 9,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "report_exists",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "client_csv_exists",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "report_has_invoice_or_reconcile",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "report_has_variance",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "report_has_insight",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "report_has_numbers",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "client_csv_row_count",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 8,
+      "name": "report_has_client_analysis",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 9,
+      "name": "report_has_payment_type_analysis",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}

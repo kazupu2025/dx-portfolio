@@ -1,0 +1,151 @@
+{
+  "passed": 18,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "csv_exists",
+      "category": "存在",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "row_count_gte_400",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "required_columns",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "invoice_no_unique",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "invoice_date_format",
+      "category": "フォーマット",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "client_code_variety",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "invoice_amount_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 8,
+      "name": "received_amount_nonneg",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 9,
+      "name": "payment_type_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 10,
+      "name": "match_status_valid_values",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 11,
+      "name": "variance_amount_consistency",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 12,
+      "name": "match_rate_gte_70pct",
+      "category": "品質",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 13,
+      "name": "diff_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 14,
+      "name": "source_file_exists",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 15,
+      "name": "missing_rate_lte_15pct",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 16,
+      "name": "source_file_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 17,
+      "name": "unpaid_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 18,
+      "name": "overpaid_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}
