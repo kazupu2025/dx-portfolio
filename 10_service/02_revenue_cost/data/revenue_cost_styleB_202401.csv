@@ -1,0 +1,181 @@
+﻿project_id,client_name,service_type,department,contract_month,revenue,direct_cost,allocated_overhead,hours_spent,is_completed
+B-1001,Nakamura Services,SaaS,Consulting,2024-02,66326,8526,3601,410,False
+B-1002,Sasaki Holdings,SaaS,Sales,2024-01,239871,42354,12638,319,True
+B-1003,Suzuki General Trading,Consulting,CS,2024-02,1403601,459734,160962,170,False
+B-1004,Shimizu Solutions,Custom Development,Development,2024-01,4843162,2554271,496263,144,False
+B-1005,Shimizu Solutions,Consulting,Sales,2024-03,619804,201143,83123,241,True
+B-1006,Sasaki Holdings,Consulting,Development,2024-03,1688014,528327,205409,466,False
+B-1007,Kato Industries,Custom Development,Sales,2024-02,1518062,982226,169541,131,False
+B-1008,Sasaki Holdings,SaaS,CS,2024-03,295055,76930,15362,323,True
+B-1009,Ikeda Networks,SaaS,CS,2024-02,265374,67360,16700,47,True
+B-1010,Ikeda Networks,Maintenance Support,Development,2024-02,461249,127151,42970,292,True
+B-1011,Ito Communications,Custom Development,Consulting,2024-03,4846155,2329077,419610,175,True
+B-1012,Kobayashi Commerce,Maintenance Support,CS,2024-01,765905,337971,54362,330,False
+B-1013,Yamaguchi Innovation,Training,Development,2024-03,573673,181354,32612,329,False
+B-1014,Tanaka Manufacturing,Training,Development,2024-01,577311,189525,42184,343,True
+B-1015,Shimizu Solutions,Training,Consulting,2024-03,546090,177715,33631,499,False
+B-1016,Yamamoto Corp,Consulting,Sales,2024-03,1151150,362145,117873,235,False
+B-1017,Ishikawa Media,Consulting,Consulting,2024-01,501295,181727,64533,385,False
+B-1018,Hashimoto Digital,Consulting,Sales,2024-02,422683,153781,50155,146,False
+B-1019,Yamamoto Corp,Custom Development,Sales,2024-01,3722482,2318483,360058,453,True
+B-1020,Shimizu Solutions,Maintenance Support,CS,2024-01,639728,219658,60878,264,True
+B-1021,Kato Industries,SaaS,Consulting,2024-03,162797,35273,5200,154,False
+B-1022,Yamada Trading Co.,Training,Consulting,2024-02,524162,116101,29016,145,False
+B-1023,Tanaka Manufacturing,Consulting,CS,2024-01,1395967,575645,159839,157,True
+B-1024,Ishikawa Media,Consulting,Consulting,2024-03,1626899,686890,171062,59,False
+B-1025,Watanabe Foods,Maintenance Support,CS,2024-03,308727,114381,23480,30,True
+B-1026,Shimizu Solutions,SaaS,Sales,2024-03,322279,61683,17483,273,True
+B-1027,Ishikawa Media,Maintenance Support,CS,2024-01,413769,152575,33222,270,False
+B-1028,Sasaki Holdings,Training,CS,2024-02,253664,84916,22625,308,False
+B-1029,Yamaguchi Innovation,SaaS,Consulting,2024-02,169298,41356,9030,97,False
+B-1030,Ito Communications,Custom Development,Sales,2024-01,2100414,953141,194388,87,False
+B-1031,Shimizu Solutions,Custom Development,Consulting,2024-03,1022453,604428,103009,297,False
+B-1032,Hayashi Technology,Consulting,Consulting,2024-02,1318048,485655,150483,405,False
+B-1033,Yoshida Industries,Training,Consulting,2024-01,372598,96763,32661,162,False
+B-1034,Sasaki Holdings,Custom Development,Consulting,2024-02,2793928,1418080,287604,288,False
+B-1035,Tanaka Manufacturing,Consulting,CS,2024-01,803204,394423,82859,483,False
+B-1036,Hashimoto Digital,Maintenance Support,Consulting,2024-01,384303,167788,33759,80,True
+B-1037,Ikeda Networks,Training,Sales,2024-01,198316,64966,10332,221,False
+B-1038,Yamada Trading Co.,Consulting,Development,2024-03,1354172,671103,143972,344,False
+B-1039,Yamamoto Corp,Consulting,Sales,2024-02,1554546,484757,203255,343,True
+B-1040,Nakamura Services,Training,Development,2024-01,569644,218701,51203,213,False
+B-1041,Yamamoto Corp,Custom Development,CS,2024-01,1400103,890032,130771,242,False
+B-1042,Ito Communications,Custom Development,Consulting,2024-02,3273979,1579691,322017,141,True
+B-1043,Kobayashi Commerce,SaaS,CS,2024-02,142009,31553,7888,217,False
+B-1044,Ito Communications,Training,CS,2024-01,176878,70103,12221,489,True
+B-1045,Hayashi Technology,SaaS,CS,2024-02,445185,68290,19225,308,True
+B-1046,Tanaka Manufacturing,Maintenance Support,CS,2024-03,223967,76838,14868,361,False
+B-1047,Kato Industries,SaaS,CS,2024-02,164886,48059,8100,242,False
+B-1048,Kato Industries,Consulting,Consulting,2024-03,1626780,733593,219493,51,False
+B-1049,Ito Communications,Training,CS,2024-01,112379,41103,9677,113,True
+B-1050,Ito Communications,Custom Development,CS,2024-03,2223032,1319110,221309,470,False
+B-1051,Kimura Systems,SaaS,Consulting,2024-01,289493,61598,15155,354,False
+B-1052,Kobayashi Commerce,SaaS,Consulting,2024-02,353201,40478,16582,368,True
+B-1053,Tanaka Manufacturing,Training,Development,2024-01,230518,64953,18616,402,False
+B-1054,Inoue Corporation,Maintenance Support,Consulting,2024-02,184148,71181,15923,286,True
+B-1055,Inoue Corporation,Maintenance Support,Development,2024-01,654531,180303,64896,437,True
+B-1056,Kimura Systems,SaaS,CS,2024-02,328886,57836,12887,245,False
+B-1057,Tanaka Manufacturing,Custom Development,CS,2024-01,4016845,2301590,471776,465,True
+B-1058,Ishikawa Media,Custom Development,Sales,2024-01,781658,421538,83544,456,True
+B-1059,Kato Industries,Custom Development,Development,2024-02,2322586,1395588,257905,81,False
+B-1060,Matsumoto Group,Custom Development,CS,2024-03,2487295,1269398,213236,348,True
+B-1061,Hashimoto Digital,Consulting,CS,2024-02,1440815,685745,196618,330,False
+B-1062,Inoue Corporation,Training,Consulting,2024-01,491987,150003,38302,219,True
+B-1063,Shimizu Solutions,Maintenance Support,Consulting,2024-01,352673,148076,25402,372,True
+B-1064,Kimura Systems,Consulting,Development,2024-03,1368715,555696,158136,140,True
+B-1065,Suzuki General Trading,Maintenance Support,Development,2024-02,661654,261298,44740,147,False
+B-1066,Yamaguchi Innovation,Training,Development,2024-01,459744,153687,26978,116,False
+B-1067,Ito Communications,Maintenance Support,Development,2024-01,602184,260678,52886,370,True
+B-1068,Yamamoto Corp,Consulting,Sales,2024-03,998305,392583,125735,167,False
+B-1069,Shimizu Solutions,Maintenance Support,Consulting,2024-02,435788,188637,32609,221,True
+B-1070,Yamada Trading Co.,Training,Sales,2024-03,216720,67326,15898,378,False
+B-1071,Kato Industries,Maintenance Support,Sales,2024-01,498290,181356,34795,291,False
+B-1072,Hayashi Technology,Maintenance Support,Consulting,2024-03,276405,109609,20478,81,False
+B-1073,Suzuki General Trading,Custom Development,Development,2024-03,906968,546781,87518,441,True
+B-1074,Ikeda Networks,SaaS,Sales,2024-01,289080,50484,15816,351,False
+B-1075,Hashimoto Digital,Consulting,Development,2024-01,1062639,321310,128767,150,False
+B-1076,Ito Communications,SaaS,Consulting,2024-01,324928,42168,12242,279,False
+B-1077,Sasaki Holdings,Maintenance Support,CS,2024-02,525750,179701,36659,366,True
+B-1078,Suzuki General Trading,Maintenance Support,Development,2024-03,524965,171061,43103,38,True
+B-1079,Matsumoto Group,Custom Development,Development,2024-02,1299953,817616,151790,127,True
+B-1080,Suzuki General Trading,Training,Consulting,2024-02,438837,169003,37727,298,True
+B-1081,Yamaguchi Innovation,Custom Development,CS,2024-01,1709566,1026510,185502,213,True
+B-1082,Yamaguchi Innovation,Maintenance Support,Sales,2024-03,508060,195809,41469,206,True
+B-1083,Kimura Systems,SaaS,CS,2024-01,171710,45972,7490,403,False
+B-1084,Hayashi Technology,Maintenance Support,Development,2024-03,614435,181643,50458,202,False
+B-1085,Yamamoto Corp,Custom Development,Consulting,2024-01,2567370,1521479,213814,88,False
+B-1086,Ito Communications,Custom Development,Consulting,2024-02,1267729,571795,117050,194,False
+B-1087,Kimura Systems,SaaS,Sales,2024-01,285323,60316,14408,62,True
+B-1088,Ishikawa Media,SaaS,CS,2024-03,363547,93390,23466,16,False
+B-1089,Kato Industries,Consulting,Consulting,2024-01,1399487,565701,178312,96,True
+B-1090,Watanabe Foods,Maintenance Support,CS,2024-02,166340,47147,11816,163,False
+B-1091,Shimizu Solutions,SaaS,CS,2024-02,361325,80696,17457,79,False
+B-1092,Inoue Corporation,SaaS,Consulting,2024-02,471567,128473,22450,230,True
+B-1093,Shimizu Solutions,Maintenance Support,CS,2024-03,429445,122618,32607,173,False
+B-1094,Yoshida Industries,Consulting,Sales,2024-02,1912313,874258,219152,487,True
+B-1095,Yamada Trading Co.,Training,Sales,2024-03,579648,200235,50846,117,False
+B-1096,Watanabe Foods,Maintenance Support,Development,2024-02,764100,237303,53568,88,False
+B-1097,Shimizu Solutions,Consulting,Development,2024-02,1421054,540229,170902,481,False
+B-1098,Ishikawa Media,Training,Development,2024-02,414590,158738,22543,137,False
+B-1099,Matsumoto Group,Custom Development,Development,2024-03,4110922,1937020,345088,123,True
+B-1100,Yamaguchi Innovation,Consulting,CS,2024-02,1647951,659333,187534,22,False
+B-1101,Ito Communications,SaaS,CS,2024-02,485849,139990,17328,169,False
+B-1102,Sasaki Holdings,Consulting,Sales,2024-03,1198585,382977,154473,241,False
+B-1103,Yamada Trading Co.,SaaS,CS,2024-01,495214,83500,17022,419,True
+B-1104,Matsumoto Group,Custom Development,Sales,2024-03,4076645,2615952,363939,217,True
+B-1105,Ishikawa Media,Custom Development,Consulting,2024-02,2155277,1163666,209454,12,True
+B-1106,Yamaguchi Innovation,Custom Development,CS,2024-03,1353558,825535,137353,197,False
+B-1107,Shimizu Solutions,Custom Development,Consulting,2024-01,4926794,3168831,455906,208,False
+B-1108,Hayashi Technology,Training,Development,2024-02,403675,94664,31060,419,False
+B-1109,Matsumoto Group,Training,Development,2024-03,141793,35124,7752,201,True
+B-1110,Watanabe Foods,Training,Consulting,2024-02,381363,105539,21901,335,True
+B-1111,Watanabe Foods,Training,Sales,2024-02,178093,46823,12117,37,False
+B-1112,Inoue Corporation,SaaS,Consulting,2024-01,344430,69260,17152,360,False
+B-1113,Suzuki General Trading,Consulting,Consulting,2024-02,1385725,424270,180757,159,True
+B-1114,Nakamura Services,Maintenance Support,Sales,2024-03,579536,210446,52680,263,True
+B-1115,Sasaki Holdings,Training,Development,2024-02,364186,132753,18815,378,False
+B-1116,Kato Industries,Training,Sales,2024-02,236085,88522,12108,144,False
+B-1117,Kobayashi Commerce,SaaS,Consulting,2024-01,475041,117583,27345,450,False
+B-1118,Tanaka Manufacturing,Custom Development,Sales,2024-01,3442853,1915796,357623,96,False
+B-1119,Ikeda Networks,Maintenance Support,CS,2024-03,199850,55381,17987,220,True
+B-1120,Kato Industries,Maintenance Support,Sales,2024-03,253347,99382,23596,399,False
+B-1121,Kimura Systems,Consulting,Sales,2024-03,986793,385242,123689,460,True
+B-1122,Hayashi Technology,Consulting,CS,2024-03,1223503,447138,122471,406,True
+B-1123,Inoue Corporation,Consulting,CS,2024-01,656822,324224,87353,263,False
+B-1124,Yamaguchi Innovation,Maintenance Support,CS,2024-02,236937,86062,18816,185,True
+B-1125,Yamada Trading Co.,SaaS,Development,2024-03,115136,32915,4181,243,True
+B-1126,Yamamoto Corp,Consulting,Sales,2024-03,533399,253303,72042,57,False
+B-1127,Tanaka Manufacturing,Maintenance Support,Development,2024-02,515594,193410,45908,396,True
+B-1128,Yamada Trading Co.,Consulting,Development,2024-03,647576,256026,68194,125,False
+B-1129,Ito Communications,SaaS,Development,2024-03,271414,64815,13328,127,False
+B-1130,Sasaki Holdings,SaaS,Development,2024-01,206895,26363,12607,395,True
+B-1131,Yamada Trading Co.,Custom Development,Development,2024-03,1876709,1009706,204368,331,True
+B-1132,Ito Communications,Consulting,Consulting,2024-01,493628,222374,61004,206,False
+B-1133,Yoshida Industries,Consulting,CS,2024-01,1551867,491708,189538,317,False
+B-1134,Ishikawa Media,SaaS,CS,2024-01,317136,43678,14483,340,True
+B-1135,Kato Industries,Custom Development,Consulting,2024-02,4690802,2709484,388588,465,True
+B-1136,Yamaguchi Innovation,Maintenance Support,CS,2024-01,541307,174886,47265,400,False
+B-1137,Yamada Trading Co.,SaaS,Development,2024-03,187460,26834,12541,495,False
+B-1138,Kimura Systems,Training,CS,2024-03,302075,102814,16099,284,True
+B-1139,Ikeda Networks,Maintenance Support,Development,2024-02,313068,139272,20729,177,False
+B-1140,Kato Industries,Training,Development,2024-02,110359,27467,9599,69,False
+B-1141,Ito Communications,Training,Development,2024-02,86640,29594,6763,93,False
+B-1142,Watanabe Foods,Maintenance Support,CS,2024-01,381819,151424,24712,470,True
+B-1143,Suzuki General Trading,Maintenance Support,Consulting,2024-02,375722,147457,31209,49,False
+B-1144,Yamaguchi Innovation,Consulting,CS,2024-01,549975,205436,60609,62,True
+B-1145,Kato Industries,Custom Development,Development,2024-01,885721,482144,84426,86,True
+B-1146,Kato Industries,SaaS,Consulting,2024-01,268238,75957,11479,432,True
+B-1147,Tanaka Manufacturing,Training,CS,2024-01,174028,42573,12291,33,False
+B-1148,Matsumoto Group,SaaS,Consulting,2024-02,95290,20069,2889,112,False
+B-1149,Kato Industries,Training,CS,2024-03,323231,88453,28726,405,True
+B-1150,Kimura Systems,Training,Sales,2024-01,92535,22819,5909,439,True
+B-1151,Yamamoto Corp,Maintenance Support,Development,2024-03,208998,60826,20758,224,False
+B-1152,Suzuki General Trading,SaaS,Sales,2024-03,73016,20755,4811,276,False
+B-1153,Yamaguchi Innovation,Maintenance Support,Consulting,2024-03,200219,70293,17116,211,True
+B-1154,Kato Industries,Training,Development,2024-02,232922,58742,14581,420,False
+B-1155,Kato Industries,Maintenance Support,CS,2024-02,178315,78228,11669,404,True
+B-1156,Hayashi Technology,Custom Development,Development,2024-01,3134302,1665262,317934,404,True
+B-1157,Ito Communications,Consulting,CS,2024-02,389626,129170,49654,433,True
+B-1158,Kato Industries,Custom Development,CS,2024-01,3484186,1844001,285557,163,False
+B-1159,Hashimoto Digital,Custom Development,Development,2024-02,2595915,1217341,218254,416,True
+B-1160,Watanabe Foods,SaaS,Development,2024-01,153878,40736,6907,332,True
+B-1161,Suzuki General Trading,Training,CS,2024-01,183678,69889,12441,75,True
+B-1162,Tanaka Manufacturing,Maintenance Support,Development,2024-01,276149,120076,21353,380,False
+B-1163,Nakamura Services,Consulting,Development,2024-02,942272,323145,101281,153,False
+B-1164,Ishikawa Media,Custom Development,Development,2024-03,2561792,1484444,256065,461,False
+B-1165,Watanabe Foods,SaaS,Development,2024-02,269799,37742,17641,279,True
+B-1166,Shimizu Solutions,Training,Development,2024-02,365484,130217,23303,299,False
+B-1167,Matsumoto Group,Consulting,CS,2024-01,1452243,499287,197259,408,False
+B-1168,Yamaguchi Innovation,SaaS,Consulting,2024-03,172034,50714,5850,346,True
+B-1169,Inoue Corporation,Maintenance Support,Development,2024-01,472039,206300,47044,98,True
+B-1170,Yamaguchi Innovation,Custom Development,CS,2024-03,736613,435110,69291,300,True
+B-1171,Yamamoto Corp,Training,Sales,2024-02,172042,51283,9223,129,True
+B-1172,Ishikawa Media,SaaS,Consulting,2024-01,155625,40663,6789,100,False
+B-1173,Watanabe Foods,SaaS,Development,2024-01,455991,55714,23279,196,True
+B-1174,Matsumoto Group,Maintenance Support,Consulting,2024-03,416423,130973,41240,384,False
+B-1175,Ishikawa Media,Consulting,CS,2024-01,1850441,687189,234305,427,True
+B-1176,Watanabe Foods,Consulting,CS,2024-03,572681,255281,79002,495,False
+B-1177,Matsumoto Group,Training,Development,2024-01,562889,203631,41910,337,True
+B-1178,Kato Industries,Consulting,Sales,2024-02,927313,460388,98958,463,True
+B-1179,Kobayashi Commerce,Maintenance Support,Consulting,2024-01,361662,140554,26769,412,True
+B-1180,Kimura Systems,SaaS,Development,2024-02,137209,37994,6822,203,False
