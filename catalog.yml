@@ -23,6 +23,16 @@
   description: "50商品の過去3ヶ月日次売上から移動平均+曜日係数+トレンドモデルで2024年1月需要を予測し、欠品リスクと過剰在庫を商品別にアラート表示する発注最適化システム"
   demo: "cd 01_retail/02_ordering && streamlit run app.py"
 
+- id: "C-19"
+  name: "月次収益・予実差異レポート"
+  industry: "小売"
+  department: "経理・財務"
+  status: "production-ready"
+  priority: "C"
+  path: "01_retail/03_monthly_pnl"
+  description: "5店舗×13週の売上・原価・人件費データを集計し、粗利率・営業利益の予実差異と赤字店舗アラートを可視化する月次収益管理システム"
+  demo: "cd 01_retail/03_monthly_pnl && streamlit run app.py"
+
 - id: null
   name: "顧客購買履歴 RFM 分析"
   industry: "小売"
@@ -268,6 +278,16 @@
   description: "5店舗の食材仕入データをカテゴリ別に集計し、廃棄ロス率と廃棄コスト上位食材をアラート付きで可視化する原価管理システム"
   demo: "cd 06_restaurant/02_cost_management && streamlit run app.py"
 
+- id: "C-20"
+  name: "アルバイトシフト・人件費集計パイプライン"
+  industry: "飲食"
+  department: "人事・労務"
+  status: "production-ready"
+  priority: "C"
+  path: "06_restaurant/03_labor_cost"
+  description: "飲食チェーン3店舗の勤怠データから基本賃金・深夜割増・残業コストを集計し、雇用区分別人件費構成と労働時間上位スタッフを可視化する人件費管理システム"
+  demo: "cd 06_restaurant/03_labor_cost && streamlit run app.py"
+
 - id: null
   name: "予約キャンセル率分析・収益影響試算"
   industry: "飲食"
@@ -411,6 +431,16 @@
   path: "10_service/01_inquiry_log"
   description: "500件の問い合わせログをキーワードベース自動分類（6カテゴリ）し、担当者別解決率・カテゴリ別対応時間・時間帯別受付傾向を可視化するCS支援システム"
   demo: "cd 10_service/01_inquiry_log && streamlit run app.py"
+
+- id: "C-21"
+  name: "サービス別売上・原価分析パイプライン"
+  industry: "サービス"
+  department: "経理・財務"
+  status: "production-ready"
+  priority: "C"
+  path: "10_service/02_revenue_cost"
+  description: "ITサービス会社の5サービス区分×530案件の売上・直接原価・間接費を集計し、サービス別粗利率・営業利益率と赤字案件アラートを可視化する原価管理システム"
+  demo: "cd 10_service/02_revenue_cost && streamlit run app.py"
 
 - id: null
   name: "顧客満足度スコア集計・トレンド分析"
