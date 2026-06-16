@@ -196,15 +196,15 @@
   description: "20得意先×420件の請求書と入金データを自動突合し、未入金・過払・差異を分類してリスク得意先ランキングと支払区分別差異率を可視化する債権管理システム"
   demo: "cd 04_finance/03_invoice_reconciliation && streamlit run app.py"
 
-- id: null
-  name: "契約更新アラート・期限管理"
+- id: "C-31"
+  name: "契約更新アラート・期限管理パイプライン"
   industry: "金融・保険"
   department: "営業・販売"
-  status: "idea"
-  priority: null
-  path: null
-  description: "保険契約の更新期限をスコアリングし、優先アプローチ先を自動ランキング出力"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "04_finance/04_contract_renewal"
+  description: "150顧客×420件の保険契約データから基準日まで30日以内の緊急・期限切れ契約をアラート分類し、担当者別・保険種別の更新管理を可視化する契約管理システム"
+  demo: "cd 04_finance/04_contract_renewal && streamlit run app.py"
 
 # ── 物流・倉庫 ─────────────────────────────────────────
 - id: "A-03"
@@ -227,15 +227,15 @@
   description: "5ルート×4車種の配送ログから燃料費・高速代・人件費を集計し、ルート別コスト効率（円/km）と車種別損益を可視化するコスト削減支援システム"
   demo: "cd 05_logistics/02_delivery_cost && streamlit run app.py"
 
-- id: null
-  name: "配送ルート効率化レポート"
+- id: "C-32"
+  name: "配送ルート効率化レポートパイプライン"
   industry: "物流・倉庫"
   department: "物流・在庫"
-  status: "idea"
-  priority: null
-  path: null
-  description: "配送実績データから非効率ルートを特定し、燃料費・時間コスト削減額を試算"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "05_logistics/04_route_efficiency"
+  description: "10ルート×3車種×420件の運行データから1件当たりコスト・エリア別遅延率を集計し、非効率ルートと改善余地をランキング可視化する配送最適化システム"
+  demo: "cd 05_logistics/04_route_efficiency && streamlit run app.py"
 
 - id: "C-22"
   name: "ドライバー勤怠・拘束時間管理パイプライン"
@@ -360,15 +360,15 @@
   description: "5部門の勤怠データを集計し、残業上限超過（45h警告/60h危険）・有休消化率のアラートを自動生成するパイプライン"
   demo: "cd 08_hr/01_attendance && streamlit run app.py"
 
-- id: null
-  name: "採用歩留まり率分析"
+- id: "C-33"
+  name: "採用歩留まり率分析パイプライン"
   industry: "人事・採用"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "応募〜内定〜入社の各フェーズの通過率をチャネル別・職種別に分析し改善策を提示"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "08_hr/03_recruitment_funnel"
+  description: "420件の採用応募データをファネル分析し、書類〜内定の各フェーズ通過率・チャネル別採用率・職種別選考日数を可視化する採用改善支援システム"
+  demo: "cd 08_hr/03_recruitment_funnel && streamlit run app.py"
 
 - id: null
   name: "研修効果測定レポート"
