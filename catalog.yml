@@ -33,15 +33,15 @@
   description: "5店舗×13週の売上・原価・人件費データを集計し、粗利率・営業利益の予実差異と赤字店舗アラートを可視化する月次収益管理システム"
   demo: "cd 01_retail/03_monthly_pnl && streamlit run app.py"
 
-- id: null
-  name: "顧客購買履歴 RFM 分析"
+- id: "C-27"
+  name: "顧客購買履歴 RFM 分析パイプライン"
   industry: "小売"
   department: "営業・販売"
-  status: "idea"
-  priority: null
-  path: null
-  description: "Recency・Frequency・Monetary で顧客をセグメント分類し、施策優先度を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "01_retail/04_rfm_analysis"
+  description: "100顧客×450件の購買履歴にRecency/Frequency/Monetary（各1-5点）スコアを付与し、優良/成長/離反リスク/休眠の4セグメントに分類する顧客分析システム"
+  demo: "cd 01_retail/04_rfm_analysis && streamlit run app.py"
 
 - id: null
   name: "シフト自動作成・人件費最適化"
@@ -104,15 +104,15 @@
   description: "原材料価格の変動を仕入伝票から自動集計し、原価率への影響と前年比を可視化"
   demo: null
 
-- id: null
-  name: "生産計画 vs 実績 差異分析"
+- id: "C-25"
+  name: "生産計画 vs 実績 差異分析パイプライン"
   industry: "製造"
   department: "生産・品質"
-  status: "idea"
-  priority: null
-  path: null
-  description: "計画数・実績数・不良数の差異を工程別に分析し、ボトルネック工程を特定"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "02_manufacturing/04_production_variance"
+  description: "5製造ライン×420件の生産記録から計画達成率・不良率・差異数量をライン別・カテゴリ別に集計し、未達ラインと品質ボトルネックを可視化する生産管理システム"
+  demo: "cd 02_manufacturing/04_production_variance && streamlit run app.py"
 
 - id: null
   name: "作業員別生産性レポート"
@@ -186,15 +186,15 @@
   description: "500件の申込データにスコアカード方式の与信スコアを付与し、高/中/低リスク分類と職業・負債比率によるリスク要因を可視化する与信管理システム"
   demo: "cd 04_finance/02_credit_scoring && streamlit run app.py"
 
-- id: null
-  name: "請求書突合・差異検出"
+- id: "C-26"
+  name: "請求書突合・差異検出パイプライン"
   industry: "金融・保険"
   department: "経理・財務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "請求書データと入金記録を自動突合し、未収・差異をリアルタイム検出してアラート"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "04_finance/03_invoice_reconciliation"
+  description: "20得意先×420件の請求書と入金データを自動突合し、未入金・過払・差異を分類してリスク得意先ランキングと支払区分別差異率を可視化する債権管理システム"
+  demo: "cd 04_finance/03_invoice_reconciliation && streamlit run app.py"
 
 - id: null
   name: "契約更新アラート・期限管理"
