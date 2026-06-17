@@ -1,0 +1,151 @@
+{
+  "passed": 18,
+  "failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": 1,
+      "name": "csv_exists",
+      "category": "存在",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 2,
+      "name": "row_count_gte_420",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 3,
+      "name": "required_columns",
+      "category": "スキーマ",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 4,
+      "name": "inquiry_date_format",
+      "category": "フォーマット",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 5,
+      "name": "inquiry_id_unique",
+      "category": "整合性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 6,
+      "name": "inquiry_type_five_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 7,
+      "name": "channel_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 8,
+      "name": "handling_minutes_positive",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 9,
+      "name": "is_resolved_binary",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 10,
+      "name": "recontact_flag_binary",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 11,
+      "name": "satisfaction_range",
+      "category": "値域",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 12,
+      "name": "efficiency_flag_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 13,
+      "name": "cs_grade_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 14,
+      "name": "missing_rate_lte_15pct",
+      "category": "完全性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 15,
+      "name": "source_file_three_kinds",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 16,
+      "name": "resolved_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 17,
+      "name": "unresolved_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    },
+    {
+      "id": 18,
+      "name": "recontact_exists",
+      "category": "網羅性",
+      "status": "PASS",
+      "detail": "",
+      "fix_hint": ""
+    }
+  ]
+}
