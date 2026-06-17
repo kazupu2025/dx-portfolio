@@ -1,0 +1,9 @@
+{
+  "total_claims": 420,
+  "resolved_count": 275,
+  "unresolved_count": 45,
+  "in_progress_count": 100,
+  "urgent_count": 45,
+  "avg_response_days": 28.3,
+  "total_cost_estimate": 8057500
+}
