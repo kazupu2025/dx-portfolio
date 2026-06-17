@@ -155,15 +155,15 @@
   description: "50薬品×400件の在庫データから病棟別欠品・警告品目を集計し、残日数ベースの発注優先順位と在庫金額構成を可視化する薬品管理システム"
   demo: "cd 03_healthcare/03_medicine_inventory && streamlit run app.py"
 
-- id: null
-  name: "介護記録データ集計・傾向分析"
+- id: "C-37"
+  name: "来院スループット分析パイプライン"
   industry: "医療・介護"
   department: "受付・CS"
-  status: "idea"
-  priority: null
-  path: null
-  description: "介護記録から利用者ごとの身体・認知状態のトレンドを集計し、ケアプランを支援"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "03_healthcare/04_reception_throughput"
+  description: "5診療科×420件の来院データを集計し、待ち時間レベル分布・時間帯×診療科ヒートマップ・長待ちアラートで受付体制の改善ポイントを可視化するスループット管理システム"
+  demo: "cd 03_healthcare/04_reception_throughput && streamlit run app.py"
 
 # ── 金融・保険 ─────────────────────────────────────────
 - id: "A-04"
@@ -288,15 +288,15 @@
   description: "飲食チェーン3店舗の勤怠データから基本賃金・深夜割増・残業コストを集計し、雇用区分別人件費構成と労働時間上位スタッフを可視化する人件費管理システム"
   demo: "cd 06_restaurant/03_labor_cost && streamlit run app.py"
 
-- id: null
-  name: "予約キャンセル率分析・収益影響試算"
+- id: "C-38"
+  name: "予約キャンセル集計・傾向分析パイプライン"
   industry: "飲食"
   department: "受付・CS"
-  status: "idea"
-  priority: null
-  path: null
-  description: "キャンセル発生パターンを分析し、機会損失額を定量化して対策の優先度を提示"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "06_restaurant/03_reservation_cancel"
+  description: "3店舗×420件の予約データを集計し、店舗別キャンセル率・理由別ランキング・曜日別傾向・機会損失金額を可視化する予約管理システム"
+  demo: "cd 06_restaurant/03_reservation_cancel && streamlit run app.py"
 
 - id: null
   name: "アルバイトシフト管理・人件費集計"
@@ -339,15 +339,15 @@
   description: "50物件×505件の修繕・管理コストをエリア別・費用カテゴリ別に集計し、高コスト物件ランキングと緊急工事比率を可視化するコスト管理システム"
   demo: "cd 07_realestate/03_maintenance_cost && streamlit run app.py"
 
-- id: null
-  name: "入居者対応履歴・クレーム集計"
+- id: "C-39"
+  name: "入居者対応履歴・クレーム集計パイプライン"
   industry: "不動産"
   department: "受付・CS"
-  status: "idea"
-  priority: null
-  path: null
-  description: "入居者からの問い合わせ・クレームをカテゴリ分類し、対応工数と頻出課題を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "07_realestate/04_tenant_claims"
+  description: "5物件×420件のクレームデータを集計し、物件別解決率・緊急案件アラート・クレーム区分ランキング・対応工数推移を可視化する不動産管理システム"
+  demo: "cd 07_realestate/04_tenant_claims && streamlit run app.py"
 
 # ── 人事・採用 ────────────────────────────────────────
 - id: "A-05"
