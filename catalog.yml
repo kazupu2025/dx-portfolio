@@ -491,3 +491,36 @@
   path: "10_service/04_service_revenue"
   description: "8サービス×5クライアント×1440件の売上データを集計し、サービス別粗利率・赤字サービスアラート・カテゴリ別収益貢献ランキングを可視化する原価管理システム"
   demo: "cd 10_service/04_service_revenue && streamlit run app.py"
+
+# ── 建設・ゼネコン ────────────────────────────────────────
+- id: "C-46"
+  name: "工程進捗・作業員稼働KPI集計パイプライン"
+  industry: "建設・ゼネコン"
+  department: "生産・品質"
+  status: "production-ready"
+  priority: "C"
+  path: "12_construction/01_progress_kpi"
+  description: "5現場×4工程×20作業員の施工データを集計し、現場別進捗率・不具合件数・稼働効率・遅延アラートを可視化する建設現場KPI管理システム"
+  demo: "cd 12_construction/01_progress_kpi && streamlit run app.py"
+
+# ── ホテル・観光 ────────────────────────────────────────
+- id: "C-47"
+  name: "宿泊予約・稼働率分析パイプライン"
+  industry: "ホテル・観光"
+  department: "受付・CS"
+  status: "production-ready"
+  priority: "C"
+  path: "13_hotel/01_occupancy_rate"
+  description: "4客室タイプ×480件の予約データを集計し、客室タイプ別稼働率・キャンセル率・損失金額・日別稼働率トレンドを可視化するホテル収益管理システム"
+  demo: "cd 13_hotel/01_occupancy_rate && streamlit run app.py"
+
+# ── IT・SaaS ────────────────────────────────────────
+- id: "C-48"
+  name: "サブスクリプション解約率（チャーン）分析パイプライン"
+  industry: "IT・SaaS"
+  department: "営業・販売"
+  status: "production-ready"
+  priority: "C"
+  path: "14_it_saas/01_churn_analysis"
+  description: "3プラン×5業種×1440件の契約データを集計し、プラン別チャーン率・業種別LTV・チャーンリスク分布・コホート解約率を可視化するSaaS解約防止支援システム"
+  demo: "cd 14_it_saas/01_churn_analysis && streamlit run app.py"
