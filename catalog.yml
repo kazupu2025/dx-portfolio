@@ -349,6 +349,16 @@
   description: "5物件×420件のクレームデータを集計し、物件別解決率・緊急案件アラート・クレーム区分ランキング・対応工数推移を可視化する不動産管理システム"
   demo: "cd 07_realestate/04_tenant_claims && streamlit run app.py"
 
+- id: "C-40"
+  name: "アルバイトシフト管理・人件費集計パイプライン"
+  industry: "飲食・外食"
+  department: "人事・労務"
+  status: "production-ready"
+  priority: "C"
+  path: "06_restaurant/04_shift_labor"
+  description: "3店舗×450件のシフトデータを集計し、店舗別人件費・役割別平均時給・残業実態・高コストアラートを可視化する飲食チェーン向けシフト管理システム"
+  demo: "cd 06_restaurant/04_shift_labor && streamlit run app.py"
+
 # ── 人事・採用 ────────────────────────────────────────
 - id: "A-05"
   name: "勤怠データ集計・残業アラートレポート"
@@ -369,6 +379,16 @@
   path: "08_hr/03_recruitment_funnel"
   description: "420件の採用応募データをファネル分析し、書類〜内定の各フェーズ通過率・チャネル別採用率・職種別選考日数を可視化する採用改善支援システム"
   demo: "cd 08_hr/03_recruitment_funnel && streamlit run app.py"
+
+- id: "C-41"
+  name: "採用チャネル別コスト分析パイプライン"
+  industry: "人事・採用"
+  department: "人事・労務"
+  status: "production-ready"
+  priority: "C"
+  path: "08_hr/04_recruitment_cost"
+  description: "420件の採用データをチャネル別に集計し、採用単価・採用率・内定承諾率・フェーズ別ファネルを可視化する採用コスト最適化システム"
+  demo: "cd 08_hr/04_recruitment_cost && streamlit run app.py"
 
 - id: null
   name: "研修効果測定レポート"
@@ -400,6 +420,16 @@
   path: "09_education/01_dropout_risk"
   description: "200受講生×5科目の成績・出席・提出率データに加重スコアカード方式の退学リスクスコアを付与し、高/中/低リスク分類と科目別・コース別リスク要因を可視化する早期警戒システム"
   demo: "cd 09_education/01_dropout_risk && streamlit run app.py"
+
+- id: "C-42"
+  name: "受講率・修了率レポートパイプライン"
+  industry: "教育・研修"
+  department: "受付・CS"
+  status: "production-ready"
+  priority: "C"
+  path: "09_education/03_completion_rate"
+  description: "450件の受講データをコース別・受講者区分別に集計し、修了率・テストスコア分布・中退リスク・満足度を可視化する教育効果測定システム"
+  demo: "cd 09_education/03_completion_rate && streamlit run app.py"
 
 - id: null
   name: "出席率・成績推移レポート"
