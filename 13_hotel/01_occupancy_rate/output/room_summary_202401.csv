@@ -1,0 +1,5 @@
+﻿room_type,total_revenue,avg_room_rate,occupancy_rate,avg_nights,total_reservations,stayed_count,cancel_count,cancel_rate,loss_revenue
+スイート,15126000,59941.0,0.6975,2.93,119,83,36,0.3025,5542000
+ダブル,8342000,29658.0,0.7417,3.1,120,89,31,0.2583,2672000
+ツイン,7044000,25545.0,0.7769,3.0,121,94,27,0.2231,2158000
+シングル,3818000,13742.0,0.7333,3.1,120,88,32,0.2667,1246000

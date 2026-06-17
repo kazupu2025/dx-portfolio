@@ -1,0 +1,161 @@
+﻿CheckinDate,ReservNo,RoomType,GuestCount,Nights,RoomRate,Status,CancelReason
+2024-01-01,RES-0161,Single,2,5,17000,Stayed,
+2024-01-17,RES-0162,Double,1,2,33000,Stayed,
+2024-01-14,RES-0163,Suite,3,2,77000,Stayed,
+2024-01-14,RES-0164,Suite,1,4,62000,Stayed,
+2024-01-11,RES-0165,Double,3,1,23000,Stayed,
+2024-01-18,RES-0166,Suite,4,3,65000,Cancelled,Schedule change
+2024-01-11,RES-0167,Suite,1,3,56000,Stayed,
+2024-01-18,RES-0168,Single,4,5,8000,Stayed,
+2024-01-17,RES-0169,Suite,4,1,52000,Stayed,
+2024-01-07,RES-0170,Double,4,4,19000,Stayed,
+2024-01-16,RES-0171,Double,2,3,32000,Stayed,
+2024-01-08,RES-0172,Single,1,5,20000,Stayed,
+2024-01-18,RES-0173,Twin,3,5,15000,Stayed,
+2024-01-15,RES-0174,Suite,1,2,47000,Stayed,
+2024-01-10,RES-0175,Single,2,4,19000,Stayed,
+2024-01-08,RES-0176,Double,4,4,33000,Stayed,
+2024-01-20,RES-0177,Suite,2,4,52000,Stayed,
+2024-01-11,RES-0178,Twin,1,3,28000,Stayed,
+2024-01-19,RES-0179,Double,1,3,27000,Cancelled,Bad weather
+2024-01-16,RES-0180,Suite,2,4,74000,Stayed,
+2024-01-13,RES-0181,Double,3,5,35000,Stayed,
+2024-01-19,RES-0182,Suite,3,2,55000,Stayed,
+2024-01-11,RES-0183,Suite,2,4,42000,Cancelled,Changed hotel
+2024-01-02,RES-0184,Suite,4,2,71000,Cancelled,Illness
+2024-01-17,RES-0185,Double,1,4,21000,Stayed,
+2024-01-05,RES-0186,Suite,1,2,66000,Stayed,
+2024-01-20,RES-0187,Single,4,3,13000,Cancelled,Changed hotel
+2024-01-11,RES-0188,Single,3,5,14000,Stayed,
+2024-01-08,RES-0189,Suite,1,5,44000,Stayed,
+2024-01-04,RES-0190,Double,2,1,31000,Stayed,
+2024-01-10,RES-0191,Single,4,2,19000,Stayed,
+2024-01-02,RES-0192,Single,1,3,20000,Cancelled,Price too high
+2024-01-08,RES-0193,Double,3,4,22000,Cancelled,Bad weather
+2024-01-03,RES-0194,Suite,2,2,51000,Stayed,
+2024-01-05,RES-0195,Suite,2,4,77000,Stayed,
+2024-01-09,RES-0196,Twin,4,3,29000,Stayed,
+2024-01-18,RES-0197,Single,4,3,18000,Stayed,
+2024-01-19,RES-0198,Twin,1,4,26000,Cancelled,Price too high
+2024-01-07,RES-0199,Suite,3,4,59000,Cancelled,Changed hotel
+2024-01-19,RES-0200,Suite,1,2,64000,Cancelled,Price too high
+2024-01-13,RES-0201,Double,3,1,39000,Stayed,
+2024-01-02,RES-0202,Double,1,5,39000,Stayed,
+2024-01-12,RES-0203,Suite,3,2,78000,Stayed,
+2024-01-05,RES-0204,Twin,2,5,23000,Cancelled,Schedule change
+2024-01-19,RES-0205,Single,3,4,8000,Stayed,
+2024-01-11,RES-0206,Double,2,1,27000,Stayed,
+2024-01-18,RES-0207,Suite,2,2,48000,Stayed,
+2024-01-16,RES-0208,Double,3,2,26000,Stayed,
+2024-01-03,RES-0209,Double,3,1,32000,Stayed,
+2024-01-12,RES-0210,Twin,2,4,32000,Stayed,
+2024-01-18,RES-0211,Single,4,1,12000,Stayed,
+2024-01-09,RES-0212,Single,4,3,18000,Stayed,
+2024-01-16,RES-0213,Suite,3,1,54000,Stayed,
+2024-01-03,RES-0214,Single,3,5,11000,Stayed,
+2024-01-05,RES-0215,Suite,3,4,47000,Stayed,
+2024-01-04,RES-0216,Single,1,3,15000,Stayed,
+2024-01-13,RES-0217,Single,2,5,10000,Stayed,
+2024-01-19,RES-0218,Suite,3,5,66000,Stayed,
+2024-01-20,RES-0219,Twin,4,1,30000,Stayed,
+2024-01-07,RES-0220,Suite,3,1,63000,Cancelled,Changed hotel
+2024-01-12,RES-0221,Suite,2,3,46000,Stayed,
+2024-01-07,RES-0222,Double,1,4,26000,Stayed,
+2024-01-07,RES-0223,Single,4,1,18000,Stayed,
+2024-01-05,RES-0224,Single,1,3,11000,Stayed,
+2024-01-19,RES-0225,Twin,1,5,21000,Stayed,
+2024-01-20,RES-0226,Twin,2,3,19000,Stayed,
+2024-01-18,RES-0227,Single,3,2,10000,NoShow,Price too high
+2024-01-01,RES-0228,Twin,1,1,19000,Stayed,
+2024-01-01,RES-0229,Double,2,5,28000,Cancelled,Illness
+2024-01-17,RES-0230,Double,1,2,31000,Stayed,
+2024-01-12,RES-0231,Single,1,4,15000,Cancelled,Bad weather
+2024-01-20,RES-0232,Single,4,5,11000,Stayed,
+2024-01-01,RES-0233,Single,3,4,18000,Stayed,
+2024-01-04,RES-0234,Single,4,4,14000,Stayed,
+2024-01-11,RES-0235,Suite,4,1,45000,Stayed,
+2024-01-20,RES-0236,Twin,1,2,23000,Stayed,
+2024-01-10,RES-0237,Double,4,5,34000,Stayed,
+2024-01-18,RES-0238,Suite,4,1,47000,Stayed,
+2024-01-14,RES-0239,Twin,4,4,22000,Stayed,
+2024-01-04,RES-0240,Double,4,4,31000,Stayed,
+2024-01-09,RES-0241,Double,4,3,39000,Cancelled,Price too high
+2024-01-03,RES-0242,Twin,4,1,17000,NoShow,Schedule change
+2024-01-18,RES-0243,Suite,1,3,48000,Cancelled,Schedule change
+2024-01-14,RES-0244,Double,1,4,29000,Stayed,
+2024-01-12,RES-0245,Single,3,5,12000,Stayed,
+2024-01-16,RES-0246,Single,2,2,18000,Cancelled,Illness
+2024-01-04,RES-0247,Single,3,5,13000,Stayed,
+2024-01-20,RES-0248,Double,2,4,35000,NoShow,Bad weather
+2024-01-09,RES-0249,Single,3,1,10000,NoShow,Price too high
+2024-01-05,RES-0250,Double,3,1,23000,Cancelled,Bad weather
+2024-01-01,RES-0251,Suite,1,2,80000,Stayed,
+2024-01-15,RES-0252,Single,2,4,14000,Stayed,
+2024-01-11,RES-0253,Double,2,3,27000,Cancelled,Bad weather
+2024-01-20,RES-0254,Single,1,2,10000,Stayed,
+2024-01-14,RES-0255,Single,1,3,15000,Stayed,
+2024-01-07,RES-0256,Suite,4,4,57000,Stayed,
+2024-01-10,RES-0257,Single,3,4,9000,Cancelled,Bad weather
+2024-01-13,RES-0258,Suite,3,1,54000,Stayed,
+2024-01-07,RES-0259,Single,1,2,12000,Stayed,
+2024-01-04,RES-0260,Twin,3,3,25000,Stayed,
+2024-01-05,RES-0261,Single,4,4,10000,Stayed,
+2024-01-12,RES-0262,Suite,2,5,75000,NoShow,Schedule change
+2024-01-15,RES-0263,Suite,1,4,41000,Stayed,
+2024-01-19,RES-0264,Single,3,5,14000,Stayed,
+2024-01-13,RES-0265,Suite,4,3,47000,Cancelled,Schedule change
+2024-01-12,RES-0266,Double,2,5,32000,Stayed,
+2024-01-14,RES-0267,Single,4,1,11000,Stayed,
+2024-01-11,RES-0268,Suite,1,4,59000,Stayed,
+2024-01-17,RES-0269,Twin,3,2,17000,Stayed,
+2024-01-05,RES-0270,Single,2,3,13000,Stayed,
+2024-01-07,RES-0271,Twin,1,2,23000,Cancelled,Illness
+2024-01-16,RES-0272,Twin,1,2,35000,Cancelled,Changed hotel
+2024-01-15,RES-0273,Suite,3,3,49000,Cancelled,Schedule change
+2024-01-19,RES-0274,Suite,4,3,57000,Cancelled,Schedule change
+2024-01-15,RES-0275,Double,1,3,32000,Stayed,
+2024-01-03,RES-0276,Single,1,3,12000,Stayed,
+2024-01-18,RES-0277,Single,4,4,17000,Cancelled,Schedule change
+2024-01-16,RES-0278,Suite,2,3,78000,Stayed,
+2024-01-11,RES-0279,Twin,1,4,18000,Stayed,
+2024-01-15,RES-0280,Single,2,1,11000,Cancelled,Changed hotel
+2024-01-13,RES-0281,Twin,3,3,24000,Cancelled,Changed hotel
+2024-01-11,RES-0282,Double,1,3,20000,Stayed,
+2024-01-20,RES-0283,Single,4,3,12000,Stayed,
+2024-01-05,RES-0284,Twin,3,1,33000,Stayed,
+2024-01-20,RES-0285,Double,3,4,22000,Stayed,
+2024-01-11,RES-0286,Single,3,5,14000,Stayed,
+2024-01-12,RES-0287,Twin,1,4,31000,Stayed,
+2024-01-07,RES-0288,Single,3,3,10000,Stayed,
+2024-01-05,RES-0289,Double,4,2,25000,Stayed,
+2024-01-17,RES-0290,Twin,1,3,18000,Stayed,
+2024-01-20,RES-0291,Single,3,5,10000,Stayed,
+2024-01-20,RES-0292,Suite,2,2,51000,Stayed,
+2024-01-12,RES-0293,Twin,4,1,28000,Cancelled,Illness
+2024-01-18,RES-0294,Suite,3,4,54000,Stayed,
+2024-01-12,RES-0295,Twin,3,4,21000,Stayed,
+2024-01-17,RES-0296,Suite,4,3,64000,Stayed,
+2024-01-05,RES-0297,Suite,2,2,78000,Cancelled,Price too high
+2024-01-04,RES-0298,Single,4,3,16000,Stayed,
+2024-01-06,RES-0299,Single,3,1,20000,Stayed,
+2024-01-14,RES-0300,Double,4,5,22000,Stayed,
+2024-01-01,RES-0301,Single,2,4,13000,Stayed,
+2024-01-12,RES-0302,Suite,1,4,72000,Stayed,
+2024-01-08,RES-0303,Twin,4,1,26000,Stayed,
+2024-01-11,RES-0304,Single,3,1,19000,Stayed,
+2024-01-16,RES-0305,Twin,2,1,24000,Stayed,
+2024-01-01,RES-0306,Twin,4,4,34000,NoShow,Schedule change
+2024-01-18,RES-0307,Single,3,2,10000,Stayed,
+2024-01-10,RES-0308,Suite,1,3,55000,Stayed,
+2024-01-20,RES-0309,Single,1,2,14000,Cancelled,Changed hotel
+2024-01-18,RES-0310,Single,1,4,17000,Stayed,
+2024-01-14,RES-0311,Single,2,2,12000,Stayed,
+2024-01-14,RES-0312,Single,3,2,17000,Stayed,
+2024-01-03,RES-0313,Twin,1,5,26000,Stayed,
+2024-01-13,RES-0314,Single,4,4,8000,NoShow,Price too high
+2024-01-12,RES-0315,Double,1,3,20000,Cancelled,Illness
+2024-01-12,RES-0316,Single,3,2,8000,Stayed,
+2024-01-16,RES-0317,Double,2,4,40000,Stayed,
+2024-01-02,RES-0318,Twin,2,1,29000,Stayed,
+2024-01-02,RES-0319,Double,2,1,24000,Stayed,
+2024-01-18,RES-0320,Double,3,5,30000,Stayed,
