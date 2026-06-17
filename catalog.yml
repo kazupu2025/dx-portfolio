@@ -43,15 +43,15 @@
   description: "100顧客×450件の購買履歴にRecency/Frequency/Monetary（各1-5点）スコアを付与し、優良/成長/離反リスク/休眠の4セグメントに分類する顧客分析システム"
   demo: "cd 01_retail/04_rfm_analysis && streamlit run app.py"
 
-- id: null
-  name: "シフト自動作成・人件費最適化"
+- id: "C-43"
+  name: "シフト充足率・人件費最適化レポート"
   industry: "小売"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "売上予測をベースに最適シフトを自動提案し、時間外コストと予算対比を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "01_retail/06_shift_optimization"
+  description: "5店舗×3役割×20日のシフトデータを集計し、店舗別人件費・シフト充足率・不足アラート・役割別平均時給を可視化する小売チェーン向けシフト管理システム"
+  demo: "cd 01_retail/06_shift_optimization && streamlit run app.py"
 
 - id: "C-34"
   name: "返品・クレームデータ集計レポート"
@@ -247,15 +247,15 @@
   description: "600件の運行記録から拘束時間・実労働時間を集計し、改善基準（拘束13h/労働9h）超過ドライバーと営業所別違反率を可視化する法令遵守支援システム"
   demo: "cd 05_logistics/03_driver_attendance && streamlit run app.py"
 
-- id: null
-  name: "倉庫作業員 KPI 集計"
+- id: "C-44"
+  name: "荷役作業員KPI集計パイプライン"
   industry: "物流・倉庫"
   department: "生産・品質"
-  status: "idea"
-  priority: null
-  path: null
-  description: "ピッキング数・エラー率・時間当たり作業量をスタッフ別に集計・比較可視化"
-  demo: null
+  status: "production-ready"
+  priority: "C"
+  path: "11_logistics/01_worker_kpi"
+  description: "20作業員×4ゾーン×3作業区分×20日の荷役データを集計し、スループット・エラー率・KPIフラグ・残業実態を可視化する倉庫作業員パフォーマンス管理システム"
+  demo: "cd 11_logistics/01_worker_kpi && streamlit run app.py"
 
 # ── 飲食 ──────────────────────────────────────────────
 - id: "A-02"
@@ -482,12 +482,12 @@
   description: "5サービス区分×5担当者のアンケートデータ(CSAT/NPS)を集計し、NPS区分別件数・担当者別満足度ランキング・月別トレンドを可視化する顧客満足度管理システム"
   demo: "cd 10_service/03_customer_satisfaction && streamlit run app.py"
 
-- id: null
-  name: "サービス別売上・原価レポート"
+- id: "C-45"
+  name: "サービス別売上・原価レポートパイプライン"
   industry: "サービス"
-  department: "経理・財務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "サービスメニュー別の売上・原価・粗利率を集計し、収益性改善ポイントを特定"
-  demo: null
+  department: "営業・販売"
+  status: "production-ready"
+  priority: "C"
+  path: "10_service/04_service_revenue"
+  description: "8サービス×5クライアント×1440件の売上データを集計し、サービス別粗利率・赤字サービスアラート・カテゴリ別収益貢献ランキングを可視化する原価管理システム"
+  demo: "cd 10_service/04_service_revenue && streamlit run app.py"
