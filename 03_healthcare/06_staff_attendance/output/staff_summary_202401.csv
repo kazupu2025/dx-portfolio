@@ -1,0 +1,5 @@
+﻿staff_type,total_records,absent_count,avg_overtime_hours,avg_utilization_rate,attendance_rate
+事務,143,13,0.97,0.9278,0.9091
+医師,105,14,0.92,0.8815,0.8667
+看護師,115,9,1.05,0.9407,0.9217
+薬剤師,117,13,0.71,0.8529,0.8889
