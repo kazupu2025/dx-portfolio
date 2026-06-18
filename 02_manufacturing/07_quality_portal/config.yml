@@ -1,0 +1,65 @@
+portal:
+  title: "品質管理ポータル"
+  icon: "🏭"
+
+systems:
+  - id: defect_rate
+    label: "📊 月次不良率集計"
+    description: "工程別・製品別の不良率を自動集計し月次レポートを生成します"
+    required_columns:
+      - "日付（例: 2024-01-15）"
+      - "ライン（例: L1〜L5）"
+      - "製品名"
+      - "検査数（整数）"
+      - "不良数（整数）"
+    sample_file: "sample_defect_rate.csv"
+
+  - id: claim
+    label: "📋 クレーム件数集計"
+    description: "仕入先別・カテゴリ別のクレームを集計し対応状況を可視化します"
+    required_columns:
+      - "日付（例: 2024-01-15）"
+      - "仕入先名"
+      - "不良カテゴリ（例: 寸法不良・外観不良）"
+      - "対応状況（未対応・対応中・完了）"
+    sample_file: "sample_claim.csv"
+
+  - id: yield_
+    label: "📈 歩留まりトレンド"
+    description: "工程別の歩留まり率を週次・月次トレンドで可視化します"
+    required_columns:
+      - "日付（例: 2024-01-15）"
+      - "工程名（例: 切断・溶接・塗装）"
+      - "投入数（整数）"
+      - "合格数（整数）"
+    sample_file: "sample_yield.csv"
+
+  - id: inspector
+    label: "👷 検査員別実績"
+    description: "検査員・シフト別の検査数・合格率を集計し実績レポートを生成します"
+    required_columns:
+      - "日付（例: 2024-01-15）"
+      - "検査員名"
+      - "シフト（日勤・夜勤）"
+      - "検査数（整数）"
+      - "合格数（整数）"
+    sample_file: "sample_inspector.csv"
+
+  - id: lot
+    label: "📦 ロット別合否判定"
+    description: "製品ロットの合否判定結果を集計し要確認ロットを抽出します"
+    required_columns:
+      - "ロットID（例: LOT-001）"
+      - "製品名"
+      - "検査日（例: 2024-01-15）"
+      - "検査項目（例: 寸法・外観・機能）"
+      - "判定（合格・不合格）"
+    sample_file: "sample_lot.csv"
+
+colors:
+  sidebar_bg: "#1e3a5f"
+  sidebar_active: "#2a5298"
+  kpi_good: "#16a34a"
+  kpi_alert: "#dc2626"
+  kpi_warning: "#d97706"
+  page_bg: "#f5f7fa"
