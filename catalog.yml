@@ -646,3 +646,12 @@
   path: "14_it_saas/02_support_ticket"
   description: "5カテゴリ×3優先度×8担当者×480件のCSチケットデータを集計し、カテゴリ別解決率・優先度別エスカレーション率・担当者別解決率を可視化するサポート品質管理システム"
   demo: "cd 14_it_saas/02_support_ticket && streamlit run app.py"
+
+- id: "C-61"
+  name: "製造業品質管理ポータル（統合）"
+  industry: "製造"
+  department: "生産・品質"
+  status: "production-ready"
+  priority: "C"
+  path: "02_manufacturing/07_quality_portal"
+  demo: "cd 02_manufacturing/07_quality_portal && .venv\\Scripts\\streamlit run portal.py"
