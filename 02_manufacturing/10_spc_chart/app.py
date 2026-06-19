@@ -77,6 +77,9 @@ if df is None:
     st.stop()
 
 if run_btn:
+    if not all([process_col, value_col, sub_col, process]):
+        st.error("列と工程をすべて選択してください。")
+        st.stop()
     subset = df[df[process_col] == process]
     try:
         result       = analyze.run_analysis(subset, value_col, sub_col)
