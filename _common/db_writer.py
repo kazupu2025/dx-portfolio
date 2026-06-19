@@ -107,6 +107,11 @@ def _cpk_to_verdict(cpk: float) -> str:
     return "alert"
 
 
+def cpk_to_verdict(cpk: float) -> str:
+    """Cpk値から判定文字列（good/warning/alert）を返す公開ヘルパー"""
+    return _cpk_to_verdict(cpk)
+
+
 def write_cpk_results(upload_id: int, results: list[dict]) -> None:
     """cpk_results に results の各要素を挿入（analyze.run_analysis の出力形式）"""
     uploaded_at = datetime.now(timezone.utc).isoformat()

@@ -201,7 +201,7 @@ with col_left:
                         if str(_db_root) not in sys.path:
                             sys.path.insert(0, str(_db_root))
                         from _common.db_writer import init_db as _init_db
-                        from _common.db_writer import write_upload, write_kpi, write_cpk_results
+                        from _common.db_writer import write_upload, write_kpi, write_cpk_results, cpk_to_verdict as _cpk_to_verdict
                         _init_db()
                         _fname = uploaded.name if uploaded else "sample"
                         _uid = write_upload("cpk", _fname, len(df))
@@ -209,7 +209,7 @@ with col_left:
                         from datetime import datetime as _dt
                         _ym = _dt.now().strftime("%Y-%m")
                         _min_cpk = min(r["cpk"] for r in results)
-                        _v = "good" if _min_cpk >= 1.33 else ("warning" if _min_cpk >= 1.00 else "alert")
+                        _v = _cpk_to_verdict(_min_cpk)
                         write_kpi(_uid, "cpk", _ym, "min_cpk", _min_cpk, _v)
                     except Exception as _e:
                         st.caption(f"⚠ DB書き込みスキップ: {_e}")
