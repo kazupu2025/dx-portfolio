@@ -55,6 +55,8 @@ def get_verdict(cpk: float) -> str:
 
 def get_action(cp: float, cpk: float) -> str:
     """Cp/Cpkの関係から改善アクションを返す。"""
+    if cpk < 0:
+        return "工程が規格外に逸脱（直ちに生産停止・原因究明が必要）"
     if cp >= 1.33 and cpk < 1.00:
         return "平均値を規格中心に調整（センタリング優先・ばらつきは許容範囲内）"
     if cp < 1.00:

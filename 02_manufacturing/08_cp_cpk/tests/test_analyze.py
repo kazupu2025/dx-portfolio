@@ -96,6 +96,12 @@ def test_action_maintain():
     assert "現状維持" in action or "モニタリング" in action
 
 
+def test_action_negative_cpk():
+    """Cpk<0（工程が規格外に逸脱）→ 緊急対応"""
+    action = get_action(cp=0.5, cpk=-0.3)
+    assert "規格外" in action or "生産停止" in action
+
+
 # ── run_analysis ───────────────────────────────────────────────
 
 def test_run_analysis_returns_list():
