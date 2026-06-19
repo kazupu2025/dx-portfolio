@@ -666,3 +666,17 @@
   path: "02_manufacturing/08_cp_cpk"
   description: "測定データと規格値（USL/LSL）からCp/Cpkを自動計算。工程ごとの「ばらつき」vs「中心ずれ」を診断し、改善アクションを提示する独立型分析システム。"
   demo: "streamlit run 02_manufacturing/08_cp_cpk/app.py"
+
+- id: "C-63"
+  name: "統合品質ダッシュボード（横断KPI）"
+  industry: "製造"
+  department: "生産・品質（横断）"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/09_unified_dashboard"
+  demo: "streamlit run 02_manufacturing/09_unified_dashboard/dashboard.py"
+  description: >
+    C-61（品質管理ポータル）と C-62（Cp/Cpk）の分析結果を SQLite DB に蓄積し、
+    不良率・クレーム・歩留・Cpk・検査員検出率・ロット合否率の6KPIを
+    信号機カード＋時系列グラフで横断表示する統合ダッシュボード。
