@@ -84,6 +84,13 @@ def test_db_path_created_if_not_exists(tmp_path, monkeypatch):
     assert db_path.exists()
 
 
+def test_upload_id_foreign_key(tmp_db):
+    """存在しない upload_id で write_kpi を呼ぶと例外が発生すること"""
+    import sqlite3
+    with pytest.raises(Exception):
+        db_writer.write_kpi(99999, "defect_rate", "2024-01", "defect_rate", 0.012, "good")
+
+
 def test_cpk_verdict_mapping(tmp_db):
     """C-62 の verdict（日本語）が good/warning/alert に変換されること"""
     uid = db_writer.write_upload("cpk", "meas.csv", 600)
