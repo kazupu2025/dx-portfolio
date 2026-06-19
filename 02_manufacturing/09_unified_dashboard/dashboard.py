@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import streamlit as st
 import plotly.graph_objects as go
+import pandas as pd
 from _common.db_writer import init_db
 from db_reader import get_latest_kpis, get_kpi_trend, get_latest_cpk
 
@@ -138,7 +139,6 @@ cpk_data = get_latest_cpk()
 if cpk_data:
     st.markdown("---")
     st.markdown("### 直近 Cp/Cpk 一覧")
-    import pandas as pd
     df = pd.DataFrame(cpk_data)[["process", "cp", "cpk", "verdict", "out_of_spec_pct", "n"]]
     df.columns = ["工程", "Cp", "Cpk", "判定", "規格外%", "n"]
     st.dataframe(df, use_container_width=True, hide_index=True)
