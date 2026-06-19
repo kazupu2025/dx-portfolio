@@ -684,10 +684,12 @@
 - id: "C-64"
   name: "SPC管理図（X-bar/R + 異常8ルール）"
   industry: "製造"
-  category: "品質管理（QC）"
+  department: "生産・品質"
   difficulty: "★★☆"
   status: "production-ready"
+  priority: "B"
   path: "02_manufacturing/10_spc_chart"
+  demo: "streamlit run 02_manufacturing/10_spc_chart/app.py"
   description: |
     ロング形式CSV をアップロードし、X-bar/R 管理図を描画。
     Western Electric 異常8ルールを自動適用して管理逸脱ポイントを赤表示。
