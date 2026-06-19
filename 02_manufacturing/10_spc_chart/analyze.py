@@ -52,7 +52,7 @@ def run_analysis(df: pd.DataFrame, value_col: str, subgroup_col: str) -> dict:
 
     n = Counter(count_s.tolist()).most_common(1)[0][0]
     if n not in CONSTANTS:
-        raise ValueError(f"Subgroup size n={n} not supported (supported: 2–10)")
+        raise ValueError(f"Subgroup size n={n} not supported (supported: 2-10)")
 
     c        = CONSTANTS[n]
     xbar_bar = float(xbar_s.mean())
