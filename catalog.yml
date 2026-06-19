@@ -680,3 +680,15 @@
     C-61（品質管理ポータル）と C-62（Cp/Cpk）の分析結果を SQLite DB に蓄積し、
     不良率・クレーム・歩留・Cpk・検査員検出率・ロット合否率の6KPIを
     信号機カード＋時系列グラフで横断表示する統合ダッシュボード。
+
+- id: "C-64"
+  name: "SPC管理図（X-bar/R + 異常8ルール）"
+  industry: "製造"
+  category: "品質管理（QC）"
+  difficulty: "★★☆"
+  status: "production-ready"
+  path: "02_manufacturing/10_spc_chart"
+  description: |
+    ロング形式CSV をアップロードし、X-bar/R 管理図を描画。
+    Western Electric 異常8ルールを自動適用して管理逸脱ポイントを赤表示。
+    結果を統合品質DB（quality.db）に書き込み、C-63 ダッシュボードに連携。
