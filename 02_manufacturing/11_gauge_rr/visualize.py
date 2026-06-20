@@ -50,13 +50,14 @@ def scatter_chart(
     df: pd.DataFrame, part_col: str, operator_col: str, value_col: str
 ) -> go.Figure:
     """部品 × 測定値の散布図（作業者別色分け）。"""
-    operators = df[operator_col].unique()
+    operators = sorted(df[operator_col].unique())
+    parts_sorted = sorted(df[part_col].unique())
     fig = go.Figure()
     for idx, op in enumerate(operators):
-        sub = df[df[operator_col] == op]
+        sub = df[df[operator_col] == op].set_index(part_col).reindex(parts_sorted)
         color = _OP_COLORS[idx % len(_OP_COLORS)]
         fig.add_trace(go.Scatter(
-            x=sub[part_col].astype(str).tolist(),
+            x=[str(p) for p in parts_sorted],
             y=sub[value_col].tolist(),
             mode="markers",
             marker=dict(color=color, size=7, opacity=0.8),
