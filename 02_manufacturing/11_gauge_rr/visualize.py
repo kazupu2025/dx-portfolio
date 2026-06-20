@@ -77,7 +77,7 @@ def xbar_chart(
 ) -> go.Figure:
     """作業者別 部品平均値折れ線グラフ（再現性の可視化）。"""
     operators = df[operator_col].unique()
-    parts     = df[part_col].unique()
+    parts     = sorted(df[part_col].unique())
     fig = go.Figure()
     for idx, op in enumerate(operators):
         sub   = df[df[operator_col] == op]
