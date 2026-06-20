@@ -78,11 +78,11 @@ def test_ndc_perfect_returns_99():
 
 def test_ndc_formula():
     """ndc = floor(1.41 × pv / grr) の計算が正しいこと（GRR > 0 のケース）"""
+    import math
     result = analyze.run_analysis(_alert_df(), "value", "part", "operator")
-    if result["grr"] > 0:
-        import math
-        expected = math.floor(1.41 * result["pv"] / result["grr"])
-        assert result["ndc"] == expected
+    assert result["grr"] > 0, "alert_df must produce grr > 0"
+    expected = math.floor(1.41 * result["pv"] / result["grr"])
+    assert result["ndc"] == expected
 
 
 def test_anova_table_shape():

@@ -45,7 +45,10 @@ def run_analysis(
     if n_parts < 2:
         raise ValueError(f"Need at least 2 parts, got {n_parts}")
 
-    n_trials = int(df.groupby([part_col, operator_col])[value_col].count().min())
+    trial_counts = df.groupby([part_col, operator_col])[value_col].count()
+    if trial_counts.nunique() != 1:
+        raise ValueError("Unbalanced design: all part-operator cells must have equal trial count")
+    n_trials = int(trial_counts.iloc[0])
     if n_trials < 2:
         raise ValueError(f"Need at least 2 trials per cell, got {n_trials}")
 
@@ -79,7 +82,7 @@ def run_analysis(
     var_av  = max(0.0, (MS_Op    - MS_Inter) / (n_parts * n_trials))
     var_pv  = max(0.0, (MS_Part  - MS_Inter) / (n_ops   * n_trials))
 
-    grr2 = var_ev + var_av
+    grr2 = var_ev + var_av + var_int
     tv2  = grr2 + var_pv
 
     ev   = float(np.sqrt(var_ev))
