@@ -86,8 +86,8 @@ if not kpis:
         "C-62 で分析を実行するか、C-61 ポータルでパイプラインを実行してください。"
     )
 
-# ── KPI カード（6枚）─────────────────────────────────────────
-cols = st.columns(6)
+# ── KPI カード ────────────────────────────────────────────────
+cols = st.columns(len(CARDS))
 for i, card in enumerate(CARDS):
     data = kpi_map.get((card["system_id"], card["metric"]))
     verdict = data["verdict"] if data else "no_data"
