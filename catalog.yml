@@ -694,3 +694,17 @@
     ロング形式CSV をアップロードし、X-bar/R 管理図を描画。
     Western Electric 異常8ルールを自動適用して管理逸脱ポイントを赤表示。
     結果を統合品質DB（quality.db）に書き込み、C-63 ダッシュボードに連携。
+
+- id: "C-65"
+  name: "ゲージR&R（MSA）— 2要因ANOVA 測定システム分析"
+  industry: "製造"
+  department: "生産・品質"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/11_gauge_rr"
+  demo: "streamlit run 02_manufacturing/11_gauge_rr/app.py"
+  description: |
+    作業者×部品×繰り返しのロング形式CSVから2要因ANOVAでゲージR&Rを計算。
+    %GRR・%EV・%AV・ndc を算出し、AIAG MSA第4版基準で測定システムを判定。
+    結果を統合品質DB（quality.db）に書き込み、C-63ダッシュボードに連携。

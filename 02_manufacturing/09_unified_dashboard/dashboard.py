@@ -43,6 +43,8 @@ CARDS = [
      "title": "ロット合否率",    "fmt": lambda v: f"{v*100:.1f}%"},
     {"system_id": "spc",         "metric": "out_of_control_pct",
      "title": "SPC 管理逸脱率", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "msa",         "metric": "grr_pct",
+     "title": "ゲージR&R（%GRR）", "fmt": lambda v: f"{v:.1f}%"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
