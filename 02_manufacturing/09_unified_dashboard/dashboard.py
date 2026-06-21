@@ -63,6 +63,8 @@ CARDS = [
      "title": "受入不良率（平均）", "fmt": lambda v: f"{v:.2f}%"},
     {"system_id": "customer_claim_monthly", "metric": "claim_count",
      "title": "月次クレーム総数", "fmt": lambda v: f"{int(v)}件"},
+    {"system_id": "quality_cost", "metric": "failure_ratio",
+     "title": "損失コスト比率", "fmt": lambda v: f"{v:.1f}%"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

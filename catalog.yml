@@ -835,3 +835,17 @@
     顧客別・原因分類別のクレーム件数を CSV でアップロードし、月次推移と原因分類内訳を自動集計。
     月次平均クレーム数 ≤ 5件 → "good" の明快な verdict 設計。
     月次トレンドグラフと原因分類横棒グラフで改善ポイントを可視化。
+
+- id: "C-75"
+  name: "品質コスト明細集計（4分類）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/21_quality_cost"
+  demo: "streamlit run 02_manufacturing/21_quality_cost/app.py"
+  description: |
+    月次の品質コスト明細（予防・評価・内部損失・外部損失）を CSV でアップロードし、
+    損失コスト比率を自動算出。損失比率 ≤ 30% → "good" の明快な verdict 設計。
+    積み上げ棒グラフと分類別横棒グラフで改善ポイントを可視化。
