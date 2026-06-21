@@ -80,7 +80,9 @@ def test_normality_selects_ttest():
 def test_nonnormal_selects_mannwhitney():
     """非正規分布では recommended = 'mw'"""
     result = analyze.run_analysis(_nonnormal(), "group", "measurement", "before", "after")
-    # 指数分布は Shapiro-Wilk で高確率で非正規と判定される
+    # 指数分布は Shapiro-Wilk で非正規と判定されることを確認してから recommended を検証
+    assert not (result["normal_before"] and result["normal_after"]), \
+        "Expected at least one group to be non-normal with exponential distribution"
     assert result["recommended"] == "mw"
 
 

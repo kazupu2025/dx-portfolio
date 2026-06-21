@@ -35,7 +35,7 @@ def run_analysis(
         n_before, n_after, mean_before, mean_after, std_before, std_after,
         shapiro_before_p, shapiro_after_p, normal_before, normal_after,
         t_stat, t_pvalue, cohens_d,
-        mw_stat, mw_pvalue, rank_biserial_r,
+        mw_stat, mw_pvalue, rank_biserial_r (signed — positive means before > after; effect_size uses abs()),
         recommended, p_value, effect_size, verdict
 
     Raises
@@ -88,6 +88,8 @@ def run_analysis(
     mw_pvalue = float(mw_result.pvalue)
 
     # rank-biserial r（効果量）
+    # 正の値: before > after（変更前の方が大きい）、負の値: after > before
+    # effect_size には abs() を使用 — 大きさのみ判定に使う
     rank_biserial_r = float(1.0 - (2.0 * mw_stat) / (n_before * n_after))
 
     # ── 推奨検定の選択 ────────────────────────────────────────────
