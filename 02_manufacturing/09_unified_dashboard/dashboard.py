@@ -51,6 +51,8 @@ CARDS = [
      "title": "最多不良モード構成比", "fmt": lambda v: f"{v:.1f}%"},
     {"system_id": "corrective_action", "metric": "p_value",
      "title": "是正処置効果（p値）", "fmt": lambda v: f"{v:.4f}"},
+    {"system_id": "process_correlation", "metric": "max_r",
+     "title": "工程間最強相関（r）", "fmt": lambda v: f"{v:.3f}"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
