@@ -47,6 +47,8 @@ CARDS = [
      "title": "ゲージR&R（%GRR）", "fmt": lambda v: f"{v:.1f}%"},
     {"system_id": "4m_change",   "metric": "p_value",
      "title": "4M変更有意差（p値）", "fmt": lambda v: f"{v:.4f}"},
+    {"system_id": "defect_pareto", "metric": "top_mode_pct",
+     "title": "最多不良モード構成比", "fmt": lambda v: f"{v:.1f}%"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

@@ -722,3 +722,17 @@
     4M変更（材料・機械・方法・人）前後の測定データを比較し、統計的有意差を自動判定。
     t検定（Welch）とMann-Whitney U検定を両方実行し、Shapiro-Wilk正規性検定で推奨手法を自動選択。
     効果量（Cohen's d / rank-biserial r）で変化の大きさも定量化する。
+
+- id: "C-69"
+  name: "不良モード別パレート × 時系列複合分析"
+  industry: "製造"
+  department: "生産・品質"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/13_defect_pareto"
+  demo: "streamlit run 02_manufacturing/13_defect_pareto/app.py"
+  description: |
+    月次集計済みの不良モード別件数データをパレート分析と時系列推移グラフで可視化。
+    累積80%以内の"vital few"（支配的不良モード群）を自動特定し、
+    直近月の悪化傾向を verdict（good/warning/alert）で通知する。
