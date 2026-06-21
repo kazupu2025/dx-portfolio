@@ -821,3 +821,17 @@
     協力会社（仕入先）ごとの月次受入検査データ（受入数・不良数）を CSV でアップロードし、
     不良率を自動計算。平均不良率 ≤ 1.0% → "good" の明快な verdict 設計。
     月次トレンドグラフと協力会社別平均横棒グラフで改善ポイントを可視化。
+
+- id: "C-74"
+  name: "顧客クレーム件数・原因分類 月次集計"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/20_customer_claim_monthly"
+  demo: "streamlit run 02_manufacturing/20_customer_claim_monthly/app.py"
+  description: |
+    顧客別・原因分類別のクレーム件数を CSV でアップロードし、月次推移と原因分類内訳を自動集計。
+    月次平均クレーム数 ≤ 5件 → "good" の明快な verdict 設計。
+    月次トレンドグラフと原因分類横棒グラフで改善ポイントを可視化。

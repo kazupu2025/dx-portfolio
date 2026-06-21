@@ -61,6 +61,8 @@ CARDS = [
      "title": "直近ロット合否", "fmt": lambda v: "合格" if v >= 1.0 else "不合格"},
     {"system_id": "supplier_defect_rate", "metric": "defect_rate",
      "title": "受入不良率（平均）", "fmt": lambda v: f"{v:.2f}%"},
+    {"system_id": "customer_claim_monthly", "metric": "claim_count",
+     "title": "月次クレーム総数", "fmt": lambda v: f"{int(v)}件"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
