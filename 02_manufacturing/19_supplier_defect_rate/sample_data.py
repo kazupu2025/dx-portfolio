@@ -4,6 +4,12 @@ import pandas as pd
 
 
 def generate_sample_csv() -> pd.DataFrame:
+    """5協力会社（A社〜E社）× 6ヶ月（2024-01〜2024-06）= 30行のサンプルデータを生成する。
+
+    列: supplier, month, incoming_qty, defect_qty
+    期待値: avg 不良率 ≈ 2.0% → verdict = "warning"
+            worst: B社（≈ 4.5%）/ best: D社（≈ 0.5%）
+    """
     rows = []
     # A社: 不良率 ≈ 0.8%（優良）
     for month, qty, defects in [
