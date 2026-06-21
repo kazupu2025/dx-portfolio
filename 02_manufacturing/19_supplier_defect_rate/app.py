@@ -39,8 +39,8 @@ st.markdown(
 with st.sidebar:
     st.header("⚙ 設定")
     st.caption("CSV 列: supplier / month / incoming_qty / defect_qty")
-    use_sample = st.button("サンプルデータを使用", use_container_width=True)
     uploaded   = st.file_uploader("CSVアップロード", type=["csv"])
+    use_sample = st.button("サンプルデータを使用", use_container_width=True)
 
     if use_sample:
         st.session_state["df"] = generate_sample_csv()
@@ -68,6 +68,25 @@ if run_btn:
     except ValueError as e:
         st.error(str(e))
         st.stop()
+
+    # DB書き込み（run_btn ガード内 — 分析実行時のみ実行）
+    try:
+        from _common.db_writer import init_db, write_upload, write_kpi
+        init_db()
+        uid = write_upload(
+            "supplier_defect_rate",
+            st.session_state.get("uploaded_name"),
+            st.session_state.get("row_count"),
+        )
+        avg_for_db = st.session_state["result"]["avg_defect_rate"]
+        verdict_for_db = st.session_state["result"]["verdict"]
+        write_kpi(
+            uid, "supplier_defect_rate",
+            datetime.now().strftime("%Y-%m"),
+            "defect_rate", avg_for_db, verdict_for_db,
+        )
+    except Exception as _e:
+        st.caption(f"⚠ DB書き込みスキップ: {_e}")
 
 result = st.session_state.get("result")
 if not result:
@@ -116,20 +135,3 @@ display_df = result["result_df"][
     ["supplier", "month", "incoming_qty", "defect_qty", "defect_rate"]
 ].sort_values(["month", "supplier"]).reset_index(drop=True)
 st.dataframe(display_df, use_container_width=True)
-
-# ── DB 書き込み ────────────────────────────────────────────────────
-try:
-    from _common.db_writer import init_db, write_upload, write_kpi
-    init_db()
-    uid = write_upload(
-        "supplier_defect_rate",
-        st.session_state.get("uploaded_name"),
-        st.session_state.get("row_count"),
-    )
-    write_kpi(
-        uid, "supplier_defect_rate",
-        datetime.now().strftime("%Y-%m"),
-        "defect_rate", avg, verdict,
-    )
-except Exception as _e:
-    st.caption(f"⚠ DB書き込みスキップ: {_e}")
