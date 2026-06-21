@@ -55,6 +55,8 @@ CARDS = [
      "title": "工程間最強相関（r）", "fmt": lambda v: f"{v:.3f}"},
     {"system_id": "quality_cost_roi", "metric": "roi",
      "title": "品質コストROI", "fmt": lambda v: f"{v:.2f}x"},
+    {"system_id": "supplier_scoring", "metric": "avg_score",
+     "title": "仕入先平均スコア", "fmt": lambda v: f"{v:.1f}点"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

@@ -778,3 +778,17 @@
     月次の品質コスト（予防・評価・失敗）CSVをアップロードし、PAFモデルに基づくROIを自動計算。
     前月比 failure コスト削減額 / 投資額 > 1.0 → "good"（投資回収済み）という明快な verdict 設計。
     1行データ時は failure_ratio フォールバックで必ず verdict を返す堅牢な実装。
+
+- id: "C-68"
+  name: "仕入先品質複合スコアリング — 重み付き合成スコア × 仕入先ランク"
+  industry: "製造"
+  department: "購買・品質"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/17_supplier_scoring"
+  demo: "streamlit run 02_manufacturing/17_supplier_scoring/app.py"
+  description: |
+    仕入先ごとの品質指標（不良率・納期遵守率・価格偏差）を重み付き合成スコアに変換してランク付け。
+    固定重み（不良率50%・納期30%・価格20%）でシンプルに計算し、スコア≥80→"good"で優良判定。
+    横棒グラフで仕入先ランキング、指標別内訳グラフで改善ポイントを可視化。
