@@ -1,4 +1,4 @@
-"""C-73 analyze.py TDD — 8テスト。"""
+"""C-73 analyze.py TDD — 10テスト。"""
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -62,12 +62,12 @@ def test_weighted_average():
 
 def test_worst_supplier():
     df = _make_df(
-        ["A", "B", "C"], ["2024-01", "2024-01", "2024-01"],
+        ["A社", "B社", "C社"], ["2024-01", "2024-01", "2024-01"],
         [500, 300, 800], [5, 15, 4],
     )
     result = analyze.run_analysis(df)
     # B社: 15/300 = 5.0%、A社: 1.0%、C社: 0.5%
-    assert result["worst_supplier"] == "B"
+    assert result["worst_supplier"] == "B社"
 
 
 def test_output_keys():
