@@ -49,6 +49,8 @@ CARDS = [
      "title": "4M変更有意差（p値）", "fmt": lambda v: f"{v:.4f}"},
     {"system_id": "defect_pareto", "metric": "top_mode_pct",
      "title": "最多不良モード構成比", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "corrective_action", "metric": "p_value",
+     "title": "是正処置効果（p値）", "fmt": lambda v: f"{v:.4f}"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

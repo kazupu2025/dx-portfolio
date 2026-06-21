@@ -736,3 +736,17 @@
     月次集計済みの不良モード別件数データをパレート分析と時系列推移グラフで可視化。
     累積80%以内の"vital few"（支配的不良モード群）を自動特定し、
     直近月の悪化傾向を verdict（good/warning/alert）で通知する。
+
+- id: "C-70"
+  name: "是正処置（8D）効果検証 — 統計的有意差検定（t検定/Mann-Whitney）"
+  industry: "製造"
+  department: "生産・品質"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/14_corrective_action"
+  demo: "streamlit run 02_manufacturing/14_corrective_action/app.py"
+  description: |
+    是正処置（8Dメソッド）実施前後の品質データを比較し、統計的有意差を自動判定。
+    t検定（Welch）とMann-Whitney U検定を両方実行し、Shapiro-Wilk正規性検定で推奨手法を自動選択。
+    有意差あり + 効果量大 → "good"（是正効果確認）という C-66 と逆の verdict 設計が特徴。
