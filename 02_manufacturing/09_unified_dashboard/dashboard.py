@@ -57,6 +57,8 @@ CARDS = [
      "title": "品質コストROI", "fmt": lambda v: f"{v:.2f}x"},
     {"system_id": "supplier_scoring", "metric": "avg_score",
      "title": "仕入先平均スコア", "fmt": lambda v: f"{v:.1f}点"},
+    {"system_id": "aql_sampling", "metric": "acceptance",
+     "title": "直近ロット合否", "fmt": lambda v: "合格" if v >= 1.0 else "不合格"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

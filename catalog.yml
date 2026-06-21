@@ -792,3 +792,18 @@
     仕入先ごとの品質指標（不良率・納期遵守率・価格偏差）を重み付き合成スコアに変換してランク付け。
     固定重み（不良率50%・納期30%・価格20%）でシンプルに計算し、スコア≥80→"good"で優良判定。
     横棒グラフで仕入先ランキング、指標別内訳グラフで改善ポイントを可視化。
+
+- id: "C-72"
+  name: "AQL/受入サンプリング計画最適化 — OC曲線・抜取方式設計"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/18_aql_sampling"
+  demo: "streamlit run 02_manufacturing/18_aql_sampling/app.py"
+  description: |
+    ロットサイズ・AQL 水準・検査水準を入力し、JIS Z 9015-1 テーブルから
+    サンプルサイズ n と合格判定数 Ac を自動算出。
+    OC 曲線で生産者リスク α と消費者リスク β を可視化し、
+    実際の検査不良数を入力することでロット合否判定と DB 記録を行う。
