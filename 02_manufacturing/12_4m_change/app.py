@@ -132,8 +132,8 @@ c4.markdown(
 )
 
 # ── チャート ──────────────────────────────────────────────────────
-before_arr = df[df[group_col] == before_label][value_col].to_numpy(dtype=float)
-after_arr  = df[df[group_col] == after_label][value_col].to_numpy(dtype=float)
+before_arr = pd.to_numeric(df[df[group_col] == before_label][value_col], errors="coerce").dropna().to_numpy(dtype=float)
+after_arr  = pd.to_numeric(df[df[group_col] == after_label][value_col],  errors="coerce").dropna().to_numpy(dtype=float)
 
 col_l, col_r = st.columns(2)
 with col_l:
