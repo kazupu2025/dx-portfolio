@@ -708,3 +708,17 @@
     作業者×部品×繰り返しのロング形式CSVから2要因ANOVAでゲージR&Rを計算。
     %GRR・%EV・%AV・ndc を算出し、AIAG MSA第4版基準で測定システムを判定。
     結果を統合品質DB（quality.db）に書き込み、C-63ダッシュボードに連携。
+
+- id: "C-66"
+  name: "4M変更前後品質比較 — 変化点有意差検定（t検定/Mann-Whitney）"
+  industry: "製造"
+  department: "生産・品質"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/12_4m_change"
+  demo: "streamlit run 02_manufacturing/12_4m_change/app.py"
+  description: |
+    4M変更（材料・機械・方法・人）前後の測定データを比較し、統計的有意差を自動判定。
+    t検定（Welch）とMann-Whitney U検定を両方実行し、Shapiro-Wilk正規性検定で推奨手法を自動選択。
+    効果量（Cohen's d / rank-biserial r）で変化の大きさも定量化する。

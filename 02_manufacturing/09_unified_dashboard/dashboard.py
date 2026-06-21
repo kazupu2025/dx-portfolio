@@ -45,6 +45,8 @@ CARDS = [
      "title": "SPC 管理逸脱率", "fmt": lambda v: f"{v:.1f}%"},
     {"system_id": "msa",         "metric": "grr_pct",
      "title": "ゲージR&R（%GRR）", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "4m_change",   "metric": "p_value",
+     "title": "4M変更有意差（p値）", "fmt": lambda v: f"{v:.4f}"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
