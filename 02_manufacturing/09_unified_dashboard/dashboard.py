@@ -53,6 +53,8 @@ CARDS = [
      "title": "是正処置効果（p値）", "fmt": lambda v: f"{v:.4f}"},
     {"system_id": "process_correlation", "metric": "max_r",
      "title": "工程間最強相関（r）", "fmt": lambda v: f"{v:.3f}"},
+    {"system_id": "quality_cost_roi", "metric": "roi",
+     "title": "品質コストROI", "fmt": lambda v: f"{v:.2f}x"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
