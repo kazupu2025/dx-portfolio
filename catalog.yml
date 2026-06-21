@@ -807,3 +807,17 @@
     サンプルサイズ n と合格判定数 Ac を自動算出。
     OC 曲線で生産者リスク α と消費者リスク β を可視化し、
     実際の検査不良数を入力することでロット合否判定と DB 記録を行う。
+
+- id: "C-73"
+  name: "協力会社別受入不良率月報"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "B"
+  path: "02_manufacturing/19_supplier_defect_rate"
+  demo: "streamlit run 02_manufacturing/19_supplier_defect_rate/app.py"
+  description: |
+    協力会社（仕入先）ごとの月次受入検査データ（受入数・不良数）を CSV でアップロードし、
+    不良率を自動計算。平均不良率 ≤ 1.0% → "good" の明快な verdict 設計。
+    月次トレンドグラフと協力会社別平均横棒グラフで改善ポイントを可視化。
