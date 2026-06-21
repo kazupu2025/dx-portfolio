@@ -19,10 +19,10 @@ def generate_sample_csv() -> pd.DataFrame:
     ]:
         rows.append({"supplier": "B社", "month": month,
                      "incoming_qty": qty, "defect_qty": defects})
-    # C社: 不良率 ≈ 1.5%（要注意）
+    # C社: 不良率 ≈ 2.5%（要注意）
     for month, qty, defects in [
-        ("2024-01", 800, 12), ("2024-02", 820, 13), ("2024-03", 810, 12),
-        ("2024-04", 830, 12), ("2024-05", 800, 12), ("2024-06", 815, 12),
+        ("2024-01", 800, 20), ("2024-02", 820, 21), ("2024-03", 810, 20),
+        ("2024-04", 830, 21), ("2024-05", 800, 20), ("2024-06", 815, 20),
     ]:
         rows.append({"supplier": "C社", "month": month,
                      "incoming_qty": qty, "defect_qty": defects})
@@ -40,9 +40,8 @@ def generate_sample_csv() -> pd.DataFrame:
     ]:
         rows.append({"supplier": "E社", "month": month,
                      "incoming_qty": qty, "defect_qty": defects})
+    # 期待 avg ≈ 2.0% → verdict = "warning" / worst: B社 / best: D社
     return pd.DataFrame(rows)
-    # 期待 avg ≈ 2.0% → verdict = "warning"
-    # worst: B社 / best: D社
 
 
 if __name__ == "__main__":
