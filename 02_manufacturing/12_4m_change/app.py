@@ -6,7 +6,6 @@ from datetime import datetime
 
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 sys.path.insert(0, str(Path(__file__).parent))
 _ROOT = Path(__file__).parent.parent.parent
@@ -151,21 +150,21 @@ with col_r:
 # ── 検定結果テーブル ──────────────────────────────────────────────
 st.subheader("検定結果詳細")
 
-_star = lambda rec_val, this: "★ 推奨" if result["recommended"] == rec_val else "—"
+_star = lambda rec_val: "★ 推奨" if result["recommended"] == rec_val else "—"
 table_df = pd.DataFrame([
     {
         "検定手法": "t検定（Welch）",
         "統計量": f"{result['t_stat']:.4f}",
         "p値": f"{result['t_pvalue']:.4f}",
         "効果量": f"Cohen's d = {result['cohens_d']:.3f}",
-        "推奨": _star("t", result["recommended"]),
+        "推奨": _star("t"),
     },
     {
         "検定手法": "Mann-Whitney U",
         "統計量": f"{result['mw_stat']:.1f}",
         "p値": f"{result['mw_pvalue']:.4f}",
         "効果量": f"r = {result['rank_biserial_r']:.3f}",
-        "推奨": _star("mw", result["recommended"]),
+        "推奨": _star("mw"),
     },
 ])
 st.dataframe(table_df, hide_index=True, use_container_width=True)
