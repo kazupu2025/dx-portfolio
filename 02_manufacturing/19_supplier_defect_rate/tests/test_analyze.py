@@ -82,3 +82,22 @@ def test_missing_column_raises():
     df = pd.DataFrame({"supplier": ["A"], "month": ["2024-01"]})
     with pytest.raises(ValueError):
         analyze.run_analysis(df)
+
+
+def test_verdict_warning_upper_boundary():
+    # avg = 15/500 * 100 = 3.0% → warning（上限境界値、alertではない）
+    df = _make_df(["A"], ["2024-01"], [500], [15])
+    result = analyze.run_analysis(df)
+    assert result["verdict"] == "warning"
+    assert result["avg_defect_rate"] == pytest.approx(3.0)
+
+
+def test_zero_defect_rows_are_kept():
+    # C社の不良数がゼロでも行を保持し、avg が正しく計算されること
+    df = _make_df(
+        ["A", "C"], ["2024-01", "2024-01"],
+        [100, 900], [10, 0],
+    )
+    result = analyze.run_analysis(df)
+    assert result["avg_defect_rate"] == pytest.approx(1.0)  # 10/1000*100
+    assert result["n_suppliers"] == 2
