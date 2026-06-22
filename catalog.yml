@@ -1060,3 +1060,17 @@
     工程パラメータ（温度・圧力・速度・湿度等）と最終検査合否の CSV から
     RandomForest 分類モデルを自動学習。精度 ≥ 90% → "good" の verdict 設計。
     特徴量重要度でボトルネック工程を特定し、新規データの合否をリアルタイム予測。
+
+- id: "C-91"
+  name: "FMEA RPN動的更新システム"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★☆☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/37_fmea_rpn"
+  demo: "streamlit run 02_manufacturing/37_fmea_rpn/app.py"
+  description: |
+    FMEA（故障モード影響解析）項目を SQLite で管理し、重大度×発生頻度×検出難度から
+    RPN を自動計算。フォーム入力による CRUD + リアルタイム RPN 更新。
+    平均RPN ≤ 100 → "good" の verdict でリスク全体像を把握。
