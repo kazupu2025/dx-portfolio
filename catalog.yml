@@ -1032,3 +1032,17 @@
     月次の予防・評価・内部/外部失敗コストを CSV でアップロードし、品質投資ROIを自動計算。
     ROI ≥ 100% → "good" の verdict 設計で予防投資の効果を定量評価。
     コスト積み上げ棒グラフと失敗コスト比率折れ線で改善トレンドを可視化。
+
+- id: "C-89"
+  name: "AQL/受入サンプリング計画最適化（OC曲線）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/35_aql_sampling"
+  demo: "streamlit run 02_manufacturing/35_aql_sampling/app.py"
+  description: |
+    ロットサイズ・サンプルサイズ・合格判定数・AQLを CSV でアップロードし、二項分布でOC曲線を自動生成。
+    AQL水準での平均合格確率 ≥ 0.95 → "good" の verdict 設計で最適サンプリング計画を特定。
+    OC曲線（複数計画重ね表示）と保護スコア棒グラフで計画間比較を可視化。
