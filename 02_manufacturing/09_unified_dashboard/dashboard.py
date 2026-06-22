@@ -75,6 +75,8 @@ CARDS = [
      "title": "出荷検査合格率", "fmt": lambda v: f"{v:.2f}%"},
     {"system_id": "process_defect", "metric": "count",
      "title": "工程別不良月次平均", "fmt": lambda v: f"{v:.1f}件"},
+    {"system_id": "inspector_performance", "metric": "defect_rate",
+     "title": "不良検出率", "fmt": lambda v: f"{v:.2f}%"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

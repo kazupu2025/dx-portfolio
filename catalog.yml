@@ -919,3 +919,17 @@
     月次の工程別・不良コード別の件数を CSV でアップロードし、工程別推移と不良コード内訳を自動集計。
     月次平均 ≤ 10件 → "good" の verdict 設計。
     工程別積み上げ棒グラフと不良コード横棒グラフで改善ポイントを可視化。
+
+- id: "C-81"
+  name: "検査員別 検査数・不良検出率・精度レポート"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/27_inspector_performance"
+  demo: "streamlit run 02_manufacturing/27_inspector_performance/app.py"
+  description: |
+    月次の検査員別実績（検査数・不良検出数）を CSV でアップロードし、
+    不良検出率（高いほど精度が高い）を自動算出。≥ 3% → "good" の verdict 設計。
+    検査員別折れ線トレンドと横棒グラフで精度差を可視化。
