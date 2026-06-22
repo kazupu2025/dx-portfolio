@@ -1018,3 +1018,17 @@
     是正処置ごとの処置前後サンプルを CSV でアップロードし、Welch t検定で有意差を自動判定。
     有効率（有意差あり＋改善方向）≥ 80% → "good" の verdict 設計で処置の実効性を評価。
     p値棒グラフと Cohen's d 効果量チャートで統計的根拠を可視化。
+
+- id: "C-88"
+  name: "品質コストROI分析（予防投資額 vs 失敗コスト削減額）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/34_quality_roi"
+  demo: "streamlit run 02_manufacturing/34_quality_roi/app.py"
+  description: |
+    月次の予防・評価・内部/外部失敗コストを CSV でアップロードし、品質投資ROIを自動計算。
+    ROI ≥ 100% → "good" の verdict 設計で予防投資の効果を定量評価。
+    コスト積み上げ棒グラフと失敗コスト比率折れ線で改善トレンドを可視化。
