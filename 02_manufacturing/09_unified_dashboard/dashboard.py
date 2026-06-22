@@ -93,6 +93,8 @@ CARDS = [
      "title": "分類済み件数", "fmt": lambda v: f"{int(v)}件"},
     {"system_id": "supplier_cert", "metric": "avg_score",
      "title": "仕入先平均認定スコア", "fmt": lambda v: f"{v:.1f}点"},
+    {"system_id": "lot_traceability", "metric": "n_lots",
+     "title": "管理ロット数", "fmt": lambda v: f"{int(v)}件"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

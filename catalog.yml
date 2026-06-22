@@ -1102,3 +1102,17 @@
     サプライヤーマスタ + 品質評価記録を SQLite で管理し、品質(50%) × 納期(30%) × コスト(20%)
     の重み付き総合スコアで認定区分（認定/条件付認定/保留）を自動判定。
     平均スコア ≥ 80 → "good" の verdict 設計でサプライヤー全体の品質水準を管理。
+
+- id: "C-94"
+  name: "ロット完全トレーサビリティ"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★☆☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/40_lot_traceability"
+  demo: "streamlit run 02_manufacturing/40_lot_traceability/app.py"
+  description: |
+    原材料 → 工程 → 出荷先の関係を CSV で定義し、networkx 有向グラフで双方向トレーサビリティを実現。
+    ロット番号での絞り込み追跡が可能。ノード数 ≤ 10 → "good" の verdict でサプライチェーン複雑度を管理。
+    Plotly Scatter グラフで階層レイアウトの視覚的なサプライチェーン図を生成。
