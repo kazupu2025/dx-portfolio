@@ -891,3 +891,17 @@
     月次の4M変更件数（人員・設備・材料・方法）を CSV でアップロードし、変更種別推移を集計。
     月次平均 ≤ 5件 → "good" の明快な verdict 設計。
     積み上げ棒グラフと変更種別横棒グラフで管理ポイントを可視化。
+
+- id: "C-79"
+  name: "出荷検査合否率・保留件数レポート"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/25_shipping_inspection"
+  demo: "streamlit run 02_manufacturing/25_shipping_inspection/app.py"
+  description: |
+    月次の出荷検査実績（検査数・合格数・保留数）を CSV でアップロードし、
+    合格率と保留率を自動算出。合格率 ≥ 99% → "good" の高いほど良い verdict 設計。
+    折れ線トレンドと月次件数積み上げ棒グラフで出荷品質を可視化。
