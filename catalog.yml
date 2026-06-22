@@ -990,3 +990,17 @@
     重み付きスコアカード（40%・40%・20%）で 0〜100点に自動換算。
     平均スコア ≥ 80点 → "good" の verdict 設計。
     スコア積み上げ棒グラフとレーダーチャートで仕入先間比較を可視化。
+
+- id: "C-86"
+  name: "不良モード別パレート × 時系列複合分析"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/32_defect_pareto"
+  demo: "streamlit run 02_manufacturing/32_defect_pareto/app.py"
+  description: |
+    月次の不良モード別件数を CSV でアップロードし、パレート分析（80%ルール）を自動実行。
+    上位モード数 ≤ 2種 → "good" の verdict 設計で集中改善対象を特定。
+    パレート図（棒+累積折れ線）と月次推移積み上げ棒グラフで分析を可視化。
