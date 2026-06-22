@@ -1046,3 +1046,17 @@
     ロットサイズ・サンプルサイズ・合格判定数・AQLを CSV でアップロードし、二項分布でOC曲線を自動生成。
     AQL水準での平均合格確率 ≥ 0.95 → "good" の verdict 設計で最適サンプリング計画を特定。
     OC曲線（複数計画重ね表示）と保護スコア棒グラフで計画間比較を可視化。
+
+- id: "C-90"
+  name: "品質予測モデル（工程パラメータ → 合否予測）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★☆☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/36_quality_prediction"
+  demo: "streamlit run 02_manufacturing/36_quality_prediction/app.py"
+  description: |
+    工程パラメータ（温度・圧力・速度・湿度等）と最終検査合否の CSV から
+    RandomForest 分類モデルを自動学習。精度 ≥ 90% → "good" の verdict 設計。
+    特徴量重要度でボトルネック工程を特定し、新規データの合否をリアルタイム予測。
