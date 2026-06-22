@@ -91,6 +91,8 @@ CARDS = [
      "title": "最大相関係数", "fmt": lambda v: f"{v:.3f}"},
     {"system_id": "defect_classifier", "metric": "n_items",
      "title": "分類済み件数", "fmt": lambda v: f"{int(v)}件"},
+    {"system_id": "supplier_cert", "metric": "avg_score",
+     "title": "仕入先平均認定スコア", "fmt": lambda v: f"{v:.1f}点"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

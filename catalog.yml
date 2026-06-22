@@ -1088,3 +1088,17 @@
     不良説明テキストをClaude API（claude-haiku）で5カテゴリ（寸法系/外観系/機能系/材料系/その他）に自動分類。
     APIキーなし環境ではルールベースフォールバックで動作し、LLM使用時 → "good"の verdict 設計。
     CSVアップロードによるバッチ分類と単件テスト機能を提供。
+
+- id: "C-93"
+  name: "サプライヤー品質認定・改善追跡システム"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★☆☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/39_supplier_certification"
+  demo: "streamlit run 02_manufacturing/39_supplier_certification/app.py"
+  description: |
+    サプライヤーマスタ + 品質評価記録を SQLite で管理し、品質(50%) × 納期(30%) × コスト(20%)
+    の重み付き総合スコアで認定区分（認定/条件付認定/保留）を自動判定。
+    平均スコア ≥ 80 → "good" の verdict 設計でサプライヤー全体の品質水準を管理。
