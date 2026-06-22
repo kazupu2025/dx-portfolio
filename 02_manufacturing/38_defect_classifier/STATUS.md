@@ -3,4 +3,4 @@
 - **name:** LLM不良原因自動分類（Claude API + ルールベースフォールバック）
 - **industry:** 製造
 - **department:** 品質保証
-- **status:** designing
+- **status:** production-ready
