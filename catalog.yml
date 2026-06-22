@@ -1004,3 +1004,17 @@
     月次の不良モード別件数を CSV でアップロードし、パレート分析（80%ルール）を自動実行。
     上位モード数 ≤ 2種 → "good" の verdict 設計で集中改善対象を特定。
     パレート図（棒+累積折れ線）と月次推移積み上げ棒グラフで分析を可視化。
+
+- id: "C-87"
+  name: "是正処置（8D）効果検証 — 統計的有意差検定"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/33_8d_effectiveness"
+  demo: "streamlit run 02_manufacturing/33_8d_effectiveness/app.py"
+  description: |
+    是正処置ごとの処置前後サンプルを CSV でアップロードし、Welch t検定で有意差を自動判定。
+    有効率（有意差あり＋改善方向）≥ 80% → "good" の verdict 設計で処置の実効性を評価。
+    p値棒グラフと Cohen's d 効果量チャートで統計的根拠を可視化。
