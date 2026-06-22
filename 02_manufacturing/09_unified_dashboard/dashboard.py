@@ -81,6 +81,8 @@ CARDS = [
      "title": "再発率", "fmt": lambda v: f"{v:.1f}%"},
     {"system_id": "4m_change_comparison", "metric": "significant_ratio",
      "title": "変更効果確認率", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "process_correlation", "metric": "max_corr",
+     "title": "最大相関係数", "fmt": lambda v: f"{v:.3f}"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {

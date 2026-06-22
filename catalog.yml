@@ -961,3 +961,17 @@
     4M変更前後の品質指標サンプルを CSV でアップロードし、t検定と Mann-Whitney 検定で
     有意差を自動判定。有意差確認率 >= 80% -> "good" の統計的根拠付き verdict 設計。
     p値棒グラフと変更前後平均比較グラフで変化点の影響を可視化。
+
+- id: "C-84"
+  name: "工程間品質相関分析（前工程パラメータ × 後工程不良率）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/30_process_correlation"
+  demo: "streamlit run 02_manufacturing/30_process_correlation/app.py"
+  description: |
+    前工程パラメータ（温度・圧力・速度等）と後工程不良率の相関を Pearson 相関係数で分析。
+    最大|r| ≥ 0.7 → "good" の verdict 設計で原因パラメータを自動特定。
+    相関係数棒グラフと散布図（回帰直線付き）で因果関係を可視化。
