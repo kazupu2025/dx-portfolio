@@ -849,3 +849,17 @@
     月次の品質コスト明細（予防・評価・内部損失・外部損失）を CSV でアップロードし、
     損失コスト比率を自動算出。損失比率 ≤ 30% → "good" の明快な verdict 設計。
     積み上げ棒グラフと分類別横棒グラフで改善ポイントを可視化。
+
+- id: "C-76"
+  name: "CAPA完了率・期限遵守率レポート"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/22_capa_report"
+  demo: "streamlit run 02_manufacturing/22_capa_report/app.py"
+  description: |
+    月次の CAPA 実績（登録・完了・期限内完了）を CSV でアップロードし、
+    完了率と期限遵守率を自動算出。完了率 ≥ 90% → "good" の高いほど良い verdict 設計。
+    折れ線トレンドと月次件数積み上げ棒グラフで改善ポイントを可視化。
