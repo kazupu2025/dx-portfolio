@@ -975,3 +975,18 @@
     前工程パラメータ（温度・圧力・速度等）と後工程不良率の相関を Pearson 相関係数で分析。
     最大|r| ≥ 0.7 → "good" の verdict 設計で原因パラメータを自動特定。
     相関係数棒グラフと散布図（回帰直線付き）で因果関係を可視化。
+
+- id: "C-85"
+  name: "仕入先品質複合スコアリング（受入不良率 × Cpk × クレーム件数）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/31_supplier_scoring"
+  demo: "streamlit run 02_manufacturing/31_supplier_scoring/app.py"
+  description: |
+    仕入先ごとの受入不良率・Cpk・クレーム件数を CSV でアップロードし、
+    重み付きスコアカード（40%・40%・20%）で 0〜100点に自動換算。
+    平均スコア ≥ 80点 → "good" の verdict 設計。
+    スコア積み上げ棒グラフとレーダーチャートで仕入先間比較を可視化。
