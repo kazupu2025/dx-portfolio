@@ -1074,3 +1074,17 @@
     FMEA（故障モード影響解析）項目を SQLite で管理し、重大度×発生頻度×検出難度から
     RPN を自動計算。フォーム入力による CRUD + リアルタイム RPN 更新。
     平均RPN ≤ 100 → "good" の verdict でリスク全体像を把握。
+
+- id: "C-92"
+  name: "LLM不良原因自動分類"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★☆☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/38_defect_classifier"
+  demo: "streamlit run 02_manufacturing/38_defect_classifier/app.py"
+  description: |
+    不良説明テキストをClaude API（claude-haiku）で5カテゴリ（寸法系/外観系/機能系/材料系/その他）に自動分類。
+    APIキーなし環境ではルールベースフォールバックで動作し、LLM使用時 → "good"の verdict 設計。
+    CSVアップロードによるバッチ分類と単件テスト機能を提供。
