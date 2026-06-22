@@ -863,3 +863,17 @@
     月次の CAPA 実績（登録・完了・期限内完了）を CSV でアップロードし、
     完了率と期限遵守率を自動算出。完了率 ≥ 90% → "good" の高いほど良い verdict 設計。
     折れ線トレンドと月次件数積み上げ棒グラフで改善ポイントを可視化。
+
+- id: "C-77"
+  name: "特採件数・理由別集計・月次推移"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/23_tokusai_monthly"
+  demo: "streamlit run 02_manufacturing/23_tokusai_monthly/app.py"
+  description: |
+    月次の特採件数を理由別に集計し、月次推移と理由別内訳を自動集計。
+    月次平均 ≤ 3件 → "good" の明快な verdict 設計。
+    積み上げ棒グラフと理由別横棒グラフで改善ポイントを可視化。

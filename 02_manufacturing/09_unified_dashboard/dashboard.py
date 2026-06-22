@@ -67,6 +67,8 @@ CARDS = [
      "title": "損失コスト比率", "fmt": lambda v: f"{v:.1f}%"},
     {"system_id": "capa_report", "metric": "completion_rate",
      "title": "CAPA完了率", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "tokusai_monthly", "metric": "count",
+     "title": "特採月次平均", "fmt": lambda v: f"{v:.1f}件"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
