@@ -2,4 +2,4 @@
 - name: 4M変更前後品質比較（t検定/Mann-Whitney）
 - industry: 製造
 - department: 品質保証
-- status: in-progress
+- status: production-ready
