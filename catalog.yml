@@ -933,3 +933,17 @@
     月次の検査員別実績（検査数・不良検出数）を CSV でアップロードし、
     不良検出率（高いほど精度が高い）を自動算出。≥ 3% → "good" の verdict 設計。
     検査員別折れ線トレンドと横棒グラフで精度差を可視化。
+
+- id: "C-82"
+  name: "なぜなぜ分析 原因カテゴリ別集計・再発率トレンド"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/28_5why_analysis"
+  demo: "streamlit run 02_manufacturing/28_5why_analysis/app.py"
+  description: |
+    月次のなぜなぜ分析結果（原因カテゴリ別件数・再発件数）を CSV でアップロードし、
+    再発率を自動算出。再発率 ≤ 10% → "good" の低いほど良い verdict 設計。
+    再発率月次折れ線と原因カテゴリ横棒グラフで再発防止の進捗を可視化。
