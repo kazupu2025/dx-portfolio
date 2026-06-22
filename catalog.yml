@@ -947,3 +947,17 @@
     月次のなぜなぜ分析結果（原因カテゴリ別件数・再発件数）を CSV でアップロードし、
     再発率を自動算出。再発率 ≤ 10% → "good" の低いほど良い verdict 設計。
     再発率月次折れ線と原因カテゴリ横棒グラフで再発防止の進捗を可視化。
+
+- id: "C-83"
+  name: "4M変更前後品質比較（t検定/Mann-Whitney）"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★☆"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/29_4m_change_comparison"
+  demo: "streamlit run 02_manufacturing/29_4m_change_comparison/app.py"
+  description: |
+    4M変更前後の品質指標サンプルを CSV でアップロードし、t検定と Mann-Whitney 検定で
+    有意差を自動判定。有意差確認率 >= 80% -> "good" の統計的根拠付き verdict 設計。
+    p値棒グラフと変更前後平均比較グラフで変化点の影響を可視化。

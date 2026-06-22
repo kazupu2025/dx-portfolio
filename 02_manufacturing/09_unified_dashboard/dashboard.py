@@ -79,6 +79,8 @@ CARDS = [
      "title": "不良検出率", "fmt": lambda v: f"{v:.2f}%"},
     {"system_id": "5why_analysis", "metric": "recurrence_rate",
      "title": "再発率", "fmt": lambda v: f"{v:.1f}%"},
+    {"system_id": "4m_change_comparison", "metric": "significant_ratio",
+     "title": "変更効果確認率", "fmt": lambda v: f"{v:.1f}%"},
 ]
 
 VERDICT_STYLE: dict[str, dict] = {
