@@ -877,3 +877,17 @@
     月次の特採件数を理由別に集計し、月次推移と理由別内訳を自動集計。
     月次平均 ≤ 3件 → "good" の明快な verdict 設計。
     積み上げ棒グラフと理由別横棒グラフで改善ポイントを可視化。
+
+- id: "C-78"
+  name: "4M変更台帳 集計・変更種別推移"
+  industry: "製造"
+  department: "品質保証"
+  difficulty: "★★★"
+  status: "production-ready"
+  priority: "A"
+  path: "02_manufacturing/24_4m_change"
+  demo: "streamlit run 02_manufacturing/24_4m_change/app.py"
+  description: |
+    月次の4M変更件数（人員・設備・材料・方法）を CSV でアップロードし、変更種別推移を集計。
+    月次平均 ≤ 5件 → "good" の明快な verdict 設計。
+    積み上げ棒グラフと変更種別横棒グラフで管理ポイントを可視化。
