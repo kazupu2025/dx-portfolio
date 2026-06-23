@@ -298,15 +298,15 @@
   description: "3店舗×420件の予約データを集計し、店舗別キャンセル率・理由別ランキング・曜日別傾向・機会損失金額を可視化する予約管理システム"
   demo: "cd 06_restaurant/03_reservation_cancel && streamlit run app.py"
 
-- id: null
+- id: "C-110"
   name: "アルバイトシフト管理・人件費集計"
   industry: "飲食"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "シフト実績から時給・残業・社保コストを自動集計し、売上対人件費率を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "A"
+  path: "06_restaurant/03_shift_cost/"
+  description: "シフト実績から時給・残業・社保コストを自動集計。人件費率≤25%→good の verdict で売上対人件費率をリアルタイム管理。"
+  demo: "cd 06_restaurant/03_shift_cost && streamlit run app.py"
 
 # ── 不動産 ────────────────────────────────────────────
 - id: "A-08"
@@ -390,15 +390,15 @@
   description: "420件の採用データをチャネル別に集計し、採用単価・採用率・内定承諾率・フェーズ別ファネルを可視化する採用コスト最適化システム"
   demo: "cd 08_hr/04_recruitment_cost && streamlit run app.py"
 
-- id: null
+- id: "C-111"
   name: "研修効果測定レポート"
   industry: "人事・採用"
   department: "人事・労務"
-  status: "idea"
-  priority: null
-  path: null
-  description: "研修前後のスキルアセスメントデータを集計し、研修効果と費用対効果を可視化"
-  demo: null
+  status: "production-ready"
+  priority: "A"
+  path: "08_hr/02_training_effectiveness/"
+  description: "研修前後スキルアセスメントから改善率・費用対効果を集計。平均改善≥15点→good の verdict で研修投資の効果を可視化。"
+  demo: "cd 08_hr/02_training_effectiveness && streamlit run app.py"
 
 - id: "C-30"
   name: "人件費推移・予実差異レポートパイプライン"
@@ -431,15 +431,15 @@
   description: "450件の受講データをコース別・受講者区分別に集計し、修了率・テストスコア分布・中退リスク・満足度を可視化する教育効果測定システム"
   demo: "cd 09_education/03_completion_rate && streamlit run app.py"
 
-- id: null
+- id: "C-112"
   name: "出席率・成績推移レポート"
   industry: "教育・研修"
   department: "受付・CS"
-  status: "idea"
-  priority: null
-  path: null
-  description: "クラス・科目別の出席率と成績分布を集計し、指導品質改善の根拠データを生成"
-  demo: null
+  status: "production-ready"
+  priority: "A"
+  path: "09_education/02_attendance_grade/"
+  description: "クラス・科目別の出席率と成績分布を月次集計。出席率≥90%→good の verdict で指導品質改善の根拠データを生成。"
+  demo: "cd 09_education/02_attendance_grade && streamlit run app.py"
 
 - id: "C-24"
   name: "講師稼働・コマ数管理パイプライン"

@@ -1,0 +1,22 @@
+# C-112 出席率・成績推移レポート 設定ファイル
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 40     # 最小レコード数（6ヶ月 × 4クラス ≥ 24）
+max_imputed_ratio: 0.05       # 欠損補完許容割合
+
+# ── 分析設定 ──────────────────────────────────────
+group_column: "class_name"    # クラス別集計
+date_column: "month"          # 月別トレンド
+value_columns:
+  - "attendance_rate"
+  - "avg_score"
+  - "failing_rate"
+
+# ── 閾値設定 ──────────────────────────────────────
+alert_attendance_threshold: 85   # 出席率（%）
+alert_score_threshold: 60        # 平均点
+good_attendance_threshold: 90    # 良好判定の出席率
+
+# ── 出力設定 ──────────────────────────────────────
+output_csv: "output/cleaned_attendance_grade.csv"
+report_title: "出席率・成績推移レポート"
