@@ -1,0 +1,18 @@
+# C-126 整備士別生産性・売上分析 設定ファイル
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 60        # 期待する総レコード数（最小）
+max_imputed_ratio: 0.05          # 欠損補完の許容割合
+
+# ── 分析設定 ──────────────────────────────────────
+group_column: "mechanic_id"      # 集計軸の列名（整備士ID）
+date_column: "date"              # 日付列名
+value_column: "labor_revenue"    # 集計対象の数値列名（売上）
+
+# ── 時給効率判定基準 ──────────────────────────────
+threshold_good: 6000             # 優良基準（時給効率 >= ¥6,000）
+threshold_warning: 4000          # 警告基準（時給効率 >= ¥4,000）
+
+# ── 出力設定 ──────────────────────────────────────
+output_csv: "output/cleaned_mechanic.csv"
+report_title: "整備士別生産性・売上分析レポート"

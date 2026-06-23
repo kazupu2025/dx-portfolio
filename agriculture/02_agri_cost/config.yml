@@ -1,0 +1,22 @@
+---
+# C-123 Configuration - Agricultural Pesticide & Fertilizer Cost Analysis
+
+system_code: C-123
+system_name: "農薬・肥料コスト分析"
+industry: "農業・食品加工"
+difficulty: "★★☆"
+
+# Data source
+data_source: "sample_agri_cost.csv"
+sample_data_rows: 48
+sample_data_description: "12ヶ月 × 4品目（トマト, キャベツ, ほうれん草, じゃがいも）各カテゴリ別"
+
+# Thresholds for cost per hectare verdict
+cost_per_ha_good: 50000       # ≤50000 = good
+cost_per_ha_warning: 80000    # ≤80000 = warning
+cost_per_ha_alert: -1         # >80000 = alert
+
+# UI Config
+title: "🌾 農業 農薬・肥料コスト分析ダッシュボード"
+layout: "wide"
+page_icon: "🌾"

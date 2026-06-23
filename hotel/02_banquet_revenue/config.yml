@@ -1,0 +1,15 @@
+# {SYSTEM_NAME} 設定ファイル
+# ここを変更するだけで顧客ごとのカスタマイズが完結する
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 1000   # 期待する総レコード数（最小）
+max_imputed_ratio: 0.15       # 欠損補完の許容割合（15%まで）
+
+# ── 分析設定 ──────────────────────────────────────
+group_column: "{GROUP_COLUMN}"   # 集計軸の列名（例: store_name, department）
+date_column: "{DATE_COLUMN}"     # 日付列名（例: date, transaction_date）
+value_column: "{VALUE_COLUMN}"   # 集計対象の数値列名（例: sales_amount, quantity）
+
+# ── 出力設定 ──────────────────────────────────────
+output_csv: "output/cleaned_{DATA_NAME}.csv"
+report_title: "{SYSTEM_NAME} レポート"

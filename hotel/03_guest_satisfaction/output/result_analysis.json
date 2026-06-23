@@ -1,0 +1,25 @@
+{
+  "avg_overall_score": 2.9,
+  "avg_room_score": 3.16,
+  "avg_food_score": 3.2,
+  "avg_service_score": 2.99,
+  "overall_judgment": "alert",
+  "repeat_count": 12,
+  "total_guests": 50,
+  "repeat_rate": 0.24,
+  "avg_spend_per_night": 13990.09,
+  "channels": [
+    "直接予約",
+    "法人",
+    "旅行代理店",
+    "OTA"
+  ],
+  "room_types": [
+    "シングル",
+    "ダブル",
+    "スイート",
+    "ツイン"
+  ],
+  "repeat_avg_score": 2.66,
+  "new_avg_score": 2.98
+}

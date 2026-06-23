@@ -1,0 +1,23 @@
+# C-124 出荷先別単価・販売分析 設定ファイル
+# ここを変更するだけで顧客ごとのカスタマイズが完結する
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 40   # 期待する総レコード数（最小）
+max_imputed_ratio: 0.10     # 欠損補完の許容割合（10%まで）
+
+# ── 分析設定 ──────────────────────────────────────
+month_column: "month"         # 月列
+crop_column: "crop"           # 作物列
+channel_column: "channel"     # 出荷先チャネル列
+quantity_column: "quantity_kg"  # 出荷量列
+price_column: "unit_price"    # 単価列
+revenue_column: "revenue"     # 売上列
+
+# ── 判定閾値 ──────────────────────────────────────
+direct_sales_good: 0.30       # 直販比率 >= 30% = good
+direct_sales_warning: 0.15    # 直販比率 >= 15% = warning
+# < 15% = alert
+
+# ── 出力設定 ──────────────────────────────────────
+output_csv: "output/cleaned_sales_channel.csv"
+report_title: "出荷先別単価・販売分析"

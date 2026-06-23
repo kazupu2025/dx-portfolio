@@ -1,0 +1,23 @@
+# C-121 安全管理・ヒヤリハット集計 設定ファイル
+# ここを変更するだけで顧客ごとのカスタマイズが完結する
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 30        # 期待する総レコード数（最小）
+max_unresolved_ratio: 0.30       # 未解決率の許容値（30%まで）
+
+# ── 分析設定 ──────────────────────────────────────
+date_column: "date"              # 日付列名
+category_column: "category"      # カテゴリ列名（転落・転倒など）
+severity_column: "severity"      # 重篤度列名（ヒヤリハット/軽微/重大）
+resolved_column: "resolved"      # 解決フラグ列名（True/False）
+project_column: "project_id"     # プロジェクト列名
+
+# ── 判定閾値 ──────────────────────────────────────
+good_severity_max: 0             # good 判定: 重大件数 ≤ N
+good_resolution_min: 0.90        # good 判定: 解決率 ≥ N
+warning_severity_max: 2          # warning 判定: 重大件数 ≤ N
+warning_resolution_min: 0.70     # warning 判定: 解決率 ≥ N
+
+# ── 出力設定 ──────────────────────────────────────
+output_json: "output/analysis_report.json"
+report_title: "安全管理・ヒヤリハット集計レポート"

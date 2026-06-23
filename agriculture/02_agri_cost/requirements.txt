@@ -1,0 +1,10 @@
+streamlit>=1.30.0
+pandas
+numpy
+openpyxl
+matplotlib
+seaborn
+japanize-matplotlib
+pyyaml
+plotly
+pytest

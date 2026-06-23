@@ -1,0 +1,22 @@
+# C-122 資材コスト・発注管理 設定ファイル
+# ここを変更するだけでカスタマイズが完結する
+
+# ── データ品質チェック設定 ──────────────────────────
+expected_record_count: 40   # 期待する総レコード数（最小）
+max_imputed_ratio: 0.05     # 欠損補完の許容割合（5%まで）
+
+# ── 分析設定 ──────────────────────────────────────
+date_column: "date"              # 日付列名
+category_column: "category"      # カテゴリ列名
+project_column: "project_id"     # プロジェクトID列名
+supplier_column: "supplier"      # 仕入先列名
+cost_column: "total_cost"        # コスト列名
+unit_price_column: "unit_price"  # 単価列名
+
+# ── 月次変動率判定設定 ──────────────────────────────
+cost_variance_threshold_good: 0.10    # 10% 以下 → good
+cost_variance_threshold_warning: 0.20 # 20% 以下 → warning, 超過 → alert
+
+# ── 出力設定 ──────────────────────────────────────
+output_csv: "output/analyzed_material.csv"
+report_title: "C-122 資材コスト・発注管理 分析レポート"
