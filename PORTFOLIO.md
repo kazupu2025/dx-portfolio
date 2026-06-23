@@ -1,6 +1,6 @@
 # DX ポートフォリオ ダッシュボード
 
-> 最終更新: 2026-06-23  |  総システム数: 107  |  Production-ready: 104
+> 最終更新: 2026-06-23  |  総システム数: 112  |  Production-ready: 109
 
 ---
 
@@ -8,9 +8,9 @@
 
 | 状態 | 件数 |
 |------|------|
-| ✅ Production-ready | 104 |
+| ✅ Production-ready | 109 |
 | 💡 Idea | 3 |
-| **合計** | **107** |
+| **合計** | **112** |
 
 ---
 
@@ -19,7 +19,7 @@
 | 業種 | 件数 |
 |------|------|
 | 製造 | 40 |
-| 製造業 | 10 |
+| 製造業 | 15 |
 | 小売 | 6 |
 | 医療・介護 | 6 |
 | 金融・保険 | 5 |
@@ -48,7 +48,7 @@
 |--------|------|------|
 | ★★★ | 20 | config 調整のみで転用可 |
 | ★★☆ | 18 | 統計分析ロジック実装 |
-| ★☆☆ | 5 | ML・CRUD・グラフ構造 |
+| ★☆☆ | 10 | ML・CRUD・グラフ構造 |
 
 ---
 
@@ -76,6 +76,11 @@
 | C-102 | 製造業 | 工程別不良コード頻度・月次トレンド | ★★★ | A | `02_manufacturing/48_defect_code_trend/` |
 | C-103 | 製造業 | 検査員別 検査数・不良検出率・精度レポート | ★★★ | A | `02_manufacturing/49_inspector_accuracy/` |
 | C-104 | 製造業 | なぜなぜ分析 原因カテゴリ別集計・再発率トレンド | ★★★ | A | `02_manufacturing/50_5why_recurrence/` |
+| C-105 | 製造業 | リアルタイムSPC監視 | ★☆☆ | A | `02_manufacturing/51_realtime_spc/` |
+| C-106 | 製造業 | 市場品質フィードバックループ | ★☆☆ | A | `02_manufacturing/52_quality_feedback_loop/` |
+| C-107 | 製造業 | CAPAワークフロー（起票→承認→効果確認フロー） | ★☆☆ | A | `02_manufacturing/53_capa_workflow/` |
+| C-108 | 製造業 | AI外観検査自動判定 | ★☆☆ | A | `02_manufacturing/54_visual_inspection/` |
+| C-109 | 製造業 | 多拠点品質比較ダッシュボード | ★☆☆ | A | `02_manufacturing/55_multisite_quality/` |
 | C-16 | 医療・介護 | シフト希望・配置分析パイプライン |  | C | `03_healthcare/02_shift_optimization` |
 | C-17 | 物流・倉庫 | 配送コスト分析パイプライン |  | C | `05_logistics/02_delivery_cost` |
 | C-18 | 製造 | 原価差異分析パイプライン |  | C | `02_manufacturing/03_cost_variance` |
