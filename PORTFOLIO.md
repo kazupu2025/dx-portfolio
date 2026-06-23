@@ -1,6 +1,6 @@
 # DX ポートフォリオ ダッシュボード
 
-> 最終更新: 2026-06-23  |  総システム数: 97  |  Production-ready: 94
+> 最終更新: 2026-06-23  |  総システム数: 107  |  Production-ready: 104
 
 ---
 
@@ -8,9 +8,9 @@
 
 | 状態 | 件数 |
 |------|------|
-| ✅ Production-ready | 94 |
+| ✅ Production-ready | 104 |
 | 💡 Idea | 3 |
-| **合計** | **97** |
+| **合計** | **107** |
 
 ---
 
@@ -19,6 +19,7 @@
 | 業種 | 件数 |
 |------|------|
 | 製造 | 40 |
+| 製造業 | 10 |
 | 小売 | 6 |
 | 医療・介護 | 6 |
 | 金融・保険 | 5 |
@@ -45,7 +46,7 @@
 
 | 難易度 | 件数 | 特徴 |
 |--------|------|------|
-| ★★★ | 10 | config 調整のみで転用可 |
+| ★★★ | 20 | config 調整のみで転用可 |
 | ★★☆ | 18 | 統計分析ロジック実装 |
 | ★☆☆ | 5 | ML・CRUD・グラフ構造 |
 
@@ -70,6 +71,11 @@
 | B-13 | 飲食 | 原価管理・食材ロス分析 |  | B | `06_restaurant/02_cost_management` |
 | B-14 | 不動産 | 賃貸物件管理・空室率レポート |  | B | `07_realestate/02_rental_management` |
 | B-15 | サービス | 問い合わせログ分類・対応時間分析 |  | B | `10_service/01_inquiry_log` |
+| C-100 | 製造業 | 4M変更台帳 集計・変更種別推移レポート | ★★★ | A | `02_manufacturing/46_4m_change_ledger/` |
+| C-101 | 製造業 | 出荷検査合否率・保留件数 週次レポート | ★★★ | A | `02_manufacturing/47_shipping_inspection/` |
+| C-102 | 製造業 | 工程別不良コード頻度・月次トレンド | ★★★ | A | `02_manufacturing/48_defect_code_trend/` |
+| C-103 | 製造業 | 検査員別 検査数・不良検出率・精度レポート | ★★★ | A | `02_manufacturing/49_inspector_accuracy/` |
+| C-104 | 製造業 | なぜなぜ分析 原因カテゴリ別集計・再発率トレンド | ★★★ | A | `02_manufacturing/50_5why_recurrence/` |
 | C-16 | 医療・介護 | シフト希望・配置分析パイプライン |  | C | `03_healthcare/02_shift_optimization` |
 | C-17 | 物流・倉庫 | 配送コスト分析パイプライン |  | C | `05_logistics/02_delivery_cost` |
 | C-18 | 製造 | 原価差異分析パイプライン |  | C | `02_manufacturing/03_cost_variance` |
@@ -149,6 +155,11 @@
 | C-92 | 製造 | LLM不良原因自動分類 | ★☆☆ | A | `02_manufacturing/38_defect_classifier` |
 | C-93 | 製造 | サプライヤー品質認定・改善追跡システム | ★☆☆ | A | `02_manufacturing/39_supplier_certification` |
 | C-94 | 製造 | ロット完全トレーサビリティ | ★☆☆ | A | `02_manufacturing/40_lot_traceability` |
+| C-95 | 製造業 | 協力会社別受入不良率月報 | ★★★ | A | `02_manufacturing/41_incoming_defect_rate/` |
+| C-96 | 製造業 | 顧客クレーム件数・原因分類 月次集計 | ★★★ | A | `02_manufacturing/42_customer_claims/` |
+| C-97 | 製造業 | 品質コスト明細集計（予防/評価/内部失敗/外部失敗） | ★★★ | A | `02_manufacturing/43_quality_cost_detail/` |
+| C-98 | 製造業 | CAPA完了率・期限遵守率レポート | ★★★ | A | `02_manufacturing/44_capa_management/` |
+| C-99 | 製造業 | 特採件数・理由別集計・月次推移 | ★★★ | A | `02_manufacturing/45_special_acceptance/` |
 
 ---
 
