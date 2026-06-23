@@ -238,7 +238,7 @@ def main():
         """
         > Claude Code × Python で構築 | 各システムはローカル環境で即座に起動可能
         >
-        > 導入・カスタマイズのご相談: [your-email@example.com](mailto:your-email@example.com)
+        > 導入・カスタマイズのご相談: [realpooh0927@gmail.com](mailto:realpooh0927@gmail.com)
         """
     )
 
