@@ -1,0 +1,22 @@
+---
+# C-117 Configuration - Harvest Quality & Yield Analysis
+
+system_code: C-117
+system_name: "収穫量・品質トレンド分析"
+industry: "農業・食品加工"
+difficulty: "★★☆"
+
+# Data source
+data_source: "sample_harvest_quality.csv"
+sample_data_rows: 48
+sample_data_description: "12ヶ月 × 4品目（トマト, キャベツ, ほうれん草, じゃがいも）"
+
+# Thresholds
+grade_a_threshold_good: 75      # ≥75% = good quality
+grade_a_threshold_warning: 60   # 60~74% = warning
+grade_a_threshold_alert: -1     # <60% = alert
+
+# UI Config
+title: "🌾 農業 収穫量・品質トレンド分析ダッシュボード"
+layout: "wide"
+page_icon: "🌾"

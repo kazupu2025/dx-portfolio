@@ -1,0 +1,52 @@
+system_id: C-113
+system_name: SaaSメトリクスダッシュボード
+description: |
+  MRR・チャーン率・LTV・CACなどのSaaS重要指標を月次で追跡・可視化するダッシュボード。
+  12ヶ月のデータから成長トレンド、健全性診断、プラン別構成を分析。
+
+input:
+  format: CSV
+  columns:
+    - month: 年月（YYYY-MM）
+    - plan: プラン名（Basic/Standard/Premium等）
+    - new_customers: 新規顧客数
+    - churned_customers: 解約顧客数
+    - total_customers: 累積顧客数
+    - mrr: 月次経常収益（MRR）
+    - new_mrr: 新規顧客によるMRR
+    - churned_mrr: 解約によるMRR
+    - cac_spend: 月次顧客獲得コスト総額
+
+output:
+  files:
+    - analysis_result.json: KPI集計結果
+    - monthly_data.csv: 月次分析データ
+  visualizations:
+    - MRR推移グラフ
+    - MRR成長率トレンド
+    - チャーン率トレンド
+    - プラン別MRR構成
+
+kpis:
+  latest_mrr: 最新月のMRR（基準: 増加傾向）
+  avg_churn: 平均チャーン率（基準: <5%で優良）
+  avg_cac: 平均顧客獲得コスト（基準: CAC < LTV/24）
+  avg_ltv: 平均顧客生涯価値（基準: LTV > 3*CAC で健全）
+  ltv_cac_ratio: LTV/CAC比（健全性指標）
+    - good: >= 3
+    - warning: >= 1
+    - alert: < 1
+
+technical:
+  language: Python 3.x
+  framework: Streamlit
+  libraries:
+    - pandas: データ処理
+    - numpy: 数値計算
+    - plotly: グラフ表示（オプション）
+  execution: "streamlit run app.py"
+
+testing:
+  framework: pytest
+  test_count: 8
+  command: "python -m pytest tests/ -v"
