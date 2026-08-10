@@ -7,6 +7,10 @@
   path: 01_retail/01_sales_analysis
   description: 複数店舗（xlsx/csv混在）の売上データをクレンジング・分析・可視化。Streamlit Webアプリで提供
   demo: streamlit run app.py
+  customize_points:
+  - 店舗名・CSVファイル名（xlsx/csv 混在に対応済み）
+  - 売上・原価の列名マッピング（config.yml）
+  - 集計対象期間の設定
 - id: B-10
   name: 発注最適化・需要予測パイプライン
   industry: 小売
@@ -62,6 +66,10 @@
   description: 5工程の品質検査データを集計し、統計的外れ値（±3σ）と工程別不良率アラートを自動検出する品質管理システム
   demo: cd 02_manufacturing/01_quality_inspection && python run_pipeline.py && streamlit
     run app.py
+  customize_points:
+  - 'config.yml の不良率アラートライン（defect_alert_rate: 5%）'
+  - CSVの工程名・製品名（process, product_name 列）
+  - 検査値の正常範囲・単位（inspection_value 列）
 - id: B-09
   name: 製造×設備稼働ログ異常予兆検知
   industry: 製造
@@ -117,6 +125,10 @@
   description: 5診療科の来院データを集計し、時間帯×曜日ヒートマップでピーク負荷を可視化。長時間待ちアラートで受付体制の最適化を支援
   demo: cd 03_healthcare/01_patient_visit && python run_pipeline.py && streamlit run
     app.py
+  customize_points:
+  - 'config.yml の待ち時間アラート（wait_alert_minutes: 60分）'
+  - 'config.yml のピーク倍率（peak_hour_threshold: 平均の1.3倍）'
+  - CSVの診療科名（department 列）
 - id: C-16
   name: シフト希望・配置分析パイプライン
   industry: 医療・介護
@@ -153,6 +165,10 @@
   path: 04_finance/01_expense
   description: 5部門の経費精算データを集計し、予算消化率と超過アラートを月次レポートで提供する経費管理システム
   demo: cd 04_finance/01_expense && python run_pipeline.py && streamlit run app.py
+  customize_points:
+  - config.yml の予算超過アラート閾値（budget_alert_threshold）
+  - CSVの部門名・費目名（department, expense_type 列）
+  - 月次予算値（budget 列）をクライアントの予算表から投入
 - id: B-11
   name: 与信スコアリングデータ整備
   industry: 金融・保険
@@ -189,6 +205,10 @@
   path: 05_logistics/01_inventory
   description: 複数倉庫の在庫データを統合クレンジングし、欠品リスク品目を自動検出・レポート
   demo: cd 05_logistics/01_inventory && python run_pipeline.py && streamlit run app.py
+  customize_points:
+  - config.yml の欠品率アラート閾値（low_stock_ratio_threshold）
+  - CSVの倉庫名・品目名（warehouse, item_name 列）
+  - 最低在庫基準数（min_stock_qty 列）
 - id: C-17
   name: 配送コスト分析パイプライン
   industry: 物流・倉庫
@@ -235,6 +255,10 @@
   description: 飲食店5店舗の日次売上を集計し、廃棄ロス率（廃棄額÷売上額）を算出。5%超の店舗をアラート表示する経営支援レポート。
   demo: cd 06_restaurant/01_daily_sales && python run_pipeline.py && streamlit run
     app.py
+  customize_points:
+  - config.yml の粗利率アラートライン
+  - CSVの店舗名・メニューカテゴリ（store, category 列）
+  - 売上・原価・廃棄ロスの列名マッピング
 - id: B-13
   name: 原価管理・食材ロス分析
   industry: 飲食
@@ -281,6 +305,10 @@
   path: 07_realestate/01_inquiry
   description: 5エリアの物件問い合わせデータをファネル分析し、エリア別・担当者別・経路別の成約率を可視化する営業支援システム
   demo: cd 07_realestate/01_inquiry && python run_pipeline.py && streamlit run app.py
+  customize_points:
+  - 'config.yml の成約率アラートライン（conversion_alert_threshold: 10%）'
+  - config.yml の商談ステージ名（stages リスト）
+  - CSVのエリア名・担当者名（area, agent 列）
 - id: B-14
   name: 賃貸物件管理・空室率レポート
   industry: 不動産
@@ -327,6 +355,10 @@
   path: 08_hr/01_attendance
   description: 5部門の勤怠データを集計し、残業上限超過（45h警告/60h危険）・有休消化率のアラートを自動生成するパイプライン
   demo: cd 08_hr/01_attendance && python run_pipeline.py && streamlit run app.py
+  customize_points:
+  - 'config.yml の残業警告ライン（overtime_warning_hours: 45h）'
+  - 'config.yml の危険ライン（overtime_danger_hours: 60h）'
+  - CSVの部門名・従業員名（department, employee_name 列）
 - id: C-33
   name: 採用歩留まり率分析パイプライン
   industry: 人事・採用

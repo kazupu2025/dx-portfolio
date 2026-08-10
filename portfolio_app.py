@@ -144,6 +144,13 @@ def render_card(item):
 </div>
 """, unsafe_allow_html=True)
 
+        # ── カスタマイズポイント（設定した場合のみ表示）────────
+        customize_points = item.get("customize_points", [])
+        if customize_points:
+            with st.expander("⚙️ カスタマイズポイント", expanded=False):
+                for pt in customize_points:
+                    st.markdown(f"- {pt}")
+
         if iid in _demo_pages:
             # インタラクティブデモが使えるツール → デモボタン（全幅）+ コードリンク（全幅）
             # ※ネストされたst.columns()は3列グリッド内で幅が足りなくなるため縦積みにする
