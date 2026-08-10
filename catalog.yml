@@ -11,6 +11,7 @@
   - 店舗名・CSVファイル名（xlsx/csv 混在に対応済み）
   - 売上・原価の列名マッピング（config.yml）
   - 集計対象期間の設定
+  difficulty: ★★★
 - id: B-10
   name: 発注最適化・需要予測パイプライン
   industry: 小売
@@ -20,6 +21,7 @@
   path: 01_retail/02_ordering
   description: 50商品の過去3ヶ月日次売上から移動平均+曜日係数+トレンドモデルで2024年1月需要を予測し、欠品リスクと過剰在庫を商品別にアラート表示する発注最適化システム
   demo: cd 01_retail/02_ordering && python run_pipeline.py && streamlit run app.py
+  difficulty: ★☆☆
 - id: C-19
   name: 月次収益・予実差異レポート
   industry: 小売
@@ -29,6 +31,7 @@
   path: 01_retail/03_monthly_pnl
   description: 5店舗×13週の売上・原価・人件費データを集計し、粗利率・営業利益の予実差異と赤字店舗アラートを可視化する月次収益管理システム
   demo: cd 01_retail/03_monthly_pnl && streamlit run app.py
+  difficulty: ★★☆
 - id: C-27
   name: 顧客購買履歴 RFM 分析パイプライン
   industry: 小売
@@ -38,6 +41,7 @@
   path: 01_retail/04_rfm_analysis
   description: 100顧客×450件の購買履歴にRecency/Frequency/Monetary（各1-5点）スコアを付与し、優良/成長/離反リスク/休眠の4セグメントに分類する顧客分析システム
   demo: cd 01_retail/04_rfm_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-43
   name: シフト充足率・人件費最適化レポート
   industry: 小売
@@ -47,6 +51,7 @@
   path: 01_retail/06_shift_optimization
   description: 5店舗×3役割×20日のシフトデータを集計し、店舗別人件費・シフト充足率・不足アラート・役割別平均時給を可視化する小売チェーン向けシフト管理システム
   demo: cd 01_retail/06_shift_optimization && streamlit run app.py
+  difficulty: ★★☆
 - id: C-34
   name: 返品・クレームデータ集計レポート
   industry: 小売
@@ -56,6 +61,7 @@
   path: 01_retail/05_returns_claims
   description: 5店舗×4クレーム区分の返品・クレームデータを集計し、店舗別解決率・対応スピード分布・クレーム区分ランキングを可視化する受付CS管理システム
   demo: cd 01_retail/05_returns_claims && streamlit run app.py
+  difficulty: ★★☆
 - id: A-06
   name: 品質検査データ異常値検出レポート
   industry: 製造
@@ -70,6 +76,7 @@
   - 'config.yml の不良率アラートライン（defect_alert_rate: 5%）'
   - CSVの工程名・製品名（process, product_name 列）
   - 検査値の正常範囲・単位（inspection_value 列）
+  difficulty: ★★★
 - id: B-09
   name: 製造×設備稼働ログ異常予兆検知
   industry: 製造
@@ -79,6 +86,7 @@
   path: 02_manufacturing/02_equipment_log
   description: 5台の製造設備センサーログからローリング統計ベースの異常予兆を検知し、CRITICAL/WARNING アラートと連続予兆パターンを可視化する設備保全システム
   demo: cd 02_manufacturing/02_equipment_log && streamlit run app.py
+  difficulty: ★☆☆
 - id: C-18
   name: 原価差異分析パイプライン
   industry: 製造
@@ -88,6 +96,7 @@
   path: 02_manufacturing/03_cost_variance
   description: 3製造ライン×20製品の計画原価vs実績原価を集計し、材料費・労務費・製造間接費の差異額と差異率を製品・ライン別に可視化する原価管理システム
   demo: cd 02_manufacturing/03_cost_variance && streamlit run app.py
+  difficulty: ★★☆
 - id: C-28
   name: 原材料コスト変動レポートパイプライン
   industry: 製造
@@ -97,6 +106,7 @@
   path: 02_manufacturing/05_material_cost
   description: 20原材料×440件の仕入伝票からカテゴリ別コスト・前月比変動率を集計し、急騰・急落品目をアラート表示する原価管理支援システム
   demo: cd 02_manufacturing/05_material_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-25
   name: 生産計画 vs 実績 差異分析パイプライン
   industry: 製造
@@ -106,6 +116,7 @@
   path: 02_manufacturing/04_production_variance
   description: 5製造ライン×420件の生産記録から計画達成率・不良率・差異数量をライン別・カテゴリ別に集計し、未達ラインと品質ボトルネックを可視化する生産管理システム
   demo: cd 02_manufacturing/04_production_variance && streamlit run app.py
+  difficulty: ★★☆
 - id: C-35
   name: 作業員別生産性レポート
   industry: 製造
@@ -115,6 +126,7 @@
   path: 02_manufacturing/06_worker_productivity
   description: 30作業員×4ライン×4工程の生産実績データを集計し、生産性ランキング・不良率・残業との相関・OJT優先候補を可視化する人事管理システム
   demo: cd 02_manufacturing/06_worker_productivity && streamlit run app.py
+  difficulty: ★★☆
 - id: A-07
   name: 患者来院データ・ピーク時間可視化
   industry: 医療・介護
@@ -129,6 +141,7 @@
   - 'config.yml の待ち時間アラート（wait_alert_minutes: 60分）'
   - 'config.yml のピーク倍率（peak_hour_threshold: 平均の1.3倍）'
   - CSVの診療科名（department 列）
+  difficulty: ★★★
 - id: C-16
   name: シフト希望・配置分析パイプライン
   industry: 医療・介護
@@ -138,6 +151,7 @@
   path: 03_healthcare/02_shift_optimization
   description: 医療・介護施設3拠点のスタッフシフト希望データをクレンジングし、役職別夜勤比率・連続夜勤リスク・施設別希望充足率を分析するシフト管理支援システム
   demo: cd 03_healthcare/02_shift_optimization && streamlit run app.py
+  difficulty: ★★☆
 - id: C-29
   name: 薬品在庫管理・発注アラートパイプライン
   industry: 医療・介護
@@ -147,6 +161,7 @@
   path: 03_healthcare/03_medicine_inventory
   description: 50薬品×400件の在庫データから病棟別欠品・警告品目を集計し、残日数ベースの発注優先順位と在庫金額構成を可視化する薬品管理システム
   demo: cd 03_healthcare/03_medicine_inventory && streamlit run app.py
+  difficulty: ★★☆
 - id: C-37
   name: 来院スループット分析パイプライン
   industry: 医療・介護
@@ -156,6 +171,7 @@
   path: 03_healthcare/04_reception_throughput
   description: 5診療科×420件の来院データを集計し、待ち時間レベル分布・時間帯×診療科ヒートマップ・長待ちアラートで受付体制の改善ポイントを可視化するスループット管理システム
   demo: cd 03_healthcare/04_reception_throughput && streamlit run app.py
+  difficulty: ★★☆
 - id: A-04
   name: 経費精算データ集計・月次レポート
   industry: 金融・保険
@@ -169,6 +185,7 @@
   - config.yml の予算超過アラート閾値（budget_alert_threshold）
   - CSVの部門名・費目名（department, expense_type 列）
   - 月次予算値（budget 列）をクライアントの予算表から投入
+  difficulty: ★★★
 - id: B-11
   name: 与信スコアリングデータ整備
   industry: 金融・保険
@@ -178,6 +195,7 @@
   path: 04_finance/02_credit_scoring
   description: 500件の申込データにスコアカード方式の与信スコアを付与し、高/中/低リスク分類と職業・負債比率によるリスク要因を可視化する与信管理システム
   demo: cd 04_finance/02_credit_scoring && streamlit run app.py
+  difficulty: ★☆☆
 - id: C-26
   name: 請求書突合・差異検出パイプライン
   industry: 金融・保険
@@ -187,6 +205,7 @@
   path: 04_finance/03_invoice_reconciliation
   description: 20得意先×420件の請求書と入金データを自動突合し、未入金・過払・差異を分類してリスク得意先ランキングと支払区分別差異率を可視化する債権管理システム
   demo: cd 04_finance/03_invoice_reconciliation && streamlit run app.py
+  difficulty: ★★☆
 - id: C-31
   name: 契約更新アラート・期限管理パイプライン
   industry: 金融・保険
@@ -196,6 +215,7 @@
   path: 04_finance/04_contract_renewal
   description: 150顧客×420件の保険契約データから基準日まで30日以内の緊急・期限切れ契約をアラート分類し、担当者別・保険種別の更新管理を可視化する契約管理システム
   demo: cd 04_finance/04_contract_renewal && streamlit run app.py
+  difficulty: ★★☆
 - id: A-03
   name: 在庫データクレンジング・欠品検知
   industry: 物流・倉庫
@@ -209,6 +229,7 @@
   - config.yml の欠品率アラート閾値（low_stock_ratio_threshold）
   - CSVの倉庫名・品目名（warehouse, item_name 列）
   - 最低在庫基準数（min_stock_qty 列）
+  difficulty: ★★★
 - id: C-17
   name: 配送コスト分析パイプライン
   industry: 物流・倉庫
@@ -218,6 +239,7 @@
   path: 05_logistics/02_delivery_cost
   description: 5ルート×4車種の配送ログから燃料費・高速代・人件費を集計し、ルート別コスト効率（円/km）と車種別損益を可視化するコスト削減支援システム
   demo: cd 05_logistics/02_delivery_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-32
   name: 配送ルート効率化レポートパイプライン
   industry: 物流・倉庫
@@ -227,6 +249,7 @@
   path: 05_logistics/04_route_efficiency
   description: 10ルート×3車種×420件の運行データから1件当たりコスト・エリア別遅延率を集計し、非効率ルートと改善余地をランキング可視化する配送最適化システム
   demo: cd 05_logistics/04_route_efficiency && streamlit run app.py
+  difficulty: ★★☆
 - id: C-22
   name: ドライバー勤怠・拘束時間管理パイプライン
   industry: 物流・倉庫
@@ -236,6 +259,7 @@
   path: 05_logistics/03_driver_attendance
   description: 600件の運行記録から拘束時間・実労働時間を集計し、改善基準（拘束13h/労働9h）超過ドライバーと営業所別違反率を可視化する法令遵守支援システム
   demo: cd 05_logistics/03_driver_attendance && streamlit run app.py
+  difficulty: ★★☆
 - id: C-44
   name: 荷役作業員KPI集計パイプライン
   industry: 物流・倉庫
@@ -245,6 +269,7 @@
   path: 11_logistics/01_worker_kpi
   description: 20作業員×4ゾーン×3作業区分×20日の荷役データを集計し、スループット・エラー率・KPIフラグ・残業実態を可視化する倉庫作業員パフォーマンス管理システム
   demo: cd 11_logistics/01_worker_kpi && streamlit run app.py
+  difficulty: ★★☆
 - id: A-02
   name: 飲食×日次売上・廃棄ロス集計レポート
   industry: 飲食
@@ -259,6 +284,7 @@
   - config.yml の粗利率アラートライン
   - CSVの店舗名・メニューカテゴリ（store, category 列）
   - 売上・原価・廃棄ロスの列名マッピング
+  difficulty: ★★★
 - id: B-13
   name: 原価管理・食材ロス分析
   industry: 飲食
@@ -269,6 +295,7 @@
   description: 5店舗の食材仕入データをカテゴリ別に集計し、廃棄ロス率と廃棄コスト上位食材をアラート付きで可視化する原価管理システム
   demo: cd 06_restaurant/02_cost_management && python run_pipeline.py && streamlit
     run app.py
+  difficulty: ★★☆
 - id: C-20
   name: アルバイトシフト・人件費集計パイプライン
   industry: 飲食
@@ -278,6 +305,7 @@
   path: 06_restaurant/03_labor_cost
   description: 飲食チェーン3店舗の勤怠データから基本賃金・深夜割増・残業コストを集計し、雇用区分別人件費構成と労働時間上位スタッフを可視化する人件費管理システム
   demo: cd 06_restaurant/03_labor_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-38
   name: 予約キャンセル集計・傾向分析パイプライン
   industry: 飲食
@@ -287,6 +315,7 @@
   path: 06_restaurant/03_reservation_cancel
   description: 3店舗×420件の予約データを集計し、店舗別キャンセル率・理由別ランキング・曜日別傾向・機会損失金額を可視化する予約管理システム
   demo: cd 06_restaurant/03_reservation_cancel && streamlit run app.py
+  difficulty: ★★☆
 - id: C-110
   name: アルバイトシフト管理・人件費集計
   industry: 飲食
@@ -296,6 +325,7 @@
   path: 06_restaurant/03_shift_cost/
   description: シフト実績から時給・残業・社保コストを自動集計。人件費率≤25%→good の verdict で売上対人件費率をリアルタイム管理。
   demo: cd 06_restaurant/03_shift_cost && streamlit run app.py
+  difficulty: ★★★
 - id: A-08
   name: 物件問い合わせ・成約率分析レポート
   industry: 不動産
@@ -309,6 +339,7 @@
   - 'config.yml の成約率アラートライン（conversion_alert_threshold: 10%）'
   - config.yml の商談ステージ名（stages リスト）
   - CSVのエリア名・担当者名（area, agent 列）
+  difficulty: ★★★
 - id: B-14
   name: 賃貸物件管理・空室率レポート
   industry: 不動産
@@ -319,6 +350,7 @@
   description: 5エリアの賃貸物件データからエリア別空室率・物件タイプ別純収益を集計し、空室率20%超のエリアをアラート付きで可視化する物件管理システム
   demo: cd 07_realestate/02_rental_management && python run_pipeline.py && streamlit
     run app.py
+  difficulty: ★★☆
 - id: C-23
   name: 不動産 管理費・修繕費コスト分析パイプライン
   industry: 不動産
@@ -328,6 +360,7 @@
   path: 07_realestate/03_maintenance_cost
   description: 50物件×505件の修繕・管理コストをエリア別・費用カテゴリ別に集計し、高コスト物件ランキングと緊急工事比率を可視化するコスト管理システム
   demo: cd 07_realestate/03_maintenance_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-39
   name: 入居者対応履歴・クレーム集計パイプライン
   industry: 不動産
@@ -337,6 +370,7 @@
   path: 07_realestate/04_tenant_claims
   description: 5物件×420件のクレームデータを集計し、物件別解決率・緊急案件アラート・クレーム区分ランキング・対応工数推移を可視化する不動産管理システム
   demo: cd 07_realestate/04_tenant_claims && streamlit run app.py
+  difficulty: ★★☆
 - id: C-40
   name: アルバイトシフト管理・人件費集計パイプライン
   industry: 飲食
@@ -346,6 +380,7 @@
   path: 06_restaurant/04_shift_labor
   description: 3店舗×450件のシフトデータを集計し、店舗別人件費・役割別平均時給・残業実態・高コストアラートを可視化する飲食チェーン向けシフト管理システム
   demo: cd 06_restaurant/04_shift_labor && streamlit run app.py
+  difficulty: ★★☆
 - id: A-05
   name: 勤怠データ集計・残業アラートレポート
   industry: 人事・採用
@@ -359,6 +394,7 @@
   - 'config.yml の残業警告ライン（overtime_warning_hours: 45h）'
   - 'config.yml の危険ライン（overtime_danger_hours: 60h）'
   - CSVの部門名・従業員名（department, employee_name 列）
+  difficulty: ★★★
 - id: C-33
   name: 採用歩留まり率分析パイプライン
   industry: 人事・採用
@@ -368,6 +404,7 @@
   path: 08_hr/03_recruitment_funnel
   description: 420件の採用応募データをファネル分析し、書類〜内定の各フェーズ通過率・チャネル別採用率・職種別選考日数を可視化する採用改善支援システム
   demo: cd 08_hr/03_recruitment_funnel && streamlit run app.py
+  difficulty: ★★☆
 - id: C-41
   name: 採用チャネル別コスト分析パイプライン
   industry: 人事・採用
@@ -377,6 +414,7 @@
   path: 08_hr/04_recruitment_cost
   description: 420件の採用データをチャネル別に集計し、採用単価・採用率・内定承諾率・フェーズ別ファネルを可視化する採用コスト最適化システム
   demo: cd 08_hr/04_recruitment_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-111
   name: 研修効果測定レポート
   industry: 人事・採用
@@ -386,6 +424,7 @@
   path: 08_hr/02_training_effectiveness/
   description: 研修前後スキルアセスメントから改善率・費用対効果を集計。平均改善≥15点→good の verdict で研修投資の効果を可視化。
   demo: cd 08_hr/02_training_effectiveness && streamlit run app.py
+  difficulty: ★★★
 - id: C-30
   name: 人件費推移・予実差異レポートパイプライン
   industry: 人事・採用
@@ -395,6 +434,7 @@
   path: 08_hr/02_labor_cost
   description: 5部門×3雇用区分×12ヶ月の人件費データから予実差異・超過部門を集計し、雇用区分別コスト構成と月別トレンドを可視化する人件費管理システム
   demo: cd 08_hr/02_labor_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: B-12
   name: 受講生成績・退学リスクスコア
   industry: 教育・研修
@@ -404,6 +444,7 @@
   path: 09_education/01_dropout_risk
   description: 200受講生×5科目の成績・出席・提出率データに加重スコアカード方式の退学リスクスコアを付与し、高/中/低リスク分類と科目別・コース別リスク要因を可視化する早期警戒システム
   demo: cd 09_education/01_dropout_risk && streamlit run app.py
+  difficulty: ★☆☆
 - id: C-42
   name: 受講率・修了率レポートパイプライン
   industry: 教育・研修
@@ -413,6 +454,7 @@
   path: 09_education/03_completion_rate
   description: 450件の受講データをコース別・受講者区分別に集計し、修了率・テストスコア分布・中退リスク・満足度を可視化する教育効果測定システム
   demo: cd 09_education/03_completion_rate && streamlit run app.py
+  difficulty: ★★☆
 - id: C-112
   name: 出席率・成績推移レポート
   industry: 教育・研修
@@ -422,6 +464,7 @@
   path: 09_education/02_attendance_grade/
   description: クラス・科目別の出席率と成績分布を月次集計。出席率≥90%→good の verdict で指導品質改善の根拠データを生成。
   demo: cd 09_education/02_attendance_grade && streamlit run app.py
+  difficulty: ★★★
 - id: C-24
   name: 講師稼働・コマ数管理パイプライン
   industry: 教育・研修
@@ -431,6 +474,7 @@
   path: 09_education/02_instructor_workload
   description: 20講師×950コマの稼働データから専門分野別・雇用区分別の人件費と稼働負荷を集計し、過負荷講師と費用対効果を可視化する適正配置支援システム
   demo: cd 09_education/02_instructor_workload && streamlit run app.py
+  difficulty: ★★☆
 - id: B-15
   name: 問い合わせログ分類・対応時間分析
   industry: サービス
@@ -440,6 +484,7 @@
   path: 10_service/01_inquiry_log
   description: 500件の問い合わせログをキーワードベース自動分類（6カテゴリ）し、担当者別解決率・カテゴリ別対応時間・時間帯別受付傾向を可視化するCS支援システム
   demo: cd 10_service/01_inquiry_log && streamlit run app.py
+  difficulty: ★★☆
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス
@@ -449,6 +494,7 @@
   path: 10_service/02_revenue_cost
   description: ITサービス会社の5サービス区分×530案件の売上・直接原価・間接費を集計し、サービス別粗利率・営業利益率と赤字案件アラートを可視化する原価管理システム
   demo: cd 10_service/02_revenue_cost && streamlit run app.py
+  difficulty: ★★☆
 - id: C-36
   name: 顧客満足度スコア集計・トレンド分析
   industry: サービス
@@ -458,6 +504,7 @@
   path: 10_service/03_customer_satisfaction
   description: 5サービス区分×5担当者のアンケートデータ(CSAT/NPS)を集計し、NPS区分別件数・担当者別満足度ランキング・月別トレンドを可視化する顧客満足度管理システム
   demo: cd 10_service/03_customer_satisfaction && streamlit run app.py
+  difficulty: ★★☆
 - id: C-45
   name: サービス別売上・原価レポートパイプライン
   industry: サービス
@@ -467,6 +514,7 @@
   path: 10_service/04_service_revenue
   description: 8サービス×5クライアント×1440件の売上データを集計し、サービス別粗利率・赤字サービスアラート・カテゴリ別収益貢献ランキングを可視化する原価管理システム
   demo: cd 10_service/04_service_revenue && streamlit run app.py
+  difficulty: ★★☆
 - id: C-46
   name: 工程進捗・作業員稼働KPI集計パイプライン
   industry: 建設・ゼネコン
@@ -476,6 +524,7 @@
   path: 12_construction/01_progress_kpi
   description: 5現場×4工程×20作業員の施工データを集計し、現場別進捗率・不具合件数・稼働効率・遅延アラートを可視化する建設現場KPI管理システム
   demo: cd 12_construction/01_progress_kpi && streamlit run app.py
+  difficulty: ★★☆
 - id: C-47
   name: 宿泊予約・稼働率分析パイプライン
   industry: ホテル・観光
@@ -485,6 +534,7 @@
   path: 13_hotel/01_occupancy_rate
   description: 4客室タイプ×480件の予約データを集計し、客室タイプ別稼働率・キャンセル率・損失金額・日別稼働率トレンドを可視化するホテル収益管理システム
   demo: cd 13_hotel/01_occupancy_rate && streamlit run app.py
+  difficulty: ★★☆
 - id: C-48
   name: サブスクリプション解約率（チャーン）分析パイプライン
   industry: IT・SaaS
@@ -494,6 +544,7 @@
   path: 14_it_saas/01_churn_analysis
   description: 3プラン×5業種×1440件の契約データを集計し、プラン別チャーン率・業種別LTV・チャーンリスク分布・コホート解約率を可視化するSaaS解約防止支援システム
   demo: cd 14_it_saas/01_churn_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-49
   name: 作物収量・品質検査レポートパイプライン
   industry: 農業・食品加工
@@ -503,6 +554,7 @@
   path: 15_agriculture/01_yield_quality
   description: 4農場×5作物×480件の収穫データを集計し、農場別収穫量・A等級率・不合格率・品質フラグ分布を可視化する農業品質管理システム
   demo: cd 15_agriculture/01_yield_quality && streamlit run app.py
+  difficulty: ★★☆
 - id: C-50
   name: 車両整備依頼・完了率分析パイプライン
   industry: 自動車・整備業
@@ -512,6 +564,7 @@
   path: 16_automotive/01_repair_analysis
   description: 3店舗×4作業区分×480件の整備依頼データを集計し、店舗別売上・遅延日数・再入庫率・技術者別効率を可視化する整備工場管理システム
   demo: cd 16_automotive/01_repair_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-51
   name: 診療報酬・請求分析パイプライン
   industry: 医療・介護
@@ -521,6 +574,7 @@
   path: 03_healthcare/05_billing_analysis
   description: 5診療科×3保険区分×480件の診療報酬データを集計し、診療科別請求額・査定率・回収率・保険区分別点数分布を可視化するキャッシュフロー管理システム
   demo: cd 03_healthcare/05_billing_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-52
   name: 保険問い合わせ・対応履歴分析パイプライン
   industry: 金融・保険
@@ -530,6 +584,7 @@
   path: 04_finance/04_inquiry_analysis
   description: 5種問い合わせ区分×3チャネル×480件の対応履歴データを集計し、区分別解決率・平均対応時間・チャネル別満足度・オペレーター別効率を可視化するCS品質管理システム
   demo: cd 04_finance/04_inquiry_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-53
   name: 物件内見予約・成約率分析パイプライン
   industry: 不動産
@@ -539,6 +594,7 @@
   path: 07_realestate/05_viewing_conversion
   description: 4物件タイプ×4エリア×480件の内見予約データを集計し、物件タイプ別成約率・平均成約日数・エリア別内見件数・価格帯別分布を可視化する営業効率化システム
   demo: cd 07_realestate/05_viewing_conversion && streamlit run app.py
+  difficulty: ★★☆
 - id: C-54
   name: 店舗別損益・原価率管理パイプライン
   industry: 飲食
@@ -548,6 +604,7 @@
   path: 06_restaurant/05_pl_management
   description: 5店舗×食材費・人件費・その他経費の3費目×480件の損益データを集計し、店舗別利益率・食材費率・コスト内訳・黒字赤字判定を可視化するP/L管理システム
   demo: cd 06_restaurant/05_pl_management && streamlit run app.py
+  difficulty: ★★☆
 - id: C-55
   name: 生徒入学申込・入学率分析パイプライン
   industry: 教育・研修
@@ -557,6 +614,7 @@
   path: 15_education/02_enrollment_analysis
   description: 4学科×3選考方法×5地域×480件の入学申込データを集計し、学科別合格率・平均点・選考方法別合格率・地域別申込数を可視化する入試管理システム
   demo: cd 15_education/02_enrollment_analysis && streamlit run app.py
+  difficulty: ★★☆
 - id: C-56
   name: 配送コスト・利益率管理パイプライン
   industry: 物流・倉庫
@@ -566,6 +624,7 @@
   path: 09_logistics/05_cost_margin
   description: 4配送区分×5エリア×3車両タイプ×480件の配送データを集計し、配送区分別利益率・エリア別粗利・車両別km単価を可視化するコスト管理システム
   demo: cd 09_logistics/05_cost_margin && streamlit run app.py
+  difficulty: ★★☆
 - id: C-57
   name: 医療スタッフ勤怠・稼働率分析パイプライン
   industry: 医療・介護
@@ -575,6 +634,7 @@
   path: 03_healthcare/06_staff_attendance
   description: 4職種×5診療科×12名スタッフ×480件の勤怠データを集計し、職種別稼働率・診療科別欠勤件数・残業時間分布を可視化するシフト管理システム
   demo: cd 03_healthcare/06_staff_attendance && streamlit run app.py
+  difficulty: ★★☆
 - id: C-58
   name: 工事原価・予算実績管理パイプライン
   industry: 建設・ゼネコン
@@ -584,6 +644,7 @@
   path: 11_construction/05_cost_budget
   description: 8工事×4工種×3費目×480件の原価データを集計し、工事別差異率・工種別実績額・費目別予算実績比較を可視化する工事原価管理システム
   demo: cd 11_construction/05_cost_budget && streamlit run app.py
+  difficulty: ★★☆
 - id: C-59
   name: 農場スタッフ勤怠・作業効率分析パイプライン
   industry: 農業・食品加工
@@ -593,6 +654,7 @@
   path: 12_agriculture/02_staff_efficiency
   description: 10名スタッフ×4作業区分×5作物×480件の作業記録を集計し、作物別目標達成率・作業区分別生産性・スタッフ別効率を可視化する農場管理システム
   demo: cd 12_agriculture/02_staff_efficiency && streamlit run app.py
+  difficulty: ★★☆
 - id: C-60
   name: CSチケット分析パイプライン
   industry: IT・SaaS
@@ -602,6 +664,7 @@
   path: 14_it_saas/02_support_ticket
   description: 5カテゴリ×3優先度×8担当者×480件のCSチケットデータを集計し、カテゴリ別解決率・優先度別エスカレーション率・担当者別解決率を可視化するサポート品質管理システム
   demo: cd 14_it_saas/02_support_ticket && streamlit run app.py
+  difficulty: ★★☆
 - id: C-61
   name: 製造業品質管理ポータル（統合）
   industry: 製造
@@ -610,6 +673,7 @@
   priority: C
   path: 02_manufacturing/07_quality_portal
   demo: cd 02_manufacturing/07_quality_portal && .venv\Scripts\streamlit run portal.py
+  difficulty: ★☆☆
 - id: C-62
   name: 工程能力指数（Cp/Cpk）分析システム
   industry: 製造
