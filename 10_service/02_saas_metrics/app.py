@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import json
@@ -5,13 +8,6 @@ from pathlib import Path
 from analyze import analyze
 
 # ページ設定
-st.set_page_config(
-    page_title="SaaSメトリクスダッシュボード",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 st.title("📊 SaaSメトリクスダッシュボード")
 st.markdown("MRR・チャーン率・LTV・CACなどの重要指標を月次で追跡・可視化")
 

@@ -1,10 +1,11 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import numpy as np
 from analyze import analyze
 from pathlib import Path
-
-st.set_page_config(page_title="RevPAR ダッシュボード", layout="wide")
 
 st.title("ホテル RevPAR・客室稼働率ダッシュボード")
 

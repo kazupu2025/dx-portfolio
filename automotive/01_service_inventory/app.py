@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,13 +8,6 @@ from pathlib import Path
 from analyze import analyze
 
 # ページ設定
-st.set_page_config(
-    page_title="C-118 整備案件・部品在庫管理ダッシュボード",
-    page_icon="🔧",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # スタイル設定
 st.markdown("""
 <style>

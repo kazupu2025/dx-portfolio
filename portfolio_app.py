@@ -50,6 +50,17 @@ _A_TOOL_DEFS = [
     ("A-03", "05_logistics/01_inventory/app.py",              "demo_logistics",   "[A-03] 在庫データ鮮度確認"),
     ("A-08", "07_realestate/01_inquiry/app.py",               "demo_realestate",  "[A-08] 問い合わせ・反響率分析"),
     ("A-05", "08_hr/01_attendance/app.py",                    "demo_hr",          "[A-05] 勤怠データ・ツールアラート"),
+    ("C-110", "06_restaurant/03_shift_cost/app.py", "demo_shift_cost", "[C-110] シフト管理・人件費集計"),
+    ("C-111", "08_hr/02_training_effectiveness/app.py", "demo_training", "[C-111] 研修効果測定レポート"),
+    ("C-112", "09_education/02_attendance_grade/app.py", "demo_attendance", "[C-112] 出席率・成績推移"),
+    ("C-113", "10_service/02_saas_metrics/app.py", "demo_saas", "[C-113] SaaSメトリクス（MRR/チャーン）"),
+    ("C-115", "hotel/01_revpar/app.py", "demo_hotel", "[C-115] RevPAR・客室稼働率"),
+    ("C-116", "construction/01_progress_cost/app.py", "demo_construction", "[C-116] 工程進捗・原価差異"),
+    ("C-117", "agriculture/01_harvest_quality/app.py", "demo_agriculture", "[C-117] 収穫量・品質トレンド"),
+    ("C-118", "automotive/01_service_inventory/app.py", "demo_automotive", "[C-118] 整備案件・部品在庫"),
+    ("C-121", "construction/02_safety_hazard/app.py", "demo_safety", "[C-121] 安全管理・ヒヤリハット"),
+    ("C-125", "automotive/02_inspection_reminder/app.py", "demo_inspection", "[C-125] 車検リマインダー管理"),
+    ("C-97", "02_manufacturing/43_quality_cost_detail/app.py", "demo_quality_cost", "[C-97] 品質コスト明細（4分類）"),
 ]
 
 _demo_pages = {

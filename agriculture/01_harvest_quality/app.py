@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,12 +8,6 @@ import yaml
 from pathlib import Path
 import plotly.graph_objects as go
 import plotly.express as px
-
-st.set_page_config(
-    page_title="🌾 農業 収穫量・品質トレンド",
-    page_icon="🌾",
-    layout="wide",
-)
 
 BASE = Path(__file__).parent
 

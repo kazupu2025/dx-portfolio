@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,8 +9,6 @@ from pathlib import Path
 from analyze import analyze
 
 # ページ設定
-st.set_page_config(page_title="工程進捗・原価差異レポート", layout="wide")
-
 # タイトル
 st.title("🏗️ 工程進捗・原価差異レポート")
 st.markdown("工事プロジェクトの進捗状況と原価差異を可視化します")

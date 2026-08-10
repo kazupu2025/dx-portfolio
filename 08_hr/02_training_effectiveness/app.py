@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -7,7 +10,6 @@ from io import StringIO
 from analyze import analyze, REQUIRED_COLUMNS
 from pathlib import Path
 
-st.set_page_config(page_title="C-111 研修効果測定レポート", layout="wide")
 st.title("C-111 研修効果測定レポート")
 
 # ─────────────────────────────────────────

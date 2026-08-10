@@ -1,11 +1,12 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 from pathlib import Path
 from analyze import analyze, REQUIRED_COLUMNS
-
-st.set_page_config(page_title="C-110 シフト管理・人件費集計", layout="wide")
 
 st.title("C-110 アルバイトシフト管理・人件費集計")
 

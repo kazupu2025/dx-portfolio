@@ -3,6 +3,9 @@ C-125: 顧客車検リマインダー・定期点検管理
 Streamlit ダッシュボード
 """
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
@@ -23,7 +26,6 @@ from analyze import (
 
 
 def main():
-    st.set_page_config(page_title="顧客車検リマインダー", layout="wide")
     st.title("🚗 顧客車検リマインダー・定期点検管理 (C-125)")
 
     # ==================== サイドバー ====================

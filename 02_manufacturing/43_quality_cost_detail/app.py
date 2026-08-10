@@ -1,10 +1,12 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
 from analyze import analyze
 
-st.set_page_config(page_title="品質コスト明細集計", layout="wide")
 st.title("品質コスト明細集計")
 st.markdown("予防/評価/内部失敗/外部失敗コストの月別分析")
 

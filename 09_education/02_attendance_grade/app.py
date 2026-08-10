@@ -2,6 +2,9 @@
 """
 C-112 Attendance & Grade Report - Streamlit Dashboard
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -20,12 +23,6 @@ plt.rcParams['font.sans-serif'] = ['MS Gothic', 'Yu Gothic', 'Hiragino Sans']
 plt.rcParams['axes.unicode_minus'] = False
 
 # Streamlit page config
-st.set_page_config(
-    page_title="出席率・成績推移レポート",
-    page_icon="📊",
-    layout="wide",
-)
-
 st.title("📊 出席率・成績推移レポート")
 st.markdown("各クラス・科目の出席率と成績の推移を追跡分析します。")
 

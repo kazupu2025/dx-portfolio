@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,8 +9,6 @@ from pathlib import Path
 from analyze import analyze
 
 # ページ設定
-st.set_page_config(page_title="安全管理・ヒヤリハット集計", layout="wide")
-
 # タイトル
 st.title("🛡️ 安全管理・ヒヤリハット集計レポート")
 st.markdown("建設プロジェクトのヒヤリハット・安全事案を集計・分析し、安全管理の進捗を可視化します")
