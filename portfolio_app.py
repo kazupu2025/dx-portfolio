@@ -302,6 +302,10 @@ Streamlit Cloud / 社内サーバーへ展開
     with st.expander("📋 一覧表示（テーブル形式）"):
         if filtered:
             df = pd.DataFrame(filtered)
+            # YAML null → Python None → "None" 文字列を空欄に置換
+            for col in ["difficulty", "department"]:
+                if col in df.columns:
+                    df[col] = df[col].where(df[col].notna(), "").replace("None", "")
             display_cols = [c for c in ["id", "name", "industry", "department", "difficulty", "priority", "path"] if c in df.columns]
             st.dataframe(
                 df[display_cols],
