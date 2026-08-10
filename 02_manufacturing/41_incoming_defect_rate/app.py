@@ -1,10 +1,12 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 from pathlib import Path
 from analyze import analyze, REQUIRED_COLUMNS
 
-st.set_page_config(page_title="C-95 協力会社別受入不良率月報", layout="wide")
 st.title("C-95 協力会社別受入不良率月報")
 
 # サイドバー

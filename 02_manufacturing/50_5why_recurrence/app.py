@@ -1,14 +1,11 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from analyze import analyze, REQUIRED_COLUMNS
 import os
-
-st.set_page_config(
-    page_title="5Why分析 再発率トレンド",
-    page_icon="📊",
-    layout="wide",
-)
 
 st.title("5Why分析 原因カテゴリ別集計・再発率トレンド")
 st.markdown("---")

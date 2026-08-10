@@ -1,10 +1,12 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from analyze import analyze, REQUIRED_COLUMNS
 from pathlib import Path
 
-st.set_page_config(page_title="特採件数・理由別集計・月次推移", layout="wide")
 st.title("特採件数・理由別集計・月次推移")
 
 with st.sidebar:

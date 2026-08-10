@@ -1,4 +1,7 @@
 """特採件数・理由別集計・月次推移 — 特採管理モニタリング。"""
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -15,8 +18,6 @@ if str(_ROOT) not in sys.path:
 import analyze
 import visualize
 from sample_data import generate_sample_csv
-
-st.set_page_config(page_title="特採件数・理由別集計", page_icon="📋", layout="wide")
 
 st.markdown("""
 <style>

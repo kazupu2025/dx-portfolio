@@ -1,4 +1,7 @@
 """CAPA 完了率・期限遵守率レポート — CAPA 管理状況モニタリング。"""
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -15,8 +18,6 @@ if str(_ROOT) not in sys.path:
 import analyze
 import visualize
 from sample_data import generate_sample_csv
-
-st.set_page_config(page_title="CAPA完了率・期限遵守率レポート", page_icon="✅", layout="wide")
 
 st.markdown("""
 <style>

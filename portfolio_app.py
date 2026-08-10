@@ -61,6 +61,22 @@ _A_TOOL_DEFS = [
     ("C-121", "construction/02_safety_hazard/app.py", "demo_safety", "[C-121] 安全管理・ヒヤリハット"),
     ("C-125", "automotive/02_inspection_reminder/app.py", "demo_inspection", "[C-125] 車検リマインダー管理"),
     ("C-97", "02_manufacturing/43_quality_cost_detail/app.py", "demo_quality_cost", "[C-97] 品質コスト明細（4分類）"),
+    ("C-74", "02_manufacturing/20_customer_claim_monthly/app.py", "demo_claim_monthly", "[C-74] 顧客クレーム件数・月次集計"),
+    ("C-75", "02_manufacturing/21_quality_cost/app.py", "demo_qual_cost", "[C-75] 品質コスト明細集計"),
+    ("C-76", "02_manufacturing/22_capa_report/app.py", "demo_capa", "[C-76] CAPA完了率・期限遵守率"),
+    ("C-77", "02_manufacturing/23_tokusai_monthly/app.py", "demo_tokusai", "[C-77] 特採件数・理由別集計"),
+    ("C-95", "02_manufacturing/41_incoming_defect_rate/app.py", "demo_incoming", "[C-95] 協力会社別受入不良率"),
+    ("C-96", "02_manufacturing/42_customer_claims/app.py", "demo_claims", "[C-96] 顧客クレーム月次集計"),
+    ("C-98", "02_manufacturing/44_capa_management/app.py", "demo_capa_mgmt", "[C-98] CAPA管理・期限遵守"),
+    ("C-99", "02_manufacturing/45_special_acceptance/app.py", "demo_special", "[C-99] 特採件数・月次推移"),
+    ("C-100", "02_manufacturing/46_4m_change_ledger/app.py", "demo_4m_ledger", "[C-100] 4M変更台帳・推移"),
+    ("C-101", "02_manufacturing/47_shipping_inspection/app.py", "demo_shipping", "[C-101] 出荷検査合否率"),
+    ("C-102", "02_manufacturing/48_defect_code_trend/app.py", "demo_defect_trend", "[C-102] 工程別不良コードトレンド"),
+    ("C-103", "02_manufacturing/49_inspector_accuracy/app.py", "demo_inspector", "[C-103] 検査員別精度レポート"),
+    ("C-104", "02_manufacturing/50_5why_recurrence/app.py", "demo_5why", "[C-104] なぜなぜ分析・再発率"),
+    ("C-106", "02_manufacturing/52_quality_feedback_loop/app.py", "demo_feedback", "[C-106] 市場品質フィードバック"),
+    ("C-109", "02_manufacturing/55_multisite_quality/app.py", "demo_multisite", "[C-109] 多拠点品質比較"),
+    ("C-114", "10_service/03_customer_success/app.py", "demo_cs", "[C-114] カスタマーサクセス指標"),
 ]
 
 _demo_pages = {

@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -7,13 +10,6 @@ import numpy as np
 from analyze import analyze, REQUIRED_COLUMNS
 
 # Set page config
-st.set_page_config(
-    page_title="多拠点リアルタイム品質比較ダッシュボード",
-    page_icon="🏭",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # Title
 st.title("🏭 多拠点リアルタイム品質比較ダッシュボード")
 st.markdown("複数拠点の品質KPIを一画面で横断比較し、ベンチマーク・ランキング・トレンドを表示します。")

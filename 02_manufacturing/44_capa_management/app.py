@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -5,7 +8,6 @@ import plotly.express as px
 from pathlib import Path
 from analyze import analyze
 
-st.set_page_config(page_title="CAPA完了率・期限遵守率レポート", layout="wide")
 st.title("C-98 CAPA完了率・期限遵守率レポート")
 
 sample_csv_path = Path(__file__).parent / "sample_capa.csv"

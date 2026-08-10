@@ -1,11 +1,12 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
 from analyze import analyze
-
-st.set_page_config(page_title="C-96 顧客クレーム集計", layout="wide")
 
 st.title("C-96 顧客クレーム件数・原因分類 月次集計")
 

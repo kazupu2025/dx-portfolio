@@ -1,3 +1,6 @@
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -7,8 +10,6 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).parent))
 from analyze import analyze
-
-st.set_page_config(page_title="品質フィードバックループ", layout="wide")
 
 st.title("市場品質フィードバックループ分析")
 

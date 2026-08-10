@@ -1,4 +1,7 @@
 """顧客クレーム件数・原因分類 月次集計 — 月次クレーム集計 × 原因分類内訳。"""
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).parent))
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -15,8 +18,6 @@ if str(_ROOT) not in sys.path:
 import analyze
 import visualize
 from sample_data import generate_sample_csv
-
-st.set_page_config(page_title="顧客クレーム件数・原因分類 月次集計", page_icon="📋", layout="wide")
 
 st.markdown("""
 <style>
