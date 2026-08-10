@@ -13,6 +13,8 @@ st.set_page_config(
 )
 
 # ── 定数 ────────────────────────────────────────────────────
+_GITHUB_BASE = "https://github.com/kazupu2025/dx-portfolio/tree/main"
+
 _INDUSTRY_COLOR = {
     "製造": "#1e3a5f",
     "小売": "#16a34a",
@@ -88,15 +90,16 @@ def filter_items(items, industries, difficulties, priorities, keyword):
 
 # ── カード描画 ────────────────────────────────────────────────
 def render_card(item):
-    iid  = item.get("id", "")
-    name = item.get("name", "")
-    ind  = item.get("industry", "")
-    dept = item.get("department", "")
-    diff = item.get("difficulty", "")
-    pri  = item.get("priority", "")
-    path = item.get("path", "")
-    desc = item.get("description", "").strip().replace("\n", " ")
-    demo = item.get("demo", "")
+    iid    = item.get("id", "")
+    name   = item.get("name", "")
+    ind    = item.get("industry", "")
+    dept   = item.get("department", "")
+    diff   = item.get("difficulty", "")
+    pri    = item.get("priority", "")
+    path   = item.get("path", "")
+    desc   = item.get("description", "").strip().replace("\n", " ")
+    demo   = item.get("demo", "")
+    gh_url = f"{_GITHUB_BASE}/{path}" if path else ""
 
     desc_short = desc[:100] + "..." if len(desc) > 100 else desc
 
@@ -137,12 +140,21 @@ def render_card(item):
 """, unsafe_allow_html=True)
 
         if iid in _demo_pages:
-            # インタラクティブデモが使えるツール → ページリンクボタン
-            st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
+            # インタラクティブデモが使えるツール → ページリンクボタン + GitHubリンク
+            col_demo, col_code = st.columns([3, 2])
+            with col_demo:
+                st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
+            with col_code:
+                if gh_url:
+                    st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
         elif demo:
-            # デモページ未作成のツール → 起動コマンドを表示
+            # デモページ未作成のツール → 起動コマンド + GitHubリンク
             with st.expander("💻 起動コマンド", expanded=False):
                 st.code(demo, language="bash")
+            if gh_url:
+                st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
+        elif gh_url:
+            st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
 
 
 # ── カタログページ本体 ────────────────────────────────────────
@@ -215,6 +227,30 @@ def _show_catalog():
 - ★☆☆ アーキテクチャから再設計
 
 **🚀 デモ起動可能** = ブラウザ上でツールを体験できます
+""")
+
+    st.sidebar.markdown("---")
+    st.sidebar.markdown("### 🗺️ 導入フロー")
+    st.sidebar.markdown("""
+**Step 1 🔍 ツールを探す**
+業種・難易度・優先度でフィルタリング
+
+**Step 2 🚀 デモで確認**
+優先度Aのツールはブラウザ上で体験可能
+
+**Step 3 📂 コードを取得**
+「コードを見る →」からGitHubへアクセス
+```
+git clone https://github.com/kazupu2025/dx-portfolio.git
+cd dx-portfolio/<ツールのpath>
+```
+
+**Step 4 ⚙️ カスタマイズ**
+`config.yml` の閾値・列名・会社名を調整
+CSVのカラム名をクライアント環境に合わせる
+
+**Step 5 🚢 納品・デプロイ**
+Streamlit Cloud / 社内サーバーへ展開
 """)
 
     # ── フィルタリング ────────────────────────────────────────
