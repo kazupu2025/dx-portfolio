@@ -111,12 +111,16 @@ def render_card(item):
         if diff else ""
     )
 
+    # 優先度バッジ（white-space:nowrap で折り返し防止）
     if pri == "A":
-        pri_badge = '<span style="background:#fef2f2;color:#dc2626;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:bold">優先度 A</span>'
+        pri_badge = '<span style="background:#fef2f2;color:#dc2626;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:bold;white-space:nowrap">優先度A</span>'
     elif pri == "B":
-        pri_badge = '<span style="background:#fffbeb;color:#d97706;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:bold">優先度 B</span>'
+        pri_badge = '<span style="background:#fffbeb;color:#d97706;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:bold;white-space:nowrap">優先度B</span>'
     else:
-        pri_badge = f'<span style="background:#f8fafc;color:#64748b;padding:1px 6px;border-radius:8px;font-size:11px">優先度 {pri}</span>'
+        pri_badge = f'<span style="background:#f8fafc;color:#64748b;padding:1px 6px;border-radius:8px;font-size:11px;white-space:nowrap">優先度{pri}</span>'
+
+    # パスは先頭16文字に切り詰め（長いパスがバッジを押しつぶすのを防ぐ）
+    path_short = path if len(path) <= 22 else path[:19] + "…"
 
     # st.container(border=True) でカード本体とアクションを1ブロックに統合
     with st.container(border=True):
@@ -124,32 +128,31 @@ def render_card(item):
 <div style="padding:4px 4px 8px 4px">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
     <span style="background:{ind_color};color:white;padding:2px 8px;border-radius:12px;
-                 font-size:11px;font-weight:bold">{ind}</span>
+                 font-size:11px;font-weight:bold;white-space:nowrap">{ind}</span>
     {diff_html}
   </div>
   <div style="font-size:11px;color:#64748b;margin-bottom:2px">{iid} · {dept}</div>
   <div style="font-size:15px;font-weight:bold;color:#1e293b;margin-bottom:8px">{name}</div>
   <div style="font-size:12px;color:#64748b;margin-bottom:12px;line-height:1.5">{desc_short}</div>
   <div style="font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:8px;
-              display:flex;align-items:center;gap:8px">
+              display:flex;align-items:center;gap:6px;overflow:hidden">
     {pri_badge}
     <code style="font-size:10px;background:#f8fafc;padding:1px 4px;border-radius:3px;
-                 color:#64748b">📁 {path}</code>
+                 color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+                 min-width:0">📁 {path_short}</code>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
         if iid in _demo_pages:
-            # インタラクティブデモが使えるツール → ページリンクボタン + GitHubリンク
-            col_demo, col_code = st.columns([3, 2])
-            with col_demo:
-                st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
-            with col_code:
-                if gh_url:
-                    st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
+            # インタラクティブデモが使えるツール → デモボタン（全幅）+ コードリンク（全幅）
+            # ※ネストされたst.columns()は3列グリッド内で幅が足りなくなるため縦積みにする
+            st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
+            if gh_url:
+                st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
         elif demo:
             # デモページ未作成のツール → 起動コマンド + GitHubリンク
-            with st.expander("💻 起動コマンド", expanded=False):
+            with st.expander("起動コマンド", expanded=False):
                 st.code(demo, language="bash")
             if gh_url:
                 st.link_button("📂 コードを見る →", gh_url, use_container_width=True)
@@ -159,6 +162,27 @@ def render_card(item):
 
 # ── カタログページ本体 ────────────────────────────────────────
 def _show_catalog():
+    # グローバルCSS：ExpanderヘッダーとLinkButtonの折り返し防止
+    st.markdown("""
+<style>
+/* Expander ヘッダーのラベルを1行に固定 */
+[data-testid="stExpanderToggleIcon"] ~ div p,
+details > summary p,
+.streamlit-expanderHeader p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+/* st.link_button / st.page_link の折り返し防止 */
+[data-testid="stLinkButton"] p,
+[data-testid="stPageLink"] p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
     # ヘッダーバー
     st.markdown("""
 <div style="background:#1e3a5f;padding:20px 32px;border-radius:8px;margin-bottom:24px">
@@ -186,7 +210,7 @@ def _show_catalog():
     with k3:
         st.metric("最高優先度 (A)", f"{priority_a_count} 件")
     with k4:
-        st.metric("🚀 デモ起動可能", f"{demo_count} 件")
+        st.metric("🚀 デモ体験可能", f"{demo_count} 件")
 
     st.markdown("---")
 
