@@ -1,0 +1,15 @@
+# ── カスタマイズポイント ──────────────────────────────
+# 1. 店舗名は store 列で管理。複数店舗をドロップダウンでフィルタ可能
+# 2. 列名マッピング（クライアントのCSVに合わせて変更）
+columns:
+  date:        "date"          # 日付列
+  store:       "store"         # 店舗名列
+  sales:       "sales"         # 売上金額列
+  cost:        "cost"          # 原価金額列
+  category:    "category"      # 商品カテゴリ列（任意）
+
+# 3. アラートライン（粗利率がこの値を下回ると警告）
+alert_gross_margin_rate: 0.25   # 25% 未満でアラート
+
+# 集計単位（daily / weekly / monthly）
+aggregation: "daily"

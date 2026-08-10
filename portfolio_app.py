@@ -43,6 +43,7 @@ _DIFF_COLOR = {
 # ── デモページ定義（priority-A の実装済みツール）────────────────
 # (tool_id, app_path, url_path, page_title)
 _A_TOOL_DEFS = [
+    ("A-01", "01_retail/01_sales_analysis/app.py",            "demo_retail",      "[A-01] 小売売上データ分析パイプライン"),
     ("A-02", "06_restaurant/01_daily_sales/app.py",           "demo_restaurant",  "[A-02] 飲食売上管理・P/L集計"),
     ("A-06", "02_manufacturing/01_quality_inspection/app.py", "demo_quality",     "[A-06] 品質検査異常値検出"),
     ("A-07", "03_healthcare/01_patient_visit/app.py",         "demo_healthcare",  "[A-07] 患者訪問・ピーク時間解析"),
@@ -360,11 +361,46 @@ Streamlit Cloud / 社内サーバーへ展開
     )
 
 
-# ── ナビゲーション ────────────────────────────────────────────
+# ── ナビゲーション（セクション別グループ化） ─────────────────────
+# ツールID → 表示セクション のマッピング
+_SECTION_MAP: dict[str, str] = {
+    "A-01": "🏪 小売",
+    "A-02": "🍜 飲食",
+    "A-03": "📦 物流・倉庫",
+    "A-04": "💰 金融・保険",
+    "A-05": "👥 人事・採用",
+    "A-06": "🏭 製造",
+    "A-07": "🏥 医療・介護",
+    "A-08": "🏢 不動産",
+    "C-110": "🍜 飲食",
+    "C-111": "👥 人事・採用",
+    "C-112": "📚 教育・研修",
+    "C-113": "💻 IT・SaaS",
+    "C-114": "⚙️ サービス",
+    "C-115": "🏨 ホテル・観光",
+    "C-116": "🏗️ 建設・ゼネコン",
+    "C-117": "🌾 農業・食品加工",
+    "C-118": "🚗 自動車・整備業",
+    "C-121": "🏗️ 建設・ゼネコン",
+    "C-125": "🚗 自動車・整備業",
+}
+# C-74〜C-109 は製造まとめ
+for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
+             "C-98", "C-99", "C-100", "C-101", "C-102", "C-103",
+             "C-104", "C-106", "C-109"]:
+    _SECTION_MAP[_tid] = "🏭 製造"
+
+# セクション別にページをグループ化（_A_TOOL_DEFS の順序を保持）
+_section_pages: dict[str, list] = {}
+for _aid, _, _, _ in _A_TOOL_DEFS:
+    _sec = _SECTION_MAP.get(_aid, "📦 その他")
+    _section_pages.setdefault(_sec, []).append(_demo_pages[_aid])
+
 _catalog_page = st.Page(_show_catalog, title="📊 ツールカタログ", url_path="catalog", default=True)
 
-pg = st.navigation(
-    [_catalog_page] + list(_demo_pages.values()),
-    position="sidebar",
-)
+# カタログをトップに置き、業種セクションを続ける
+_nav_dict: dict[str, list] = {"📋 メニュー": [_catalog_page]}
+_nav_dict.update(_section_pages)
+
+pg = st.navigation(_nav_dict, position="sidebar")
 pg.run()
