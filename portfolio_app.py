@@ -4,7 +4,7 @@ import yaml
 import streamlit as st
 from pathlib import Path
 
-# ── ページ設定 ──────────────────────────────────────────────
+# ── ページ設定（メインスクリプトでのみ有効） ────────────────────
 st.set_page_config(
     page_title="DX ポートフォリオ | 業務改善システムストック集",
     page_icon="📊",
@@ -36,6 +36,23 @@ _DIFF_COLOR = {
     "★★★": "#16a34a",
     "★★☆": "#d97706",
     "★☆☆": "#dc2626",
+}
+
+# ── デモページ定義（priority-A の実装済みツール）────────────────
+# (tool_id, app_path, icon, page_title)
+_A_TOOL_DEFS = [
+    ("A-02", "06_restaurant/01_daily_sales/app.py",           "🍴", "飲食売上管理・P/L集計"),
+    ("A-06", "02_manufacturing/01_quality_inspection/app.py", "🔬", "品質検査異常値検出"),
+    ("A-07", "03_healthcare/01_patient_visit/app.py",         "🏥", "患者訪問・ピーク時間解析"),
+    ("A-04", "04_finance/01_expense/app.py",                  "💰", "出張費集計・比較レポート"),
+    ("A-03", "05_logistics/01_inventory/app.py",              "📦", "在庫データ鮮度確認"),
+    ("A-08", "07_realestate/01_inquiry/app.py",               "🏠", "問い合わせ・反響率分析"),
+    ("A-05", "08_hr/01_attendance/app.py",                    "👥", "勤怠データ・ツールアラート"),
+]
+
+_demo_pages: dict[str, st.Page] = {
+    aid: st.Page(path, title=title, icon=icon)
+    for aid, path, icon, title in _A_TOOL_DEFS
 }
 
 
@@ -91,7 +108,6 @@ def render_card(item):
         if diff else ""
     )
 
-    pri_badge = ""
     if pri == "A":
         pri_badge = '<span style="background:#fef2f2;color:#dc2626;padding:1px 6px;border-radius:8px;font-size:11px;font-weight:bold">優先度 A</span>'
     elif pri == "B":
@@ -119,13 +135,17 @@ def render_card(item):
 </div>
 """, unsafe_allow_html=True)
 
-    if demo:
-        with st.expander("🚀 起動コマンド", expanded=False):
+    if iid in _demo_pages:
+        # インタラクティブデモが使えるツール → ページリンクボタン
+        st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
+    elif demo:
+        # デモページ未作成のツール → 起動コマンドを表示
+        with st.expander("💻 起動コマンド", expanded=False):
             st.code(demo, language="bash")
 
 
-# ── メイン ────────────────────────────────────────────────────
-def main():
+# ── カタログページ本体 ────────────────────────────────────────
+def _show_catalog():
     # ヘッダーバー
     st.markdown("""
 <div style="background:#1e3a5f;padding:20px 32px;border-radius:8px;margin-bottom:24px">
@@ -143,6 +163,7 @@ def main():
     unique_industries = sorted({i.get("industry", "") for i in all_items if i.get("industry")})
     priority_a_count  = sum(1 for i in all_items if i.get("priority") == "A")
     ready_count       = len(all_items)
+    demo_count        = len(_demo_pages)
 
     k1, k2, k3, k4 = st.columns(4)
     with k1:
@@ -150,9 +171,9 @@ def main():
     with k2:
         st.metric("対応業種数", f"{len(unique_industries)} 業種")
     with k3:
-        st.metric("Production-ready", f"{ready_count} 件")
-    with k4:
         st.metric("最高優先度 (A)", f"{priority_a_count} 件")
+    with k4:
+        st.metric("🚀 デモ起動可能", f"{demo_count} 件")
 
     st.markdown("---")
 
@@ -191,6 +212,8 @@ def main():
 - ★★★ 転用しやすい
 - ★★☆ 設計変更が必要
 - ★☆☆ アーキテクチャから再設計
+
+**🚀 デモ起動可能** = ブラウザ上でツールを体験できます
 """)
 
     # ── フィルタリング ────────────────────────────────────────
@@ -231,12 +254,20 @@ def main():
     st.markdown("---")
     st.markdown(
         """
-        > Claude Code × Python で構築 | 各システムはローカル環境で即座に起動可能
+        > Claude Code × Python で構築 | 🚀 優先度Aのツールはブラウザ上でデモ体験可能
         >
         > 導入・カスタマイズのご相談: [realpooh0927@gmail.com](mailto:realpooh0927@gmail.com)
         """
     )
 
 
-if __name__ == "__main__":
-    main()
+# ── ナビゲーション ────────────────────────────────────────────
+_catalog_page = st.Page(_show_catalog, title="📊 ツールカタログ", icon="📊", default=True)
+
+pg = st.navigation(
+    {
+        "カタログ": [_catalog_page],
+        "🚀 デモツール（優先度A）": list(_demo_pages.values()),
+    }
+)
+pg.run()
