@@ -1,70 +1,159 @@
-# DX ポートフォリオ
+# 📊 DX ポートフォリオ — 業務改善システムストック集
 
-業務改善コンサルタント向け DX システムストック集。
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)
+![Systems](https://img.shields.io/badge/Production--ready-126_systems-16a34a)
+![Demos](https://img.shields.io/badge/Live_demos-35_tools-3b82f6)
+![Industries](https://img.shields.io/badge/Industries-15_sectors-d97706)
 
-**✅ Production-ready: 126 システム** | 対応業種: 20 | 最終更新: 2026-06-24
+> **業務改善コンサルタント向け DX システムライブラリ。**  
+> ブラウザ上でデモを体験 → `config.yml` を書き換えて即納品。
 
-> 詳細は [PORTFOLIO.md](PORTFOLIO.md) を参照。
+---
+
+## 🚀 ライブデモ
+
+**👉 [dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)**
+
+35 ツールをブラウザで即体験できます。クレカ登録・インストール不要。
+
+---
+
+## 何ができるか
+
+| # | できること | 代表ツール |
+|---|-----------|-----------|
+| 🏭 | **製造業 QC ダッシュボード** 不良率・CAPA・特採をリアルタイム集計 | A-06 品質検査異常値検出 |
+| 🏪 | **小売 売上分析** 複数店舗の xlsx/csv 混在データを自動クレンジング→可視化 | A-01 売上データ分析パイプライン |
+| 🍜 | **飲食 P/L 集計** 日次売上・原価・粗利を店舗横断で比較 | A-02 飲食売上管理 |
+| 📦 | **物流 在庫鮮度** 滞留在庫・入出庫バランスをアラート付きで監視 | A-03 在庫データ鮮度確認 |
+| 💰 | **出張費レポート** 部門別集計・上限超過アラート・CSV エクスポート | A-04 出張費集計 |
+| 👥 | **勤怠・研修** 残業アラート・研修効果測定スコアカード | A-05 / C-111 |
+| 🏥 | **医療 ピーク解析** 患者来院時間帯の集中度分析・スタッフ配置最適化 | A-07 患者訪問分析 |
+
+**全 15 業種 × 126 システム**をカバー。優先度 A（すぐ転用可）が 8 件、C 系は設計ガイド付き。
+
+---
+
+## 🎯 ターゲットユーザー
+
+- **中小企業 DX コンサルタント** — 顧客ごとに 1 から作らず、ストックから選んでカスタマイズ
+- **社内 IT 推進担当** — 部門横断のデータ収集〜可視化を Streamlit ＋ Python で内製化
+- **業務改善チーム** — Excel 管理から脱却するための最初の 1 本を探している
+
+---
+
+## ⚡ 5 分でローカル起動
+
+```bash
+git clone https://github.com/kazupu2025/dx-portfolio.git
+cd dx-portfolio
+
+# ポートフォリオ全体（カタログ表示）
+pip install streamlit pyyaml plotly pandas
+streamlit run portfolio_app.py
+
+# 個別ツール（例: 小売売上分析）
+cd 01_retail/01_sales_analysis
+pip install -r ../../requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📁 対応業種一覧
+
+| フォルダ | 業種 | 主なツール数 |
+|---------|------|------------|
+| `01_retail/` | 小売 | 4 |
+| `02_manufacturing/` | 製造 | 55 |
+| `03_healthcare/` | 医療・介護 | 6 |
+| `04_finance/` | 金融・保険 | 5 |
+| `05_logistics/` | 物流・倉庫 | 5 |
+| `06_restaurant/` | 飲食 | 4 |
+| `07_realestate/` | 不動産 | 4 |
+| `08_hr/` | 人事・採用 | 6 |
+| `09_education/` | 教育・研修 | 4 |
+| `10_service/` | サービス・SaaS | 5 |
+| `hotel/` `construction/` `agriculture/` `automotive/` | その他 4 業種 | 各 2〜3 |
+
+---
+
+## 🔧 カスタマイズの仕組み
+
+各ツールは **`config.yml` 1 ファイルで主要設定を変更可能**に設計：
+
+```yaml
+# 例: 01_retail/01_sales_analysis/config.yml
+columns:
+  date:     "日付"       # ← 顧客CSVの列名に合わせるだけ
+  store:    "店舗名"
+  sales:    "売上金額"
+  cost:     "原価"
+alert_gross_margin_rate: 0.30   # アラートラインも調整可
+```
+
+コードを読まずに列名マッピング・閾値・会社名を変更できます。
+
+---
+
+## 🛠 技術スタック
+
+| レイヤー | 採用技術 |
+|---------|---------|
+| UI | Streamlit 1.58 |
+| データ処理 | pandas / numpy |
+| 可視化 | Plotly Express |
+| 統計・ML | scipy / scikit-learn |
+| 設定管理 | PyYAML |
+| コード生成 | Claude Code（Anthropic） |
+
+---
 
 ## コンセプト
 
 > **作るためのLLM（Claude Code）× 動かすためのPython**
 
-各システムは Claude Code が Python コードを生成・修正し、完成後は LLM なしで動作する。
-顧客ごとのカスタマイズ・保守更新には再びエージェントが活躍する。
+各ツールは Claude Code が Python コードを生成。完成後は LLM なしで動作します。  
+カスタマイズ・保守更新には再びエージェントが活躍する「人間とAIの協業」モデルです。
 
-## ディレクトリ構造
+---
+
+## 📞 お問い合わせ
+
+導入・カスタマイズのご相談: [realpooh0927@gmail.com](mailto:realpooh0927@gmail.com)
+
+---
+
+<details>
+<summary>🔧 開発者向け情報（クリックして展開）</summary>
+
+### ディレクトリ構造
 
 ```
 dx-portfolio/
-├── README.md          このファイル
+├── portfolio_app.py   カタログ Streamlit アプリ（エントリポイント）
+├── catalog.yml        126 システム定義（id / name / industry / priority 等）
+├── requirements.txt   共通依存パッケージ
 ├── PORTFOLIO.md       全システム状態ダッシュボード
 ├── ROADMAP.md         優先度付きユースケース一覧
 ├── _template/         新システム作成時の雛形
-├── _common/           全システム共通ライブラリ
-├── 01_retail/         小売業
-├── 02_manufacturing/  製造業
-├── 03_healthcare/     医療・介護
-├── 04_finance/        金融・保険
-├── 05_logistics/      物流・倉庫
-├── 06_restaurant/     飲食業
-├── 07_realestate/     不動産
-├── 08_hr/             人事・採用（業種横断）
-├── 09_education/      教育・研修
-└── 10_service/        サービス業・その他
+└── _common/           全システム共通ライブラリ
 ```
 
-## 新システムの追加手順
+### 新システムの追加手順
 
-```
-1. _template/ を対象フォルダにコピー
-   例: cp -r _template/ 02_manufacturing/01_quality_inspection/
+```bash
+# 1. テンプレートをコピー
+cp -r _template/ 02_manufacturing/99_new_system/
 
-2. STATUS.md を編集（name / industry / status: idea）
+# 2. catalog.yml に追記（id / name / industry / priority を設定）
 
-3. Claude Code で「クレンジングして」と伝えると
-   cleaner エージェントが cleanse.py を生成
+# 3. app.py を実装（config.yml で列名・閾値を外部化する設計を推奨）
 
-4. 完成したら STATUS.md を production-ready に更新
-
-5. PORTFOLIO.md のダッシュボードを更新
+# 4. portfolio_app.py の _A_TOOL_DEFS に登録（デモ追加の場合）
 ```
 
-## 各システムの共通構造
-
-```
-{system}/
-├── .claude/agents/     エージェント定義（cleaner / validator / reporter）
-├── output/             生成スクリプト群
-├── tests/              pytest テスト
-├── app.py              Streamlit Webアプリ
-├── run_pipeline.py     CLIパイプライン実行
-├── config.yml          設定（店舗数・列名等、変更不要箇所）
-├── requirements.txt
-└── STATUS.md           このシステムの現在状態
-```
-
-## システム状態の定義
+### システム状態の定義
 
 | アイコン | 状態 | 意味 |
 |---------|------|------|
@@ -75,13 +164,4 @@ dx-portfolio/
 | ✅ | Production-ready | 顧客に納品可能な状態 |
 | 🚀 | Deployed | 実際の顧客環境で稼働中 |
 
-## 優先度の考え方
-
-```
-高価値 × 低難易度 → 優先度A（すぐ作る）
-高価値 × 高難易度 → 優先度B（計画的に）
-低価値 × 低難易度 → 優先度C（余裕があれば）
-低価値 × 高難易度 → 対象外
-```
-
-詳細は [ROADMAP.md](ROADMAP.md) を参照。
+</details>

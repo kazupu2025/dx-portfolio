@@ -1,8 +1,8 @@
 """特採件数・理由別集計・月次推移 — 特採管理モニタリング。"""
+from __future__ import annotations
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).parent))
-from __future__ import annotations
 import sys
 from pathlib import Path
 from datetime import datetime

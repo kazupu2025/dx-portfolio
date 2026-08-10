@@ -1,8 +1,8 @@
 """顧客クレーム件数・原因分類 月次集計 — 月次クレーム集計 × 原因分類内訳。"""
+from __future__ import annotations
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).parent))
-from __future__ import annotations
 import sys
 from pathlib import Path
 from datetime import datetime

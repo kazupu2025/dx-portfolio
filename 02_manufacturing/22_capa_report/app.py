@@ -1,8 +1,8 @@
 """CAPA 完了率・期限遵守率レポート — CAPA 管理状況モニタリング。"""
+from __future__ import annotations
 import sys as _sys
 from pathlib import Path as _Path
 _sys.path.insert(0, str(_Path(__file__).parent))
-from __future__ import annotations
 import sys
 from pathlib import Path
 from datetime import datetime
