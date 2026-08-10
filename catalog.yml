@@ -15,7 +15,7 @@
   priority: B
   path: 01_retail/02_ordering
   description: 50商品の過去3ヶ月日次売上から移動平均+曜日係数+トレンドモデルで2024年1月需要を予測し、欠品リスクと過剰在庫を商品別にアラート表示する発注最適化システム
-  demo: cd 01_retail/02_ordering && streamlit run app.py
+  demo: cd 01_retail/02_ordering && python run_pipeline.py && streamlit run app.py
 - id: C-19
   name: 月次収益・予実差異レポート
   industry: 小売
@@ -60,7 +60,8 @@
   priority: A
   path: 02_manufacturing/01_quality_inspection
   description: 5工程の品質検査データを集計し、統計的外れ値（±3σ）と工程別不良率アラートを自動検出する品質管理システム
-  demo: cd 02_manufacturing/01_quality_inspection && streamlit run app.py
+  demo: cd 02_manufacturing/01_quality_inspection && python run_pipeline.py && streamlit
+    run app.py
 - id: B-09
   name: 製造×設備稼働ログ異常予兆検知
   industry: 製造
@@ -114,7 +115,8 @@
   priority: A
   path: 03_healthcare/01_patient_visit
   description: 5診療科の来院データを集計し、時間帯×曜日ヒートマップでピーク負荷を可視化。長時間待ちアラートで受付体制の最適化を支援
-  demo: cd 03_healthcare/01_patient_visit && streamlit run app.py
+  demo: cd 03_healthcare/01_patient_visit && python run_pipeline.py && streamlit run
+    app.py
 - id: C-16
   name: シフト希望・配置分析パイプライン
   industry: 医療・介護
@@ -150,7 +152,7 @@
   priority: A
   path: 04_finance/01_expense
   description: 5部門の経費精算データを集計し、予算消化率と超過アラートを月次レポートで提供する経費管理システム
-  demo: cd 04_finance/01_expense && streamlit run app.py
+  demo: cd 04_finance/01_expense && python run_pipeline.py && streamlit run app.py
 - id: B-11
   name: 与信スコアリングデータ整備
   industry: 金融・保険
@@ -186,7 +188,7 @@
   priority: A
   path: 05_logistics/01_inventory
   description: 複数倉庫の在庫データを統合クレンジングし、欠品リスク品目を自動検出・レポート
-  demo: cd 05_logistics/01_inventory && streamlit run app.py
+  demo: cd 05_logistics/01_inventory && python run_pipeline.py && streamlit run app.py
 - id: C-17
   name: 配送コスト分析パイプライン
   industry: 物流・倉庫
@@ -231,7 +233,8 @@
   priority: A
   path: 06_restaurant/01_daily_sales
   description: 飲食店5店舗の日次売上を集計し、廃棄ロス率（廃棄額÷売上額）を算出。5%超の店舗をアラート表示する経営支援レポート。
-  demo: cd 06_restaurant/01_daily_sales && streamlit run app.py
+  demo: cd 06_restaurant/01_daily_sales && python run_pipeline.py && streamlit run
+    app.py
 - id: B-13
   name: 原価管理・食材ロス分析
   industry: 飲食
@@ -240,7 +243,8 @@
   priority: B
   path: 06_restaurant/02_cost_management
   description: 5店舗の食材仕入データをカテゴリ別に集計し、廃棄ロス率と廃棄コスト上位食材をアラート付きで可視化する原価管理システム
-  demo: cd 06_restaurant/02_cost_management && streamlit run app.py
+  demo: cd 06_restaurant/02_cost_management && python run_pipeline.py && streamlit
+    run app.py
 - id: C-20
   name: アルバイトシフト・人件費集計パイプライン
   industry: 飲食
@@ -276,7 +280,7 @@
   priority: A
   path: 07_realestate/01_inquiry
   description: 5エリアの物件問い合わせデータをファネル分析し、エリア別・担当者別・経路別の成約率を可視化する営業支援システム
-  demo: cd 07_realestate/01_inquiry && streamlit run app.py
+  demo: cd 07_realestate/01_inquiry && python run_pipeline.py && streamlit run app.py
 - id: B-14
   name: 賃貸物件管理・空室率レポート
   industry: 不動産
@@ -285,7 +289,8 @@
   priority: B
   path: 07_realestate/02_rental_management
   description: 5エリアの賃貸物件データからエリア別空室率・物件タイプ別純収益を集計し、空室率20%超のエリアをアラート付きで可視化する物件管理システム
-  demo: cd 07_realestate/02_rental_management && streamlit run app.py
+  demo: cd 07_realestate/02_rental_management && python run_pipeline.py && streamlit
+    run app.py
 - id: C-23
   name: 不動産 管理費・修繕費コスト分析パイプライン
   industry: 不動産
@@ -321,7 +326,7 @@
   priority: A
   path: 08_hr/01_attendance
   description: 5部門の勤怠データを集計し、残業上限超過（45h警告/60h危険）・有休消化率のアラートを自動生成するパイプライン
-  demo: cd 08_hr/01_attendance && streamlit run app.py
+  demo: cd 08_hr/01_attendance && python run_pipeline.py && streamlit run app.py
 - id: C-33
   name: 採用歩留まり率分析パイプライン
   industry: 人事・採用
