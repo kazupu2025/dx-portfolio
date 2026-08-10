@@ -115,9 +115,10 @@ def render_card(item):
     else:
         pri_badge = f'<span style="background:#f8fafc;color:#64748b;padding:1px 6px;border-radius:8px;font-size:11px">優先度 {pri}</span>'
 
-    st.markdown(f"""
-<div style="border:1px solid #e2e8f0;border-radius:8px;padding:16px;background:white;
-            margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06)">
+    # st.container(border=True) でカード本体とアクションを1ブロックに統合
+    with st.container(border=True):
+        st.markdown(f"""
+<div style="padding:4px 4px 8px 4px">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
     <span style="background:{ind_color};color:white;padding:2px 8px;border-radius:12px;
                  font-size:11px;font-weight:bold">{ind}</span>
@@ -135,13 +136,13 @@ def render_card(item):
 </div>
 """, unsafe_allow_html=True)
 
-    if iid in _demo_pages:
-        # インタラクティブデモが使えるツール → ページリンクボタン
-        st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
-    elif demo:
-        # デモページ未作成のツール → 起動コマンドを表示
-        with st.expander("💻 起動コマンド", expanded=False):
-            st.code(demo, language="bash")
+        if iid in _demo_pages:
+            # インタラクティブデモが使えるツール → ページリンクボタン
+            st.page_link(_demo_pages[iid], label="🚀 デモを起動", use_container_width=True)
+        elif demo:
+            # デモページ未作成のツール → 起動コマンドを表示
+            with st.expander("💻 起動コマンド", expanded=False):
+                st.code(demo, language="bash")
 
 
 # ── カタログページ本体 ────────────────────────────────────────
