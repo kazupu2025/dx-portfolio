@@ -39,20 +39,20 @@ _DIFF_COLOR = {
 }
 
 # ── デモページ定義（priority-A の実装済みツール）────────────────
-# (tool_id, app_path, icon, page_title)
+# (tool_id, app_path, url_path, page_title)
 _A_TOOL_DEFS = [
-    ("A-02", "06_restaurant/01_daily_sales/app.py",           "🍴", "飲食売上管理・P/L集計"),
-    ("A-06", "02_manufacturing/01_quality_inspection/app.py", "🔬", "品質検査異常値検出"),
-    ("A-07", "03_healthcare/01_patient_visit/app.py",         "🏥", "患者訪問・ピーク時間解析"),
-    ("A-04", "04_finance/01_expense/app.py",                  "💰", "出張費集計・比較レポート"),
-    ("A-03", "05_logistics/01_inventory/app.py",              "📦", "在庫データ鮮度確認"),
-    ("A-08", "07_realestate/01_inquiry/app.py",               "🏠", "問い合わせ・反響率分析"),
-    ("A-05", "08_hr/01_attendance/app.py",                    "👥", "勤怠データ・ツールアラート"),
+    ("A-02", "06_restaurant/01_daily_sales/app.py",           "demo_restaurant",  "[A-02] 飲食売上管理・P/L集計"),
+    ("A-06", "02_manufacturing/01_quality_inspection/app.py", "demo_quality",     "[A-06] 品質検査異常値検出"),
+    ("A-07", "03_healthcare/01_patient_visit/app.py",         "demo_healthcare",  "[A-07] 患者訪問・ピーク時間解析"),
+    ("A-04", "04_finance/01_expense/app.py",                  "demo_finance",     "[A-04] 出張費集計・比較レポート"),
+    ("A-03", "05_logistics/01_inventory/app.py",              "demo_logistics",   "[A-03] 在庫データ鮮度確認"),
+    ("A-08", "07_realestate/01_inquiry/app.py",               "demo_realestate",  "[A-08] 問い合わせ・反響率分析"),
+    ("A-05", "08_hr/01_attendance/app.py",                    "demo_hr",          "[A-05] 勤怠データ・ツールアラート"),
 ]
 
-_demo_pages: dict[str, st.Page] = {
-    aid: st.Page(path, title=title, icon=icon)
-    for aid, path, icon, title in _A_TOOL_DEFS
+_demo_pages = {
+    aid: st.Page(path, title=title, url_path=url_path)
+    for aid, path, url_path, title in _A_TOOL_DEFS
 }
 
 
@@ -262,12 +262,10 @@ def _show_catalog():
 
 
 # ── ナビゲーション ────────────────────────────────────────────
-_catalog_page = st.Page(_show_catalog, title="📊 ツールカタログ", icon="📊", default=True)
+_catalog_page = st.Page(_show_catalog, title="📊 ツールカタログ", url_path="catalog", default=True)
 
 pg = st.navigation(
-    {
-        "カタログ": [_catalog_page],
-        "🚀 デモツール（優先度A）": list(_demo_pages.values()),
-    }
+    [_catalog_page] + list(_demo_pages.values()),
+    position="sidebar",
 )
 pg.run()
