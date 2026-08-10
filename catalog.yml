@@ -326,6 +326,10 @@
   description: シフト実績から時給・残業・社保コストを自動集計。人件費率≤25%→good の verdict で売上対人件費率をリアルタイム管理。
   demo: cd 06_restaurant/03_shift_cost && streamlit run app.py
   difficulty: ★★★
+  customize_points:
+  - 店舗名・スタッフ名の列名マッピング（config.yml）
+  - 人件費アラートライン（月次予算超過率 %）
+  - 役割分類（正社員 / アルバイト / パート）の区分名
 - id: A-08
   name: 物件問い合わせ・成約率分析レポート
   industry: 不動産
@@ -425,6 +429,10 @@
   description: 研修前後スキルアセスメントから改善率・費用対効果を集計。平均改善≥15点→good の verdict で研修投資の効果を可視化。
   demo: cd 08_hr/02_training_effectiveness && streamlit run app.py
   difficulty: ★★★
+  customize_points:
+  - 研修名・部門名の列名マッピング
+  - 効果判定スコアの合格ライン（pass_score）
+  - 研修前後テスト列名（pre_score / post_score）
 - id: C-30
   name: 人件費推移・予実差異レポートパイプライン
   industry: 人事・採用
@@ -465,6 +473,10 @@
   description: クラス・科目別の出席率と成績分布を月次集計。出席率≥90%→good の verdict で指導品質改善の根拠データを生成。
   demo: cd 09_education/02_attendance_grade && streamlit run app.py
   difficulty: ★★★
+  customize_points:
+  - '出席率アラートライン（absence_alert_rate: 20%）'
+  - 科目名・クラス名の列名マッピング
+  - 成績分布の評価区分（A/B/C/D）の閾値設定
 - id: C-24
   name: 講師稼働・コマ数管理パイプライン
   industry: 教育・研修
@@ -1330,6 +1342,10 @@
   description: 10プロジェクト×3フェーズの工事実績から工期遅延と原価差異を自動分析。計画 vs 実績をガントチャート・原価差異グラフで可視化し、原価超過率≤5%→good
     の verdict で工事進捗管理を支援する。
   demo: cd construction/01_progress_cost && streamlit run app.py
+  customize_points:
+  - 工程進捗アラートライン（遅延率 % 閾値）
+  - 工事名・協力会社名の列名マッピング
+  - 原価差異の警告ライン（cost_variance_alert_pct）
 - id: C-113
   name: SaaSメトリクスダッシュボード（MRR/チャーン/LTV/CAC）
   industry: IT・SaaS
@@ -1340,6 +1356,10 @@
   difficulty: ★★☆
   description: MRR成長・チャーン率・LTV/CACをプラン別月次追跡。LTV/CAC比≥3→good の verdict でSaaS事業の健全性を可視化。
   demo: cd 10_service/02_saas_metrics && streamlit run app.py
+  customize_points:
+  - MRRアラートライン（チャーン率 threshold）
+  - プラン名・顧客セグメントの列名マッピング
+  - 解約予兆スコアの重みづけ（churnscore_weights）
 - id: C-114
   name: カスタマーサクセス指標ダッシュボード（NPS・ヘルススコア）
   industry: IT・SaaS
@@ -1350,6 +1370,10 @@
   difficulty: ★★☆
   description: ログイン率・機能使用率・サポートチケットからヘルススコアを算出。healthy率≥60%→good の verdict でチャーンリスク顧客を早期発見。
   demo: cd 10_service/03_customer_success && streamlit run app.py
+  customize_points:
+  - NPS区分の閾値（推奨者≥9 / 批判者≤6）
+  - 顧客セグメント名・CSM担当者名の列名
+  - ヘルススコアの重みづけ（usage / support / nps）
 - id: C-115
   name: RevPAR・客室稼働率ダッシュボード
   industry: ホテル・観光
@@ -1360,6 +1384,10 @@
   difficulty: ★★☆
   description: 客室タイプ別の稼働率・ADR・RevPARを月次集計。稼働率≥70%→good の verdict でホテル収益管理の標準KPIを一元可視化。
   demo: cd hotel/01_revpar && streamlit run app.py
+  customize_points:
+  - RevPAR アラートライン（前年同期比 %）
+  - 客室タイプ名・フロア名の列名マッピング
+  - 繁閑区分（season_type）の日付範囲設定
 - id: C-117
   name: 収穫量・品質トレンド分析
   industry: 農業・食品加工
@@ -1370,6 +1398,10 @@
   difficulty: ★★☆
   description: 品目別の収穫量・A品率・糖度を月次集計。A品率≥75%→good の verdict でスマート農業の品質管理基盤を提供。
   demo: cd agriculture/01_harvest_quality && streamlit run app.py
+  customize_points:
+  - 収穫量アラートライン（前年比 % 閾値）
+  - 品種名・圃場名の列名マッピング
+  - 品質等級の区分名（grade_A / grade_B / waste）
 - id: C-118
   name: 整備案件・部品在庫管理ダッシュボード
   industry: 自動車・整備業
@@ -1380,6 +1412,10 @@
   difficulty: ★★☆
   description: 整備案件の売上・完了率と部品在庫アラートを2タブで一元管理。完了率≥80%かつアラート≤2件→good の verdict で整備工場のDXを実現。
   demo: cd automotive/01_service_inventory && streamlit run app.py
+  customize_points:
+  - 部品在庫アラートライン（min_stock_qty）
+  - 車種名・担当メカニック名の列名マッピング
+  - 整備区分（定期点検 / 修理 / 車検）の分類名
 - id: C-119
   name: 宴会・イベント収益管理
   industry: ホテル・観光
@@ -1410,6 +1446,10 @@
   difficulty: ★★☆
   description: 現場のヒヤリハット・軽微・重大事案をカテゴリ別・プロジェクト別に集計。重大件数=0かつ解決率≥90%→good で建設現場の安全管理を支援。
   demo: cd construction/02_safety_hazard && streamlit run app.py
+  customize_points:
+  - ヒヤリハット重大度区分の閾値（severity_threshold）
+  - 現場名・担当者名の列名マッピング
+  - 月次アラート件数の上限（monthly_alert_limit）
 - id: C-122
   name: 資材コスト・発注管理
   industry: 建設・ゼネコン
@@ -1450,6 +1490,10 @@
   difficulty: ★★☆
   description: 車検期限・オイル交換推奨顧客をリストアップ。30日以内≤3件→good で整備工場の顧客フォローと来店促進を自動化。
   demo: cd automotive/02_inspection_reminder && streamlit run app.py
+  customize_points:
+  - '車検期限アラートの日数（alert_days_before: 60日）'
+  - 顧客名・車種名の列名マッピング
+  - 'オイル交換推奨走行距離（oil_change_km: 5000km）'
 - id: C-126
   name: 整備士別生産性・売上分析
   industry: 自動車・整備業

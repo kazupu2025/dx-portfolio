@@ -12,7 +12,7 @@ CSV = OUT / "cleaned_rental_202401.csv"
 REPORT = OUT / "analysis_report.md"
 CHARTS = OUT / "charts"
 
-st.set_page_config(page_title="B-14 賃貸物件管理", page_icon="🏠", layout="wide")
+# st.set_page_config removed — called by portfolio_app.py host
 
 @st.cache_data
 def load_data():
@@ -27,15 +27,13 @@ def load_cfg():
     with open(BASE / "config.yml", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
-def main():
-    st.title("🏠 B-14 賃貸物件管理・空室率レポート")
-    st.caption("5エリア × 5物件タイプの賃貸物件データから空室率を管理するシステム")
+st.title("🏠 B-14 賃貸物件管理・空室率レポート")
+st.caption("5エリア × 5物件タイプの賃貸物件データから空室率を管理するシステム")
 
-    if not CSV.exists():
-        st.error("cleaned_rental_202401.csv が見つかりません。パイプラインを実行してください。")
-        st.code("python run_pipeline.py", language="bash")
-        return
-
+if not CSV.exists():
+    st.error("cleaned_rental_202401.csv が見つかりません。パイプラインを実行してください。")
+    st.code("python run_pipeline.py", language="bash")
+else:
     df = load_data()
     cfg = load_cfg()
     vacancy_threshold = cfg.get("vacancy_alert_threshold", 0.20)
@@ -76,7 +74,7 @@ def main():
 
     with tab1:
         if (CHARTS / "bar_area_vacancy_rate.png").exists():
-            st.image(str(CHARTS / "bar_area_vacancy_rate.png"), use_column_width=True)
+            st.image(str(CHARTS / "bar_area_vacancy_rate.png"), use_container_width=True)
         else:
             st.warning("グラフを生成してください: python output/visualize.py")
 
@@ -95,13 +93,13 @@ def main():
 
     with tab2:
         if (CHARTS / "bar_type_net_income.png").exists():
-            st.image(str(CHARTS / "bar_type_net_income.png"), use_column_width=True)
+            st.image(str(CHARTS / "bar_type_net_income.png"), use_container_width=True)
         else:
             st.warning("グラフを生成してください: python output/visualize.py")
 
     with tab3:
         if (CHARTS / "bar_area_revenue.png").exists():
-            st.image(str(CHARTS / "bar_area_revenue.png"), use_column_width=True)
+            st.image(str(CHARTS / "bar_area_revenue.png"), use_container_width=True)
         else:
             st.warning("グラフを生成してください: python output/visualize.py")
 
@@ -110,6 +108,3 @@ def main():
     if REPORT.exists():
         with st.expander("分析レポート（詳細）", expanded=False):
             st.markdown(REPORT.read_text(encoding="utf-8"))
-
-if __name__ == "__main__":
-    main()

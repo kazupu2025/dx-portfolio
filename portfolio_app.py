@@ -78,6 +78,8 @@ _A_TOOL_DEFS = [
     ("C-106", "02_manufacturing/52_quality_feedback_loop/app.py", "demo_feedback", "[C-106] 市場品質フィードバック"),
     ("C-109", "02_manufacturing/55_multisite_quality/app.py", "demo_multisite", "[C-109] 多拠点品質比較"),
     ("C-114", "10_service/03_customer_success/app.py", "demo_cs", "[C-114] カスタマーサクセス指標"),
+    ("B-13", "06_restaurant/02_cost_management/app.py", "demo_cost_mgmt", "[B-13] 飲食原価・食材ロス管理"),
+    ("B-14", "07_realestate/02_rental_management/app.py", "demo_rental", "[B-14] 賃貸物件管理・空室率"),
 ]
 
 _demo_pages = {
@@ -383,6 +385,8 @@ _SECTION_MAP: dict[str, str] = {
     "C-118": "🚗 自動車・整備業",
     "C-121": "🏗️ 建設・ゼネコン",
     "C-125": "🚗 自動車・整備業",
+    "B-13": "🍜 飲食",
+    "B-14": "🏢 不動産",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

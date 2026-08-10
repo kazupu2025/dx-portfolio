@@ -3,12 +3,6 @@ import pandas as pd
 import yaml
 from pathlib import Path
 
-st.set_page_config(
-    page_title="飲食 原価・食材ロスダッシュボード",
-    page_icon="🍽️",
-    layout="wide",
-)
-
 BASE = Path(__file__).parent
 
 with open(BASE / "config.yml", encoding="utf-8") as f:
