@@ -22,6 +22,10 @@
   description: 50商品の過去3ヶ月日次売上から移動平均+曜日係数+トレンドモデルで2024年1月需要を予測し、欠品リスクと過剰在庫を商品別にアラート表示する発注最適化システム
   demo: cd 01_retail/02_ordering && python run_pipeline.py && streamlit run app.py
   difficulty: ★☆☆
+  customize_points:
+  - 商品コード・カテゴリ名の列名マッピング
+  - '発注点計算の安全在庫日数（safety_stock_days: 7）'
+  - '需要予測モデルの対象期間（forecast_weeks: 12）'
 - id: C-19
   name: 月次収益・予実差異レポート
   industry: 小売
@@ -87,6 +91,10 @@
   description: 5台の製造設備センサーログからローリング統計ベースの異常予兆を検知し、CRITICAL/WARNING アラートと連続予兆パターンを可視化する設備保全システム
   demo: cd 02_manufacturing/02_equipment_log && streamlit run app.py
   difficulty: ★☆☆
+  customize_points:
+  - 設備ID・ライン名の列名マッピング（config.yml）
+  - '異常スコアの警告閾値（anomaly_score_threshold: 0.8）'
+  - '検知モデルの感度（contamination: 0.05 = 外れ値率 5%）'
 - id: C-18
   name: 原価差異分析パイプライン
   industry: 製造
@@ -196,6 +204,10 @@
   description: 500件の申込データにスコアカード方式の与信スコアを付与し、高/中/低リスク分類と職業・負債比率によるリスク要因を可視化する与信管理システム
   demo: cd 04_finance/02_credit_scoring && streamlit run app.py
   difficulty: ★☆☆
+  customize_points:
+  - '与信スコアの可否ライン（credit_pass_score: 70）'
+  - 顧客区分・業種名の列名マッピング
+  - 評価項目の重みづけ（payment_history / financial_health / relationship）
 - id: C-26
   name: 請求書突合・差異検出パイプライン
   industry: 金融・保険
@@ -296,6 +308,10 @@
   demo: cd 06_restaurant/02_cost_management && python run_pipeline.py && streamlit
     run app.py
   difficulty: ★★☆
+  customize_points:
+  - '食材ロス率アラートライン（waste_rate_alert_threshold: 10%）'
+  - 店舗名・カテゴリ名の列名マッピング
+  - 仕入コスト・廃棄コスト列名の設定（config.yml）
 - id: C-20
   name: アルバイトシフト・人件費集計パイプライン
   industry: 飲食
@@ -355,6 +371,10 @@
   demo: cd 07_realestate/02_rental_management && python run_pipeline.py && streamlit
     run app.py
   difficulty: ★★☆
+  customize_points:
+  - '空室率アラートライン（vacancy_alert_threshold: 20%）'
+  - エリア名・物件タイプ名の列名マッピング
+  - 月次収益・純収益の列名設定（monthly_revenue / net_income）
 - id: C-23
   name: 不動産 管理費・修繕費コスト分析パイプライン
   industry: 不動産
@@ -453,6 +473,10 @@
   description: 200受講生×5科目の成績・出席・提出率データに加重スコアカード方式の退学リスクスコアを付与し、高/中/低リスク分類と科目別・コース別リスク要因を可視化する早期警戒システム
   demo: cd 09_education/01_dropout_risk && streamlit run app.py
   difficulty: ★☆☆
+  customize_points:
+  - '退学リスクの警告閾値（dropout_risk_threshold: 0.6）'
+  - 受講生ID・コース名の列名マッピング
+  - 成績・出席率・課題提出率の重みづけ設定
 - id: C-42
   name: 受講率・修了率レポートパイプライン
   industry: 教育・研修
@@ -497,6 +521,10 @@
   description: 500件の問い合わせログをキーワードベース自動分類（6カテゴリ）し、担当者別解決率・カテゴリ別対応時間・時間帯別受付傾向を可視化するCS支援システム
   demo: cd 10_service/01_inquiry_log && streamlit run app.py
   difficulty: ★★☆
+  customize_points:
+  - 問い合わせカテゴリ分類名（complaint / inquiry / request / other）
+  - '対応時間アラートライン（response_sla_hours: 24）'
+  - 担当者名・チャネル名の列名マッピング
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス
@@ -696,6 +724,10 @@
   path: 02_manufacturing/08_cp_cpk
   description: 測定データと規格値（USL/LSL）からCp/Cpkを自動計算。工程ごとの「ばらつき」vs「中心ずれ」を診断し、改善アクションを提示する独立型分析システム。
   demo: streamlit run 02_manufacturing/08_cp_cpk/app.py
+  customize_points:
+  - 'Cp/Cpk 判定基準（cpk_lower_limit: 1.33）'
+  - 工程名・測定項目名の列名マッピング
+  - 規格上下限（USL / LSL）の設定値
 - id: C-63
   name: 統合品質ダッシュボード（横断KPI）
   industry: 製造
@@ -709,6 +741,10 @@
     信号機カード＋時系列グラフで横断表示する統合ダッシュボード。
 
     '
+  customize_points:
+  - 品質 KPI の警告ライン（不良率・CAPA 完了率）
+  - 拠点名・工程名の列名マッピング
+  - 集計期間の週次/月次切替（aggregation_period）
 - id: C-64
   name: SPC管理図（X-bar/R + 異常8ルール）
   industry: 製造
@@ -725,6 +761,10 @@
     結果を統合品質DB（quality.db）に書き込み、C-63 ダッシュボードに連携。
 
     '
+  customize_points:
+  - Western Electric 8 ルールの有効/無効切替
+  - 'サブグループサイズ（subgroup_size: 5）'
+  - 工程名・測定値列名のマッピング
 - id: C-65
   name: ゲージR&R（MSA）— 2要因ANOVA 測定システム分析
   industry: 製造
@@ -741,6 +781,10 @@
     結果を統合品質DB（quality.db）に書き込み、C-63ダッシュボードに連携。
 
     '
+  customize_points:
+  - ゲージ許容範囲（gauge_tolerance）の設定
+  - 評価者名・部品名の列名マッピング
+  - '%GRR 判定基準（acceptable_grr_pct: 30%）'
 - id: C-66
   name: 4M変更前後品質比較 — 変化点有意差検定（t検定/Mann-Whitney）
   industry: 製造
@@ -757,6 +801,10 @@
     効果量（Cohen''s d / rank-biserial r）で変化の大きさも定量化する。
 
     '
+  customize_points:
+  - 変化点前後の比較期間（days_before / days_after）
+  - '有意水準の設定（alpha: 0.05）'
+  - 4M 変更区分名（Man / Machine / Material / Method）
 - id: C-69
   name: 不良モード別パレート × 時系列複合分析
   industry: 製造
@@ -773,6 +821,10 @@
     直近月の悪化傾向を verdict（good/warning/alert）で通知する。
 
     '
+  customize_points:
+  - 'パレート分析の累積比率ライン（pareto_threshold: 80%）'
+  - 不良モード名・工程名の列名マッピング
+  - '分析対象期間の月数（trend_months: 6）'
 - id: C-70
   name: 是正処置（8D）効果検証 — 統計的有意差検定（t検定/Mann-Whitney）
   industry: 製造
@@ -789,6 +841,10 @@
     有意差あり + 効果量大 → "good"（是正効果確認）という C-66 と逆の verdict 設計が特徴。
 
     '
+  customize_points:
+  - '是正効果判定の有意水準（alpha: 0.05）'
+  - 是正処置名・不良モード名の列名マッピング
+  - 是正前後の比較期間（days_before / days_after）
 - id: C-67
   name: 工程間品質相関分析 — Pearson 相関行列 × ヒートマップ
   industry: 製造
@@ -805,6 +861,10 @@
     max |r| ≥ 0.7 → "good"（強い相関あり）という verdict 設計で工程管理改善を支援。
 
     '
+  customize_points:
+  - '相関係数の警告閾値（correlation_alert: 0.7）'
+  - 工程名・品質特性名の列名マッピング
+  - '相関分析の対象期間（analysis_months: 6）'
 - id: C-71
   name: 品質コストROI分析 — PAFモデル × 月次改善効果測定
   industry: 製造
@@ -821,6 +881,10 @@
     1行データ時は failure_ratio フォールバックで必ず verdict を返す堅牢な実装。
 
     '
+  customize_points:
+  - '品質コスト ROI の目標ライン（target_roi: 3.0倍）'
+  - PAF 区分名（Prevention / Appraisal / Failure）
+  - 月次改善効果の列名マッピング
 - id: C-68
   name: 仕入先品質複合スコアリング — 重み付き合成スコア × 仕入先ランク
   industry: 製造
@@ -837,6 +901,10 @@
     横棒グラフで仕入先ランキング、指標別内訳グラフで改善ポイントを可視化。
 
     '
+  customize_points:
+  - '仕入先スコア合否ライン（supplier_pass_score: 70）'
+  - 評価項目の重みづけ（品質 / 納期 / コスト / 対応）
+  - 仕入先名・品目名の列名マッピング
 - id: C-72
   name: AQL/受入サンプリング計画最適化 — OC曲線・抜取方式設計
   industry: 製造
@@ -855,6 +923,10 @@
     実際の検査不良数を入力することでロット合否判定と DB 記録を行う。
 
     '
+  customize_points:
+  - 'AQL 合格品質水準（aql_level: 1.0 / 2.5 / 4.0）'
+  - ロットサイズ・サンプルサイズの設定範囲
+  - 抜取方式（normal / tightened / reduced）の切替閾値
 - id: C-73
   name: 協力会社別受入不良率月報
   industry: 製造
@@ -871,6 +943,10 @@
     月次トレンドグラフと協力会社別平均横棒グラフで改善ポイントを可視化。
 
     '
+  customize_points:
+  - '受入不良率アラートライン（incoming_defect_alert: 5%）'
+  - 仕入先名・品目コードの列名マッピング
+  - '月次集計の対象期間（report_months: 3）'
 - id: C-74
   name: 顧客クレーム件数・原因分類 月次集計
   industry: 製造
@@ -1426,6 +1502,10 @@
   difficulty: ★★☆
   description: イベント種別・会場別の収益集計と月次トレンド可視化。1名単価≥15000円→good の verdict でホテル宴会部門のKPI管理を実現。
   demo: cd hotel/02_banquet_revenue && streamlit run app.py
+  customize_points:
+  - 宴会・イベント収益のアラートライン（revenue_alert_threshold）
+  - イベント区分名・担当者名の列名マッピング
+  - '目標稼働率の設定（target_utilization_rate: 70%）'
 - id: C-120
   name: 顧客満足度・リピート分析
   industry: ホテル・観光
@@ -1436,6 +1516,10 @@
   difficulty: ★★☆
   description: 宿泊ゲストの総合・部屋・料理・サービス満足度を集計し、チャネル別・リピーター比率を分析。平均スコア≥4.0→good。
   demo: cd hotel/03_guest_satisfaction && streamlit run app.py
+  customize_points:
+  - '顧客満足度スコアの警告ライン（satisfaction_alert: 3.5 / 5.0）'
+  - 'リピート率アラートライン（repeat_rate_alert: 40%）'
+  - 顧客セグメント名・評価区分の列名マッピング
 - id: C-121
   name: 安全管理・ヒヤリハット集計
   industry: 建設・ゼネコン
@@ -1460,6 +1544,10 @@
   difficulty: ★★☆
   description: 鉄鋼・コンクリート・木材等のカテゴリ別発注コストを集計し、月次変動率を監視。変動率≤10%→good で建設資材の原価管理を実現。
   demo: cd construction/03_material_cost && streamlit run app.py
+  customize_points:
+  - '発注量アラートライン（min_stock_alert_days: 14）'
+  - 資材名・仕入先名の列名マッピング
+  - '資材コスト予算超過アラートライン（budget_overrun_pct: 10%）'
 - id: C-123
   name: 農薬・肥料コスト分析
   industry: 農業・食品加工
@@ -1470,6 +1558,10 @@
   difficulty: ★★☆
   description: 殺虫剤・肥料等をカテゴリ別・作物別に集計し、ha当たりコストを計算。ha単価≤50000円→good で農業経営の資材コスト最適化を支援。
   demo: cd agriculture/02_agri_cost && streamlit run app.py
+  customize_points:
+  - 農薬・肥料コストのアラートライン（cost_per_ha_alert）
+  - 圃場名・作物名の列名マッピング
+  - '前年比コスト増加率の警告閾値（yoy_increase_alert: 15%）'
 - id: C-124
   name: 出荷先別単価・販売分析
   industry: 農業・食品加工
@@ -1480,6 +1572,10 @@
   difficulty: ★★☆
   description: 直販・市場・スーパー・JA出荷の4チャネル別売上・単価を比較。直販比率≥30%→good で高単価チャネルへの販路最適化を促進。
   demo: cd agriculture/03_sales_channel && streamlit run app.py
+  customize_points:
+  - 出荷先別単価アラートライン（price_floor_alert）
+  - 出荷先名・品目名の列名マッピング
+  - 販売量アラートライン（monthly_volume_alert）
 - id: C-125
   name: 顧客車検リマインダー管理
   industry: 自動車・整備業
@@ -1504,3 +1600,7 @@
   difficulty: ★★☆
   description: 整備士別の案件数・売上・顧客評価・時給効率を集計。時給効率≥6000円→good で整備工場のスタッフ生産性管理を実現。
   demo: cd automotive/03_mechanic_performance && streamlit run app.py
+  customize_points:
+  - 整備士別生産性アラートライン（productivity_alert_cases_per_day）
+  - 整備士名・整備区分名の列名マッピング
+  - '売上目標達成率の警告閾値（revenue_achievement_alert: 80%）'
