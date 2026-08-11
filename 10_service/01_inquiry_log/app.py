@@ -25,7 +25,6 @@ CSV_PATH = OUT / "cleaned_inquiry_202401.csv"
 CFG_PATH = BASE / "config.yml"
 RPT_PATH = OUT / "analysis_report.md"
 
-st.set_page_config(page_title="B-15 問い合わせログ分析", layout="wide", page_icon="📞")
 
 @st.cache_data
 def load_data():
