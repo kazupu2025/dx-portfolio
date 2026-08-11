@@ -14,7 +14,7 @@
 
 **👉 [dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)**
 
-35 ツールをブラウザで即体験できます。クレカ登録・インストール不要。
+42 ツールをブラウザで即体験できます。クレカ登録・インストール不要。
 
 ---
 
