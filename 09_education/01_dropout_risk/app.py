@@ -35,7 +35,7 @@ st.caption("2024年1月末時点 | 200受講生 × 5科目")
 df = load_data()
 if df is None:
     st.error("データが見つかりません。cleanse.py を先に実行してください。")
-    return
+    st.stop()
 
 # 受講生単位集計
 stu_df = df.groupby("student_id").agg(
