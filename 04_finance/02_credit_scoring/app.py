@@ -13,11 +13,6 @@ CHARTS = OUT / "charts"
 with open(BASE / "config.yml", encoding="utf-8") as f:
     config = yaml.safe_load(f)
 
-st.set_page_config(
-    page_title="B-11 与信スコアリング ダッシュボード",
-    page_icon="💳",
-    layout="wide",
-)
 
 st.title("💳 B-11 与信スコアリング データ整備ダッシュボード")
 st.caption("スコアカード方式による申込者リスク分類・職業別分析 | 2024年1月")

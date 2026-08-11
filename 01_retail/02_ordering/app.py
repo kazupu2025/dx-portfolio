@@ -3,11 +3,6 @@ import pandas as pd
 import yaml
 from pathlib import Path
 
-st.set_page_config(
-    page_title="小売 発注最適化ダッシュボード",
-    page_icon="🛒",
-    layout="wide",
-)
 
 BASE = Path(__file__).parent
 

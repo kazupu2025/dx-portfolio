@@ -11,7 +11,6 @@ BASE = Path(__file__).parent
 OUT  = BASE / "output"
 CHARTS = OUT / "charts"
 
-st.set_page_config(page_title="B-09 設備稼働ログ 異常予兆検知", layout="wide")
 st.title("B-09 製造×設備稼働ログ 異常予兆検知")
 st.markdown("5台の製造設備センサーデータからローリングZスコアによる異常予兆を検知します。")
 

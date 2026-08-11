@@ -78,8 +78,12 @@ _A_TOOL_DEFS = [
     ("C-106", "02_manufacturing/52_quality_feedback_loop/app.py", "demo_feedback", "[C-106] 市場品質フィードバック"),
     ("C-109", "02_manufacturing/55_multisite_quality/app.py", "demo_multisite", "[C-109] 多拠点品質比較"),
     ("C-114", "10_service/03_customer_success/app.py", "demo_cs", "[C-114] カスタマーサクセス指標"),
-    ("B-13", "06_restaurant/02_cost_management/app.py", "demo_cost_mgmt", "[B-13] 飲食原価・食材ロス管理"),
-    ("B-14", "07_realestate/02_rental_management/app.py", "demo_rental", "[B-14] 賃貸物件管理・空室率"),
+    ("B-13", "06_restaurant/02_cost_management/app.py",   "demo_cost_mgmt",  "[B-13] 飲食原価・食材ロス管理"),
+    ("B-14", "07_realestate/02_rental_management/app.py", "demo_rental",     "[B-14] 賃貸物件管理・空室率"),
+    ("B-09", "02_manufacturing/02_equipment_log/app.py",  "demo_equipment",  "[B-09] 設備稼働ログ異常予兆検知"),
+    ("B-10", "01_retail/02_ordering/app.py",              "demo_ordering",   "[B-10] 発注最適化・需要予測"),
+    ("B-11", "04_finance/02_credit_scoring/app.py",       "demo_credit",     "[B-11] 与信スコアリング管理"),
+    ("B-12", "09_education/01_dropout_risk/app.py",       "demo_dropout",    "[B-12] 退学リスク早期警戒"),
 ]
 
 _demo_pages = {
@@ -387,6 +391,10 @@ _SECTION_MAP: dict[str, str] = {
     "C-125": "🚗 自動車・整備業",
     "B-13": "🍜 飲食",
     "B-14": "🏢 不動産",
+    "B-09": "🏭 製造",
+    "B-10": "🏪 小売",
+    "B-11": "💰 金融・保険",
+    "B-12": "📚 教育・研修",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
