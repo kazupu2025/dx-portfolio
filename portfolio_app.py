@@ -85,6 +85,7 @@ _A_TOOL_DEFS = [
     ("B-11", "04_finance/02_credit_scoring/app.py",       "demo_credit",     "[B-11] 与信スコアリング管理"),
     ("B-12", "09_education/01_dropout_risk/app.py",       "demo_dropout",    "[B-12] 退学リスク早期警戒"),
     ("B-15", "10_service/01_inquiry_log/app.py",          "demo_inquiry_log","[B-15] 問い合わせログ分類・対応時間"),
+    ("B-16", "03_healthcare/02_shift_optimization/app.py","demo_shift_opt",  "[B-16] 医療・介護 シフト希望・夜勤分析"),
 ]
 
 _demo_pages = {
@@ -397,6 +398,7 @@ _SECTION_MAP: dict[str, str] = {
     "B-11": "💰 金融・保険",
     "B-12": "📚 教育・研修",
     "B-15": "⚙️ サービス",
+    "B-16": "🏥 医療・介護",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

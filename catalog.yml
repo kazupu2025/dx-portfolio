@@ -525,6 +525,20 @@
   - 問い合わせカテゴリ分類名（complaint / inquiry / request / other）
   - '対応時間アラートライン（response_sla_hours: 24）'
   - 担当者名・チャネル名の列名マッピング
+- id: B-16
+  name: 医療・介護 シフト希望・夜勤分析
+  industry: 医療・介護
+  department: 看護部・介護部・人事部
+  status: production-ready
+  priority: B
+  path: 03_healthcare/02_shift_optimization
+  description: 50名スタッフのシフト希望データを集計し、夜勤偏り・連続夜勤リスク者・役職別配置傾向を可視化する疲労管理支援ダッシュボード
+  demo: cd 03_healthcare/02_shift_optimization && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - config.yml の night_threshold で夜勤連続アラート日数（デフォルト3日）を変更
+  - 入力 CSV 列名（staff_id / role / preferred_shift / date）を自社シフト管理表に合わせてマッピング
+  - 役職フィルターのデフォルト選択を自社役職区分（看護師/介護士/補助職等）に変更
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス
