@@ -90,6 +90,8 @@ _A_TOOL_DEFS = [
     ("B-18", "03_healthcare/03_medicine_inventory/app.py","demo_medicine",   "[B-18] 医療 薬品在庫管理・発注アラート"),
     ("B-19", "04_finance/03_invoice_reconciliation/app.py","demo_invoice",   "[B-19] 金融 請求書突合・差異検出"),
     ("B-20", "08_hr/03_recruitment_funnel/app.py",         "demo_recruit",   "[B-20] 人事 採用ファネル・歩留まり分析"),
+    ("B-21", "07_realestate/03_maintenance_cost/app.py",   "demo_maint",     "[B-21] 不動産 管理費・修繕費分析"),
+    ("B-22", "06_restaurant/05_pl_management/app.py",      "demo_pl_mgmt",   "[B-22] 飲食 店舗別損益・P/L管理"),
 ]
 
 _demo_pages = {
@@ -407,6 +409,8 @@ _SECTION_MAP: dict[str, str] = {
     "B-18": "🏥 医療・介護",
     "B-19": "💰 金融・保険",
     "B-20": "👥 人事・採用",
+    "B-21": "🏢 不動産",
+    "B-22": "🍜 飲食",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

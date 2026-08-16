@@ -595,6 +595,34 @@
   - フェーズ定義（PHASES リストの「書類選考」〜「内定」を自社選考フローに変更）
   - チャネル名（channel 列のラベルを自社採用媒体名に変更）
   - 職種分類（job_type 列の名称を自社職種マスターに合わせる）
+- id: B-21
+  name: 不動産 管理費・修繕費分析ダッシュボード
+  industry: 不動産
+  department: 不動産管理・総務・施設管理
+  status: production-ready
+  priority: B
+  path: 07_realestate/03_maintenance_cost
+  description: 物件50棟のエリア別・費用区分別メンテナンスコストを集計し、緊急対応費・高額案件フラグを可視化する修繕費管理ダッシュボード
+  demo: cd 07_realestate/03_maintenance_cost && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - エリア名（area 列の名称を自社管理エリア区分に変更）
+  - 高額判定しきい値（cost_per_unit_flag の「高額」判定基準を自社コスト基準に変更）
+  - 費用区分（cost_category 列の分類を自社勘定科目に合わせる）
+- id: B-22
+  name: 飲食 店舗別損益・P/L管理ダッシュボード
+  industry: 飲食
+  department: 店舗オーナー・経理・財務
+  status: production-ready
+  priority: B
+  path: 06_restaurant/05_pl_management
+  description: 複数店舗の日次P/Lデータを集計し、食材費率・人件費率・利益率を店舗横断で比較するダッシュボード
+  demo: cd 06_restaurant/05_pl_management && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - 店舗名（store_name 列のラベルを自社店舗名に変更）
+  - 損益フラグ基準（pl_flag の判定しきい値を自社基準に変更）
+  - コスト内訳列（food_cost / labor_cost / other_cost を自社コスト項目に対応）
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス
