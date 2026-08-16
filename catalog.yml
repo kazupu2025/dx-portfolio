@@ -553,6 +553,20 @@
   - ルートID・車種区分の列名マッピング（route_id / vehicle_type）
   - 遅延判定ステータス名（status 列の「遅延」文字列を自社ステータス名に変更）
   - コスト構成列（fuel_cost / toll_cost / driver_cost）を自社 CSV 列名に合わせて変更
+- id: B-18
+  name: 医療・介護 薬品在庫管理・発注アラート
+  industry: 医療・介護
+  department: 薬局・病棟・購買部
+  status: production-ready
+  priority: B
+  path: 03_healthcare/03_medicine_inventory
+  description: 病棟別・カテゴリ別の薬品在庫を集計し、欠品リスク品目を残日数でランキング表示する発注アラートダッシュボード
+  demo: cd 03_healthcare/03_medicine_inventory && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - アラートレベル名（alert_level 列の「欠品」「警告」を自社基準に変更）
+  - 最低在庫日数のしきい値（days_until_stockout の判定ロジックを config 化）
+  - 病棟フィルターのデフォルト選択（ward 列の名称を自社病棟名にマッピング）
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス

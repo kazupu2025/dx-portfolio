@@ -87,6 +87,7 @@ _A_TOOL_DEFS = [
     ("B-15", "10_service/01_inquiry_log/app.py",          "demo_inquiry_log","[B-15] 問い合わせログ分類・対応時間"),
     ("B-16", "03_healthcare/02_shift_optimization/app.py","demo_shift_opt",  "[B-16] 医療・介護 シフト希望・夜勤分析"),
     ("B-17", "05_logistics/02_delivery_cost/app.py",      "demo_delivery",   "[B-17] 物流 配送コスト・ルート効率分析"),
+    ("B-18", "03_healthcare/03_medicine_inventory/app.py","demo_medicine",   "[B-18] 医療 薬品在庫管理・発注アラート"),
 ]
 
 _demo_pages = {
@@ -401,6 +402,7 @@ _SECTION_MAP: dict[str, str] = {
     "B-15": "⚙️ サービス",
     "B-16": "🏥 医療・介護",
     "B-17": "📦 物流・倉庫",
+    "B-18": "🏥 医療・介護",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
