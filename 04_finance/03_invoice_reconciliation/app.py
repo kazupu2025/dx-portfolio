@@ -5,13 +5,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(
-    page_title="請求書突合ダッシュボード",
-    page_icon="💰",
-    layout="wide",
-)
-
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE / "output"
 
 STATUS_ORDER = ["一致", "差異", "過払", "未入金"]
@@ -56,8 +50,8 @@ except FileNotFoundError:
 report_text = load_report()
 
 # --- タイトル ---
-st.title("💰 金融・保険 請求書突合ダッシュボード")
-st.caption("2024年1月 | C-26 請求書突合・差異検出パイプライン")
+st.title("💰 B-19 金融・保険 請求書突合・差異検出ダッシュボード")
+st.caption("2024年1月 | 請求書突合・未収金アラート・支払区分別分析")
 
 # --- 突合ステータスフィルター ---
 available_statuses = [s for s in STATUS_ORDER if s in df_all["match_status"].unique()]

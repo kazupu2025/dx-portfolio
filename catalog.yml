@@ -567,6 +567,34 @@
   - アラートレベル名（alert_level 列の「欠品」「警告」を自社基準に変更）
   - 最低在庫日数のしきい値（days_until_stockout の判定ロジックを config 化）
   - 病棟フィルターのデフォルト選択（ward 列の名称を自社病棟名にマッピング）
+- id: B-19
+  name: 金融・保険 請求書突合・差異検出ダッシュボード
+  industry: 金融・保険
+  department: 経理・財務・債権管理
+  status: production-ready
+  priority: B
+  path: 04_finance/03_invoice_reconciliation
+  description: 請求書と入金データを突合し、差異・過払い・未収金をステータス別に集計・可視化する照合管理ダッシュボード
+  demo: cd 04_finance/03_invoice_reconciliation && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - 突合ステータス名（match_status 列の「一致」「差異」「過払」「未入金」を自社業務用語に変更）
+  - 差異金額の警告しきい値（上位N社の表示件数・金額フィルターを config 化）
+  - 支払区分（payment_type 列の名称と分類ロジックを自社取引区分に合わせる）
+- id: B-20
+  name: 人事・採用 採用ファネル・歩留まり分析
+  industry: 人事・採用
+  department: 人事・採用担当
+  status: production-ready
+  priority: B
+  path: 08_hr/03_recruitment_funnel
+  description: 採用チャネル別の応募〜内定の歩留まり率とフェーズ到達率を分析し、採用効率を可視化するファネル分析ダッシュボード
+  demo: cd 08_hr/03_recruitment_funnel && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - フェーズ定義（PHASES リストの「書類選考」〜「内定」を自社選考フローに変更）
+  - チャネル名（channel 列のラベルを自社採用媒体名に変更）
+  - 職種分類（job_type 列の名称を自社職種マスターに合わせる）
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス
