@@ -17,7 +17,8 @@ REPORT_PATH = OUTPUT_DIR / "analysis_report.md"
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_labor_cost_data() -> pd.DataFrame:
+    """B-24専用ローダー（キャッシュキー衝突防止のため関数名を一意に設定）"""
     if not CSV_PATH.exists():
         return pd.DataFrame()
     df = pd.read_csv(CSV_PATH, encoding="utf-8-sig")
@@ -27,9 +28,13 @@ def load_data() -> pd.DataFrame:
 st.title("👥 B-24 人事・採用 人件費予実ダッシュボード")
 st.caption("B-24 | 2024年度 | 人件費推移・予実差異・超過部門アラートレポート")
 
-df = load_data()
+df = load_labor_cost_data()
 
-if df.empty:
+REQUIRED_COLS = {"department", "budget_cost", "actual_cost", "variance_amount",
+                 "variance_flag", "employment_type", "overtime_cost", "head_count",
+                 "year_month", "variance_rate"}
+
+if df.empty or not REQUIRED_COLS.issubset(df.columns):
     st.error("データが見つかりません。パイプラインを実行してください。")
     st.stop()
 
