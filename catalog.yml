@@ -1744,3 +1744,45 @@
   - 整備士別生産性アラートライン（productivity_alert_cases_per_day）
   - 整備士名・整備区分名の列名マッピング
   - '売上目標達成率の警告閾値（revenue_achievement_alert: 80%）'
+- id: B-26
+  name: 小売 月次収益・P/L管理
+  industry: 小売
+  department: 経営企画・店舗管理部
+  status: production-ready
+  priority: A
+  path: 01_retail/03_monthly_pnl/
+  difficulty: ★★☆
+  description: 店舗別売上実績 vs 予算・粗利率・営業利益を月次で集計。赤字・未達アラートで即時対応を支援する小売P/L管理ダッシュボード。
+  demo: cd 01_retail/03_monthly_pnl && streamlit run app.py
+  customize_points:
+  - 店舗名・売上/粗利列名のマッピング
+  - 粗利率アラートライン（gp_margin_alert）
+  - 赤字判定の営業利益閾値
+- id: B-27
+  name: 医療 来院スループット・待ち時間管理
+  industry: 医療・介護
+  department: 医療管理部・受付CS
+  status: production-ready
+  priority: A
+  path: 03_healthcare/04_reception_throughput/
+  difficulty: ★★☆
+  description: 診療科別平均待ち時間・長待ち率・時間帯ヒートマップを集計。60分超の長待ちアラートで患者満足度改善と混雑管理を実現。
+  demo: cd 03_healthcare/04_reception_throughput && streamlit run app.py
+  customize_points:
+  - 長待ちアラートの閾値（long_wait_minutes: 60）
+  - 診療科名・時間帯名の列名マッピング
+  - 混雑ピーク判定の件数閾値
+- id: B-28
+  name: 金融 契約更新アラート・期限管理
+  industry: 金融・保険
+  department: 営業部・契約管理部
+  status: production-ready
+  priority: A
+  path: 04_finance/04_contract_renewal/
+  difficulty: ★★☆
+  description: 保険契約の更新期限を「期限切れ/緊急/警告/正常」に分類。担当者別アラート件数・保険種別構成で失効防止と顧客フォローを自動化。
+  demo: cd 04_finance/04_contract_renewal && streamlit run app.py
+  customize_points:
+  - 緊急アラートの日数（urgent_days: 30）
+  - 警告アラートの日数（warning_days: 90）
+  - 担当者名・保険種別名の列名マッピング

@@ -1,103 +1,79 @@
 """
-C-31: 契約更新アラート・期限管理パイプライン Streamlit ダッシュボード
+B-28 金融・保険 契約更新アラートダッシュボード（Streamlit）
 """
-import streamlit as st
-import pandas as pd
 from pathlib import Path
 
-st.set_page_config(
-    page_title="契約更新アラートダッシュボード",
-    page_icon="📋",
-    layout="wide",
-)
+import pandas as pd
+import streamlit as st
 
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE / "output"
 
 STATUS_ORDER = ["期限切れ", "緊急", "警告", "正常"]
-STATUS_COLORS = {
-    "期限切れ": "red",
-    "緊急":     "orange",
-    "警告":     "yellow",
-    "正常":     "green",
-}
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_contract_renewal_data() -> pd.DataFrame:
+    """B-28専用ローダー（キャッシュキー衝突防止）"""
     path = OUTPUT_DIR / "cleaned_contracts_202401.csv"
+    if not path.exists():
+        return pd.DataFrame()
     df = pd.read_csv(path, encoding="utf-8-sig")
     for col in ["annual_premium", "days_to_expiry", "contract_years"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
-    if "end_date" in df.columns:
-        df["end_date"] = pd.to_datetime(df["end_date"], errors="coerce")
-    if "start_date" in df.columns:
-        df["start_date"] = pd.to_datetime(df["start_date"], errors="coerce")
+    for col in ["end_date", "start_date"]:
+        if col in df.columns:
+            df[col] = pd.to_datetime(df[col], errors="coerce")
     return df
 
 
 @st.cache_data
-def load_report() -> str:
+def load_contract_renewal_report() -> str:
+    """B-28レポート専用ローダー"""
     p = OUTPUT_DIR / "analysis_report.md"
     return p.read_text(encoding="utf-8") if p.exists() else "レポートが見つかりません。"
 
 
-def fmt_yen(val: float) -> str:
-    """金額を日本円形式で表示（バックスラッシュY記号なし）"""
-    return f"{val:,.0f} 円"
+st.title("📋 B-28 金融・保険 契約更新アラートダッシュボード")
+st.caption("B-28 | 基準日: 2024年2月1日 | 更新期限・担当者別アラート・保険種別構成")
 
+df_all = load_contract_renewal_data()
+report_text = load_contract_renewal_report()
 
-# --- データ読み込み ---
-try:
-    df_all = load_data()
-except FileNotFoundError:
+if df_all.empty:
     st.error("cleaned_contracts_202401.csv が見つかりません。cleanse.py を先に実行してください。")
     st.stop()
 
-report_text = load_report()
+# サイドバー: 担当者フィルター
+with st.sidebar:
+    st.header("🔍 フィルター")
+    all_agents = sorted(df_all["agent_name"].dropna().unique().tolist()) if "agent_name" in df_all.columns else []
+    selected_agents = st.multiselect("担当者フィルター", options=all_agents, default=all_agents)
 
-# --- タイトル ---
-st.title("📋 金融・保険 契約更新アラートダッシュボード")
-st.caption("基準日: 2024年2月1日 | C-31 契約更新アラート・期限管理パイプライン")
+df = df_all[df_all["agent_name"].isin(selected_agents)].copy() if selected_agents else df_all.copy()
 
-# --- 担当者フィルター ---
-all_agents = sorted(df_all["agent_name"].dropna().unique().tolist()) if "agent_name" in df_all.columns else []
-selected_agents = st.multiselect(
-    "担当者フィルター",
-    options=all_agents,
-    default=all_agents,
-)
-df = df_all[df_all["agent_name"].isin(selected_agents)] if selected_agents else df_all
-
-# --- KPI 4つ ---
+# KPI 4つ
 total_contracts = len(df)
-expired_count = (df["renewal_status"] == "期限切れ").sum() if "renewal_status" in df.columns else 0
-urgent_count = (df["renewal_status"] == "緊急").sum() if "renewal_status" in df.columns else 0
+expired_count = int((df["renewal_status"] == "期限切れ").sum()) if "renewal_status" in df.columns else 0
+urgent_count = int((df["renewal_status"] == "緊急").sum()) if "renewal_status" in df.columns else 0
 total_premium = df["annual_premium"].sum() if "annual_premium" in df.columns else 0
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("総契約数", f"{total_contracts:,} 件")
-c2.metric(
-    "期限切れ件数",
-    f"{expired_count:,} 件",
-    delta="要対応" if expired_count > 0 else "なし",
-    delta_color="inverse" if expired_count > 0 else "off",
-)
-c3.metric(
-    "緊急件数（30日以内）",
-    f"{urgent_count:,} 件",
-    delta="要対応" if urgent_count > 0 else "なし",
-    delta_color="inverse" if urgent_count > 0 else "off",
-)
-c4.metric("年間保険料合計", fmt_yen(total_premium))
+c2.metric("期限切れ件数", f"{expired_count:,} 件",
+          delta="要対応" if expired_count > 0 else "なし",
+          delta_color="inverse" if expired_count > 0 else "off")
+c3.metric("緊急件数（30日以内）", f"{urgent_count:,} 件",
+          delta="要対応" if urgent_count > 0 else "なし",
+          delta_color="inverse" if urgent_count > 0 else "off")
+c4.metric("年間保険料合計", f"{total_premium:,.0f} 円")
 
 st.divider()
 
-# --- 3タブ ---
-tab1, tab2, tab3 = st.tabs(["更新ステータス", "担当者別アラート", "保険種別構成"])
-
+# 3タブ
 charts_dir = OUTPUT_DIR / "charts"
+tab1, tab2, tab3 = st.tabs(["📊 更新ステータス", "👤 担当者別アラート", "🗂️ 保険種別構成"])
 
 with tab1:
     st.subheader("更新ステータス別件数")
@@ -120,7 +96,7 @@ with tab1:
         st.dataframe(summary, use_container_width=True)
 
 with tab2:
-    st.subheader("担当者別 アラート件数（期限切れ+緊急）")
+    st.subheader("担当者別 アラート件数（期限切れ＋緊急）")
     p = charts_dir / "bar_agent_alert.png"
     if p.exists():
         st.image(str(p), use_container_width=True)
@@ -164,8 +140,8 @@ with tab3:
 
 st.divider()
 
-# --- 期限切れ・緊急の契約明細テーブル ---
-st.subheader("期限切れ・緊急 契約明細")
+# 期限切れ・緊急 契約明細テーブル
+st.subheader("🚨 期限切れ・緊急 契約明細")
 if "renewal_status" in df.columns:
     alert_df = df[df["renewal_status"].isin(["期限切れ", "緊急"])].copy()
     if len(alert_df) > 0:
@@ -176,11 +152,12 @@ if "renewal_status" in df.columns:
             "agent_name", "renewal_status"
         ] if c in alert_df_sorted.columns]
         st.dataframe(alert_df_sorted[disp_cols].head(200), use_container_width=True)
+        st.caption(f"アラート対象: {len(alert_df)} 件（期限切れ {expired_count} + 緊急 {urgent_count}）")
     else:
         st.info("アラート対象の契約はありません。")
 
 st.divider()
 
-# --- 分析レポート expander ---
-with st.expander("分析レポートを見る", expanded=False):
+# 分析レポート expander
+with st.expander("📄 分析レポートを見る", expanded=False):
     st.markdown(report_text)

@@ -95,6 +95,9 @@ _A_TOOL_DEFS = [
     ("B-23", "05_logistics/03_driver_attendance/app.py",   "demo_driver",    "[B-23] 物流 ドライバー勤怠・拘束時間管理"),
     ("B-24", "08_hr/02_labor_cost/app.py",                 "demo_labor",     "[B-24] 人事 人件費予実・超過部門アラート"),
     ("B-25", "09_education/03_completion_rate/app.py",     "demo_completion","[B-25] 教育 受講・修了率ダッシュボード"),
+    ("B-26", "01_retail/03_monthly_pnl/app.py",            "demo_monthly_pnl","[B-26] 小売 月次収益・P/L管理"),
+    ("B-27", "03_healthcare/04_reception_throughput/app.py","demo_reception", "[B-27] 医療 来院スループット・待ち時間管理"),
+    ("B-28", "04_finance/04_contract_renewal/app.py",       "demo_contract",  "[B-28] 金融 契約更新アラート・期限管理"),
 ]
 
 _demo_pages = {
@@ -417,6 +420,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-23": "📦 物流・倉庫",
     "B-24": "👥 人事・採用",
     "B-25": "📚 教育・研修",
+    "B-26": "🏪 小売",
+    "B-27": "🏥 医療・介護",
+    "B-28": "💰 金融・保険",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
