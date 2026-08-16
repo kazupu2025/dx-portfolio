@@ -623,6 +623,48 @@
   - 店舗名（store_name 列のラベルを自社店舗名に変更）
   - 損益フラグ基準（pl_flag の判定しきい値を自社基準に変更）
   - コスト内訳列（food_cost / labor_cost / other_cost を自社コスト項目に対応）
+- id: B-23
+  name: 物流 ドライバー勤怠・拘束時間管理ダッシュボード
+  industry: 物流・倉庫
+  department: 物流管理・安全管理・運行管理
+  status: production-ready
+  priority: B
+  path: 05_logistics/03_driver_attendance
+  description: ドライバー別乗務件数・拘束時間・違反率を営業所・運行区分フィルターで分析する勤怠KPIダッシュボード
+  demo: cd 05_logistics/03_driver_attendance && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - 違反判定ラベル（violation_flag 列の「違反」文字列を自社基準ラベルに変更）
+  - 拘束時間しきい値（confinement_over_flag の判定基準を法令・自社規定に合わせる）
+  - 営業所名（office 列のラベルを自社拠点名に変更）
+- id: B-24
+  name: 人事・採用 人件費予実ダッシュボード
+  industry: 人事・採用
+  department: 人事・経理・財務
+  status: production-ready
+  priority: B
+  path: 08_hr/02_labor_cost
+  description: 部門別・雇用区分別の人件費予実差異を月別トレンドとともに可視化し、超過部門を自動アラートするダッシュボード
+  demo: cd 08_hr/02_labor_cost && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - 部門名（department 列のラベルを自社組織名に変更）
+  - 雇用区分（employment_type 列の分類を自社雇用形態に合わせる）
+  - 超過判定基準（variance_flag の「超過」判定しきい値を自社予算管理基準に変更）
+- id: B-25
+  name: 教育研修 受講・修了率ダッシュボード
+  industry: 教育・研修
+  department: 人材開発・研修担当・教育部門
+  status: production-ready
+  priority: B
+  path: 09_education/03_completion_rate
+  description: 講座別・受講者タイプ別の修了率・スコア分布を可視化し、中途離脱リスク「高」受講者を一覧表示するダッシュボード
+  demo: cd 09_education/03_completion_rate && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - 講座名（course_name 列のラベルを自社研修プログラム名に変更）
+  - 離脱リスク基準（dropout_risk の「高」判定ロジックを自社基準に変更）
+  - 受講者タイプ（learner_type 列の分類を自社社員区分に合わせる）
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス

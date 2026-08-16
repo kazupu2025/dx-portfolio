@@ -1,14 +1,12 @@
+"""
+B-25 教育研修 受講・修了率ダッシュボード（Streamlit）
+起動: cd 09_education/03_completion_rate && streamlit run app.py
+"""
 import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(
-    page_title="教育研修 受講・修了率ダッシュボード",
-    page_icon="📚",
-    layout="wide",
-)
-
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
 
 
 @st.cache_data
@@ -32,12 +30,15 @@ def load_report():
 df_all = load_data()
 report_text = load_report()
 
-st.title("📚 教育研修 受講・修了率ダッシュボード")
-st.caption("2024年1月 | 受講率・修了率レポートパイプライン")
+st.title("📚 B-25 教育研修 受講・修了率ダッシュボード")
+st.caption("B-25 | 2024年1月 | 講座別修了率・スコア分布・中途離脱リスク分析")
 
 # --- 講座フィルター ---
-courses = sorted(df_all["course_name"].dropna().unique().tolist()) if "course_name" in df_all.columns else []
-selected_courses = st.multiselect("講座フィルター", courses, default=courses)
+with st.sidebar:
+    st.header("🔍 フィルター")
+    courses = sorted(df_all["course_name"].dropna().unique().tolist()) if "course_name" in df_all.columns else []
+    selected_courses = st.multiselect("講座フィルター", courses, default=courses)
+
 df = df_all[df_all["course_name"].isin(selected_courses)] if selected_courses else df_all
 
 # --- KPI 4つ ---
@@ -57,7 +58,7 @@ st.divider()
 
 # --- 3タブ ---
 charts_dir = BASE / "output" / "charts"
-tab1, tab2, tab3 = st.tabs(["講座別修了率", "スコア分布", "受講者タイプ別"])
+tab1, tab2, tab3 = st.tabs(["📊 講座別修了率", "📈 スコア分布", "👥 受講者タイプ別"])
 
 with tab1:
     p = charts_dir / "bar_course_completion.png"
@@ -118,7 +119,7 @@ with tab3:
 st.divider()
 
 # --- 中途離脱リスク高テーブル ---
-st.subheader("中途離脱リスク「高」 受講者一覧")
+st.subheader("🚨 中途離脱リスク「高」 受講者一覧")
 if "dropout_risk" in df.columns:
     high_risk = df[df["dropout_risk"] == "高"].copy()
     if len(high_risk) > 0:
@@ -134,5 +135,5 @@ else:
 st.divider()
 
 # --- 分析レポート expander ---
-with st.expander("分析レポートを見る", expanded=False):
+with st.expander("📄 分析レポートを表示", expanded=False):
     st.markdown(report_text)
