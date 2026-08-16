@@ -1,8 +1,8 @@
 # 📊 DX ポートフォリオ — 業務改善システムストック集
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)
-![Systems](https://img.shields.io/badge/Production--ready-139_systems-16a34a)
-![Demos](https://img.shields.io/badge/Live_demos-55_tools-3b82f6)
+![Systems](https://img.shields.io/badge/Production--ready-142_systems-16a34a)
+![Demos](https://img.shields.io/badge/Live_demos-58_tools-3b82f6)
 ![Industries](https://img.shields.io/badge/Industries-15_sectors-d97706)
 
 > **業務改善コンサルタント向け DX システムライブラリ。**  
@@ -14,13 +14,13 @@
 
 **👉 [dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)**
 
-55 ツールをブラウザで即体験できます。クレカ登録・インストール不要。
+58 ツールをブラウザで即体験できます。クレカ登録・インストール不要。
 
 ---
 
 ## 📸 スクリーンショット
 
-### ツールカタログ（139 システムを一覧・フィルタリング）
+### ツールカタログ（142 システムを一覧・フィルタリング）
 ![ツールカタログ](docs/screenshot_catalog.png)
 
 ### ライブデモ例（A-01 小売売上データ分析パイプライン）
@@ -43,7 +43,7 @@
 | 📚 | **教育 退学リスク・修了率管理** 高リスク受講生の早期特定、講座別修了率・スコア分布・離脱リスク分析 | B-12 退学リスク / B-25 修了率 |
 | ⚙️ | **サービス 問い合わせ分析** カテゴリ自動分類・対応時間・解決率を担当者別集計 | B-15 問い合わせログ |
 
-**全 15 業種 × 139 システム**をカバー。ライブデモ **55 本**（A 系 8 本・B 系 20 本・C 系 27 本）をブラウザで即体験可能。
+**全 15 業種 × 142 システム**をカバー。ライブデモ **58 本**（A 系 8 本・B 系 23 本・C 系 27 本）をブラウザで即体験可能。
 
 ---
 

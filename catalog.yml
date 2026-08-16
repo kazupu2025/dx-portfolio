@@ -1786,3 +1786,45 @@
   - 緊急アラートの日数（urgent_days: 30）
   - 警告アラートの日数（warning_days: 90）
   - 担当者名・保険種別名の列名マッピング
+- id: B-29
+  name: 物流 配送ルート効率化・遅延分析
+  industry: 物流・倉庫
+  department: 物流・在庫部署
+  status: production-ready
+  priority: A
+  path: 05_logistics/04_route_efficiency/
+  difficulty: ★★☆
+  description: ルート別1件当たりコスト・エリア別遅延率・距離vs燃料費を可視化。低効率ルートを自動特定し配送コスト削減と遅延改善を支援。
+  demo: cd 05_logistics/04_route_efficiency && streamlit run app.py
+  customize_points:
+  - ルートID・エリア名の列名マッピング
+  - 低効率判定の閾値（中央値 or 固定値）
+  - 遅延フラグ列名（delay_flag）
+- id: B-30
+  name: 不動産 入居者クレーム管理
+  industry: 不動産
+  department: 受付・CS部門・管理部
+  status: production-ready
+  priority: A
+  path: 07_realestate/04_tenant_claims/
+  difficulty: ★★☆
+  description: 物件別クレーム件数・解決率・平均対応日数を集計。緊急・未対応案件を自動抽出し入居者満足度改善と対応漏れ防止を実現。
+  demo: cd 07_realestate/04_tenant_claims && streamlit run app.py
+  customize_points:
+  - 物件名・クレーム区分名の列名マッピング
+  - 緊急度判定ラベル名（urgency列の値）
+  - 解決済みステータス名（status列の値）
+- id: B-31
+  name: 人事採用 採用コスト・チャネル別ROI分析
+  industry: 人事・採用
+  department: 人事部・採用担当
+  status: production-ready
+  priority: A
+  path: 08_hr/04_recruitment_cost/
+  difficulty: ★★☆
+  description: 採用チャネル別の平均コスト・採用率・内定承諾率を比較分析。採用ファネルと高コスト採用の詳細で費用対効果の最適化を支援。
+  demo: cd 08_hr/04_recruitment_cost && streamlit run app.py
+  customize_points:
+  - チャネル名・職種名の列名マッピング
+  - 採用判定列名（is_hired）と採用フェーズ一覧
+  - コスト列名（cost）とアラート閾値
