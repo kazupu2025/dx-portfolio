@@ -1,26 +1,20 @@
 """
-C-17 配送コスト分析パイプライン
-Streamlit ダッシュボード
+B-17 物流 配送コスト・ルート効率分析ダッシュボード（Streamlit）
+起動: cd 05_logistics/02_delivery_cost && streamlit run app.py
 """
 import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "output"
 CHARTS_DIR = OUTPUT_DIR / "charts"
 CSV_PATH = OUTPUT_DIR / "cleaned_delivery_202401.csv"
 REPORT_PATH = OUTPUT_DIR / "analysis_report.md"
 
-st.set_page_config(
-    page_title="配送コスト分析ダッシュボード",
-    page_icon="🚚",
-    layout="wide",
-)
-
-st.title("🚚 物流 配送コスト分析ダッシュボード")
-st.caption("C-17 配送コスト分析パイプライン — 2024年1月データ")
+st.title("🚚 B-17 物流 配送コスト・ルート効率分析ダッシュボード")
+st.caption("2024年1月データ ｜ ルート別コスト/km・車種別内訳・遅延率")
 
 
 @st.cache_data
@@ -83,7 +77,7 @@ with col_l:
     st.subheader("ルート別コスト効率")
     chart_route = CHARTS_DIR / "bar_route_cost_per_km.png"
     if chart_route.exists():
-        st.image(str(chart_route), use_column_width=True)
+        st.image(str(chart_route), use_container_width=True)
     else:
         route_avg = filtered.groupby("route_id")["cost_per_km"].mean().sort_values()
         st.bar_chart(route_avg)
@@ -92,7 +86,7 @@ with col_r:
     st.subheader("コスト構成比")
     chart_pie = CHARTS_DIR / "pie_cost_components.png"
     if chart_pie.exists():
-        st.image(str(chart_pie), use_column_width=True)
+        st.image(str(chart_pie), use_container_width=True)
     else:
         cost_cols = ["fuel_cost", "toll_cost", "driver_cost"]
         cost_totals = filtered[cost_cols].sum()
@@ -101,7 +95,7 @@ with col_r:
 st.subheader("車種別コスト内訳")
 chart_vehicle = CHARTS_DIR / "bar_vehicle_cost_breakdown.png"
 if chart_vehicle.exists():
-    st.image(str(chart_vehicle), use_column_width=True)
+    st.image(str(chart_vehicle), use_container_width=True)
 else:
     vehicle_avg = filtered.groupby("vehicle_type")[["fuel_cost", "toll_cost", "driver_cost"]].mean()
     st.bar_chart(vehicle_avg)

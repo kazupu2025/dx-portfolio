@@ -84,12 +84,16 @@ col_left, col_right = st.columns([1, 1])
 
 with col_left:
     st.subheader("🌙 夜勤希望ランキング（上位15名）")
+    # employment_type は cleaned CSV にあるため staff_id でマージして補完
+    emp_map = df_filtered.drop_duplicates("staff_id").set_index("staff_id")["employment_type"]
     night_rank = (
-        summary_filtered[["name", "role", "night_count", "night_ratio", "employment_type"]]
+        summary_filtered[["staff_id", "name", "role", "night_count", "night_ratio"]]
         .sort_values("night_count", ascending=False)
         .head(15)
         .reset_index(drop=True)
     )
+    night_rank["employment_type"] = night_rank["staff_id"].map(emp_map)
+    night_rank = night_rank.drop("staff_id", axis=1)
     night_rank.index += 1
     night_rank.columns = ["氏名", "役職", "夜勤回数", "夜勤比率", "雇用形態"]
     night_rank["夜勤比率"] = night_rank["夜勤比率"].map(lambda v: f"{v:.1%}")

@@ -539,6 +539,20 @@
   - config.yml の night_threshold で夜勤連続アラート日数（デフォルト3日）を変更
   - 入力 CSV 列名（staff_id / role / preferred_shift / date）を自社シフト管理表に合わせてマッピング
   - 役職フィルターのデフォルト選択を自社役職区分（看護師/介護士/補助職等）に変更
+- id: B-17
+  name: 物流 配送コスト・ルート効率分析
+  industry: 物流・倉庫
+  department: 物流・配送管理部
+  status: production-ready
+  priority: B
+  path: 05_logistics/02_delivery_cost
+  description: ルート別・車種別の配送コスト/kmを集計し、燃料費・高速代・人件費の構成比と遅延率を可視化する配送効率改善ダッシュボード
+  demo: cd 05_logistics/02_delivery_cost && streamlit run app.py
+  difficulty: ★★☆
+  customize_points:
+  - ルートID・車種区分の列名マッピング（route_id / vehicle_type）
+  - 遅延判定ステータス名（status 列の「遅延」文字列を自社ステータス名に変更）
+  - コスト構成列（fuel_cost / toll_cost / driver_cost）を自社 CSV 列名に合わせて変更
 - id: C-21
   name: サービス別売上・原価分析パイプライン
   industry: サービス

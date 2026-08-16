@@ -2,7 +2,7 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dx-portfolio-5gwofcythcrqjtmfoewwwj.streamlit.app/)
 ![Systems](https://img.shields.io/badge/Production--ready-126_systems-16a34a)
-![Demos](https://img.shields.io/badge/Live_demos-43_tools-3b82f6)
+![Demos](https://img.shields.io/badge/Live_demos-44_tools-3b82f6)
 ![Industries](https://img.shields.io/badge/Industries-15_sectors-d97706)
 
 > **業務改善コンサルタント向け DX システムライブラリ。**  
