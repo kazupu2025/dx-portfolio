@@ -1912,3 +1912,45 @@
   - 空室率アラート閾値（config.yml の vacancy_alert_threshold）
   - エリア名・物件タイプの列名マッピング
   - 収益計算列名（monthly_revenue / net_income）
+- id: B-38
+  name: 人事・採用 採用ファネル・歩留まり分析
+  industry: 人事・採用
+  department: 人事部・採用担当
+  status: production-ready
+  priority: A
+  path: 08_hr/03_recruitment_funnel/
+  difficulty: ★★☆
+  description: フェーズ別到達率・チャネル別採用率・職種別選考日数を集計。採用ファネルの瓶首フェーズを特定し採用効率改善を支援。B-31（採用コスト）と組み合わせてROI分析も可能。
+  demo: cd 08_hr/03_recruitment_funnel && streamlit run app.py
+  customize_points:
+  - 選考フェーズ名と順序（PHASES / PHASE_ORDER定数）
+  - チャネル名・職種名の列名マッピング
+  - 採用判定列名（is_hired）と選考日数列名（screening_days）
+- id: B-39
+  name: 医療・介護 薬品在庫管理・発注アラート
+  industry: 医療・介護
+  department: 薬剤部・病棟管理
+  status: production-ready
+  priority: A
+  path: 03_healthcare/03_medicine_inventory/
+  difficulty: ★★☆
+  description: 病棟別の薬品在庫残日数と欠品リスクをリアルタイム集計。欠品・警告・正常の3段階アラートとカテゴリ別在庫金額構成で発注優先順位の決定を支援。
+  demo: cd 03_healthcare/03_medicine_inventory && streamlit run app.py
+  customize_points:
+  - アラートレベルのラベル名（alert_level列の値）
+  - 病棟名・薬品コードの列名マッピング
+  - 在庫残日数計算列名（days_until_stockout）
+- id: B-40
+  name: サービス 問い合わせログ分析ダッシュボード
+  industry: サービス
+  department: カスタマーサポート・CS部門
+  status: production-ready
+  priority: A
+  path: 10_service/01_inquiry_log/
+  difficulty: ★★☆
+  description: カテゴリ別件数・担当者別解決率・時間帯別受付傾向を分析。長時間対応アラートとエスカレーション率でCS品質改善の優先課題を特定。
+  demo: cd 10_service/01_inquiry_log && streamlit run app.py
+  customize_points:
+  - 対応時間アラート閾値（config.yml の response_time_alert_minutes）
+  - 解決率アラート閾値（config.yml の resolution_rate_alert）
+  - カテゴリ・チャネル・担当者の列名マッピング

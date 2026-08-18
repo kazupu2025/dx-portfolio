@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-B-18 医療・介護 薬品在庫管理・発注アラートダッシュボード（Streamlit）
+B-39 医療・介護 薬品在庫管理・発注アラートダッシュボード（Streamlit）
 起動: cd 03_healthcare/03_medicine_inventory && streamlit run app.py
 """
 
@@ -14,21 +14,25 @@ CSV_PATH   = OUTPUT_DIR / "cleaned_medicine_202401.csv"
 REPORT_PATH = OUTPUT_DIR / "analysis_report.md"
 CHARTS_DIR = OUTPUT_DIR / "charts"
 
+st.title("💊 B-39 医療・介護 薬品在庫管理・発注アラートダッシュボード")
+st.caption("B-39 | 2024年1月 | 病棟別欠品リスク・在庫残日数・カテゴリ別在庫構成")
+
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_medicine_inventory_data() -> pd.DataFrame:
+    """B-39専用ローダー（キャッシュキー衝突防止）"""
     if not CSV_PATH.exists():
-        st.error(f"データファイルが見つかりません: {CSV_PATH}")
-        st.stop()
+        return pd.DataFrame()
     return pd.read_csv(CSV_PATH, encoding="utf-8-sig")
 
 
-st.title("💊 B-18 医療・介護 薬品在庫管理・発注アラートダッシュボード")
-st.caption("2024年1月 集計 ｜ 病棟別欠品リスク・在庫残日数・カテゴリ別構成")
+df_all = load_medicine_inventory_data()
 
-df_all = load_data()
+if df_all.empty:
+    st.error(f"データファイルが見つかりません: {CSV_PATH}")
+    st.stop()
 
-# ── サイドバー: 病棟フィルター ─────────────────────────────────
+# ── サイドバー: 病棟フィルター
 with st.sidebar:
     st.header("🔍 フィルター")
     wards = sorted(df_all["ward"].unique().tolist())
@@ -36,10 +40,10 @@ with st.sidebar:
 
 df = df_all[df_all["ward"].isin(selected_wards)].copy() if selected_wards else df_all.copy()
 
-# ── KPI ───────────────────────────────────────────────────────
-total_meds    = df["med_code"].nunique()
-shortage_count = (df["alert_level"] == "欠品").sum()
-warning_count  = (df["alert_level"] == "警告").sum()
+# ── KPI
+total_meds     = df["med_code"].nunique()
+shortage_count = int((df["alert_level"] == "欠品").sum())
+warning_count  = int((df["alert_level"] == "警告").sum())
 total_value    = df["stock_value"].sum()
 
 col1, col2, col3, col4 = st.columns(4)
@@ -54,7 +58,7 @@ col4.metric("総在庫金額", f"{total_value:,.0f} 円")
 
 st.divider()
 
-# ── タブ ──────────────────────────────────────────────────────
+# ── タブ
 tab1, tab2, tab3 = st.tabs(["🚨 アラート状況", "📉 欠品リスクランキング", "📊 カテゴリ別在庫"])
 
 with tab1:
@@ -70,8 +74,9 @@ with tab1:
     alert_detail = df[df["alert_level"].isin(["欠品", "警告"])].sort_values(
         ["alert_level", "days_until_stockout"]
     )
-    display_cols = ["alert_level", "med_code", "med_name", "category", "ward",
+    display_cols = [c for c in ["alert_level", "med_code", "med_name", "category", "ward",
                     "stock_qty", "min_stock", "daily_usage", "days_until_stockout", "unit_price"]
+                    if c in alert_detail.columns]
     st.dataframe(
         alert_detail[display_cols].reset_index(drop=True),
         use_container_width=True,
@@ -99,12 +104,14 @@ with tab2:
     risk_top10 = (
         risk_df.sort_values("days_until_stockout")
         .drop_duplicates("med_code")
-        .head(10)[["med_code", "med_name", "category", "ward",
-                   "stock_qty", "min_stock", "daily_usage",
-                   "days_until_stockout", "alert_level"]]
-        .reset_index(drop=True)
+        .head(10)
     )
-    st.dataframe(risk_top10, use_container_width=True)
+    top10_cols = [c for c in ["med_code", "med_name", "category", "ward",
+                               "stock_qty", "min_stock", "daily_usage",
+                               "days_until_stockout", "alert_level"]
+                  if c in risk_top10.columns]
+    st.dataframe(risk_top10[top10_cols].reset_index(drop=True), use_container_width=True)
+
     chart_path = CHARTS_DIR / "bar_stockout_risk_top10.png"
     if chart_path.exists():
         st.image(str(chart_path), use_container_width=True)
@@ -120,11 +127,14 @@ with tab3:
     total = cat_val["総在庫金額"].sum()
     cat_val["構成比率(%)"] = (cat_val["総在庫金額"] / total * 100).round(1)
     st.dataframe(cat_val, use_container_width=True)
+
     chart_path = CHARTS_DIR / "pie_category_stock_value.png"
     if chart_path.exists():
         st.image(str(chart_path), use_container_width=True)
 
-# ── 分析レポート ───────────────────────────────────────────────
-if REPORT_PATH.exists():
-    with st.expander("📄 分析レポートを表示"):
+# ── 分析レポート
+with st.expander("📄 分析レポートを表示", expanded=False):
+    if REPORT_PATH.exists():
         st.markdown(REPORT_PATH.read_text(encoding="utf-8"))
+    else:
+        st.info("分析レポートが見つかりません。analyze.py を実行してください。")

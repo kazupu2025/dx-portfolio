@@ -1,5 +1,5 @@
 """
-B-20 人事・採用 採用ファネル分析ダッシュボード（Streamlit）
+B-38 人事・採用 採用ファネル分析ダッシュボード（Streamlit）
 起動: cd 08_hr/03_recruitment_funnel && streamlit run app.py
 """
 
@@ -26,17 +26,17 @@ PHASES = ["書類選考", "一次面接", "二次面接", "最終面接", "内�
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_recruitment_funnel_data() -> pd.DataFrame:
+    """B-38専用ローダー（キャッシュキー衝突防止）"""
     if not CSV_PATH.exists():
         return pd.DataFrame()
-    df = pd.read_csv(CSV_PATH, encoding="utf-8-sig")
-    return df
+    return pd.read_csv(CSV_PATH, encoding="utf-8-sig")
 
 
-st.title("👔 B-20 人事・採用 採用ファネル分析ダッシュボード")
-st.caption("B-20 | 2024年1月-3月 | 採用歩留まり率・チャネル別採用コスト分析")
+st.title("👔 B-38 人事・採用 採用ファネル分析ダッシュボード")
+st.caption("B-38 | 2024年1月-3月 | 採用歩留まり率・チャネル別採用率・フェーズ別到達分析")
 
-df = load_data()
+df = load_recruitment_funnel_data()
 
 if df.empty:
     st.error("データが見つかりません。パイプラインを実行してください。")
@@ -48,14 +48,9 @@ with st.sidebar:
     channels = sorted(df["channel"].unique().tolist())
     selected_channels = st.multiselect("採用チャネル", channels, default=channels)
 
-if selected_channels:
-    df_filtered = df[df["channel"].isin(selected_channels)].copy()
-else:
-    df_filtered = df.copy()
+df_filtered = df[df["channel"].isin(selected_channels)].copy() if selected_channels else df.copy()
 
-# -------------------------------------------------------------------
-# KPI メトリクス (4つ)
-# -------------------------------------------------------------------
+# KPI メトリクス
 total_applicants = len(df_filtered)
 hired_count = int(df_filtered["is_hired"].sum())
 overall_rate = hired_count / total_applicants * 100 if total_applicants > 0 else 0
@@ -69,9 +64,7 @@ col4.metric("平均選考日数", f"{avg_screening_days:.1f} 日")
 
 st.divider()
 
-# -------------------------------------------------------------------
-# タブ: ファネル分析 / チャネル別採用率 / 職種別選考日数
-# -------------------------------------------------------------------
+# タブ
 tab1, tab2, tab3 = st.tabs(["📊 ファネル分析", "📡 チャネル別採用率", "🧑‍💼 職種別選考日数"])
 
 with tab1:
@@ -82,7 +75,6 @@ with tab1:
     else:
         st.warning("グラフファイルが見つかりません。visualize.py を実行してください。")
 
-    # フェーズ別サマリーテーブル
     funnel_rows = []
     for phase in PHASES:
         phase_num = PHASE_ORDER[phase]
@@ -145,9 +137,7 @@ with tab3:
 
 st.divider()
 
-# -------------------------------------------------------------------
 # 採用者リストテーブル
-# -------------------------------------------------------------------
 st.subheader("採用者リスト")
 hired_df = df_filtered[df_filtered["is_hired"] == 1].copy()
 if hired_df.empty:
@@ -157,11 +147,11 @@ else:
         hired_df[["apply_date", "applicant_id", "job_type", "channel",
                    "reached_phase", "screening_days"]]
         .rename(columns={
-            "apply_date":    "応募日",
-            "applicant_id":  "応募者ID",
-            "job_type":      "職種",
-            "channel":       "採用チャネル",
-            "reached_phase": "到達フェーズ",
+            "apply_date":     "応募日",
+            "applicant_id":   "応募者ID",
+            "job_type":       "職種",
+            "channel":        "採用チャネル",
+            "reached_phase":  "到達フェーズ",
             "screening_days": "選考日数",
         })
         .sort_values("応募日")
@@ -170,11 +160,8 @@ else:
 
 st.divider()
 
-# -------------------------------------------------------------------
-# 分析レポート expander
-# -------------------------------------------------------------------
-if REPORT_PATH.exists():
-    with st.expander("📄 分析レポートを表示", expanded=False):
+with st.expander("📄 分析レポートを表示", expanded=False):
+    if REPORT_PATH.exists():
         st.markdown(REPORT_PATH.read_text(encoding="utf-8"))
-else:
-    st.info("分析レポートが見つかりません。analyze.py を実行してください。")
+    else:
+        st.info("分析レポートが見つかりません。analyze.py を実行してください。")
