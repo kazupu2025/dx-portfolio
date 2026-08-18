@@ -1870,3 +1870,45 @@
   - 講師名・専門分野・雇用区分の列名マッピング
   - コマ数上位ランキングの表示件数（デフォルト10）
   - コスト計算列名（lesson_cost / hourly_rate）
+- id: B-35
+  name: 飲食 原価・食材ロス管理ダッシュボード
+  industry: 飲食
+  department: 店舗運営部・仕入担当
+  status: production-ready
+  priority: A
+  path: 06_restaurant/02_cost_management/
+  difficulty: ★★☆
+  description: 店舗別・カテゴリ別の仕入コストと廃棄ロス率を集計しアラート店舗を自動抽出。食材ロス削減と原価率改善に向けた意思決定を支援。
+  demo: cd 06_restaurant/02_cost_management && streamlit run app.py
+  customize_points:
+  - ロス率アラート閾値（config.yml の waste_rate_alert_threshold）
+  - 店舗名・カテゴリ名の列名マッピング
+  - 仕入/廃棄コスト・数量の列名マッピング
+- id: B-36
+  name: 物流 配送コスト・ルート効率分析
+  industry: 物流・倉庫
+  department: 物流部・配車担当
+  status: production-ready
+  priority: A
+  path: 05_logistics/02_delivery_cost/
+  difficulty: ★★☆
+  description: ルート別・車種別の配送コスト/kmと遅延率を分析。燃料費・高速代・ドライバーコストの内訳比較でコスト削減ルートを特定。
+  demo: cd 05_logistics/02_delivery_cost && streamlit run app.py
+  customize_points:
+  - ルートID・車種名の列名マッピング
+  - コスト項目列名（fuel_cost / toll_cost / driver_cost）
+  - 遅延判定列名とステータス値（status == "遅延"）
+- id: B-37
+  name: 不動産 賃貸管理・空室率ダッシュボード
+  industry: 不動産
+  department: 物件管理部・賃貸担当
+  status: production-ready
+  priority: A
+  path: 07_realestate/02_rental_management/
+  difficulty: ★★☆
+  description: エリア別・物件タイプ別の空室率と月次収益・純収益を集計。空室率アラート閾値超えエリアを自動検出し入居促進施策の優先順位付けを支援。
+  demo: cd 07_realestate/02_rental_management && streamlit run app.py
+  customize_points:
+  - 空室率アラート閾値（config.yml の vacancy_alert_threshold）
+  - エリア名・物件タイプの列名マッピング
+  - 収益計算列名（monthly_revenue / net_income）

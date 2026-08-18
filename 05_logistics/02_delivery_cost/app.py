@@ -1,10 +1,9 @@
 """
-B-17 物流 配送コスト・ルート効率分析ダッシュボード（Streamlit）
+B-36 物流 配送コスト・ルート効率分析ダッシュボード（Streamlit）
 起動: cd 05_logistics/02_delivery_cost && streamlit run app.py
 """
 import streamlit as st
 import pandas as pd
-import numpy as np
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -13,27 +12,28 @@ CHARTS_DIR = OUTPUT_DIR / "charts"
 CSV_PATH = OUTPUT_DIR / "cleaned_delivery_202401.csv"
 REPORT_PATH = OUTPUT_DIR / "analysis_report.md"
 
-st.title("🚚 B-17 物流 配送コスト・ルート効率分析ダッシュボード")
-st.caption("2024年1月データ ｜ ルート別コスト/km・車種別内訳・遅延率")
+st.title("🚚 B-36 物流 配送コスト・ルート効率分析ダッシュボード")
+st.caption("B-36 | 2024年1月 | ルート別コスト/km・車種別内訳・遅延率")
 
 
 @st.cache_data
-def load_data():
+def load_delivery_cost_data() -> pd.DataFrame:
+    """B-36専用ローダー（キャッシュキー衝突防止）"""
     if not CSV_PATH.exists():
-        return None
+        return pd.DataFrame()
     return pd.read_csv(CSV_PATH, encoding="utf-8-sig")
 
 
-df = load_data()
+df = load_delivery_cost_data()
 
-if df is None:
+if df.empty:
     st.error("データが見つかりません。パイプラインを実行してください。")
     st.code("python cleanse.py && python analyze.py && python visualize.py")
     st.stop()
 
 # ─── サイドバー: フィルター ──────────────────────────
 with st.sidebar:
-    st.header("フィルター")
+    st.header("🔍 フィルター")
     all_routes = sorted(df["route_id"].dropna().unique().tolist())
     selected_routes = st.multiselect(
         "ルート選択",
@@ -88,17 +88,19 @@ with col_r:
     if chart_pie.exists():
         st.image(str(chart_pie), use_container_width=True)
     else:
-        cost_cols = ["fuel_cost", "toll_cost", "driver_cost"]
-        cost_totals = filtered[cost_cols].sum()
-        st.bar_chart(cost_totals)
+        cost_cols = [c for c in ["fuel_cost", "toll_cost", "driver_cost"] if c in filtered.columns]
+        if cost_cols:
+            st.bar_chart(filtered[cost_cols].sum())
 
 st.subheader("車種別コスト内訳")
 chart_vehicle = CHARTS_DIR / "bar_vehicle_cost_breakdown.png"
 if chart_vehicle.exists():
     st.image(str(chart_vehicle), use_container_width=True)
 else:
-    vehicle_avg = filtered.groupby("vehicle_type")[["fuel_cost", "toll_cost", "driver_cost"]].mean()
-    st.bar_chart(vehicle_avg)
+    cost_cols = [c for c in ["fuel_cost", "toll_cost", "driver_cost"] if c in filtered.columns]
+    if cost_cols and "vehicle_type" in filtered.columns:
+        vehicle_avg = filtered.groupby("vehicle_type")[cost_cols].mean()
+        st.bar_chart(vehicle_avg)
 
 st.divider()
 
@@ -111,9 +113,8 @@ with st.expander("詳細データ表示", expanded=False):
     )
 
 # ─── レポート ────────────────────────────────────────
-st.subheader("分析レポート")
-if REPORT_PATH.exists():
-    report_text = REPORT_PATH.read_text(encoding="utf-8")
-    st.markdown(report_text)
-else:
-    st.warning("レポートが見つかりません。analyze.py を実行してください。")
+with st.expander("📄 分析レポートを見る", expanded=False):
+    if REPORT_PATH.exists():
+        st.markdown(REPORT_PATH.read_text(encoding="utf-8"))
+    else:
+        st.warning("レポートが見つかりません。analyze.py を実行してください。")
