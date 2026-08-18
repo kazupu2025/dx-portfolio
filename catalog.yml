@@ -1954,3 +1954,45 @@
   - 対応時間アラート閾値（config.yml の response_time_alert_minutes）
   - 解決率アラート閾値（config.yml の resolution_rate_alert）
   - カテゴリ・チャネル・担当者の列名マッピング
+- id: B-41
+  name: 金融・保険 請求書突合・差異検出ダッシュボード
+  industry: 金融・保険
+  department: 経理・財務
+  status: production-ready
+  priority: A
+  path: 04_finance/03_invoice_reconciliation/
+  difficulty: ★★☆
+  description: 請求額と入金額を突合し、一致・差異・過払・未入金を自動分類。得意先別差異TOP10と支払区分別差異発生率で未収金リスクを優先管理。
+  demo: cd 04_finance/03_invoice_reconciliation && streamlit run app.py
+  customize_points:
+  - 一致率アラート閾値（match_rate_threshold）
+  - 突合ステータスの列名マッピング（match_status列の値）
+  - 支払区分・請求金額・入金金額の列名マッピング
+- id: B-42
+  name: 不動産 管理費・修繕費エリア別分析ダッシュボード
+  industry: 不動産
+  department: 物件管理部門
+  status: production-ready
+  priority: A
+  path: 07_realestate/03_maintenance_cost/
+  difficulty: ★★☆
+  description: 物件50棟のエリア別・費用区分別コストを集計。緊急対応費・高額案件フラグでコスト超過リスクの早期発見と修繕計画の優先順位付けを支援。
+  demo: cd 07_realestate/03_maintenance_cost && streamlit run app.py
+  customize_points:
+  - 高額案件フラグの閾値（cost_per_unit_flag列の判定基準）
+  - エリア名・費用区分の列名マッピング
+  - 修繕費フラグ列名（is_repair）と緊急フラグ列名（is_urgent）
+- id: B-43
+  name: サービス 顧客満足度分析ダッシュボード
+  industry: サービス
+  department: カスタマーサポート・CS部門
+  status: production-ready
+  priority: A
+  path: 10_service/03_customer_satisfaction/
+  difficulty: ★★☆
+  description: CSAT・NPS・満足率の3指標をサービス区分別・担当者別に可視化。不満顧客リストと担当者別パフォーマンス比較でCS品質改善の優先アクションを特定。
+  demo: cd 10_service/03_customer_satisfaction && streamlit run app.py
+  customize_points:
+  - NPSカテゴリ分類列名（nps_category列の値: 推奨者/中立者/批判者）
+  - 満足フラグ列名（satisfaction_flag列の値）
+  - サービス区分・担当者の列名マッピング

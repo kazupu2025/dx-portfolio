@@ -1,5 +1,5 @@
 """
-C-26: 請求書突合・差異検出パイプライン Streamlit ダッシュボード
+B-41: 請求書突合・差異検出パイプライン Streamlit ダッシュボード
 """
 import streamlit as st
 import pandas as pd
@@ -18,8 +18,11 @@ STATUS_COLORS = {
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_invoice_reconciliation_data() -> pd.DataFrame:
+    """B-41専用ローダー（キャッシュキー衝突防止）"""
     path = OUTPUT_DIR / "cleaned_invoice_202401.csv"
+    if not path.exists():
+        return pd.DataFrame()
     df = pd.read_csv(path, encoding="utf-8-sig")
     for col in ["invoice_amount", "received_amount", "variance_amount", "variance_rate"]:
         if col in df.columns:
@@ -30,7 +33,8 @@ def load_data() -> pd.DataFrame:
 
 
 @st.cache_data
-def load_report() -> str:
+def load_invoice_reconciliation_report() -> str:
+    """B-41 レポートローダー"""
     p = OUTPUT_DIR / "analysis_report.md"
     return p.read_text(encoding="utf-8") if p.exists() else "レポートが見つかりません。"
 
@@ -41,25 +45,26 @@ def fmt_yen(val: float) -> str:
 
 
 # --- データ読み込み ---
-try:
-    df_all = load_data()
-except FileNotFoundError:
+df_all = load_invoice_reconciliation_data()
+report_text = load_invoice_reconciliation_report()
+
+if df_all.empty:
     st.error("cleaned_invoice_202401.csv が見つかりません。cleanse.py を先に実行してください。")
     st.stop()
 
-report_text = load_report()
-
 # --- タイトル ---
-st.title("💰 B-19 金融・保険 請求書突合・差異検出ダッシュボード")
+st.title("💰 B-41 金融・保険 請求書突合・差異検出ダッシュボード")
 st.caption("2024年1月 | 請求書突合・未収金アラート・支払区分別分析")
 
-# --- 突合ステータスフィルター ---
-available_statuses = [s for s in STATUS_ORDER if s in df_all["match_status"].unique()]
-selected_statuses = st.multiselect(
-    "突合ステータスフィルター",
-    options=STATUS_ORDER,
-    default=STATUS_ORDER,
-)
+# --- 突合ステータスフィルター（サイドバー）---
+with st.sidebar:
+    st.header("🔍 フィルター")
+    selected_statuses = st.multiselect(
+        "突合ステータスフィルター",
+        options=STATUS_ORDER,
+        default=STATUS_ORDER,
+    )
+
 df = df_all[df_all["match_status"].isin(selected_statuses)] if selected_statuses else df_all
 
 # --- KPI 4つ ---
@@ -124,10 +129,12 @@ with tab2:
     st.subheader("差異明細テーブル")
     diff_df = df[df["match_status"] != "一致"].copy() if "match_status" in df.columns else df.copy()
     if len(diff_df) > 0:
-        disp = diff_df[
-            ["invoice_no", "client_code", "invoice_date", "invoice_amount",
-             "received_amount", "variance_amount", "match_status", "payment_type"]
-        ].sort_values("variance_amount", key=abs, ascending=False).head(100)
+        want_cols = ["invoice_no", "client_code", "invoice_date", "invoice_amount",
+                     "received_amount", "variance_amount", "match_status", "payment_type"]
+        disp_cols = [c for c in want_cols if c in diff_df.columns]
+        disp = diff_df[disp_cols].sort_values(
+            "variance_amount", key=abs, ascending=False
+        ).head(100)
         st.dataframe(disp, use_container_width=True)
     else:
         st.info("差異なし。")

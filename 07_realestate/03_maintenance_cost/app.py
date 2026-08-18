@@ -1,5 +1,5 @@
 """
-B-21 不動産 管理費・修繕費分析ダッシュボード（Streamlit）
+B-42 不動産 管理費・修繕費分析ダッシュボード（Streamlit）
 起動: cd 07_realestate/03_maintenance_cost && streamlit run app.py
 """
 
@@ -17,7 +17,8 @@ REPORT_PATH = OUTPUT_DIR / "analysis_report.md"
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_maintenance_cost_data() -> pd.DataFrame:
+    """B-42専用ローダー（キャッシュキー衝突防止）"""
     if not CSV_PATH.exists():
         return pd.DataFrame()
     df = pd.read_csv(CSV_PATH, encoding="utf-8-sig")
@@ -25,10 +26,10 @@ def load_data() -> pd.DataFrame:
     return df
 
 
-st.title("🏢 B-21 不動産 管理費・修繕費分析ダッシュボード")
+st.title("🏢 B-42 不動産 管理費・修繕費分析ダッシュボード")
 st.caption("2024年1月 | 物件50棟 | エリア別コスト・緊急対応費・高額案件フラグ")
 
-df = load_data()
+df = load_maintenance_cost_data()
 
 if df.empty:
     st.error("データが見つかりません。パイプラインを実行してください。")
