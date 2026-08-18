@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 app.py
-小売 顧客RFM分析ダッシュボード（Streamlit）
+B-32 小売 顧客RFM分析ダッシュボード（Streamlit）
 """
 
 import streamlit as st
@@ -10,7 +10,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "output"
 RFM_CSV = OUTPUT_DIR / "customer_rfm_202401.csv"
 CLEANED_CSV = OUTPUT_DIR / "cleaned_purchases_202401.csv"
@@ -24,44 +24,41 @@ SEGMENT_COLORS = {
     "休眠顧客": "#9E9E9E",
 }
 
-st.set_page_config(
-    page_title="小売 顧客RFM分析ダッシュボード",
-    page_icon="🛒",
-    layout="wide",
-)
-
-st.title("🛒 小売 顧客RFM分析ダッシュボード")
-st.caption("基準日: 2024-02-01 | システムID: C-27")
+st.title("🛒 B-32 小売 顧客RFM分析ダッシュボード")
+st.caption("B-32 | 基準日: 2024-02-01 | 顧客セグメント・購買パターン分析")
 
 
 @st.cache_data
-def load_rfm():
+def load_retail_rfm_data() -> pd.DataFrame:
+    """B-32専用ローダー（キャッシュキー衝突防止）"""
     if not RFM_CSV.exists():
-        return None
+        return pd.DataFrame()
     return pd.read_csv(RFM_CSV, encoding="utf-8-sig")
 
 
 @st.cache_data
-def load_cleaned():
+def load_retail_rfm_cleaned() -> pd.DataFrame:
+    """B-32 クレンジング済みデータ専用ローダー"""
     if not CLEANED_CSV.exists():
-        return None
+        return pd.DataFrame()
     return pd.read_csv(CLEANED_CSV, encoding="utf-8-sig")
 
 
-rfm = load_rfm()
-df_cleaned = load_cleaned()
+rfm = load_retail_rfm_data()
+df_cleaned = load_retail_rfm_cleaned()
 
-if rfm is None or df_cleaned is None:
+if rfm.empty or df_cleaned.empty:
     st.error("分析データが見つかりません。先に _gen_sample_data.py → cleanse.py → analyze.py を実行してください。")
     st.stop()
 
 # ---- セグメントフィルター ----
-st.sidebar.header("フィルター設定")
-selected_segments = st.sidebar.multiselect(
-    "セグメント選択",
-    options=SEGMENT_ORDER,
-    default=SEGMENT_ORDER,
-)
+with st.sidebar:
+    st.header("フィルター設定")
+    selected_segments = st.multiselect(
+        "セグメント選択",
+        options=SEGMENT_ORDER,
+        default=SEGMENT_ORDER,
+    )
 
 rfm_filtered = rfm[rfm["segment"].isin(selected_segments)]
 

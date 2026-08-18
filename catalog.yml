@@ -1828,3 +1828,45 @@
   - チャネル名・職種名の列名マッピング
   - 採用判定列名（is_hired）と採用フェーズ一覧
   - コスト列名（cost）とアラート閾値
+- id: B-32
+  name: 小売 顧客RFM分析・セグメント管理
+  industry: 小売
+  department: マーケティング部・CRM担当
+  status: production-ready
+  priority: A
+  path: 01_retail/04_rfm_analysis/
+  difficulty: ★★☆
+  description: 顧客をRecency・Frequency・Monetaryでスコアリングし優良顧客/成長顧客/離反リスク/休眠顧客に自動分類。セグメント別購買パターンとカテゴリ別売上を可視化。
+  demo: cd 01_retail/04_rfm_analysis && streamlit run app.py
+  customize_points:
+  - セグメント定義と閾値（RFMスコアの区切り値）
+  - 基準日（recency計算の起点日）
+  - 顧客コード・金額・購買日の列名マッピング
+- id: B-33
+  name: 飲食 予約キャンセル管理・ロス金額分析
+  industry: 飲食
+  department: 店舗運営部・フロント
+  status: production-ready
+  priority: A
+  path: 06_restaurant/03_reservation_cancel/
+  difficulty: ★★☆
+  description: 店舗別キャンセル率・ロス金額・来店率を集計し曜日別・理由別傾向を分析。直近キャンセル一覧で即時対応と売上機会損失の最小化を支援。
+  demo: cd 06_restaurant/03_reservation_cancel && streamlit run app.py
+  customize_points:
+  - 店舗名・予約番号の列名マッピング
+  - キャンセル理由のマスターラベル
+  - ロス金額算出ロジック（コース単価×人数 等）
+- id: B-34
+  name: 教育・研修 講師稼働・コマ数管理
+  industry: 教育・研修
+  department: 研修企画部・講師管理担当
+  status: production-ready
+  priority: A
+  path: 09_education/02_instructor_workload/
+  difficulty: ★★☆
+  description: 講師別コマ数ランキング・専門分野別コストと受講者数を集計。雇用区分別コスト比率で外部講師・社内講師の費用構造を可視化し研修予算の最適配分を支援。
+  demo: cd 09_education/02_instructor_workload && streamlit run app.py
+  customize_points:
+  - 講師名・専門分野・雇用区分の列名マッピング
+  - コマ数上位ランキングの表示件数（デフォルト10）
+  - コスト計算列名（lesson_cost / hourly_rate）

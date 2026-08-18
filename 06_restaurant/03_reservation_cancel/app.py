@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-C-38: 予約キャンセル集計・傾向分析パイプライン
-Streamlit ダッシュボードアプリ
+B-33: 飲食 予約キャンセル管理ダッシュボード
 """
 
 import json
@@ -9,25 +8,20 @@ import pandas as pd
 import streamlit as st
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "output"
 CHARTS_DIR = OUTPUT_DIR / "charts"
 
-st.set_page_config(
-    page_title="飲食 予約・キャンセル管理ダッシュボード",
-    page_icon="🍽️",
-    layout="wide",
-)
-
-st.title("🍽️ 飲食 予約・キャンセル管理ダッシュボード")
-st.caption("C-38 | 予約キャンセル集計・傾向分析パイプライン")
+st.title("🍽️ B-33 飲食 予約・キャンセル管理ダッシュボード")
+st.caption("B-33 | 予約キャンセル集計・傾向分析 | 店舗別キャンセル率・ロス金額・曜日別傾向")
 
 
 @st.cache_data
-def load_data():
+def load_reservation_cancel_data() -> pd.DataFrame:
+    """B-33専用ローダー（キャッシュキー衝突防止）"""
     csv_path = OUTPUT_DIR / "cleaned_reservations_202401.csv"
     if not csv_path.exists():
-        return None
+        return pd.DataFrame()
     df = pd.read_csv(csv_path, encoding="utf-8-sig", dtype=str)
     df["guest_count"] = pd.to_numeric(df["guest_count"], errors="coerce").fillna(0).astype(int)
     df["amount"] = pd.to_numeric(df["amount"], errors="coerce").fillna(0).astype(int)
@@ -38,7 +32,8 @@ def load_data():
 
 
 @st.cache_data
-def load_json():
+def load_reservation_cancel_json() -> dict:
+    """B-33 分析JSONローダー"""
     json_path = OUTPUT_DIR / "result_analysis.json"
     if not json_path.exists():
         return {}
@@ -46,9 +41,9 @@ def load_json():
         return json.load(f)
 
 
-df_all = load_data()
+df_all = load_reservation_cancel_data()
 
-if df_all is None:
+if df_all.empty:
     st.error(
         "データが見つかりません。先に以下のコマンドを実行してください。\n\n"
         "```\n"
@@ -60,13 +55,14 @@ if df_all is None:
     st.stop()
 
 # ---- サイドバー: 店舗フィルター ----
-st.sidebar.header("フィルター")
-all_stores = sorted(df_all["store_name"].dropna().unique().tolist())
-selected_stores = st.sidebar.multiselect(
-    "店舗を選択",
-    options=all_stores,
-    default=all_stores,
-)
+with st.sidebar:
+    st.header("フィルター")
+    all_stores = sorted(df_all["store_name"].dropna().unique().tolist())
+    selected_stores = st.multiselect(
+        "店舗を選択",
+        options=all_stores,
+        default=all_stores,
+    )
 
 df = df_all[df_all["store_name"].isin(selected_stores)].copy() if selected_stores else df_all.copy()
 
@@ -102,7 +98,7 @@ with tab1:
 
     chart_path = CHARTS_DIR / "bar_store_cancel_rate.png"
     if chart_path.exists():
-        st.image(str(chart_path), caption="店舗別キャンセル率")
+        st.image(str(chart_path), caption="店舗別キャンセル率", use_container_width=True)
     else:
         st.info("グラフは visualize.py を実行後に表示されます")
 
@@ -119,7 +115,7 @@ with tab2:
 
     chart_path = CHARTS_DIR / "bar_cancel_reason.png"
     if chart_path.exists():
-        st.image(str(chart_path), caption="キャンセル理由別件数")
+        st.image(str(chart_path), caption="キャンセル理由別件数", use_container_width=True)
     else:
         st.info("グラフは visualize.py を実行後に表示されます")
 
@@ -142,7 +138,7 @@ with tab3:
 
     chart_path = CHARTS_DIR / "bar_weekday_cancel.png"
     if chart_path.exists():
-        st.image(str(chart_path), caption="曜日別キャンセル件数")
+        st.image(str(chart_path), caption="曜日別キャンセル件数", use_container_width=True)
     else:
         st.info("グラフは visualize.py を実行後に表示されます")
 

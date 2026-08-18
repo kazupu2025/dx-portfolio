@@ -2,18 +2,17 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(
-    page_title="教育・研修 講師稼働ダッシュボード",
-    page_icon="📚",
-    layout="wide",
-)
-
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
+OUTPUT_DIR = BASE / "output"
+CHARTS_DIR = OUTPUT_DIR / "charts"
 
 
 @st.cache_data
-def load_data():
-    p = BASE / "output" / "cleaned_instructor_202401.csv"
+def load_instructor_workload_data() -> pd.DataFrame:
+    """B-34専用ローダー（キャッシュキー衝突防止）"""
+    p = OUTPUT_DIR / "cleaned_instructor_202401.csv"
+    if not p.exists():
+        return pd.DataFrame()
     df = pd.read_csv(p, encoding="utf-8-sig")
     for col in ["lesson_count", "lesson_hours", "lesson_cost", "attendee_count",
                 "hourly_rate", "cost_per_attendee"]:
@@ -25,29 +24,35 @@ def load_data():
 
 
 @st.cache_data
-def load_report():
-    p = BASE / "output" / "analysis_report.md"
+def load_instructor_workload_report() -> str:
+    """B-34 レポート専用ローダー"""
+    p = OUTPUT_DIR / "analysis_report.md"
     return p.read_text(encoding="utf-8") if p.exists() else "レポートが見つかりません"
 
 
-df_all = load_data()
-report_text = load_report()
+df_all = load_instructor_workload_data()
+report_text = load_instructor_workload_report()
 
-st.title("📚 教育・研修 講師稼働ダッシュボード")
-st.caption("2024年1月 | 講師稼働・コマ数管理パイプライン")
+st.title("📚 B-34 教育・研修 講師稼働ダッシュボード")
+st.caption("B-34 | 2024年1月 | 講師稼働・コマ数管理 | 専門分野別コスト・受講者サマリー")
+
+if df_all.empty:
+    st.error("データが見つかりません。パイプラインを実行してください。")
+    st.stop()
 
 # --- 専門分野フィルター ---
-specialties = sorted(df_all["specialty"].dropna().unique().tolist()) if "specialty" in df_all.columns else []
-selected_specialties = st.multiselect("専門分野フィルター", specialties, default=specialties)
+with st.sidebar:
+    st.header("🔍 フィルター")
+    specialties = sorted(df_all["specialty"].dropna().unique().tolist()) if "specialty" in df_all.columns else []
+    selected_specialties = st.multiselect("専門分野フィルター", specialties, default=specialties)
+
 df = df_all[df_all["specialty"].isin(selected_specialties)] if selected_specialties else df_all
 
 # --- KPIメトリクス ---
 total_lessons = int(df["lesson_count"].sum()) if "lesson_count" in df.columns else 0
 total_attendees = int(df["attendee_count"].sum()) if "attendee_count" in df.columns else 0
 total_cost = float(df["lesson_cost"].sum()) if "lesson_cost" in df.columns else 0.0
-avg_cost_per_attendee = (
-    total_cost / total_attendees if total_attendees > 0 else 0.0
-)
+avg_cost_per_attendee = total_cost / total_attendees if total_attendees > 0 else 0.0
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("総コマ数", f"{total_lessons:,} コマ")
@@ -59,24 +64,23 @@ st.divider()
 
 # --- グラフタブ ---
 tab1, tab2, tab3 = st.tabs(["コマ数上位講師", "専門分野別コスト", "雇用区分別コスト比率"])
-charts_dir = BASE / "output" / "charts"
 
 with tab1:
-    p = charts_dir / "bar_instructor_lessons_top10.png"
+    p = CHARTS_DIR / "bar_instructor_lessons_top10.png"
     if p.exists():
         st.image(str(p), use_container_width=True)
     else:
         st.warning("グラフが見つかりません。visualize.py を実行してください。")
 
 with tab2:
-    p = charts_dir / "bar_specialty_cost.png"
+    p = CHARTS_DIR / "bar_specialty_cost.png"
     if p.exists():
         st.image(str(p), use_container_width=True)
     else:
         st.warning("グラフが見つかりません。visualize.py を実行してください。")
 
 with tab3:
-    p = charts_dir / "pie_employment_cost_share.png"
+    p = CHARTS_DIR / "pie_employment_cost_share.png"
     if p.exists():
         st.image(str(p), use_container_width=True)
     else:
