@@ -2150,6 +2150,48 @@
   - 現場列名（site_name）と工程列名（process）
   - 進捗率列名（progress_pct）と遅延フラグ列名（is_delayed）
   - 稼働時間列名（actual_hours）と不具合件数列名（defect_count）
+- id: B-56
+  name: 飲食 シフト・人件費管理ダッシュボード（アルバイト）
+  industry: 飲食
+  department: 店舗運営・人事
+  status: production-ready
+  priority: A
+  path: 06_restaurant/04_shift_labor/
+  difficulty: ★★☆
+  description: 店舗別・役職別の総人件費・平均時給・残業率・総労働時間を集計。スタッフ別労働時間ランキングと高コストシフト一覧で、シフト最適化と人件費削減の優先課題を特定。
+  demo: cd 06_restaurant/04_shift_labor && streamlit run app.py
+  customize_points:
+  - 店舗列名（store_name）と役職列名（role）
+  - 日次賃金列名（daily_wage）と時給列名（hourly_rate）・残業フラグ列名（is_overtime）
+  - 高コストフラグ列名（labor_cost_flag）の値（高コスト）
+- id: B-57
+  name: 自動車 整備依頼・完了率分析ダッシュボード
+  industry: 自動車・整備業
+  department: 整備・サービス管理
+  status: production-ready
+  priority: A
+  path: 16_automotive/01_repair_analysis/
+  difficulty: ★★☆
+  description: 店舗別・作業区分別の完了件数・平均遅延日数・再入庫率・総売上を集計。技術者別遅延率ランキングで、作業品質改善と整備工程の最適化ポイントを特定。
+  demo: cd 16_automotive/01_repair_analysis && streamlit run app.py
+  customize_points:
+  - 店舗列名（shop_name）と作業区分列名（work_type）
+  - ステータス列名（status）の完了値と遅延日数列名（delay_days）
+  - 再入庫フラグ列名（is_returned）と総コスト列名（total_cost）
+- id: B-58
+  name: 教育 入学申込・合格率分析ダッシュボード
+  industry: 教育・研修
+  department: 入試・招生管理
+  status: production-ready
+  priority: A
+  path: 15_education/02_enrollment_analysis/
+  difficulty: ★★☆
+  description: 学科別・選考方法別の申込数・合格率・平均点・面接実施率を集計。合否内訳と選考方法別合格率の可視化で、入試戦略の見直しと定員充足率改善を支援。
+  demo: cd 15_education/02_enrollment_analysis && streamlit run app.py
+  customize_points:
+  - 学科列名（department）と選考方法列名（selection_method）
+  - 合格フラグ列名（is_enrolled）とスコア列名（score）
+  - 面接フラグ列名（interview_flag）と申込日列名（app_date）
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険

@@ -125,6 +125,9 @@ _A_TOOL_DEFS = [
     ("B-53", "13_hotel/01_occupancy_rate/app.py",        "demo_hotel_occ",     "[B-53] ホテル 稼働率・RevPAR分析"),
     ("B-54", "10_service/04_service_revenue/app.py",     "demo_svc_revenue",   "[B-54] サービス 売上・原価レポート"),
     ("B-55", "12_construction/01_progress_kpi/app.py",   "demo_const_prog",    "[B-55] 建設 工程進捗・稼働KPI"),
+    ("B-56", "06_restaurant/04_shift_labor/app.py",      "demo_shift_labor",   "[B-56] 飲食 シフト・人件費管理"),
+    ("B-57", "16_automotive/01_repair_analysis/app.py",  "demo_repair",        "[B-57] 自動車 整備依頼・完了率分析"),
+    ("B-58", "15_education/02_enrollment_analysis/app.py","demo_enrollment",   "[B-58] 教育 入学申込・合格率分析"),
 ]
 
 _demo_pages = {
@@ -477,6 +480,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-53": "🏨 ホテル・観光",
     "B-54": "⚙️ サービス",
     "B-55": "🏗️ 建設・ゼネコン",
+    "B-56": "🍜 飲食",
+    "B-57": "🚗 自動車・整備業",
+    "B-58": "📚 教育・研修",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
