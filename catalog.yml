@@ -2066,6 +2066,48 @@
   - 店舗ID・雇用区分の列名マッピング（store_id / employment_type列）
   - 深夜割増列名（late_night_premium）と残業時間列名（overtime_hours）
   - 人件費・時給・労働時間の列名マッピング
+- id: B-50
+  name: 医療スタッフ勤怠・稼働率分析ダッシュボード
+  industry: 医療・介護
+  department: 医事・人事
+  status: production-ready
+  priority: A
+  path: 03_healthcare/06_staff_attendance/
+  difficulty: ★★☆
+  description: スタッフ種別・診療科別の出勤率・稼働率・残業時間を集計。欠勤理由内訳と診療科別欠勤件数で、慢性的な人員不足とシフト偏りの改善優先順位を可視化。
+  demo: cd 03_healthcare/06_staff_attendance && streamlit run app.py
+  customize_points:
+  - スタッフ種別の列名マッピング（staff_type列の値）
+  - 稼働率列名（utilization_rate）と欠勤フラグ列名（is_absent）
+  - 診療科列名（department）と欠勤理由列名（absence_reason）
+- id: B-51
+  name: IT・SaaS CSチケット分析ダッシュボード
+  industry: IT・SaaS
+  department: カスタマーサポート・CS
+  status: production-ready
+  priority: A
+  path: 14_it_saas/02_support_ticket/
+  difficulty: ★★☆
+  description: カテゴリ別・優先度別のチケット件数・解決率・平均解決時間・顧客満足度を集計。エスカレーション率と担当者別KPIで、CS品質改善とリソース配置の最適化を支援。
+  demo: cd 14_it_saas/02_support_ticket && streamlit run app.py
+  customize_points:
+  - カテゴリ列名（category）と優先度列名（priority）の値マッピング
+  - 解決フラグ列名（is_resolved）とエスカレーションフラグ列名（is_escalated）
+  - 満足度列名（satisfaction）と解決時間列名（resolution_hours）
+- id: B-52
+  name: 物流 配送コスト・利益率管理ダッシュボード
+  industry: 物流・倉庫
+  department: 物流・配送管理
+  status: production-ready
+  priority: A
+  path: 09_logistics/05_cost_margin/
+  difficulty: ★★☆
+  description: 配送区分・エリア・車両タイプ別の利益率・粗利・km単価を集計。利益グレード分布と区分別集計テーブルで、低収益ルートの改善とコスト削減施策を明確化。
+  demo: cd 09_logistics/05_cost_margin && streamlit run app.py
+  customize_points:
+  - 配送区分列名（delivery_type）とエリア列名（area）
+  - 利益率列名（profit_margin）と粗利列名（gross_profit）
+  - 車両タイプ列名（vehicle_type）とkm単価列名（cost_per_km）
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険

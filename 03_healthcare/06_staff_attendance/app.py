@@ -1,52 +1,53 @@
 # -*- coding: utf-8 -*-
-import os
 import pandas as pd
-import matplotlib
-matplotlib.rcParams['font.family'] = 'MS Gothic'
-import matplotlib.pyplot as plt
 import streamlit as st
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-CLEANED_FILE = os.path.join(OUTPUT_DIR, "cleaned_attendance_202401.csv")
+BASE_DIR = Path(__file__).resolve().parent
+CLEANED_FILE = BASE_DIR / "output" / "cleaned_attendance_202401.csv"
 
-st.set_page_config(
-    page_title="医療スタッフ勤怠・稼働率分析ダッシュボード",
-    page_icon=None,
-    layout="wide",
-)
+st.title("🏥 B-50 医療スタッフ勤怠・稼働率分析ダッシュボード")
 
-st.title("医療スタッフ勤怠・稼働率分析ダッシュボード")
 
-if not os.path.exists(CLEANED_FILE):
+@st.cache_data
+def load_staff_attendance_data() -> pd.DataFrame:
+    if not CLEANED_FILE.exists():
+        return pd.DataFrame()
+    return pd.read_csv(CLEANED_FILE, encoding="utf-8-sig")
+
+
+df_all = load_staff_attendance_data()
+
+if df_all.empty:
     st.error("データファイルが見つかりません。cleanse.py を先に実行してください。")
     st.stop()
 
-df = pd.read_csv(CLEANED_FILE, encoding="utf-8-sig")
-
 # --- Sidebar filters ---
-st.sidebar.header("フィルター")
+with st.sidebar:
+    st.header("フィルター")
 
-all_staff_types = sorted(df["staff_type"].dropna().unique().tolist())
-selected_staff_types = st.sidebar.multiselect(
-    "スタッフ種別",
-    options=all_staff_types,
-    default=all_staff_types,
-)
+    all_staff_types = sorted(df_all["staff_type"].dropna().unique().tolist()) if "staff_type" in df_all.columns else []
+    selected_staff_types = st.multiselect(
+        "スタッフ種別",
+        options=all_staff_types,
+        default=all_staff_types,
+    )
 
-all_departments = sorted(df["department"].dropna().unique().tolist())
-selected_departments = st.sidebar.multiselect(
-    "診療科",
-    options=all_departments,
-    default=all_departments,
-)
+    all_departments = sorted(df_all["department"].dropna().unique().tolist()) if "department" in df_all.columns else []
+    selected_departments = st.multiselect(
+        "診療科",
+        options=all_departments,
+        default=all_departments,
+    )
 
-df_filtered = df[
-    df["staff_type"].isin(selected_staff_types) &
-    df["department"].isin(selected_departments)
-].copy()
+mask = pd.Series([True] * len(df_all), index=df_all.index)
+if "staff_type" in df_all.columns and selected_staff_types:
+    mask &= df_all["staff_type"].isin(selected_staff_types)
+if "department" in df_all.columns and selected_departments:
+    mask &= df_all["department"].isin(selected_departments)
+df_filtered = df_all[mask].copy()
 
-if len(df_filtered) == 0:
+if df_filtered.empty:
     st.warning("フィルター条件に一致するデータがありません。")
     st.stop()
 
@@ -56,88 +57,64 @@ tab1, tab2, tab3 = st.tabs(["KPIサマリー", "種別・診療科分析", "勤�
 with tab1:
     st.subheader("KPIサマリー")
     total_records = len(df_filtered)
-    attendance_count = (df_filtered["is_absent"] == 0).sum()
-    attendance_rate = attendance_count / total_records if total_records > 0 else 0.0
-    avg_utilization = df_filtered["utilization_rate"].mean()
-    avg_overtime = df_filtered["overtime_hours"].mean()
+    is_absent_col = "is_absent" in df_filtered.columns
+    utilization_col = "utilization_rate" in df_filtered.columns
+    overtime_col = "overtime_hours" in df_filtered.columns
+
+    attendance_rate = ((df_filtered["is_absent"] == 0).sum() / total_records) if is_absent_col else 0.0
+    avg_utilization = df_filtered["utilization_rate"].mean() if utilization_col else 0.0
+    avg_overtime = df_filtered["overtime_hours"].mean() if overtime_col else 0.0
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("総勤務記録数", "{:,}件".format(total_records))
-    col2.metric("出勤率", "{:.1%}".format(attendance_rate))
-    col3.metric("平均稼働率", "{:.1%}".format(avg_utilization))
-    col4.metric("平均残業時間", "{:.2f}h".format(avg_overtime))
+    col1.metric("総勤務記録数", f"{total_records:,}件")
+    col2.metric("出勤率", f"{attendance_rate:.1%}")
+    col3.metric("平均稼働率", f"{avg_utilization:.1%}")
+    col4.metric("平均残業時間", f"{avg_overtime:.2f}h")
 
     st.markdown("---")
     st.subheader("欠勤内訳")
-    absent_df = df_filtered[df_filtered["is_absent"] == 1]
-    if len(absent_df) > 0 and absent_df["absence_reason"].notna().any():
-        reason_counts = absent_df["absence_reason"].value_counts()
-        st.bar_chart(reason_counts)
+    if is_absent_col and "absence_reason" in df_filtered.columns:
+        absent_df = df_filtered[df_filtered["is_absent"] == 1]
+        if len(absent_df) > 0 and absent_df["absence_reason"].notna().any():
+            reason_counts = absent_df["absence_reason"].value_counts()
+            st.bar_chart(reason_counts)
+        else:
+            st.info("欠勤データがありません。")
     else:
         st.info("欠勤データがありません。")
 
 with tab2:
     st.subheader("スタッフ種別別分析")
 
-    staff_summary = df_filtered.groupby("staff_type").agg(
-        total_records=("record_id", "count"),
-        absent_count=("is_absent", "sum"),
-        avg_utilization_rate=("utilization_rate", "mean"),
-        avg_overtime_hours=("overtime_hours", "mean"),
-    ).reset_index()
-    staff_summary["attendance_rate"] = (
-        (staff_summary["total_records"] - staff_summary["absent_count"])
-        / staff_summary["total_records"]
-    ).round(4)
+    if "staff_type" in df_filtered.columns:
+        agg_dict = {"record_id": "count"} if "record_id" in df_filtered.columns else {}
+        if "is_absent" in df_filtered.columns:
+            agg_dict["is_absent"] = "sum"
+        if "utilization_rate" in df_filtered.columns:
+            agg_dict["utilization_rate"] = "mean"
+        if "overtime_hours" in df_filtered.columns:
+            agg_dict["overtime_hours"] = "mean"
 
-    col_a, col_b = st.columns(2)
+        if agg_dict:
+            staff_summary = df_filtered.groupby("staff_type").agg(agg_dict).reset_index()
 
-    with col_a:
-        fig1, ax1 = plt.subplots(figsize=(6, 4))
-        ax1.bar(staff_summary["staff_type"], staff_summary["avg_utilization_rate"], color="#4472C4")
-        ax1.set_title("スタッフ種別別 平均稼働率")
-        ax1.set_ylabel("稼働率")
-        ax1.set_ylim(0, 1.4)
-        for i, v in enumerate(staff_summary["avg_utilization_rate"]):
-            ax1.text(i, v + 0.01, "{:.1%}".format(v), ha="center", va="bottom", fontsize=9)
-        plt.tight_layout()
-        st.pyplot(fig1)
-        plt.close()
-
-    with col_b:
-        fig2, ax2 = plt.subplots(figsize=(6, 4))
-        ax2.bar(staff_summary["staff_type"], staff_summary["avg_overtime_hours"], color="#70AD47")
-        ax2.set_title("スタッフ種別別 平均残業時間")
-        ax2.set_ylabel("時間")
-        for i, v in enumerate(staff_summary["avg_overtime_hours"]):
-            ax2.text(i, v + 0.02, "{:.2f}h".format(v), ha="center", va="bottom", fontsize=9)
-        plt.tight_layout()
-        st.pyplot(fig2)
-        plt.close()
+            col_a, col_b = st.columns(2)
+            with col_a:
+                if "utilization_rate" in staff_summary.columns:
+                    st.markdown("**スタッフ種別別 平均稼働率**")
+                    util_chart = staff_summary.set_index("staff_type")["utilization_rate"]
+                    st.bar_chart(util_chart)
+            with col_b:
+                if "overtime_hours" in staff_summary.columns:
+                    st.markdown("**スタッフ種別別 平均残業時間**")
+                    ot_chart = staff_summary.set_index("staff_type")["overtime_hours"]
+                    st.bar_chart(ot_chart)
 
     st.markdown("---")
-    st.subheader("診療科別分析")
-
-    dept_summary = df_filtered.groupby("department").agg(
-        total_records=("record_id", "count"),
-        absent_count=("is_absent", "sum"),
-        avg_utilization_rate=("utilization_rate", "mean"),
-    ).reset_index()
-    dept_summary["attendance_rate"] = (
-        (dept_summary["total_records"] - dept_summary["absent_count"])
-        / dept_summary["total_records"]
-    ).round(4)
-    dept_summary_sorted = dept_summary.sort_values("absent_count", ascending=True)
-
-    fig3, ax3 = plt.subplots(figsize=(8, 4))
-    ax3.barh(dept_summary_sorted["department"], dept_summary_sorted["absent_count"], color="#ED7D31")
-    ax3.set_title("診療科別 欠勤件数")
-    ax3.set_xlabel("欠勤件数")
-    for i, v in enumerate(dept_summary_sorted["absent_count"]):
-        ax3.text(v + 0.1, i, str(int(v)), va="center", fontsize=9)
-    plt.tight_layout()
-    st.pyplot(fig3)
-    plt.close()
+    st.subheader("診療科別 欠勤件数")
+    if "department" in df_filtered.columns and "is_absent" in df_filtered.columns:
+        dept_absent = df_filtered.groupby("department")["is_absent"].sum().sort_values(ascending=False)
+        st.bar_chart(dept_absent)
 
 with tab3:
     st.subheader("勤怠明細データ")
