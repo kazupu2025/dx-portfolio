@@ -1,56 +1,65 @@
 # -*- coding: utf-8 -*-
 """
-C-45: サービス別売上・原価レポート
+B-54: サービス別売上・原価レポート
 Streamlit アプリ
 """
 
-import os
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(__file__)
-OUTPUT_DIR = os.path.join(BASE_DIR, "output")
-CHARTS_DIR = os.path.join(OUTPUT_DIR, "charts")
-
-st.set_page_config(page_title="サービス別売上・原価レポート", layout="wide")
-st.title("サービス別売上・原価レポート")
+BASE_DIR = Path(__file__).resolve().parent
+CSV_PATH = BASE_DIR / "output" / "cleaned_revenue_202401.csv"
 
 
 @st.cache_data
-def load_data():
-    path = os.path.join(OUTPUT_DIR, "cleaned_revenue_202401.csv")
-    df = pd.read_csv(path, encoding="utf-8-sig")
-    df["revenue"] = pd.to_numeric(df["revenue"], errors="coerce")
-    df["cost"] = pd.to_numeric(df["cost"], errors="coerce")
-    df["gross_profit"] = pd.to_numeric(df["gross_profit"], errors="coerce")
-    df["gross_margin"] = pd.to_numeric(df["gross_margin"], errors="coerce")
+def load_service_revenue_data() -> pd.DataFrame:
+    if not CSV_PATH.exists():
+        return pd.DataFrame()
+    df = pd.read_csv(CSV_PATH, encoding="utf-8-sig")
+    for col in ["revenue", "cost", "gross_profit", "gross_margin"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
     return df
 
 
-df_all = load_data()
+st.title("⚙️ B-54 サービス別売上・原価レポート")
+
+df_all = load_service_revenue_data()
+
+if df_all.empty:
+    st.error("データファイルが見つかりません。パイプラインを先に実行してください。")
+    st.stop()
 
 # --- サイドバーフィルタ ---
-st.sidebar.header("フィルタ")
-all_categories = sorted(df_all["category"].dropna().unique().tolist())
-selected_cats = st.sidebar.multiselect("カテゴリ", all_categories, default=all_categories)
+with st.sidebar:
+    st.header("フィルタ")
+    all_categories = sorted(df_all["category"].dropna().unique().tolist()) if "category" in df_all.columns else []
+    selected_cats = st.multiselect("カテゴリ", all_categories, default=all_categories)
 
-all_services = sorted(df_all["service_name"].dropna().unique().tolist())
-selected_svcs = st.sidebar.multiselect("サービス", all_services, default=all_services)
+    all_services = sorted(df_all["service_name"].dropna().unique().tolist()) if "service_name" in df_all.columns else []
+    selected_svcs = st.multiselect("サービス", all_services, default=all_services)
 
-df = df_all[
-    df_all["category"].isin(selected_cats) &
-    df_all["service_name"].isin(selected_svcs)
-]
+mask = pd.Series([True] * len(df_all), index=df_all.index)
+if "category" in df_all.columns and selected_cats:
+    mask &= df_all["category"].isin(selected_cats)
+if "service_name" in df_all.columns and selected_svcs:
+    mask &= df_all["service_name"].isin(selected_svcs)
+df = df_all[mask].copy()
+
+if df.empty:
+    st.warning("フィルター条件に一致するデータがありません。")
+    st.stop()
 
 # --- タブ ---
 tab1, tab2, tab3 = st.tabs(["収益サマリー", "サービス別分析", "明細データ"])
 
 with tab1:
     st.subheader("KPI カード")
-    total_rev = df["revenue"].sum()
-    total_gross = df["gross_profit"].sum()
-    avg_margin = df["gross_margin"].mean()
-    deficit_count = (df["profit_flag"] == "赤字").sum()
+    total_rev = df["revenue"].sum() if "revenue" in df.columns else 0
+    total_gross = df["gross_profit"].sum() if "gross_profit" in df.columns else 0
+    avg_margin = df["gross_margin"].mean() if "gross_margin" in df.columns else 0.0
+    deficit_count = (df["profit_flag"] == "赤字").sum() if "profit_flag" in df.columns else 0
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("総売上", f"{total_rev:,.0f} 円")
@@ -59,17 +68,24 @@ with tab1:
     c4.metric("赤字レコード数", f"{deficit_count:,}")
 
 with tab2:
-    st.subheader("サービス別グラフ")
-    for fname, title in [
-        ("bar_service_revenue.png", "売上・原価"),
-        ("bar_service_margin.png", "粗利率"),
-        ("bar_category_profit.png", "カテゴリ別粗利"),
-    ]:
-        path = os.path.join(CHARTS_DIR, fname)
-        if os.path.exists(path):
-            st.image(path, caption=title, use_container_width=True)
-        else:
-            st.warning(f"グラフが見つかりません: {fname}")
+    st.subheader("サービス別分析")
+
+    col_left, col_right = st.columns(2)
+    with col_left:
+        st.markdown("**サービス別 売上**")
+        if "service_name" in df.columns and "revenue" in df.columns:
+            svc_rev = df.groupby("service_name")["revenue"].sum().sort_values(ascending=False)
+            st.bar_chart(svc_rev)
+    with col_right:
+        st.markdown("**サービス別 粗利率**")
+        if "service_name" in df.columns and "gross_margin" in df.columns:
+            svc_margin = (df.groupby("service_name")["gross_margin"].mean() * 100).round(1)
+            st.bar_chart(svc_margin)
+
+    st.markdown("**カテゴリ別 粗利**")
+    if "category" in df.columns and "gross_profit" in df.columns:
+        cat_profit = df.groupby("category")["gross_profit"].sum().sort_values(ascending=False)
+        st.bar_chart(cat_profit)
 
 with tab3:
     st.subheader("明細データ")

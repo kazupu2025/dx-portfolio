@@ -2108,6 +2108,48 @@
   - 配送区分列名（delivery_type）とエリア列名（area）
   - 利益率列名（profit_margin）と粗利列名（gross_profit）
   - 車両タイプ列名（vehicle_type）とkm単価列名（cost_per_km）
+- id: B-53
+  name: ホテル 宿泊予約・稼働率分析ダッシュボード
+  industry: ホテル・観光
+  department: 宿泊・フロント管理
+  status: production-ready
+  priority: A
+  path: 13_hotel/01_occupancy_rate/
+  difficulty: ★★☆
+  description: 客室タイプ・ステータス別の総売上・稼働率・キャンセル率・損失金額を集計。日別稼働率推移とキャンセル分析で、収益最大化とオペレーション改善の優先施策を可視化。
+  demo: cd 13_hotel/01_occupancy_rate && streamlit run app.py
+  customize_points:
+  - 客室タイプ列名（room_type）とステータス列名（status）の値マッピング
+  - キャンセルフラグ列名（is_cancel）と損失金額列名（loss_revenue）
+  - チェックイン日列名（checkin_date）と売上列名（total_revenue）
+- id: B-54
+  name: サービス別売上・原価レポートダッシュボード
+  industry: サービス
+  department: 事業管理・経営企画
+  status: production-ready
+  priority: A
+  path: 10_service/04_service_revenue/
+  difficulty: ★★☆
+  description: カテゴリ・サービス別の売上・粗利・粗利率を集計。赤字サービスの特定とカテゴリ別収益構造の可視化で、収益改善とサービスポートフォリオ最適化を支援。
+  demo: cd 10_service/04_service_revenue && streamlit run app.py
+  customize_points:
+  - カテゴリ列名（category）とサービス名列名（service_name）
+  - 売上列名（revenue）・原価列名（cost）・粗利列名（gross_profit）
+  - 粗利率列名（gross_margin）と赤字フラグ列名（profit_flag）の値
+- id: B-55
+  name: 建設 工程進捗・作業員稼働KPIダッシュボード
+  industry: 建設・ゼネコン
+  department: 現場管理・工事部門
+  status: production-ready
+  priority: A
+  path: 12_construction/01_progress_kpi/
+  difficulty: ★★☆
+  description: 現場別・工程別の平均進捗率・遅延件数・不具合合計を集計。作業員別累積稼働時間と不具合分布で、遅延リスクの早期特定と品質改善施策の優先順位付けを支援。
+  demo: cd 12_construction/01_progress_kpi && streamlit run app.py
+  customize_points:
+  - 現場列名（site_name）と工程列名（process）
+  - 進捗率列名（progress_pct）と遅延フラグ列名（is_delayed）
+  - 稼働時間列名（actual_hours）と不具合件数列名（defect_count）
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険
