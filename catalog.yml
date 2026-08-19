@@ -2024,6 +2024,48 @@
   - NPSカテゴリ分類列名（nps_category列の値: 推奨者/中立者/批判者）
   - 満足フラグ列名（satisfaction_flag列の値）
   - サービス区分・担当者の列名マッピング
+- id: B-47
+  name: 不動産 物件内見・成約率分析ダッシュボード
+  industry: 不動産
+  department: 営業・販売
+  status: production-ready
+  priority: A
+  path: 07_realestate/05_viewing_conversion/
+  difficulty: ★★☆
+  description: 物件タイプ別・エリア別の内見件数と成約率を集計。平均成約日数・平均物件価格と合わせて、営業効率が高いエリア・物件タイプを特定する営業支援ダッシュボード。
+  demo: cd 07_realestate/05_viewing_conversion && streamlit run app.py
+  customize_points:
+  - 物件タイプ列名マッピング（property_type列の値）
+  - 成約フラグ列名（is_contracted）と成約日数列名（days_to_contract）
+  - エリア名・物件価格の列名マッピング
+- id: B-48
+  name: IT・SaaS チャーン分析ダッシュボード
+  industry: IT・SaaS
+  department: カスタマーサクセス・CS
+  status: production-ready
+  priority: A
+  path: 14_it_saas/01_churn_analysis/
+  difficulty: ★★☆
+  description: プラン別解約率・業種別LTV・チャーンリスク分布を可視化。解約理由内訳と高リスク顧客数でCSチームの優先対応アクションを特定するサブスクリプション管理ツール。
+  demo: cd 14_it_saas/01_churn_analysis && streamlit run app.py
+  customize_points:
+  - プラン名・業種の列名マッピング（plan / industry列の値）
+  - チャーンリスク区分（churn_risk列の値: 高リスク/中リスク/低リスク）
+  - 解約フラグ列名（is_churned）とLTV列名（ltv）
+- id: B-49
+  name: 飲食 シフト・人件費管理ダッシュボード
+  industry: 飲食
+  department: 店舗運営・人事
+  status: production-ready
+  priority: A
+  path: 06_restaurant/03_labor_cost/
+  difficulty: ★★☆
+  description: 店舗別人件費・雇用区分別労働時間・深夜割増額を集計。残業発生スタッフ数と人件費構成比で、シフト最適化と労務コスト削減の優先課題を可視化。
+  demo: cd 06_restaurant/03_labor_cost && streamlit run app.py
+  customize_points:
+  - 店舗ID・雇用区分の列名マッピング（store_id / employment_type列）
+  - 深夜割増列名（late_night_premium）と残業時間列名（overtime_hours）
+  - 人件費・時給・労働時間の列名マッピング
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険
