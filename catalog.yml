@@ -2234,6 +2234,48 @@
   - スコア列名（overall_score / room_score / food_score / service_score）
   - リピーターフラグ列名（is_repeat）と予約チャネル列名（channel）
   - 満足度判定閾値（good: 4.0以上、warning: 3.5以上）
+- id: B-62
+  name: 農業 収穫量・品質トレンド分析ダッシュボード
+  industry: 農業・食品加工
+  department: 営農管理・品質管理
+  status: production-ready
+  priority: A
+  path: agriculture/01_harvest_quality/
+  difficulty: ★★☆
+  description: 品目別・月次の収穫量・A品率・糖度をKPI化。等級構成（A/B/C品）の積み上げグラフで品質傾向を可視化し、単位面積当たり収穫量ランキングで高生産性品目を特定。
+  demo: cd agriculture/01_harvest_quality && streamlit run app.py
+  customize_points:
+  - 品目列名（crop）と月列名（month）
+  - A品率列名（grade_a_rate）と糖度列名（avg_brix）
+  - A品率判定閾値（good: 75%以上、warning: 60%以上）
+- id: B-63
+  name: 農業 農薬・肥料コスト分析ダッシュボード
+  industry: 農業・食品加工
+  department: 営農管理・資材調達
+  status: production-ready
+  priority: A
+  path: agriculture/02_agri_cost/
+  difficulty: ★★☆
+  description: 農薬・肥料のカテゴリ別・品目別コストを集計し月次推移を可視化。ha当たりコストでgood/warning/alertを自動判定し、コスト削減の優先品目・カテゴリを特定。
+  demo: cd agriculture/02_agri_cost && streamlit run app.py
+  customize_points:
+  - 品目列名（crop）とカテゴリ列名（category）
+  - コスト列名（total_cost）と作付面積列名（field_area_ha）
+  - ha当たりコスト判定閾値（good: 50,000円以下、warning: 80,000円以下）
+- id: B-64
+  name: 農業 出荷先別単価・販売分析ダッシュボード
+  industry: 農業・食品加工
+  department: 販売・出荷管理
+  status: production-ready
+  priority: A
+  path: agriculture/03_sales_channel/
+  difficulty: ★★☆
+  description: チャネル別売上・平均単価・直販比率を集計し、月次×チャネル別トレンドと作物×チャネルのクロス集計を可視化。直販比率による高単価チャネル活用度を自動評価。
+  demo: cd agriculture/03_sales_channel && streamlit run app.py
+  customize_points:
+  - チャネル列名（channel）と品目列名（crop）
+  - 売上列名（revenue）と単価列名（unit_price）
+  - 直販判定閾値（good: 直販比率30%以上、warning: 15%以上）
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険
