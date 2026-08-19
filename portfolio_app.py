@@ -496,5 +496,5 @@ _catalog_page = st.Page(_show_catalog, title="📊 ツールカタログ", url_p
 _nav_dict: dict[str, list] = {"📋 メニュー": [_catalog_page]}
 _nav_dict.update(_section_pages)
 
-pg = st.navigation(_nav_dict, position="sidebar")
+pg = st.navigation(_nav_dict)
 pg.run()
