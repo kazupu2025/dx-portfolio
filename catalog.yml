@@ -2290,3 +2290,45 @@
   - 問い合わせ区分の列名マッピング（inquiry_type列の値）
   - チャネル区分の列名マッピング（channel列の値: 電話/メール/窓口）
   - 解決率アラート閾値（resolution_rate >= 85%）と再問い合わせ上限（recontact_rate <= 15%）
+- id: B-65
+  name: 自動車 整備案件・部品在庫管理ダッシュボード
+  industry: 自動車・整備業
+  department: 整備・部品管理
+  status: production-ready
+  priority: A
+  path: automotive/01_service_inventory/
+  difficulty: ★★☆
+  description: 整備タイプ別売上・月次売上トレンド・案件完了率を分析し、部品在庫の最小在庫未満アラートとカテゴリ別充足率を可視化する自動車整備業向けDXダッシュボード。
+  demo: cd automotive/01_service_inventory && streamlit run app.py
+  customize_points:
+  - 整備タイプ列名（service_type）と車種列名（vehicle_type）
+  - 工賃レート（labor_rate）と完了ステータス値（完了）
+  - 在庫アラート閾値（current_stock < min_stock）
+- id: B-66
+  name: 自動車 車検リマインダー・定期点検管理ダッシュボード
+  industry: 自動車・整備業
+  department: 顧客管理・予約
+  status: production-ready
+  priority: A
+  path: automotive/02_inspection_reminder/
+  difficulty: ★★☆
+  description: 車検期限切れ・30日以内・60日以内の顧客を自動分類し、オイル交換推奨顧客（180日超）を抽出。基準日設定でリマインダーリストをCSVエクスポートできる整備業向け顧客管理ツール。
+  demo: cd automotive/02_inspection_reminder && streamlit run app.py
+  customize_points:
+  - 次回車検日列名（next_inspection_due）と最終オイル交換日列名（last_oil_change）
+  - 連絡ステータス列名（contact_status）と顧客ID列名
+  - オイル交換推奨日数（デフォルト180日）と近接アラート日数（30日/60日）
+- id: B-67
+  name: 飲食 店舗別損益・P/L管理ダッシュボード
+  industry: 飲食
+  department: 財務・店舗管理
+  status: production-ready
+  priority: A
+  path: 06_restaurant/05_pl_management/
+  difficulty: ★★★
+  description: 店舗別売上・食材費率・人件費率・利益率をP/L軸で集計し、損益フラグ付き日次明細と店舗間コスト内訳比較を可視化。分析レポートMD自動表示機能付き飲食チェーン向けダッシュボード。
+  demo: cd 06_restaurant/05_pl_management && streamlit run app.py
+  customize_points:
+  - 店舗名列名（store_name）と損益フラグ列名（pl_flag）
+  - 食材費率閾値（food_cost_rate）と利益率目標（profit_margin）
+  - 入力CSV名（cleaned_pl_202401.csv）と出力ディレクトリ（output/）

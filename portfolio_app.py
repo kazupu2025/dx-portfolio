@@ -134,6 +134,9 @@ _A_TOOL_DEFS = [
     ("B-62", "agriculture/01_harvest_quality/app.py",   "demo_agri_harvest",  "[B-62] 農業 収穫量・品質分析"),
     ("B-63", "agriculture/02_agri_cost/app.py",         "demo_agri_cost",     "[B-63] 農業 農薬・肥料コスト分析"),
     ("B-64", "agriculture/03_sales_channel/app.py",     "demo_agri_sales",    "[B-64] 農業 出荷先別販売分析"),
+    ("B-65", "automotive/01_service_inventory/app.py",  "demo_auto_inventory","[B-65] 自動車 整備案件・部品在庫管理"),
+    ("B-66", "automotive/02_inspection_reminder/app.py","demo_auto_inspection","[B-66] 自動車 車検リマインダー管理"),
+    ("B-67", "06_restaurant/05_pl_management/app.py",   "demo_rest_pl",       "[B-67] 飲食 店舗別P/L管理"),
 ]
 
 _demo_pages = {
@@ -495,6 +498,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-62": "🌾 農業・食品加工",
     "B-63": "🌾 農業・食品加工",
     "B-64": "🌾 農業・食品加工",
+    "B-65": "🚗 自動車・整備業",
+    "B-66": "🚗 自動車・整備業",
+    "B-67": "🍜 飲食",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",
