@@ -2192,6 +2192,48 @@
   - 学科列名（department）と選考方法列名（selection_method）
   - 合格フラグ列名（is_enrolled）とスコア列名（score）
   - 面接フラグ列名（interview_flag）と申込日列名（app_date）
+- id: B-59
+  name: ホテル RevPAR・客室稼働率ダッシュボード
+  industry: ホテル・観光
+  department: 宿泊・フロント管理
+  status: production-ready
+  priority: A
+  path: hotel/01_revpar/
+  difficulty: ★★☆
+  description: 月次・客室タイプ別のRevPAR・ADR・稼働率をトレンドとランキングで可視化。収益構成ピボットで好調/注意/警告を自動判定し、価格戦略の見直しポイントを特定。
+  demo: cd hotel/01_revpar && streamlit run app.py
+  customize_points:
+  - 月列名（month）と客室タイプ列名（room_type）
+  - 販売客室数列名（sold_rooms）とADR列名（adr）・収益列名（revenue）
+  - 稼働率判定閾値（good: 70%以上、warning: 55%以上）
+- id: B-60
+  name: ホテル 宴会・イベント収益管理ダッシュボード
+  industry: ホテル・観光
+  department: 宴会・イベント管理
+  status: production-ready
+  priority: A
+  path: hotel/02_banquet_revenue/
+  difficulty: ★★☆
+  description: イベント種別・会場別の総収益/平均単価/平均人数を集計し月次トレンドを可視化。キャンセル率と1名単価で良好/注意/警告を自動判定、収益最大化の優先アクションを明示。
+  demo: cd hotel/02_banquet_revenue && streamlit run app.py
+  customize_points:
+  - イベント種別列名（event_type）と会場名列名（room_name）
+  - ステータス列名（status）の完了値（完了）
+  - 1名単価判定閾値（good: 15,000円以上、warning: 8,000円以上）
+- id: B-61
+  name: ホテル 顧客満足度・リピート分析ダッシュボード
+  industry: ホテル・観光
+  department: CS・顧客管理
+  status: production-ready
+  priority: A
+  path: hotel/03_guest_satisfaction/
+  difficulty: ★★☆
+  description: 客室タイプ・予約チャネル・ゲスト区分フィルターで満足度スコア（総合/客室/食事/サービス）とリピート率を集計。チャネル別平均スコア・構成比でリピーター獲得施策を立案。
+  demo: cd hotel/03_guest_satisfaction && streamlit run app.py
+  customize_points:
+  - スコア列名（overall_score / room_score / food_score / service_score）
+  - リピーターフラグ列名（is_repeat）と予約チャネル列名（channel）
+  - 満足度判定閾値（good: 4.0以上、warning: 3.5以上）
 - id: B-46
   name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
   industry: 金融・保険
