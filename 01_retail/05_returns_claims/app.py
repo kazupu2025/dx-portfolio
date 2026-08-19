@@ -1,40 +1,31 @@
 # -*- coding: utf-8 -*-
 """
-C-34 返品・クレームデータ集計レポートパイプライン
-Streamlit ダッシュボード
-
-起動: streamlit run app.py
+B-44 小売 返品・クレーム管理ダッシュボード（Streamlit）
 """
 
 from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-# ---- ページ設定 -----------------------------------------------------------
-st.set_page_config(
-    page_title="小売 返品・クレーム管理ダッシュボード",
-    page_icon="🏪",
-    layout="wide",
-)
-
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent
 CSV_PATH = BASE_DIR / "output" / "cleaned_claims_202401.csv"
 REPORT_PATH = BASE_DIR / "output" / "analysis_report.md"
 CHARTS_DIR = BASE_DIR / "output" / "charts"
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_retail_returns_data() -> pd.DataFrame:
+    """B-44専用ローダー（キャッシュキー衝突防止）"""
     if not CSV_PATH.exists():
         return pd.DataFrame()
     return pd.read_csv(CSV_PATH, encoding="utf-8-sig")
 
 
 # ---- ヘッダー ------------------------------------------------------------
-st.title("🏪 小売 返品・クレーム管理ダッシュボード")
-st.caption("2024年1月 | C-34 返品・クレームデータ集計レポートパイプライン")
+st.title("🏪 B-44 小売 返品・クレーム管理ダッシュボード")
+st.caption("2024年1月 | 返品・クレーム件数・解決率・対応スピード分析")
 
-df_all = load_data()
+df_all = load_retail_returns_data()
 
 if df_all.empty:
     st.error(
@@ -44,14 +35,15 @@ if df_all.empty:
     st.stop()
 
 # ---- サイドバー: 店舗フィルター ------------------------------------------
-st.sidebar.header("フィルター")
-all_stores = sorted(df_all["store_name"].unique().tolist())
-selected_stores = st.sidebar.multiselect(
-    "店舗を選択",
-    options=all_stores,
-    default=all_stores,
-    help="複数選択可。すべて選択すると全店舗を表示します。",
-)
+with st.sidebar:
+    st.header("🔍 フィルター")
+    all_stores = sorted(df_all["store_name"].unique().tolist())
+    selected_stores = st.multiselect(
+        "店舗を選択",
+        options=all_stores,
+        default=all_stores,
+        help="複数選択可。すべて選択すると全店舗を表示します。",
+    )
 
 if selected_stores:
     df = df_all[df_all["store_name"].isin(selected_stores)].copy()
@@ -101,7 +93,7 @@ with tab1:
 
     chart_path = CHARTS_DIR / "bar_store_claim_count.png"
     if chart_path.exists():
-        st.image(str(chart_path), caption="店舗別クレーム件数")
+        st.image(str(chart_path), caption="店舗別クレーム件数", use_container_width=True)
     else:
         st.info("グラフが未生成です。visualize.py を実行してください。")
 
@@ -125,7 +117,7 @@ with tab2:
     with col_b:
         chart_path = CHARTS_DIR / "bar_claim_type.png"
         if chart_path.exists():
-            st.image(str(chart_path), caption="クレーム区分別件数")
+            st.image(str(chart_path), caption="クレーム区分別件数", use_container_width=True)
         else:
             st.info("グラフが未生成です。visualize.py を実行してください。")
 
@@ -151,7 +143,7 @@ with tab3:
     with col_d:
         chart_path = CHARTS_DIR / "pie_response_level.png"
         if chart_path.exists():
-            st.image(str(chart_path), caption="対応スピード別件数")
+            st.image(str(chart_path), caption="対応スピード別件数", use_container_width=True)
         else:
             st.info("グラフが未生成です。visualize.py を実行してください。")
 
@@ -159,9 +151,9 @@ st.divider()
 
 # ---- 未解決案件テーブル --------------------------------------------------
 st.subheader("未解決案件一覧")
-unresolved = df[df["is_resolved"] == 0][
-    ["case_no", "receipt_date", "store_name", "category", "claim_type", "return_amount", "response_days"]
-].rename(columns={
+_unresolved_want = ["case_no", "receipt_date", "store_name", "category", "claim_type", "return_amount", "response_days"]
+_unresolved_cols = [c for c in _unresolved_want if c in df.columns]
+unresolved = df[df["is_resolved"] == 0][_unresolved_cols].rename(columns={
     "case_no": "案件番号",
     "receipt_date": "受付日",
     "store_name": "店舗名",

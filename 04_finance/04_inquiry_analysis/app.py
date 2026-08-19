@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-C-52: 保険問い合わせ・対応履歴分析ダッシュボード Streamlit アプリ
+B-46: 金融・保険 問い合わせ・対応履歴分析ダッシュボード Streamlit アプリ
 """
 import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(
-    page_title="保険問い合わせ分析ダッシュボード",
-    page_icon="[INS]",
-    layout="wide",
-)
-
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE / "output"
 
 INQUIRY_TYPE_ORDER = ["契約内容確認", "保険金請求", "解約手続き", "新規加入", "変更手続き"]
@@ -20,8 +14,11 @@ CHANNEL_ORDER = ["電話", "メール", "窓口"]
 
 
 @st.cache_data
-def load_data() -> pd.DataFrame:
+def load_finance_inquiry_data() -> pd.DataFrame:
+    """B-46専用ローダー（キャッシュキー衝突防止）"""
     path = OUTPUT_DIR / "cleaned_inquiries_202401.csv"
+    if not path.exists():
+        return pd.DataFrame()
     df = pd.read_csv(path, encoding="utf-8-sig")
     for col in ["handling_minutes", "is_resolved", "recontact_flag", "satisfaction"]:
         if col in df.columns:
@@ -32,42 +29,42 @@ def load_data() -> pd.DataFrame:
 
 
 @st.cache_data
-def load_report() -> str:
+def load_finance_inquiry_report() -> str:
+    """B-46 レポートローダー"""
     p = OUTPUT_DIR / "analysis_report.md"
     return p.read_text(encoding="utf-8") if p.exists() else "レポートが見つかりません。"
 
 
 # --- データ読み込み ---
-try:
-    df_all = load_data()
-except FileNotFoundError:
+df_all = load_finance_inquiry_data()
+report_text = load_finance_inquiry_report()
+
+if df_all.empty:
     st.error("cleaned_inquiries_202401.csv が見つかりません。cleanse.py を先に実行してください。")
     st.stop()
 
-report_text = load_report()
-
 # --- タイトル ---
-st.title("保険問い合わせ・対応履歴分析ダッシュボード")
-st.caption("2024年1月 | C-52 保険契約問い合わせ・対応履歴分析パイプライン")
+st.title("💰 B-46 金融・保険 問い合わせ・対応履歴分析ダッシュボード")
+st.caption("2024年1月 | 問い合わせ区分別解決率・チャネル別満足度・オペレーター別効率")
 
 # --- サイドバー: フィルター ---
-st.sidebar.header("フィルター")
+with st.sidebar:
+    st.header("🔍 フィルター")
+    available_types = [t for t in INQUIRY_TYPE_ORDER if t in df_all["inquiry_type"].unique()] \
+        if "inquiry_type" in df_all.columns else []
+    selected_types = st.multiselect(
+        "問い合わせ区分",
+        options=available_types,
+        default=available_types,
+    )
 
-available_types = [t for t in INQUIRY_TYPE_ORDER if t in df_all["inquiry_type"].unique()] \
-    if "inquiry_type" in df_all.columns else []
-selected_types = st.sidebar.multiselect(
-    "問い合わせ区分",
-    options=available_types,
-    default=available_types,
-)
-
-available_channels = [c for c in CHANNEL_ORDER if c in df_all["channel"].unique()] \
-    if "channel" in df_all.columns else []
-selected_channels = st.sidebar.multiselect(
-    "チャネル",
-    options=available_channels,
-    default=available_channels,
-)
+    available_channels = [c for c in CHANNEL_ORDER if c in df_all["channel"].unique()] \
+        if "channel" in df_all.columns else []
+    selected_channels = st.multiselect(
+        "チャネル",
+        options=available_channels,
+        default=available_channels,
+    )
 
 # フィルター適用
 df = df_all.copy()

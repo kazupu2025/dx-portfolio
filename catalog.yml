@@ -1982,6 +1982,34 @@
   - 高額案件フラグの閾値（cost_per_unit_flag列の判定基準）
   - エリア名・費用区分の列名マッピング
   - 修繕費フラグ列名（is_repair）と緊急フラグ列名（is_urgent）
+- id: B-44
+  name: 小売 返品・クレーム管理ダッシュボード
+  industry: 小売
+  department: 営業・販売
+  status: production-ready
+  priority: A
+  path: 01_retail/05_returns_claims/
+  difficulty: ★★☆
+  description: 店舗別・クレーム区分別の返品件数と解決率を集計。対応スピード分布（迅速/標準/遅延）と未解決案件一覧で、CS改善の優先対応店舗と案件を特定。
+  demo: cd 01_retail/05_returns_claims && streamlit run app.py
+  customize_points:
+  - クレーム区分の列名マッピング（claim_type列の値）
+  - 対応スピード判定列名（response_level列の値: 迅速/標準/遅延）
+  - 返品金額・対応日数の列名マッピング
+- id: B-45
+  name: 医療・介護 診療報酬・請求分析ダッシュボード
+  industry: 医療・介護
+  department: 経理・財務
+  status: production-ready
+  priority: A
+  path: 03_healthcare/05_billing_analysis/
+  difficulty: ★★☆
+  description: 診療科別請求金額・保険区分別平均査定率・診療科別回収率を可視化。返戾件数と実収入の乖離から収益ロスポイントを特定するキャッシュフロー管理ツール。
+  demo: cd 03_healthcare/05_billing_analysis && streamlit run app.py
+  customize_points:
+  - 診療科・保険区分の列名マッピング（dept / insurance_type列）
+  - 査定率列名（reduction_rate）と回収率判定列名（payment_status列の値）
+  - 返戾フラグ列名（is_returned）
 - id: B-43
   name: サービス 顧客満足度分析ダッシュボード
   industry: サービス
@@ -1996,3 +2024,17 @@
   - NPSカテゴリ分類列名（nps_category列の値: 推奨者/中立者/批判者）
   - 満足フラグ列名（satisfaction_flag列の値）
   - サービス区分・担当者の列名マッピング
+- id: B-46
+  name: 金融・保険 問い合わせ・対応履歴分析ダッシュボード
+  industry: 金融・保険
+  department: 受付・CS
+  status: production-ready
+  priority: A
+  path: 04_finance/04_inquiry_analysis/
+  difficulty: ★★☆
+  description: 問い合わせ区分別解決率・チャネル別満足度・再問い合わせ率を集計。オペレーター別効率分布と対応効率フラグでCS品質の改善ポイントを可視化する保険業向けCRM補完ツール。
+  demo: cd 04_finance/04_inquiry_analysis && streamlit run app.py
+  customize_points:
+  - 問い合わせ区分の列名マッピング（inquiry_type列の値）
+  - チャネル区分の列名マッピング（channel列の値: 電話/メール/窓口）
+  - 解決率アラート閾値（resolution_rate >= 85%）と再問い合わせ上限（recontact_rate <= 15%）
