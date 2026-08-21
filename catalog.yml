@@ -2374,3 +2374,17 @@
   - 月次変動率閾値（good: 10%以内、warning: 20%以内）
   - カテゴリ列名（category）と仕入先列名（supplier）
   - プロジェクトID列名（project_id）と単価列名（unit_price）
+- id: B-71
+  name: 物流 荷役作業員KPI集計ダッシュボード
+  industry: 物流・倉庫
+  department: 倉庫・作業管理
+  status: production-ready
+  priority: A
+  path: 11_logistics/01_worker_kpi/
+  difficulty: ★★☆
+  description: ゾーン・作業区分別の処理件数・スループット・エラー率を集計し、KPI評価フラグで優秀/要改善作業員を可視化。エラー率上位10名の早期特定と作業員別詳細テーブルで品質管理を支援。
+  demo: cd 11_logistics/01_worker_kpi && streamlit run app.py
+  customize_points:
+  - ゾーン列名（zone）と作業区分列名（task_type）
+  - スループット列名（throughput）とエラー率列名（error_rate）
+  - KPI優秀判定値（kpi_flag == "優秀"）と作業員ID列名（worker_id）
