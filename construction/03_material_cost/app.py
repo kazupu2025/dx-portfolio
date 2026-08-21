@@ -1,616 +1,178 @@
+# -*- coding: utf-8 -*-
 """
-C-122 資材コスト・発注管理 Streamlit ダッシュボード
-
-KPIカード4つ、カテゴリ別円グラフ、月次折れ線グラフ、
-仕入先別棒グラフ、資材一覧テーブルを表示。
+B-70: 建設 資材コスト・発注管理ダッシュボード
+Streamlit ダッシュボード
 """
-
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from pathlib import Path
-import japanize_matplotlib
-
-# ── analyze.py インライン（Streamlit Cloud 互換）──
-"""
-C-122 資材コスト・発注管理 分析モジュール
-
-カテゴリ別・プロジェクト別コスト集計、月次推移、単価変動、仕入先別発注を分析。
-月次コスト変動率で good/warning/alert の判定を実施。
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from datetime import datetime
-import yaml
 
+BASE_DIR = Path(__file__).resolve().parent
+CSV_PATH = BASE_DIR / "sample_material.csv"
 
-class MaterialCostAnalyzer:
-    """資材コスト分析クラス"""
-
-    def __init__(self, config_file: str = "config.yml"):
-        """
-        初期化
-
-        Args:
-            config_file: 設定ファイルパス
-        """
-        self.config = self._load_config(config_file)
-        self.df = None
-        self.df_by_category = None
-        self.df_by_month = None
-        self.df_by_project = None
-        self.df_by_supplier = None
-        self.verdict = "good"
-
-    def _load_config(self, config_file: str) -> dict:
-        """設定ファイルを読み込む"""
-        with open(config_file, encoding="utf-8") as f:
-            return yaml.safe_load(f)
-
-    def load_data(self, csv_file: str) -> pd.DataFrame:
-        """
-        CSVデータを読み込む
-
-        Args:
-            csv_file: CSVファイルパス
-
-        Returns:
-            読み込んだデータフレーム
-        """
-        self.df = pd.read_csv(csv_file)
-        self.df["date"] = pd.to_datetime(self.df["date"])
-        return self.df
-
-    def analyze_by_category(self) -> pd.DataFrame:
-        """
-        カテゴリ別コスト集計
-
-        Returns:
-            カテゴリ別集計DataFrame
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        self.df_by_category = (
-            self.df.groupby("category")
-            .agg(
-                {
-                    "total_cost": ["sum", "mean", "count"],
-                    "quantity": "sum",
-                }
-            )
-            .round(0)
-        )
-        self.df_by_category.columns = [
-            "total_cost",
-            "avg_cost",
-            "item_count",
-            "total_quantity",
-        ]
-        self.df_by_category = self.df_by_category.sort_values(
-            "total_cost", ascending=False
-        )
-        return self.df_by_category
-
-    def analyze_by_month(self) -> pd.DataFrame:
-        """
-        月次コスト推移集計
-
-        Returns:
-            月次集計DataFrame
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        self.df["year_month"] = self.df["date"].dt.to_period("M")
-        df_monthly = (
-            self.df.groupby("year_month")
-            .agg({"total_cost": "sum", "quantity": "sum"})
-            .reset_index()
-        )
-        df_monthly.columns = ["year_month", "monthly_cost", "monthly_quantity"]
-        df_monthly = df_monthly.sort_values("year_month")
-
-        # 月次変動率を計算
-        df_monthly["cost_variance_rate"] = (
-            df_monthly["monthly_cost"].pct_change() * 100
-        ).round(1)
-        self.df_by_month = df_monthly
-        return self.df_by_month
-
-    def analyze_by_project(self) -> pd.DataFrame:
-        """
-        プロジェクト別コスト集計
-
-        Returns:
-            プロジェクト別集計DataFrame
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        self.df_by_project = (
-            self.df.groupby("project_id")
-            .agg(
-                {
-                    "total_cost": ["sum", "mean"],
-                    "quantity": "sum",
-                    "material_name": "count",
-                }
-            )
-            .round(0)
-        )
-        self.df_by_project.columns = [
-            "total_cost",
-            "avg_cost",
-            "total_quantity",
-            "item_count",
-        ]
-        self.df_by_project = self.df_by_project.sort_values(
-            "total_cost", ascending=False
-        )
-        return self.df_by_project
-
-    def analyze_by_supplier(self) -> pd.DataFrame:
-        """
-        仕入先別発注金額集計
-
-        Returns:
-            仕入先別集計DataFrame
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        self.df_by_supplier = (
-            self.df.groupby("supplier")
-            .agg(
-                {
-                    "total_cost": ["sum", "mean", "count"],
-                    "quantity": "sum",
-                }
-            )
-            .round(0)
-        )
-        self.df_by_supplier.columns = [
-            "total_cost",
-            "avg_cost",
-            "order_count",
-            "total_quantity",
-        ]
-        self.df_by_supplier = self.df_by_supplier.sort_values(
-            "total_cost", ascending=False
-        )
-        return self.df_by_supplier
-
-    def analyze_unit_price_variance(self) -> pd.DataFrame:
-        """
-        単価変動率分析（材料別・月別）
-
-        Returns:
-            単価変動分析DataFrame
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        self.df["year_month"] = self.df["date"].dt.to_period("M")
-        df_variance = self.df.groupby(
-            ["material_name", "year_month"]
-        ).agg({"unit_price": "mean"}).reset_index()
-        df_variance = df_variance.sort_values(["material_name", "year_month"])
-
-        # 前月比変動率を計算
-        df_variance["price_variance_rate"] = (
-            df_variance.groupby("material_name")["unit_price"].pct_change() * 100
-        ).round(1)
-        return df_variance
-
-    def judge_verdict(self) -> str:
-        """
-        月次コスト変動率に基づいて判定を実施
-
-        Returns:
-            'good'/'warning'/'alert'
-        """
-        if self.df_by_month is None:
-            self.analyze_by_month()
-
-        # NaN を除外した変動率を取得
-        variances = self.df_by_month["cost_variance_rate"].dropna().abs()
-
-        if len(variances) == 0:
-            self.verdict = "good"
-            return self.verdict
-
-        max_variance = variances.max()
-        threshold_good = (
-            self.config.get("cost_variance_threshold_good", 0.10) * 100
-        )
-        threshold_warning = (
-            self.config.get("cost_variance_threshold_warning", 0.20) * 100
-        )
-
-        if max_variance <= threshold_good:
-            self.verdict = "good"
-        elif max_variance <= threshold_warning:
-            self.verdict = "warning"
-        else:
-            self.verdict = "alert"
-
-        return self.verdict
-
-    def get_summary_stats(self) -> dict:
-        """
-        サマリー統計情報を取得
-
-        Returns:
-            統計情報dict
-        """
-        if self.df is None:
-            raise ValueError("Data not loaded. Call load_data() first.")
-
-        total_cost = self.df["total_cost"].sum()
-        item_count = len(self.df)
-        category_with_max_cost = self.df.groupby("category")[
-            "total_cost"
-        ].sum().idxmax()
-        max_cost = self.df.groupby("category")["total_cost"].sum().max()
-
-        return {
-            "total_cost": total_cost,
-            "item_count": item_count,
-            "category_with_max_cost": category_with_max_cost,
-            "max_cost": max_cost,
-            "verdict": self.judge_verdict(),
-        }
-
-    def to_dict(self) -> dict:
-        """
-        分析結果を辞書形式で取得
-
-        Returns:
-            分析結果dict
-        """
-        return {
-            "summary": self.get_summary_stats(),
-            "by_category": (
-                self.df_by_category.to_dict() if self.df_by_category is not None
-                else {}
-            ),
-            "by_month": (
-                self.df_by_month.to_dict() if self.df_by_month is not None
-                else {}
-            ),
-            "by_project": (
-                self.df_by_project.to_dict() if self.df_by_project is not None
-                else {}
-            ),
-            "by_supplier": (
-                self.df_by_supplier.to_dict() if self.df_by_supplier is not None
-                else {}
-            ),
-        }
-
-
-def run_analysis(csv_file: str = "sample_material.csv",
-                 config_file: str = "config.yml") -> MaterialCostAnalyzer:
-    """
-    分析を実行して結果を返す
-
-    Args:
-        csv_file: CSVファイルパス
-        config_file: 設定ファイルパス
-
-    Returns:
-        MaterialCostAnalyzer インスタンス
-    """
-    analyzer = MaterialCostAnalyzer(config_file)
-    analyzer.load_data(csv_file)
-    analyzer.analyze_by_category()
-    analyzer.analyze_by_month()
-    analyzer.analyze_by_project()
-    analyzer.analyze_by_supplier()
-    analyzer.judge_verdict()
-    return analyzer
-
-
-if __name__ == "__main__":
-    import sys
-    if sys.stdout.encoding != 'utf-8':
-        import io
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
-    analyzer = run_analysis()
-    print("=" * 60)
-    print("C-122 資材コスト・発注管理 分析結果")
-    print("=" * 60)
-
-    stats = analyzer.get_summary_stats()
-    print(f"\n【サマリー】")
-    print(f"  総発注額: {stats['total_cost']:,.0f}円")
-    print(f"  品目数: {stats['item_count']} 件")
-    print(f"  最多カテゴリ: {stats['category_with_max_cost']} ({stats['max_cost']:,.0f}円)")
-    print(f"  判定: {stats['verdict'].upper()}")
-
-    print(f"\n【カテゴリ別コスト】")
-    print(analyzer.df_by_category)
-
-    print(f"\n【月次コスト推移】")
-    print(analyzer.df_by_month)
-
-    print(f"\n【プロジェクト別コスト】")
-    print(analyzer.df_by_project)
-
-    print(f"\n【仕入先別発注額】")
-    print(analyzer.df_by_supplier)
-
-# ────────────────────────────────────────────────
-
-# 日本語フォント設定
-plt.rcParams["font.sans-serif"] = ["DejaVu Sans"]
-sns.set_style("whitegrid")
-
-# ページ設定
-st.set_page_config(
-    page_title="C-122 資材コスト・発注管理",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-st.title("📊 C-122 資材コスト・発注管理")
-st.markdown("---")
-
-# データ読み込みとキャッシング
-@st.cache_data
-def load_and_analyze():
-    """データを読み込み分析を実行"""
-    analyzer = run_analysis(
-        csv_file="sample_material.csv",
-        config_file="config.yml"
-    )
-    return analyzer
-
-# データを読み込み
+# config.yml の安全な読み込み
 try:
-    analyzer = load_and_analyze()
-    df = analyzer.df
-    stats = analyzer.get_summary_stats()
-except FileNotFoundError:
-    st.error("⚠️ データファイルが見つかりません。")
+    import yaml
+    _cfg_path = BASE_DIR / "config.yml"
+    if _cfg_path.exists():
+        with open(_cfg_path, encoding="utf-8") as _f:
+            _CONFIG = yaml.safe_load(_f) or {}
+    else:
+        _CONFIG = {}
+except Exception:
+    _CONFIG = {}
+
+THRESHOLD_GOOD = _CONFIG.get("cost_variance_threshold_good", 0.10) * 100
+THRESHOLD_WARNING = _CONFIG.get("cost_variance_threshold_warning", 0.20) * 100
+
+
+@st.cache_data
+def load_construction_material_cost_data() -> pd.DataFrame:
+    if not CSV_PATH.exists():
+        return pd.DataFrame()
+    df = pd.read_csv(str(CSV_PATH))
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df["year_month"] = df["date"].dt.to_period("M").astype(str)
+    for col in ["total_cost", "unit_price", "quantity"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+    return df
+
+
+st.title("📊 B-70 建設 資材コスト・発注管理ダッシュボード")
+st.caption("B-70 | カテゴリ別・プロジェクト別・仕入先別コスト分析")
+
+df = load_construction_material_cost_data()
+
+if df.empty:
+    st.error(f"データファイルが見つかりません: {CSV_PATH}")
     st.stop()
 
-# ============ KPI カード ============
+# ── サマリー統計 ────────────────────────────────
+total_cost = df["total_cost"].sum() if "total_cost" in df.columns else 0
+item_count = len(df)
+
+# 月次変動率で判定
+_monthly_cost = df.groupby("year_month")["total_cost"].sum().sort_index()
+_variance = _monthly_cost.pct_change().abs().dropna() * 100
+max_var = _variance.max() if len(_variance) > 0 else 0
+verdict = "good" if max_var <= THRESHOLD_GOOD else ("warning" if max_var <= THRESHOLD_WARNING else "alert")
+verdict_emoji = {"good": "✅ GOOD", "warning": "⚠️ WARNING", "alert": "🔴 ALERT"}
+
+if "category" in df.columns and "total_cost" in df.columns:
+    cat_totals = df.groupby("category")["total_cost"].sum()
+    top_cat = cat_totals.idxmax() if not cat_totals.empty else "—"
+    top_cat_cost = cat_totals.max() if not cat_totals.empty else 0
+else:
+    top_cat, top_cat_cost = "—", 0
+
+# KPI
 col1, col2, col3, col4 = st.columns(4)
+col1.metric("💰 総発注額", f"¥{total_cost:,.0f}")
+col2.metric("📦 品目数", f"{item_count}件")
+col3.metric("🏆 最多カテゴリ", top_cat, delta=f"¥{top_cat_cost:,.0f}")
+col4.metric("📈 変動判定", verdict_emoji.get(verdict, verdict))
 
-with col1:
-    st.metric(
-        label="💰 総発注額",
-        value=f"¥{stats['total_cost']:,.0f}",
-        delta=None
-    )
+st.divider()
 
-with col2:
-    st.metric(
-        label="📦 品目数",
-        value=f"{stats['item_count']} 件",
-        delta=None
-    )
+# サイドバー: フィルター
+with st.sidebar:
+    st.header("🔍 フィルター")
+    if "category" in df.columns:
+        cats = sorted(df["category"].dropna().unique().tolist())
+        sel_cats = st.multiselect("カテゴリ", cats, default=cats, key="b70_category_filter")
+    else:
+        sel_cats = []
+    if "project_id" in df.columns:
+        projs = sorted(df["project_id"].dropna().unique().tolist())
+        sel_projs = st.multiselect("プロジェクト", projs, default=projs, key="b70_project_filter")
+    else:
+        sel_projs = []
+    if "supplier" in df.columns:
+        supps = sorted(df["supplier"].dropna().unique().tolist())
+        sel_supps = st.multiselect("仕入先", supps, default=supps, key="b70_supplier_filter")
+    else:
+        sel_supps = []
 
-with col3:
-    st.metric(
-        label="🏆 最多カテゴリ",
-        value=stats['category_with_max_cost'],
-        delta=f"¥{stats['max_cost']:,.0f}"
-    )
+# フィルタリング
+mask = pd.Series([True] * len(df), index=df.index)
+if sel_cats and "category" in df.columns:
+    mask &= df["category"].isin(sel_cats)
+if sel_projs and "project_id" in df.columns:
+    mask &= df["project_id"].isin(sel_projs)
+if sel_supps and "supplier" in df.columns:
+    mask &= df["supplier"].isin(sel_supps)
+df_f = df[mask].copy()
 
-with col4:
-    verdict_emoji = {"good": "✅", "warning": "⚠️", "alert": "🔴"}
-    verdict_color = {
-        "good": "background-color: #d4edda; color: #155724;",
-        "warning": "background-color: #fff3cd; color: #856404;",
-        "alert": "background-color: #f8d7da; color: #721c24;"
-    }
-    st.markdown(
-        f"<div style='padding: 15px; border-radius: 8px; {verdict_color[stats['verdict']]}'>"
-        f"<strong>{verdict_emoji[stats['verdict']]} 判定: {stats['verdict'].upper()}</strong>"
-        f"</div>",
-        unsafe_allow_html=True
-    )
-
-st.markdown("---")
-
-# ============ 分析タブ ============
 tab1, tab2, tab3, tab4, tab5 = st.tabs(
-    ["📈 カテゴリ分析", "📅 月次推移", "🏢 プロジェクト別", "🏭 仕入先別", "📋 資材一覧"]
-)
+    ["📈 カテゴリ分析", "📅 月次推移", "🏢 プロジェクト別", "🏭 仕入先別", "📋 資材一覧"])
 
-# ── Tab 1: カテゴリ別コスト構成 ──
 with tab1:
-    col1, col2 = st.columns([1, 1])
+    col_l, col_r = st.columns(2)
+    with col_l:
+        st.subheader("カテゴリ別 コスト")
+        if "category" in df_f.columns and "total_cost" in df_f.columns:
+            cat_cost = df_f.groupby("category")["total_cost"].sum().sort_values(ascending=True)
+            st.bar_chart(cat_cost)
+    with col_r:
+        st.subheader("カテゴリ別 統計")
+        if "category" in df_f.columns:
+            cat_tbl = df_f.groupby("category", as_index=False).agg(
+                総コスト=("total_cost", "sum"),
+                品目数=("total_cost", "count"),
+            )
+            cat_tbl["総コスト"] = cat_tbl["総コスト"].apply(lambda x: f"¥{x:,.0f}")
+            st.dataframe(cat_tbl, use_container_width=True, hide_index=True)
 
-    with col1:
-        st.subheader("カテゴリ別コスト（円グラフ）")
-        df_cat = analyzer.df_by_category.reset_index()
-        fig, ax = plt.subplots(figsize=(8, 6))
-        colors = plt.cm.Set3(range(len(df_cat)))
-        ax.pie(
-            df_cat["total_cost"],
-            labels=df_cat["category"],
-            autopct="%1.1f%%",
-            colors=colors,
-            startangle=90
-        )
-        ax.set_title("カテゴリ別コスト構成", fontsize=14, fontweight="bold")
-        st.pyplot(fig)
-        plt.close()
-
-    with col2:
-        st.subheader("カテゴリ別統計")
-        display_df = df_cat[["category", "total_cost", "item_count", "total_quantity"]].copy()
-        display_df.columns = ["カテゴリ", "総コスト(円)", "品目数", "総数量"]
-        display_df["総コスト(円)"] = display_df["総コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
-        st.dataframe(display_df, use_container_width=True, hide_index=True)
-
-# ── Tab 2: 月次コスト推移 ──
 with tab2:
-    st.subheader("月次コスト推移（折れ線グラフ）")
-    df_monthly = analyzer.df_by_month.copy()
-    df_monthly["year_month"] = df_monthly["year_month"].astype(str)
+    st.subheader("月次コスト推移")
+    if "year_month" in df_f.columns and "total_cost" in df_f.columns:
+        monthly = df_f.groupby("year_month")["total_cost"].sum().sort_index()
+        st.line_chart(monthly)
 
-    fig, ax = plt.subplots(figsize=(12, 5))
-    ax.plot(
-        df_monthly["year_month"],
-        df_monthly["monthly_cost"],
-        marker="o",
-        linewidth=2,
-        markersize=8,
-        color="#1f77b4"
-    )
-    ax.fill_between(
-        range(len(df_monthly)),
-        df_monthly["monthly_cost"],
-        alpha=0.3,
-        color="#1f77b4"
-    )
-    ax.set_xlabel("年月", fontsize=12)
-    ax.set_ylabel("コスト（円）", fontsize=12)
-    ax.set_title("月次コスト推移", fontsize=14, fontweight="bold")
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"¥{x/1e6:.0f}M"))
-    ax.grid(True, alpha=0.3)
-    plt.xticks(rotation=45)
-    st.pyplot(fig)
-    plt.close()
+    st.subheader("月次変動率テーブル")
+    if not monthly.empty:
+        m_df = monthly.reset_index()
+        m_df.columns = ["年月", "月次コスト(円)"]
+        m_df["変動率(%)"] = (m_df["月次コスト(円)"].pct_change() * 100).round(1)
+        m_df["月次コスト(円)"] = m_df["月次コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
+        st.dataframe(m_df, use_container_width=True, hide_index=True)
 
-    st.subheader("月次変動率")
-    display_monthly = df_monthly[["year_month", "monthly_cost", "cost_variance_rate"]].copy()
-    display_monthly.columns = ["年月", "月次コスト(円)", "変動率(%)"]
-    display_monthly["月次コスト(円)"] = display_monthly["月次コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
-    st.dataframe(display_monthly, use_container_width=True, hide_index=True)
-
-# ── Tab 3: プロジェクト別コスト ──
 with tab3:
-    st.subheader("プロジェクト別発注額（棒グラフ）")
-    df_proj = analyzer.df_by_project.reset_index()
+    st.subheader("プロジェクト別 発注額")
+    if "project_id" in df_f.columns and "total_cost" in df_f.columns:
+        proj_cost = df_f.groupby("project_id")["total_cost"].sum().sort_values(ascending=True)
+        st.bar_chart(proj_cost)
+        proj_tbl = proj_cost.reset_index()
+        proj_tbl.columns = ["プロジェクトID", "総コスト(円)"]
+        proj_tbl["総コスト(円)"] = proj_tbl["総コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
+        st.dataframe(proj_tbl, use_container_width=True, hide_index=True)
 
-    fig, ax = plt.subplots(figsize=(10, 5))
-    bars = ax.bar(df_proj["project_id"], df_proj["total_cost"], color="#2ca02c", alpha=0.7)
-    ax.set_xlabel("プロジェクトID", fontsize=12)
-    ax.set_ylabel("総コスト（円）", fontsize=12)
-    ax.set_title("プロジェクト別発注額", fontsize=14, fontweight="bold")
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"¥{x/1e6:.0f}M"))
-    ax.grid(True, alpha=0.3, axis="y")
-
-    # 値をバーの上に表示
-    for bar in bars:
-        height = bar.get_height()
-        ax.text(
-            bar.get_x() + bar.get_width() / 2.,
-            height,
-            f"¥{height/1e6:.1f}M",
-            ha="center",
-            va="bottom",
-            fontsize=10
-        )
-
-    st.pyplot(fig)
-    plt.close()
-
-    st.subheader("プロジェクト別統計")
-    display_proj = df_proj[["project_id", "total_cost", "item_count", "total_quantity"]].copy()
-    display_proj.columns = ["プロジェクトID", "総コスト(円)", "品目数", "総数量"]
-    display_proj["総コスト(円)"] = display_proj["総コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
-    st.dataframe(display_proj, use_container_width=True, hide_index=True)
-
-# ── Tab 4: 仕入先別発注額 ──
 with tab4:
-    st.subheader("仕入先別発注額（棒グラフ）")
-    df_supp = analyzer.df_by_supplier.reset_index()
+    st.subheader("仕入先別 発注額")
+    if "supplier" in df_f.columns and "total_cost" in df_f.columns:
+        supp_cost = df_f.groupby("supplier")["total_cost"].sum().sort_values(ascending=True)
+        st.bar_chart(supp_cost)
+        supp_tbl = supp_cost.reset_index()
+        supp_tbl.columns = ["仕入先", "総発注額(円)"]
+        supp_tbl["総発注額(円)"] = supp_tbl["総発注額(円)"].apply(lambda x: f"¥{x:,.0f}")
+        st.dataframe(supp_tbl, use_container_width=True, hide_index=True)
 
-    fig, ax = plt.subplots(figsize=(10, 5))
-    bars = ax.barh(df_supp["supplier"], df_supp["total_cost"], color="#ff7f0e", alpha=0.7)
-    ax.set_xlabel("総発注額（円）", fontsize=12)
-    ax.set_ylabel("仕入先", fontsize=12)
-    ax.set_title("仕入先別発注額", fontsize=14, fontweight="bold")
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f"¥{x/1e6:.0f}M"))
-    ax.grid(True, alpha=0.3, axis="x")
-
-    # 値をバーの右に表示
-    for bar in bars:
-        width = bar.get_width()
-        ax.text(
-            width,
-            bar.get_y() + bar.get_height() / 2.,
-            f"¥{width/1e6:.1f}M",
-            ha="left",
-            va="center",
-            fontsize=10
-        )
-
-    st.pyplot(fig)
-    plt.close()
-
-    st.subheader("仕入先別統計")
-    display_supp = df_supp[["supplier", "total_cost", "order_count", "total_quantity"]].copy()
-    display_supp.columns = ["仕入先", "総発注額(円)", "発注件数", "総数量"]
-    display_supp["総発注額(円)"] = display_supp["総発注額(円)"].apply(lambda x: f"¥{x:,.0f}")
-    st.dataframe(display_supp, use_container_width=True, hide_index=True)
-
-# ── Tab 5: 資材一覧テーブル ──
 with tab5:
     st.subheader("資材発注一覧")
+    _want = ["date", "material_name", "category", "project_id",
+             "quantity", "unit", "unit_price", "total_cost", "supplier"]
+    _avail = [c for c in _want if c in df_f.columns]
+    disp = df_f[_avail].copy()
+    if "date" in disp.columns:
+        disp["date"] = disp["date"].dt.strftime("%Y-%m-%d")
+    for col in ["unit_price", "total_cost"]:
+        if col in disp.columns:
+            disp[col] = disp[col].apply(lambda x: f"¥{x:,.0f}" if pd.notna(x) else "N/A")
+    disp = disp.sort_values("date", ascending=False) if "date" in disp.columns else disp
+    st.dataframe(disp, use_container_width=True, hide_index=True)
+    st.caption(f"表示件数: {len(disp)} / {len(df)} 件")
 
-    # フィルター
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        selected_category = st.multiselect(
-            "カテゴリで絞り込む",
-            options=df["category"].unique(),
-            default=df["category"].unique()
-        )
-    with col2:
-        selected_project = st.multiselect(
-            "プロジェクトで絞り込む",
-            options=df["project_id"].unique(),
-            default=df["project_id"].unique()
-        )
-    with col3:
-        selected_supplier = st.multiselect(
-            "仕入先で絞り込む",
-            options=df["supplier"].unique(),
-            default=df["supplier"].unique()
-        )
-
-    # フィルタリング
-    filtered_df = df[
-        (df["category"].isin(selected_category)) &
-        (df["project_id"].isin(selected_project)) &
-        (df["supplier"].isin(selected_supplier))
-    ].copy()
-
-    # 表示用にフォーマット
-    display_table = filtered_df[[
-        "date", "material_name", "category", "project_id",
-        "quantity", "unit", "unit_price", "total_cost", "supplier"
-    ]].copy()
-    display_table.columns = [
-        "日付", "資材名", "カテゴリ", "プロジェクトID",
-        "数量", "単位", "単価(円)", "総コスト(円)", "仕入先"
-    ]
-    display_table["日付"] = pd.to_datetime(display_table["日付"]).dt.strftime("%Y-%m-%d")
-    display_table["単価(円)"] = display_table["単価(円)"].apply(lambda x: f"¥{x:,.0f}")
-    display_table["総コスト(円)"] = display_table["総コスト(円)"].apply(lambda x: f"¥{x:,.0f}")
-    display_table = display_table.sort_values("日付", ascending=False)
-
-    st.dataframe(display_table, use_container_width=True, hide_index=True)
-
-    st.markdown(f"**表示件数:** {len(display_table)} / {len(df)} 件")
-
-st.markdown("---")
-st.markdown(
-    "<div style='text-align: center; color: #666; font-size: 12px;'>"
-    "C-122 資材コスト・発注管理 | 作成日: 2026-06-24"
-    "</div>",
-    unsafe_allow_html=True
-)
+st.divider()
+st.caption("B-70 建設 資材コスト・発注管理 | DX ポートフォリオ")

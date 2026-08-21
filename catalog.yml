@@ -2332,3 +2332,45 @@
   - 店舗名列名（store_name）と損益フラグ列名（pl_flag）
   - 食材費率閾値（food_cost_rate）と利益率目標（profit_margin）
   - 入力CSV名（cleaned_pl_202401.csv）と出力ディレクトリ（output/）
+- id: B-68
+  name: 自動車 整備士別生産性・売上分析ダッシュボード
+  industry: 自動車・整備業
+  department: 整備・人事管理
+  status: production-ready
+  priority: A
+  path: automotive/03_mechanic_performance/
+  difficulty: ★★☆
+  description: 整備士別案件数・売上・顧客評価・時給効率を分析し、good/warning/alert の3段階判定で生産性の低い整備士を早期特定。サービス種別案件数と月別売上トレンドも可視化。
+  demo: cd automotive/03_mechanic_performance && streamlit run app.py
+  customize_points:
+  - 時給効率の優良/警告閾値（good: 6,000円/h以上、warning: 4,000円/h以上）
+  - 整備士ID列名（mechanic_id）と案件売上列名（labor_revenue）
+  - 稼働時間列名（labor_hours）と顧客評価列名（customer_rating）
+- id: B-69
+  name: サービス 売上・原価分析ダッシュボード
+  industry: サービス
+  department: 財務・CS
+  status: production-ready
+  priority: A
+  path: 10_service/02_revenue_cost/
+  difficulty: ★★☆
+  description: ITサービス案件別の粗利率・営業利益率・赤字フラグを集計し、サービス区分別・部門別に可視化。赤字・低収益案件の自動アラートテーブルで改善優先度を明確化。
+  demo: cd 10_service/02_revenue_cost && streamlit run app.py
+  customize_points:
+  - サービス区分列名（service_type）と部門列名（department）
+  - 売上列名（revenue）・粗利列名（gross_profit）・営業利益列名（operating_profit）
+  - 赤字判定フラグ値（profit_flag == "赤字" / "低収益"）
+- id: B-70
+  name: 建設 資材コスト・発注管理ダッシュボード
+  industry: 建設・ゼネコン
+  department: 調達・資材管理
+  status: production-ready
+  priority: A
+  path: construction/03_material_cost/
+  difficulty: ★★★
+  description: カテゴリ別・プロジェクト別・仕入先別の資材発注コストを集計し、月次変動率で good/warning/alert を自動判定。config.yml で閾値をカスタマイズ可能な建設業向け調達管理ツール。
+  demo: cd construction/03_material_cost && streamlit run app.py
+  customize_points:
+  - 月次変動率閾値（good: 10%以内、warning: 20%以内）
+  - カテゴリ列名（category）と仕入先列名（supplier）
+  - プロジェクトID列名（project_id）と単価列名（unit_price）

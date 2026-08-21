@@ -1,411 +1,196 @@
+# -*- coding: utf-8 -*-
 """
-C-126 整備士別生産性・売上分析 - Streamlit ダッシュボード
+B-68: 自動車 整備士別生産性・売上分析ダッシュボード
+Streamlit ダッシュボード
 """
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from pathlib import Path
-import sys
-
-# matplotlib日本語フォント設定
-import matplotlib
-matplotlib.rcParams['font.sans-serif'] = ['MS Gothic', 'Yu Gothic', 'Hiragino Sans']
-matplotlib.rcParams['axes.unicode_minus'] = False
-
-# analyze.py をインポート
-sys.path.insert(0, str(Path(__file__).parent))
-# ── analyze.py インライン（Streamlit Cloud 互換）──
-"""
-C-126 整備士別生産性・売上分析
-整備士の案件数・売上・顧客満足度・時給効率を分析する
-"""
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-# ── 設定 ──────────────────────────────────────────
-THRESHOLD_GOOD = 6000          # 時給効率の優良基準
-THRESHOLD_WARNING = 4000        # 時給効率の警告基準
+BASE_DIR = Path(__file__).resolve().parent
 
-def load_data(csv_path: str = "sample_mechanic.csv") -> pd.DataFrame:
-    """CSVファイルを読み込む"""
+THRESHOLD_GOOD = 6000
+THRESHOLD_WARNING = 4000
+
+
+# ── 分析関数（インライン）────────────────────────────────
+def _load_mechanic_csv(csv_path: str) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
-    df['date'] = pd.to_datetime(df['date'])
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
     return df
 
-def analyze_mechanic_performance(df: pd.DataFrame) -> dict:
-    """整備士別パフォーマンス分析"""
-    mechanic_stats = []
 
-    for mechanic_id in df['mechanic_id'].unique():
-        mechanic_df = df[df['mechanic_id'] == mechanic_id]
-
-        job_count = len(mechanic_df)
-        total_revenue = mechanic_df['labor_revenue'].sum()
-        avg_rating = mechanic_df['customer_rating'].mean()
-        total_hours = mechanic_df['labor_hours'].sum()
-        avg_hourly_rate = total_revenue / total_hours if total_hours > 0 else 0
-
-        # 判定ロジック
-        if avg_hourly_rate >= THRESHOLD_GOOD:
-            judgment = "good"
-        elif avg_hourly_rate >= THRESHOLD_WARNING:
-            judgment = "warning"
-        else:
-            judgment = "alert"
-
-        mechanic_stats.append({
-            'mechanic_id': mechanic_id,
-            'mechanic_name': mechanic_df['mechanic_name'].iloc[0],
-            'job_count': job_count,
-            'total_revenue': total_revenue,
-            'avg_rating': round(avg_rating, 2),
-            'total_hours': total_hours,
-            'avg_hourly_rate': round(avg_hourly_rate, 2),
-            'judgment': judgment
+def _analyze_mechanic_performance(df: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for mid in df["mechanic_id"].unique():
+        mdf = df[df["mechanic_id"] == mid]
+        rev = mdf["labor_revenue"].sum()
+        hrs = mdf["labor_hours"].sum()
+        rate = rev / hrs if hrs > 0 else 0
+        rows.append({
+            "mechanic_id": mid,
+            "mechanic_name": mdf["mechanic_name"].iloc[0] if "mechanic_name" in mdf.columns else mid,
+            "job_count": len(mdf),
+            "total_revenue": rev,
+            "avg_rating": round(mdf["customer_rating"].mean(), 2) if "customer_rating" in mdf.columns else 0,
+            "total_hours": hrs,
+            "avg_hourly_rate": round(rate, 2),
+            "judgment": "good" if rate >= THRESHOLD_GOOD else ("warning" if rate >= THRESHOLD_WARNING else "alert"),
         })
+    return pd.DataFrame(rows).sort_values("total_revenue", ascending=False)
 
-    mechanic_df_result = pd.DataFrame(mechanic_stats)
-    mechanic_df_result = mechanic_df_result.sort_values('total_revenue', ascending=False)
 
+def _analyze_service_breakdown(df: pd.DataFrame) -> pd.DataFrame:
+    if "service_type" not in df.columns:
+        return pd.DataFrame()
+    rows = []
+    for svc in df["service_type"].unique():
+        sdf = df[df["service_type"] == svc]
+        rows.append({
+            "service_type": svc,
+            "job_count": len(sdf),
+            "total_revenue": sdf["labor_revenue"].sum(),
+            "avg_rating": round(sdf["customer_rating"].mean(), 2) if "customer_rating" in sdf.columns else 0,
+        })
+    return pd.DataFrame(rows).sort_values("job_count", ascending=False)
+
+
+def _analyze_monthly_trend(df: pd.DataFrame) -> pd.DataFrame:
+    df2 = df.copy()
+    df2["year_month"] = df2["date"].dt.to_period("M")
+    rows = []
+    for period in sorted(df2["year_month"].dropna().unique()):
+        pdf = df2[df2["year_month"] == period]
+        rev = pdf["labor_revenue"].sum()
+        hrs = pdf["labor_hours"].sum()
+        rows.append({
+            "month": str(period),
+            "job_count": len(pdf),
+            "total_revenue": rev,
+            "avg_rating": round(pdf["customer_rating"].mean(), 2) if "customer_rating" in pdf.columns else 0,
+            "total_hours": hrs,
+            "avg_hourly_rate": round(rev / hrs, 2) if hrs > 0 else 0,
+        })
+    return pd.DataFrame(rows)
+
+
+def _calculate_summary(df: pd.DataFrame) -> dict:
+    rev = df["labor_revenue"].sum()
+    hrs = df["labor_hours"].sum()
+    rate = rev / hrs if hrs > 0 else 0
     return {
-        'mechanic_df': mechanic_df_result,
-        'mechanic_list': mechanic_stats
+        "total_revenue": rev,
+        "avg_rating": round(df["customer_rating"].mean(), 2) if "customer_rating" in df.columns else 0,
+        "avg_hourly_rate": round(rate, 2),
+        "job_count": len(df),
+        "overall_judgment": "good" if rate >= THRESHOLD_GOOD else ("warning" if rate >= THRESHOLD_WARNING else "alert"),
     }
 
-def analyze_service_breakdown(df: pd.DataFrame) -> pd.DataFrame:
-    """サービス種別ごとの案件数・売上集計"""
-    service_stats = []
 
-    for service in df['service_type'].unique():
-        service_df = df[df['service_type'] == service]
-
-        job_count = len(service_df)
-        total_revenue = service_df['labor_revenue'].sum()
-        avg_rating = service_df['customer_rating'].mean()
-
-        service_stats.append({
-            'service_type': service,
-            'job_count': job_count,
-            'total_revenue': total_revenue,
-            'avg_rating': round(avg_rating, 2)
-        })
-
-    service_df_result = pd.DataFrame(service_stats)
-    service_df_result = service_df_result.sort_values('job_count', ascending=False)
-
-    return service_df_result
-
-def analyze_monthly_trend(df: pd.DataFrame) -> pd.DataFrame:
-    """月別トレンド分析"""
-    df['year_month'] = df['date'].dt.to_period('M')
-
-    monthly_stats = []
-
-    for period in sorted(df['year_month'].unique()):
-        period_df = df[df['year_month'] == period]
-
-        total_revenue = period_df['labor_revenue'].sum()
-        job_count = len(period_df)
-        avg_rating = period_df['customer_rating'].mean()
-        total_hours = period_df['labor_hours'].sum()
-        avg_hourly_rate = total_revenue / total_hours if total_hours > 0 else 0
-
-        monthly_stats.append({
-            'month': str(period),
-            'job_count': job_count,
-            'total_revenue': total_revenue,
-            'avg_rating': round(avg_rating, 2),
-            'total_hours': total_hours,
-            'avg_hourly_rate': round(avg_hourly_rate, 2)
-        })
-
-    monthly_df = pd.DataFrame(monthly_stats)
-    return monthly_df
-
-def calculate_summary(df: pd.DataFrame) -> dict:
-    """全体サマリー統計"""
-    total_revenue = df['labor_revenue'].sum()
-    total_hours = df['labor_hours'].sum()
-    avg_rating = df['customer_rating'].mean()
-    avg_hourly_rate = total_revenue / total_hours if total_hours > 0 else 0
-    job_count = len(df)
-
-    # 全体判定
-    if avg_hourly_rate >= THRESHOLD_GOOD:
-        overall_judgment = "good"
-    elif avg_hourly_rate >= THRESHOLD_WARNING:
-        overall_judgment = "warning"
-    else:
-        overall_judgment = "alert"
-
-    return {
-        'total_revenue': total_revenue,
-        'avg_rating': round(avg_rating, 2),
-        'avg_hourly_rate': round(avg_hourly_rate, 2),
-        'job_count': job_count,
-        'overall_judgment': overall_judgment
-    }
-
-def generate_report(
-    summary: dict,
-    mechanic_stats: pd.DataFrame,
-    service_stats: pd.DataFrame,
-    monthly_stats: pd.DataFrame
-) -> str:
-    """分析レポートをMarkdown形式で生成"""
-
-    report = f"""# 整備士別生産性・売上分析レポート
-
-## 実行日時
-{pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}
-
----
-
-## 全体KPI
-
-| 指標 | 値 |
-|------|-----|
-| **総売上** | ¥{summary['total_revenue']:,.0f} |
-| **平均顧客評価** | {summary['avg_rating']}/5 |
-| **平均時給効率** | ¥{summary['avg_hourly_rate']:,.0f}/時間 |
-| **総案件数** | {summary['job_count']} 件 |
-| **全体判定** | **{summary['overall_judgment'].upper()}** |
-
----
-
-## 整備士別パフォーマンス
-
-"""
-
-    report += "| 整備士名 | 案件数 | 総売上 | 平均評価 | 稼働時間 | 時給効率 | 判定 |\n"
-    report += "|--------|--------|--------|---------|---------|---------|--------|\n"
-
-    for _, row in mechanic_stats.iterrows():
-        report += f"| {row['mechanic_name']} | {row['job_count']} | ¥{row['total_revenue']:,.0f} | {row['avg_rating']}/5 | {row['total_hours']:.1f}h | ¥{row['avg_hourly_rate']:,.0f} | {row['judgment'].upper()} |\n"
-
-    report += "\n---\n\n## サービス種別別集計\n\n"
-    report += "| サービス種別 | 案件数 | 総売上 | 平均評価 |\n"
-    report += "|-----------|--------|--------|----------|\n"
-
-    for _, row in service_stats.iterrows():
-        report += f"| {row['service_type']} | {row['job_count']} | ¥{row['total_revenue']:,.0f} | {row['avg_rating']}/5 |\n"
-
-    report += "\n---\n\n## 月別トレンド\n\n"
-    report += "| 月 | 案件数 | 総売上 | 平均評価 | 稼働時間 | 平均時給 |\n"
-    report += "|-----|--------|--------|---------|---------|----------|\n"
-
-    for _, row in monthly_stats.iterrows():
-        report += f"| {row['month']} | {row['job_count']} | ¥{row['total_revenue']:,.0f} | {row['avg_rating']}/5 | {row['total_hours']:.1f}h | ¥{row['avg_hourly_rate']:,.0f} |\n"
-
-    report += "\n---\n\n## ビジネスインサイト\n\n"
-
-    # トップ整備士
-    top_mechanic = mechanic_stats.iloc[0]
-    report += f"**【トップ整備士】** {top_mechanic['mechanic_name']} - 総売上¥{top_mechanic['total_revenue']:,.0f}（{top_mechanic['job_count']}件、評価{top_mechanic['avg_rating']}/5）\n\n"
-
-    # ボトム整備士
-    bottom_mechanic = mechanic_stats.iloc[-1]
-    report += f"**【要改善】** {bottom_mechanic['mechanic_name']} - 時給効率¥{bottom_mechanic['avg_hourly_rate']:,.0f}（基準未達、改善が必要）\n\n"
-
-    # 人気サービス
-    top_service = service_stats.iloc[0]
-    report += f"**【人気サービス】** {top_service['service_type']} - {top_service['job_count']}件（売上¥{top_service['total_revenue']:,.0f}）\n\n"
-
-    # 評価の分析
-    high_rating_count = (mechanic_stats['avg_rating'] >= 4.5).sum()
-    report += f"**【顧客満足度】** 高評価（4.5以上）の整備士: {high_rating_count}名\n\n"
-
-    return report
-
-def main():
-    """メイン実行"""
-    # データ読み込み
-    df = load_data()
-
-    # 各種分析実行
-    summary = calculate_summary(df)
-    mechanic_results = analyze_mechanic_performance(df)
-    mechanic_stats = mechanic_results['mechanic_df']
-    service_stats = analyze_service_breakdown(df)
-    monthly_stats = analyze_monthly_trend(df)
-
-    # レポート生成
-    report = generate_report(summary, mechanic_stats, service_stats, monthly_stats)
-
-    # 出力
-    output_dir = Path("output")
-    output_dir.mkdir(exist_ok=True)
-
-    report_path = output_dir / "analysis_report.md"
-    with open(report_path, "w", encoding="utf-8") as f:
-        f.write(report)
-
-    print("Report generated: " + str(report_path))
-
-    # 整備士DF、サービスDF、月別DFを返すようにして、テスト用に統計情報を保存
-    stats_output = {
-        'summary': summary,
-        'mechanic_stats': mechanic_stats.to_dict('records'),
-        'service_stats': service_stats.to_dict('records'),
-        'monthly_stats': monthly_stats.to_dict('records')
-    }
-
-    return stats_output, mechanic_stats, service_stats, monthly_stats
-
-if __name__ == "__main__":
-    main()
-
-# ────────────────────────────────────────────────
-st.set_page_config(page_title="整備士別生産性・売上分析", layout="wide")
-
-st.title("🔧 整備士別生産性・売上分析ダッシュボード")
-
-# データ読み込み
 @st.cache_data
-def get_data():
-    return load_data("sample_mechanic.csv")
+def load_automotive_mechanic_data() -> pd.DataFrame:
+    csv_path = BASE_DIR / "sample_mechanic.csv"
+    if not csv_path.exists():
+        return pd.DataFrame()
+    return _load_mechanic_csv(str(csv_path))
 
-df = get_data()
 
-# 分析実行
-summary = calculate_summary(df)
-mechanic_results = analyze_mechanic_performance(df)
-mechanic_stats = mechanic_results['mechanic_df']
-service_stats = analyze_service_breakdown(df)
-monthly_stats = analyze_monthly_trend(df)
+# ── Streamlit UI ────────────────────────────────────────
+st.title("🔧 B-68 自動車 整備士別生産性・売上分析ダッシュボード")
+st.caption("B-68 | 整備士別案件数・売上・顧客評価・時給効率を分析")
 
-# ── KPIカード ──────────────────────────────────────────
-st.subheader("📊 主要KPI")
+df_raw = load_automotive_mechanic_data()
 
+if df_raw.empty:
+    st.error(f"データファイルが見つかりません: {BASE_DIR / 'sample_mechanic.csv'}")
+    st.stop()
+
+with st.sidebar:
+    st.header("🔍 フィルター")
+    if "service_type" in df_raw.columns:
+        svcs = sorted(df_raw["service_type"].dropna().unique().tolist())
+        sel_svcs = st.multiselect("サービス種別", svcs, default=svcs, key="b68_service_filter")
+        df = df_raw[df_raw["service_type"].isin(sel_svcs)].copy() if sel_svcs else df_raw.copy()
+    else:
+        df = df_raw.copy()
+
+summary = _calculate_summary(df)
+mechanic_stats = _analyze_mechanic_performance(df)
+service_stats = _analyze_service_breakdown(df)
+monthly_stats = _analyze_monthly_trend(df)
+
+# KPI
 col1, col2, col3, col4 = st.columns(4)
-
-with col1:
-    st.metric(
-        "総売上",
-        f"¥{summary['total_revenue']:,.0f}",
-        delta=f"{summary['job_count']}件"
-    )
-
-with col2:
-    st.metric(
-        "平均顧客評価",
-        f"{summary['avg_rating']:.2f}/5",
-        delta="⭐" if summary['avg_rating'] >= 4.0 else ""
-    )
-
-with col3:
-    st.metric(
-        "平均時給効率",
-        f"¥{summary['avg_hourly_rate']:,.0f}/h",
-        delta="👍" if summary['avg_hourly_rate'] >= 6000 else "⚠️"
-    )
-
-with col4:
-    judgment_color = {
-        'good': '🟢 GOOD',
-        'warning': '🟡 WARNING',
-        'alert': '🔴 ALERT'
-    }
-    st.metric(
-        "全体判定",
-        judgment_color.get(summary['overall_judgment'], 'UNKNOWN')
-    )
+col1.metric("総売上", f"¥{summary['total_revenue']:,.0f}", delta=f"{summary['job_count']}件")
+col2.metric("平均顧客評価", f"{summary['avg_rating']:.2f}/5")
+col3.metric("平均時給効率", f"¥{summary['avg_hourly_rate']:,.0f}/h",
+            delta="👍 良好" if summary["avg_hourly_rate"] >= THRESHOLD_GOOD else "⚠️ 要改善")
+verdict_text = {"good": "🟢 GOOD", "warning": "🟡 WARNING", "alert": "🔴 ALERT"}
+col4.metric("全体判定", verdict_text.get(summary["overall_judgment"], "―"))
 
 st.divider()
 
-# ── グラフ１: 整備士別売上ランキング ──────────────────────────
-st.subheader("💰 整備士別売上ランキング")
+tab1, tab2, tab3 = st.tabs(["👤 整備士別分析", "🛠️ サービス種別", "📈 月別トレンド"])
 
-fig, ax = plt.subplots(figsize=(10, 5))
-mechanic_sorted = mechanic_stats.sort_values('total_revenue', ascending=True)
-colors = ['#2ecc71' if j == 'good' else '#f39c12' if j == 'warning' else '#e74c3c'
-          for j in mechanic_sorted['judgment']]
-ax.barh(mechanic_sorted['mechanic_name'], mechanic_sorted['total_revenue'], color=colors)
-ax.set_xlabel('総売上（円）', fontsize=12)
-ax.set_title('整備士別売上（色は効率判定）', fontsize=14, fontweight='bold')
-ax.grid(axis='x', alpha=0.3)
-st.pyplot(fig)
+with tab1:
+    col_l, col_r = st.columns(2)
+    with col_l:
+        st.subheader("整備士別 総売上")
+        if not mechanic_stats.empty and "mechanic_name" in mechanic_stats.columns:
+            rev_ser = mechanic_stats.set_index("mechanic_name")["total_revenue"].sort_values()
+            st.bar_chart(rev_ser)
+    with col_r:
+        st.subheader("整備士別 平均顧客評価")
+        if not mechanic_stats.empty and "avg_rating" in mechanic_stats.columns:
+            rating_ser = mechanic_stats.set_index("mechanic_name")["avg_rating"].sort_values()
+            st.bar_chart(rating_ser)
 
-st.divider()
+    st.subheader("📋 整備士詳細")
+    if not mechanic_stats.empty:
+        disp = mechanic_stats[
+            [c for c in ["mechanic_name", "job_count", "total_revenue", "avg_rating",
+                         "total_hours", "avg_hourly_rate", "judgment"] if c in mechanic_stats.columns]
+        ].copy()
+        disp.columns = [{"mechanic_name": "整備士名", "job_count": "案件数",
+                         "total_revenue": "総売上", "avg_rating": "平均評価",
+                         "total_hours": "稼働時間(h)", "avg_hourly_rate": "時給効率",
+                         "judgment": "判定"}.get(c, c) for c in disp.columns]
+        st.dataframe(disp, use_container_width=True, hide_index=True)
 
-# ── グラフ２: 整備士別平均評価 ──────────────────────────
-st.subheader("⭐ 整備士別平均顧客評価")
+with tab2:
+    col_l2, col_r2 = st.columns(2)
+    with col_l2:
+        st.subheader("サービス種別 案件数")
+        if not service_stats.empty:
+            st.bar_chart(service_stats.set_index("service_type")["job_count"].sort_values())
+    with col_r2:
+        st.subheader("サービス種別 売上")
+        if not service_stats.empty:
+            st.bar_chart(service_stats.set_index("service_type")["total_revenue"].sort_values())
 
-fig, ax = plt.subplots(figsize=(10, 5))
-mechanic_sorted = mechanic_stats.sort_values('avg_rating', ascending=True)
-ax.barh(mechanic_sorted['mechanic_name'], mechanic_sorted['avg_rating'], color='#3498db')
-ax.set_xlabel('平均評価（5点満点）', fontsize=12)
-ax.set_xlim(0, 5)
-ax.set_title('整備士別平均顧客評価', fontsize=14, fontweight='bold')
-ax.grid(axis='x', alpha=0.3)
-st.pyplot(fig)
+with tab3:
+    if not monthly_stats.empty:
+        col_l3, col_r3 = st.columns(2)
+        with col_l3:
+            st.subheader("月別 案件数")
+            st.line_chart(monthly_stats.set_index("month")["job_count"])
+        with col_r3:
+            st.subheader("月別 売上")
+            st.line_chart(monthly_stats.set_index("month")["total_revenue"])
 
-st.divider()
-
-# ── グラフ３: サービス種別案件数 ──────────────────────────
-st.subheader("🛠️ サービス種別案件数")
-
-fig, ax = plt.subplots(figsize=(10, 5))
-service_sorted = service_stats.sort_values('job_count', ascending=True)
-ax.barh(service_sorted['service_type'], service_sorted['job_count'], color='#9b59b6')
-ax.set_xlabel('案件数', fontsize=12)
-ax.set_title('サービス種別の案件数分布', fontsize=14, fontweight='bold')
-ax.grid(axis='x', alpha=0.3)
-st.pyplot(fig)
-
-st.divider()
-
-# ── テーブル: 整備士詳細 ──────────────────────────
-st.subheader("📋 整備士詳細情報")
-
-display_df = mechanic_stats[['mechanic_name', 'job_count', 'total_revenue', 'avg_rating', 'total_hours', 'avg_hourly_rate', 'judgment']].copy()
-display_df.columns = ['整備士名', '案件数', '総売上', '平均評価', '稼働時間', '時給効率', '判定']
-
-st.dataframe(
-    display_df,
-    use_container_width=True,
-    hide_index=True
-)
+        st.subheader("月別 詳細テーブル")
+        st.dataframe(monthly_stats, use_container_width=True, hide_index=True)
 
 st.divider()
 
-# ── 月別トレンド ──────────────────────────
-st.subheader("📈 月別トレンド")
-
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-# 案件数推移
-axes[0].plot(monthly_stats['month'], monthly_stats['job_count'], marker='o', linewidth=2, markersize=8, color='#e74c3c')
-axes[0].fill_between(range(len(monthly_stats)), monthly_stats['job_count'], alpha=0.3, color='#e74c3c')
-axes[0].set_xlabel('月', fontsize=12)
-axes[0].set_ylabel('案件数', fontsize=12)
-axes[0].set_title('月別案件数推移', fontsize=14, fontweight='bold')
-axes[0].grid(alpha=0.3)
-
-# 売上推移
-axes[1].plot(monthly_stats['month'], monthly_stats['total_revenue'], marker='s', linewidth=2, markersize=8, color='#2ecc71')
-axes[1].fill_between(range(len(monthly_stats)), monthly_stats['total_revenue'], alpha=0.3, color='#2ecc71')
-axes[1].set_xlabel('月', fontsize=12)
-axes[1].set_ylabel('総売上（円）', fontsize=12)
-axes[1].set_title('月別売上推移', fontsize=14, fontweight='bold')
-axes[1].grid(alpha=0.3)
-
-st.pyplot(fig)
-
-st.divider()
-
-# ── レポート表示 ──────────────────────────
-st.subheader("📄 分析レポート（Markdown）")
-
-report = generate_report(summary, mechanic_stats, service_stats, monthly_stats)
-st.markdown(report)
-
-# レポートをダウンロード可能にする
-st.download_button(
-    label="📥 レポートをダウンロード（Markdown）",
-    data=report,
-    file_name="mechanic_analysis_report.md",
-    mime="text/markdown"
-)
+# レポートダウンロード
+report_lines = [
+    "# 整備士別生産性・売上分析レポート",
+    f"総売上: ¥{summary['total_revenue']:,.0f}",
+    f"平均時給効率: ¥{summary['avg_hourly_rate']:,.0f}/h",
+    f"全体判定: {summary['overall_judgment'].upper()}",
+]
+st.download_button("📥 サマリーレポートをダウンロード",
+                   data="\n".join(report_lines).encode("utf-8"),
+                   file_name="mechanic_report.md", mime="text/markdown")

@@ -1,29 +1,27 @@
+# -*- coding: utf-8 -*-
 """
-C-21: サービス売上・原価分析ダッシュボード (Streamlit)
+B-69: サービス 売上・原価分析ダッシュボード
+Streamlit ダッシュボード
 """
 import streamlit as st
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-st.set_page_config(
-    page_title="サービス 売上・原価分析ダッシュボード",
-    page_icon="💼",
-    layout="wide",
-)
-
-BASE = Path(__file__).parent
+BASE = Path(__file__).resolve().parent
 CSV_PATH = BASE / "output" / "cleaned_revenue_cost_202401.csv"
 REPORT_PATH = BASE / "output" / "analysis_report.md"
-CHARTS_DIR = BASE / "output" / "charts"
 
 
 @st.cache_data
-def load_data():
+def load_service_revenue_cost_data() -> pd.DataFrame:
+    if not CSV_PATH.exists():
+        return pd.DataFrame()
     df = pd.read_csv(CSV_PATH, encoding="utf-8-sig")
-    df["is_completed"] = df["is_completed"].astype(str).map(
-        lambda x: True if x.lower() in ("true", "1") else False
-    )
+    if "is_completed" in df.columns:
+        df["is_completed"] = df["is_completed"].astype(str).map(
+            lambda x: True if x.lower() in ("true", "1") else False
+        )
     for col in ["revenue", "direct_cost", "allocated_overhead", "total_cost",
                 "gross_profit", "operating_profit", "gross_margin_ratio",
                 "operating_margin_ratio", "revenue_per_hour", "hours_spent"]:
@@ -33,27 +31,40 @@ def load_data():
 
 
 @st.cache_data
-def load_report():
+def load_service_revenue_report() -> str:
     if REPORT_PATH.exists():
         return REPORT_PATH.read_text(encoding="utf-8")
     return "レポートが見つかりません"
 
 
-df_all = load_data()
+st.title("💼 B-69 サービス 売上・原価分析ダッシュボード")
+st.caption("B-69 | 2024年1〜3月 | ITサービス案件別売上・原価・利益率")
 
-st.title("💼 サービス 売上・原価分析ダッシュボード")
-st.caption("2024年1〜3月 | ITサービス案件別売上・原価データ")
+df_all = load_service_revenue_cost_data()
 
-# サービス区分フィルター
-service_types = sorted(df_all["service_type"].dropna().unique().tolist())
-selected = st.multiselect("サービス区分フィルター", service_types, default=service_types)
-df = df_all[df_all["service_type"].isin(selected)] if selected else df_all
+if df_all.empty:
+    st.error(f"データファイルが見つかりません: {CSV_PATH}")
+    st.info("先に cleanse.py を実行してください。")
+    st.stop()
 
-# メトリクス
-total_revenue = df["revenue"].sum()
-avg_gm = (df["gross_profit"].sum() / total_revenue * 100) if total_revenue > 0 else 0
-total_op = df["operating_profit"].sum()
-red_count = (df["profit_flag"] == "赤字").sum()
+# フィルター
+with st.sidebar:
+    st.header("🔍 フィルター")
+    if "service_type" in df_all.columns:
+        service_types = sorted(df_all["service_type"].dropna().unique().tolist())
+        selected = st.multiselect("サービス区分", service_types, default=service_types,
+                                  key="b69_service_type_filter")
+    else:
+        selected = []
+
+df = df_all[df_all["service_type"].isin(selected)].copy() if selected else df_all.copy()
+
+# KPI
+total_revenue = df["revenue"].sum() if "revenue" in df.columns else 0
+gross_profit_sum = df["gross_profit"].sum() if "gross_profit" in df.columns else 0
+avg_gm = (gross_profit_sum / total_revenue * 100) if total_revenue > 0 else 0
+total_op = df["operating_profit"].sum() if "operating_profit" in df.columns else 0
+red_count = int((df["profit_flag"] == "赤字").sum()) if "profit_flag" in df.columns else 0
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("売上合計", f"¥{total_revenue:,.0f}")
@@ -67,63 +78,83 @@ c4.metric("赤字案件数", f"{red_count}件",
 
 st.divider()
 
-tab1, tab2, tab3 = st.tabs(["サービス別利益率", "部門別売上", "売上構成比"])
+tab1, tab2, tab3 = st.tabs(["📊 サービス別利益率", "🏢 部門別売上", "📋 案件一覧"])
 
 with tab1:
-    p = CHARTS_DIR / "bar_service_margin.png"
-    if p.exists():
-        st.image(str(p), use_container_width=True)
-    else:
-        st.warning("グラフなし。visualize.py を先に実行してください。")
+    st.subheader("サービス別 粗利率")
+    if "service_type" in df.columns and "gross_profit" in df.columns and "revenue" in df.columns:
+        svc_gm = df.groupby("service_type").apply(
+            lambda g: (g["gross_profit"].sum() / g["revenue"].sum() * 100)
+            if g["revenue"].sum() > 0 else 0
+        ).sort_values(ascending=True)
+        st.bar_chart(svc_gm)
+
+    st.subheader("サービス別 収益サマリー")
+    if "service_type" in df.columns:
+        _agg = {"案件数": ("project_id", "count")} if "project_id" in df.columns else {}
+        if "revenue" in df.columns:
+            _agg["売上合計"] = ("revenue", "sum")
+        if "gross_profit" in df.columns:
+            _agg["粗利合計"] = ("gross_profit", "sum")
+        if "operating_profit" in df.columns:
+            _agg["営業利益合計"] = ("operating_profit", "sum")
+        if _agg:
+            svc_tbl = df.groupby("service_type", as_index=False).agg(**_agg)
+            if "売上合計" in svc_tbl.columns and "粗利合計" in svc_tbl.columns:
+                svc_tbl["粗利率(%)"] = (
+                    svc_tbl["粗利合計"] / svc_tbl["売上合計"].replace(0, np.nan) * 100
+                ).round(1)
+            for col in ["売上合計", "粗利合計", "営業利益合計"]:
+                if col in svc_tbl.columns:
+                    svc_tbl[col] = svc_tbl[col].apply(lambda x: f"¥{x:,.0f}")
+            st.dataframe(svc_tbl, use_container_width=True, hide_index=True)
 
 with tab2:
-    p = CHARTS_DIR / "bar_dept_revenue.png"
-    if p.exists():
-        st.image(str(p), use_container_width=True)
-    else:
-        st.warning("グラフなし")
+    st.subheader("部門別 売上")
+    if "department" in df.columns and "revenue" in df.columns:
+        dept_rev = df.groupby("department")["revenue"].sum().sort_values(ascending=True)
+        st.bar_chart(dept_rev)
+
+    st.subheader("部門別 営業利益")
+    if "department" in df.columns and "operating_profit" in df.columns:
+        dept_op = df.groupby("department")["operating_profit"].sum().sort_values(ascending=True)
+        st.bar_chart(dept_op)
 
 with tab3:
-    p = CHARTS_DIR / "pie_service_revenue_share.png"
-    if p.exists():
-        st.image(str(p), use_container_width=True)
-    else:
-        st.warning("グラフなし")
+    st.subheader("案件一覧")
+    _cols = ["project_id", "client_name", "service_type", "department",
+             "contract_month", "revenue", "gross_margin_ratio",
+             "operating_margin_ratio", "profit_flag", "is_completed"]
+    _avail = [c for c in _cols if c in df.columns]
+    disp_df = df[_avail].copy()
+    if "revenue" in disp_df.columns:
+        disp_df["revenue"] = disp_df["revenue"].apply(
+            lambda x: f"¥{x:,.0f}" if pd.notna(x) else "N/A")
+    for rate_col in ["gross_margin_ratio", "operating_margin_ratio"]:
+        if rate_col in disp_df.columns:
+            disp_df[rate_col] = disp_df[rate_col].apply(
+                lambda x: f"{x*100:.1f}%" if pd.notna(x) else "N/A")
+    st.dataframe(disp_df, use_container_width=True, hide_index=True)
 
 st.divider()
 
-# サービス別集計テーブル
-st.subheader("サービス別 収益サマリー")
-svc_tbl = df.groupby("service_type").agg(
-    案件数=("project_id", "count"),
-    売上合計=("revenue", "sum"),
-    粗利合計=("gross_profit", "sum"),
-    営業利益合計=("operating_profit", "sum"),
-    赤字件数=("profit_flag", lambda x: (x == "赤字").sum()),
-).reset_index()
-svc_tbl["粗利率(%)"] = (svc_tbl["粗利合計"] / svc_tbl["売上合計"].replace(0, np.nan) * 100).round(1)
-svc_tbl["営業利益率(%)"] = (svc_tbl["営業利益合計"] / svc_tbl["売上合計"].replace(0, np.nan) * 100).round(1)
-svc_tbl = svc_tbl.sort_values("粗利率(%)", ascending=False)
-for col in ["売上合計", "粗利合計", "営業利益合計"]:
-    svc_tbl[col] = svc_tbl[col].apply(lambda x: f"¥{x:,.0f}")
-st.dataframe(svc_tbl, use_container_width=True)
+# 赤字・低収益アラート
+if "profit_flag" in df.columns:
+    alert_df = df[df["profit_flag"].isin(["赤字", "低収益"])].copy()
+    if len(alert_df) > 0:
+        st.subheader(f"⚠️ 要注意案件 ({len(alert_df)}件)")
+        _a_cols = [c for c in ["project_id", "client_name", "service_type", "department",
+                                "contract_month", "revenue", "operating_margin_ratio", "profit_flag"]
+                   if c in alert_df.columns]
+        alert_disp = alert_df[_a_cols].copy()
+        if "revenue" in alert_disp.columns:
+            alert_disp["revenue"] = alert_disp["revenue"].apply(lambda x: f"¥{x:,.0f}")
+        if "operating_margin_ratio" in alert_disp.columns:
+            alert_disp["operating_margin_ratio"] = alert_disp["operating_margin_ratio"].apply(
+                lambda x: f"{x*100:.1f}%" if pd.notna(x) else "N/A")
+        st.dataframe(alert_disp, use_container_width=True, hide_index=True)
 
 st.divider()
 
-# 赤字・低収益案件アラート
-alert_df = df[df["profit_flag"].isin(["赤字", "低収益"])][
-    ["project_id", "client_name", "service_type", "department",
-     "contract_month", "revenue", "operating_margin_ratio", "profit_flag"]
-].copy()
-if len(alert_df) > 0:
-    st.subheader(f"要注意案件 ({len(alert_df)}件)")
-    alert_df["revenue"] = alert_df["revenue"].apply(lambda x: f"¥{x:,.0f}")
-    alert_df["operating_margin_ratio"] = alert_df["operating_margin_ratio"].apply(
-        lambda x: f"{x*100:.1f}%" if pd.notna(x) else "N/A"
-    )
-    st.dataframe(alert_df, use_container_width=True)
-
-st.divider()
-
-with st.expander("分析レポートを見る", expanded=False):
-    st.markdown(load_report())
+with st.expander("📄 分析レポートを表示", expanded=False):
+    st.markdown(load_service_revenue_report())
