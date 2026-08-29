@@ -2388,3 +2388,45 @@
   - ゾーン列名（zone）と作業区分列名（task_type）
   - スループット列名（throughput）とエラー率列名（error_rate）
   - KPI優秀判定値（kpi_flag == "優秀"）と作業員ID列名（worker_id）
+- id: B-72
+  name: 建設 工事原価・予算実績管理ダッシュボード
+  industry: 建設・ゼネコン
+  department: 経理・財務
+  status: production-ready
+  priority: A
+  path: 11_construction/05_cost_budget/
+  difficulty: ★★★
+  description: 工事番号別の予算差異率・実績額・超過件数を集計し、工種別・費目別コスト構成をグラフで比較。原価明細のキーワード検索・ソートと分析レポートMD表示で予算管理を支援する建設業向けダッシュボード。
+  demo: cd 11_construction/05_cost_budget && streamlit run app.py
+  customize_points:
+  - 工事番号列名（project_no）と工種列名（work_type）
+  - 予算額列名（budget_amount）と実績額列名（actual_amount）
+  - 差異率列名（variance_rate）と超過フラグ列名（is_over_budget）
+- id: B-73
+  name: 小売 シフト充足率・人件費最適化ダッシュボード
+  industry: 小売
+  department: 店舗運営・人事
+  status: production-ready
+  priority: A
+  path: 01_retail/06_shift_optimization/
+  difficulty: ★★☆
+  description: 店舗別シフト不足件数・充足率・総人件費を集計し、役割別平均時給と店舗別シフトギャップを可視化。全店/単店切り替えと役割フィルターで人員配置の最適化ポイントを特定する小売向けHRダッシュボード。
+  demo: cd 01_retail/06_shift_optimization && streamlit run app.py
+  customize_points:
+  - 店舗名列名（store_name）と役割列名（role）
+  - 実際人数列名（actual_staff）と必要人数列名（required_staff）
+  - 日当列名（daily_wage）と不足フラグ列名（is_understaffed）
+- id: B-74
+  name: 農業 農場スタッフ勤怠・作業効率分析ダッシュボード
+  industry: 農業・食品加工
+  department: 農場管理・人事
+  status: production-ready
+  priority: A
+  path: 12_agriculture/02_staff_efficiency/
+  difficulty: ★★☆
+  description: 作物・作業区分別の目標達成率・生産性・平均作業時間を集計し、高効率/中効率/低効率の3段階グレード分布を可視化。農場スタッフの生産性改善ポイントを特定する農業向け勤怠分析ツール。
+  demo: cd 12_agriculture/02_staff_efficiency && streamlit run app.py
+  customize_points:
+  - 作物列名（crop）と作業区分列名（work_type）
+  - 生産性列名（productivity）と達成率列名（achievement_rate）
+  - 効率グレード判定値（高効率/中効率/低効率）と目標数量列名（target_qty）
