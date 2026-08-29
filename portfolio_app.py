@@ -144,6 +144,9 @@ _A_TOOL_DEFS = [
     ("B-72", "11_construction/05_cost_budget/app.py",   "demo_const_budget",  "[B-72] 建設 工事原価・予算実績管理"),
     ("B-73", "01_retail/06_shift_optimization/app.py",  "demo_retail_shift",  "[B-73] 小売 シフト充足率・人件費最適化"),
     ("B-74", "12_agriculture/02_staff_efficiency/app.py","demo_agri_staff",   "[B-74] 農業 農場スタッフ作業効率分析"),
+    ("B-75", "02_manufacturing/04_production_variance/app.py", "demo_mfg_prod_var",  "[B-75] 製造 生産計画差異ダッシュボード"),
+    ("B-76", "02_manufacturing/01_quality_inspection/app.py",  "demo_mfg_qc_insp",   "[B-76] 製造 品質検査 異常値検出ダッシュボード"),
+    ("B-77", "02_manufacturing/02_equipment_log/app.py",       "demo_mfg_equip_log", "[B-77] 製造 設備稼働ログ 異常予兆検知"),
 ]
 
 _demo_pages = {
@@ -515,6 +518,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-72": "🏗️ 建設・ゼネコン",
     "B-73": "🏪 小売",
     "B-74": "🌾 農業・食品加工",
+    "B-75": "🏭 製造",
+    "B-76": "🏭 製造",
+    "B-77": "🏭 製造",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

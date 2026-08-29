@@ -2430,3 +2430,45 @@
   - 作物列名（crop）と作業区分列名（work_type）
   - 生産性列名（productivity）と達成率列名（achievement_rate）
   - 効率グレード判定値（高効率/中効率/低効率）と目標数量列名（target_qty）
+- id: B-75
+  name: 製造 生産計画差異ダッシュボード
+  industry: 製造
+  department: 生産管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/04_production_variance/
+  difficulty: ★★☆
+  description: 製造ライン別の計画数量・実績数量・達成率・不良率を集計し、ライン別平均達成率と日別トレンドをグラフで可視化。ライン別サマリーテーブルと分析レポートで生産計画差異の要因分析を支援する製造業向けダッシュボード。
+  demo: cd 02_manufacturing/04_production_variance && streamlit run app.py
+  customize_points:
+  - ライン名列名（line_name）と計画数量列名（planned_qty）
+  - 実績数量列名（actual_qty）と達成率列名（achievement_rate）
+  - 不良率列名（defect_rate）とカテゴリ列名（category）
+- id: B-76
+  name: 製造 品質検査 異常値検出ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/01_quality_inspection/
+  difficulty: ★★★
+  description: 製造5工程の品質検査データから工程別不良率をPlotly棒グラフで可視化し、日次トレンドとアラートライン超過日をハイライト。工程×製品ヒートマップで問題箇所を特定する品質管理特化ダッシュボード。
+  demo: cd 02_manufacturing/01_quality_inspection && streamlit run app.py
+  customize_points:
+  - 不良率アラート閾値（config.ymlのdefect_rate_alert_threshold）
+  - 工程列名（process）と製品名列名（product_name）
+  - 不良フラグ列名（is_defect）と検査値列名（inspection_value）
+- id: B-77
+  name: 製造 設備稼働ログ 異常予兆検知ダッシュボード
+  industry: 製造
+  department: 設備管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/02_equipment_log/
+  difficulty: ★★★
+  description: 製造設備センサーデータのZスコア異常予兆を検知し、設備別CRITICAL/WARNINGアラート件数・最大Zスコア・温度トレンドを可視化。連続アラート設備（≥2h）を特定して保全優先度の判断を支援する設備管理ダッシュボード。
+  demo: cd 02_manufacturing/02_equipment_log && streamlit run app.py
+  customize_points:
+  - 設備ID列名（equipment_id）とアラートレベル列名（alert_level）
+  - 温度列名（temperature）と振動列名（vibration）
+  - Zスコア列名（max_z）と連続アラート列名（consecutive_alert）
