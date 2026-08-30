@@ -147,6 +147,9 @@ _A_TOOL_DEFS = [
     ("B-75", "02_manufacturing/04_production_variance/app.py", "demo_mfg_prod_var",  "[B-75] 製造 生産計画差異ダッシュボード"),
     ("B-76", "02_manufacturing/01_quality_inspection/app.py",  "demo_mfg_qc_insp",   "[B-76] 製造 品質検査 異常値検出ダッシュボード"),
     ("B-77", "02_manufacturing/02_equipment_log/app.py",       "demo_mfg_equip_log", "[B-77] 製造 設備稼働ログ 異常予兆検知"),
+    ("B-78", "02_manufacturing/03_cost_variance/app.py",       "demo_mfg_cost_var",  "[B-78] 製造 原価差異分析ダッシュボード"),
+    ("B-79", "02_manufacturing/06_worker_productivity/app.py", "demo_mfg_worker",    "[B-79] 製造 作業員生産性・稼働率分析"),
+    ("B-80", "02_manufacturing/07_quality_portal/app.py",      "demo_mfg_qportal",   "[B-80] 製造 品質管理ポータル 総合KPI"),
 ]
 
 _demo_pages = {
@@ -521,6 +524,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-75": "🏭 製造",
     "B-76": "🏭 製造",
     "B-77": "🏭 製造",
+    "B-78": "🏭 製造",
+    "B-79": "🏭 製造",
+    "B-80": "🏭 製造",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

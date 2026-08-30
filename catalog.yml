@@ -2472,3 +2472,45 @@
   - 設備ID列名（equipment_id）とアラートレベル列名（alert_level）
   - 温度列名（temperature）と振動列名（vibration）
   - Zスコア列名（max_z）と連続アラート列名（consecutive_alert）
+- id: B-78
+  name: 製造 原価差異分析ダッシュボード
+  industry: 製造
+  department: 経理・財務
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/03_cost_variance/
+  difficulty: ★★☆
+  description: 製造ライン別の計画コスト・実績コスト・差異額・差異率を集計し、費目別（材料費・労務費）差異と差異フラグ分布を可視化。製造原価の超過要因を特定する経理・財務向け分析ツール。
+  demo: cd 02_manufacturing/03_cost_variance && streamlit run app.py
+  customize_points:
+  - ライン識別列名（line_id）と計画コスト列名（planned_total_cost）
+  - 実績コスト列名（actual_total_cost）と差異額列名（total_variance）
+  - 差異フラグ列名（variance_flag）と費目別コスト列名
+- id: B-79
+  name: 製造 作業員生産性・稼働率分析ダッシュボード
+  industry: 製造
+  department: 生産管理・人事
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/06_worker_productivity/
+  difficulty: ★★☆
+  description: 作業員別生産性ランキング・ライン別不良率をグラフで可視化し、低生産性×高不良率の作業員をOJT優先候補として自動抽出。製造現場の人材育成計画を支援する生産管理ダッシュボード。
+  demo: cd 02_manufacturing/06_worker_productivity && streamlit run app.py
+  customize_points:
+  - 作業員ID列名（worker_id）とライン列名（line）
+  - 生産性列名（productivity）と不良率列名（defect_rate）
+  - 残業時間列名（overtime_hours）と生産数列名（production_qty）
+- id: B-80
+  name: 製造 品質管理ポータル 総合品質KPIダッシュボード
+  industry: 製造
+  department: 品質保証
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/07_quality_portal/
+  difficulty: ★★★
+  description: 月次不良率・クレーム件数・歩留まりトレンド・検査員別実績・ロット合否判定の5分野を統合した品質管理ポータル。5タブ構成で品質KPIを一元管理する品質保証部門向け総合ダッシュボード。
+  demo: cd 02_manufacturing/07_quality_portal && streamlit run app.py
+  customize_points:
+  - sample_defect_rate.csv / sample_claim.csv / sample_yield.csv / sample_inspector.csv / sample_lot.csv を自社データに差し替え
+  - 不良率列名（defect_rate）と歩留まり率列名（yield_rate）
+  - ロット合否列名（verdict/result）と検査員ID列名（inspector_id）
