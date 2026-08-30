@@ -2514,3 +2514,45 @@
   - sample_defect_rate.csv / sample_claim.csv / sample_yield.csv / sample_inspector.csv / sample_lot.csv を自社データに差し替え
   - 不良率列名（defect_rate）と歩留まり率列名（yield_rate）
   - ロット合否列名（verdict/result）と検査員ID列名（inspector_id）
+- id: B-81
+  name: 製造 工程能力指数（Cp/Cpk）分析ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/08_cp_cpk/
+  difficulty: ★★★
+  description: 測定データCSVをアップロードし、工程ごとにUSL/LSLを設定するとCp/Cpkを一括計算。判定（良好/要改善/不可）・改善アクション・規格外推定割合・測定値分布ヒストグラムを表示する品質管理ツール。
+  demo: cd 02_manufacturing/08_cp_cpk && streamlit run app.py
+  customize_points:
+  - 工程名列名（デフォルト自動検出）と測定値列名
+  - 工程別USL/LSLの規格値（一括または個別設定）
+  - Cpk判定閾値（良好≥1.33/要改善≥1.00/不可<1.00）
+- id: B-82
+  name: 製造 SPC管理図 X-bar/R + 異常ルール自動検出ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/10_spc_chart/
+  difficulty: ★★★
+  description: CSVアップロードまたはサンプルデータでX-bar/R管理図を生成し、異常3ルール（3σ超過・8点連続・6点連続トレンド）を自動検出。逸脱率と違反ポイント一覧で工程の安定性を評価するSPCダッシュボード。
+  demo: cd 02_manufacturing/10_spc_chart && streamlit run app.py
+  customize_points:
+  - 工程列名・測定値列名・サブグループ列名
+  - サブグループサイズ（n=2〜10に対応）
+  - 異常ルール閾値（逸脱率 5%/10%）
+- id: B-83
+  name: 製造 不良モード別パレート × 時系列複合分析ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/13_defect_pareto/
+  difficulty: ★★☆
+  description: CSVアップロードまたはサンプルデータで不良モード別件数をパレート図（80%累積ライン付き）と月次トレンドラインで可視化。vital fewの特定と月次件数の増減トレンド判定で改善優先順位を明確化。
+  demo: cd 02_manufacturing/13_defect_pareto && streamlit run app.py
+  customize_points:
+  - 年月列名（date_col）・不良モード列名（mode_col）・件数列名（count_col）
+  - vital few閾値（累積80%）
+  - パレート棒グラフの配色（vital few赤 / その他青）
