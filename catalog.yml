@@ -2556,3 +2556,46 @@
   - 年月列名（date_col）・不良モード列名（mode_col）・件数列名（count_col）
   - vital few閾値（累積80%）
   - パレート棒グラフの配色（vital few赤 / その他青）
+
+- id: B-84
+  name: 製造 CAPA（是正処置）効果検証ダッシュボード
+  industry: 製造
+  department: 品質保証
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/14_corrective_action/
+  difficulty: ★★★
+  description: CSVアップロードまたはサンプルデータで是正処置前後の測定値を比較し、Shapiro-Wilk正規性検定に基づいてt検定（Welch）またはMann-Whitney Uを自動選択。p値・効果量・ヒストグラム・箱ひげ図でCAPA効果を統計的に可視化。
+  demo: cd 02_manufacturing/14_corrective_action && streamlit run app.py
+  customize_points:
+  - グループ列名（是正前/後の識別列）・測定値列名
+  - 是正前ラベル・是正後ラベル（CSV内の実際の値）
+  - 効果判定閾値（p値0.05 / 効果量Cohen's d 0.5）
+- id: B-85
+  name: 製造 AQL抜き取り検査・ロット合否判定ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/18_aql_sampling/
+  difficulty: ★★★
+  description: JIS Z 9015-1（ISO 2859-1）準拠のサンプリング計画を自動生成。ロットサイズ・AQL水準・検査水準からコードレター・抜取数・合格判定数（Ac/Re）を算出し、OC曲線（検査特性曲線）で生産者リスクと消費者リスクを可視化。実際の不良数を入力してロット合否を即時判定。
+  demo: cd 02_manufacturing/18_aql_sampling && streamlit run app.py
+  customize_points:
+  - ロットサイズ N（2〜500,000）
+  - AQL水準（0.065%〜10.0%の12段階）
+  - 検査水準（I/II/III）
+- id: B-86
+  name: 製造 サプライヤー品質スコアリングダッシュボード
+  industry: 製造
+  department: 調達管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/17_supplier_scoring/
+  difficulty: ★★☆
+  description: 仕入先ごとの不良率・納期遵守率・価格偏差を重み付き合成スコア（不良50%/納期30%/価格20%）で評価し仕入先ランクを自動分類。CSVアップロード対応、棒グラフとスコア内訳チャートで優良・要改善・要見直し先を一目で把握。
+  demo: cd 02_manufacturing/17_supplier_scoring && streamlit run app.py
+  customize_points:
+  - 重み付け比率（不良率/納期/価格偏差）
+  - 優良ライン（デフォルト70点）・改善ラインの閾値
+  - 評価指標の列名マッピング
