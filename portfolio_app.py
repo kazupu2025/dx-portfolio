@@ -156,6 +156,9 @@ _A_TOOL_DEFS = [
     ("B-84", "02_manufacturing/14_corrective_action/app.py", "demo_mfg_capa",      "[B-84] 製造 CAPA（是正処置）効果検証"),
     ("B-85", "02_manufacturing/18_aql_sampling/app.py",      "demo_mfg_aql",       "[B-85] 製造 AQL抜き取り検査・ロット合否判定"),
     ("B-86", "02_manufacturing/17_supplier_scoring/app.py",  "demo_mfg_supplier",  "[B-86] 製造 サプライヤー品質スコアリング"),
+    ("B-87", "02_manufacturing/05_material_cost/app.py",    "demo_mfg_matcost",   "[B-87] 製造 原材料コスト変動ダッシュボード"),
+    ("B-88", "02_manufacturing/11_gauge_rr/app.py",         "demo_mfg_grr",       "[B-88] 製造 ゲージR&R（MSA）測定システム解析"),
+    ("B-89", "02_manufacturing/12_4m_change/app.py",        "demo_mfg_4mchange",  "[B-89] 製造 4M変更前後 品質比較"),
 ]
 
 _demo_pages = {
@@ -539,6 +542,9 @@ _SECTION_MAP: dict[str, str] = {
     "B-84": "🏭 製造",
     "B-85": "🏭 製造",
     "B-86": "🏭 製造",
+    "B-87": "🏭 製造",
+    "B-88": "🏭 製造",
+    "B-89": "🏭 製造",
 }
 # C-74〜C-109 は製造まとめ
 for _tid in ["C-97", "C-74", "C-75", "C-76", "C-77", "C-95", "C-96",

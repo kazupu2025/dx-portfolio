@@ -2599,3 +2599,46 @@
   - 重み付け比率（不良率/納期/価格偏差）
   - 優良ライン（デフォルト70点）・改善ラインの閾値
   - 評価指標の列名マッピング
+
+- id: B-87
+  name: 製造 原材料コスト変動ダッシュボード
+  industry: 製造
+  department: 購買管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/05_material_cost/
+  difficulty: ★★☆
+  description: 20種類の原材料コストをカテゴリ別・仕入先別に可視化。前月比変動率10%超を急騰/急落として自動フラグ立て。Plotly棒グラフ・円グラフ・急騰急落明細テーブルで購買リスクを一目把握。CSVアップロード対応。
+  demo: cd 02_manufacturing/05_material_cost && streamlit run app.py
+  customize_points:
+  - カテゴリフィルター（金属/樹脂/化学品/電子部品/補助材）
+  - 急騰急落判定閾値（デフォルト±10%）
+  - 材料コード・材料名・仕入先の列名マッピング
+- id: B-88
+  name: 製造 ゲージR&R（MSA）測定システム解析ダッシュボード
+  industry: 製造
+  department: 品質管理
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/11_gauge_rr/
+  difficulty: ★★★
+  description: 2因子交差ANOVAで繰り返し性（EV）・再現性（AV）・部品変動（PV）の分散成分を推定。%GRR・ndc（識別カテゴリ数）を算出し測定システムの合否を判定（<10%合格/<30%条件付き合格）。ANOVAテーブルと変動成分内訳バーチャートを表示。
+  demo: cd 02_manufacturing/11_gauge_rr && streamlit run app.py
+  customize_points:
+  - 部品列名・作業者列名・測定値列名
+  - GRR合否判定閾値（10% / 30%）
+  - サンプルデータ：10部品 × 3作業者 × 2回繰り返し
+- id: B-89
+  name: 製造 4M変更前後 品質比較ダッシュボード
+  industry: 製造
+  department: 生産技術
+  status: production-ready
+  priority: A
+  path: 02_manufacturing/12_4m_change/
+  difficulty: ★★★
+  description: Man/Machine/Material/Methodいずれかの変更前後の測定データを統計的に比較。Shapiro-Wilk正規性検定でt検定（Welch）またはMann-Whitney Uを自動選択し、p値・効果量・ヒストグラム・箱ひげ図で変化点の有意差を可視化。
+  demo: cd 02_manufacturing/12_4m_change && streamlit run app.py
+  customize_points:
+  - グループ列名・測定値列名・変更前後ラベル
+  - 有意差判定閾値（p値0.05 / 効果量Cohen's d 0.5）
+  - 4M変更種別（Man/Machine/Material/Method）の列追加対応
