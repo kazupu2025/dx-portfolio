@@ -81,23 +81,23 @@
 | C-107 | 製造業 | CAPAワークフロー（起票→承認→効果確認フロー） | ★☆☆ | A | `02_manufacturing/53_capa_workflow/` |
 | C-108 | 製造業 | AI外観検査自動判定 | ★☆☆ | A | `02_manufacturing/54_visual_inspection/` |
 | C-109 | 製造業 | 多拠点品質比較ダッシュボード | ★☆☆ | A | `02_manufacturing/55_multisite_quality/` |
-| C-110 | 飲食 | アルバイトシフト管理・人件費集計 |  | A | `06_restaurant/03_shift_cost/` |
-| C-111 | 人事・採用 | 研修効果測定レポート |  | A | `08_hr/02_training_effectiveness/` |
+| C-110 | 飲食 | アルバイトシフト管理・人件費集計 |  | A | `06_restaurant/05_shift_cost/` |
+| C-111 | 人事・採用 | 研修効果測定レポート |  | A | `08_hr/05_training_effectiveness/` |
 | C-112 | 教育・研修 | 出席率・成績推移レポート |  | A | `09_education/02_attendance_grade/` |
-| C-113 | IT・SaaS | SaaSメトリクスダッシュボード（MRR/チャーン/LTV/CAC） | ★★☆ | A | `10_service/02_saas_metrics/` |
-| C-114 | IT・SaaS | カスタマーサクセス指標ダッシュボード（NPS・ヘルススコア） | ★★☆ | A | `10_service/03_customer_success/` |
-| C-115 | ホテル・観光 | RevPAR・客室稼働率ダッシュボード | ★★☆ | A | `hotel/01_revpar/` |
-| C-116 | 建設・ゼネコン | 工程進捗・原価差異レポート | ★★☆ | A | `construction/01_progress_cost` |
-| C-117 | 農業・食品加工 | 収穫量・品質トレンド分析 | ★★☆ | A | `agriculture/01_harvest_quality/` |
-| C-118 | 自動車・整備業 | 整備案件・部品在庫管理ダッシュボード | ★★☆ | A | `automotive/01_service_inventory/` |
-| C-119 | ホテル・観光 | 宴会・イベント収益管理 | ★★☆ | B | `hotel/02_banquet_revenue/` |
-| C-120 | ホテル・観光 | 顧客満足度・リピート分析 | ★★☆ | B | `hotel/03_guest_satisfaction/` |
-| C-121 | 建設・ゼネコン | 安全管理・ヒヤリハット集計 | ★★☆ | A | `construction/02_safety_hazard/` |
-| C-122 | 建設・ゼネコン | 資材コスト・発注管理 | ★★☆ | B | `construction/03_material_cost/` |
-| C-123 | 農業・食品加工 | 農薬・肥料コスト分析 | ★★☆ | B | `agriculture/02_agri_cost/` |
-| C-124 | 農業・食品加工 | 出荷先別単価・販売分析 | ★★☆ | B | `agriculture/03_sales_channel/` |
-| C-125 | 自動車・整備業 | 顧客車検リマインダー管理 | ★★☆ | A | `automotive/02_inspection_reminder/` |
-| C-126 | 自動車・整備業 | 整備士別生産性・売上分析 | ★★☆ | B | `automotive/03_mechanic_performance/` |
+| C-113 | IT・SaaS | SaaSメトリクスダッシュボード（MRR/チャーン/LTV/CAC） | ★★☆ | A | `10_service/03_saas_metrics/` |
+| C-114 | IT・SaaS | カスタマーサクセス指標ダッシュボード（NPS・ヘルススコア） | ★★☆ | A | `10_service/05_customer_success/` |
+| C-115 | ホテル・観光 | RevPAR・客室稼働率ダッシュボード | ★★☆ | A | `13_hotel/02_revpar/` |
+| C-116 | 建設・ゼネコン | 工程進捗・原価差異レポート | ★★☆ | A | `12_construction/03_progress_cost` |
+| C-117 | 農業・食品加工 | 収穫量・品質トレンド分析 | ★★☆ | A | `15_agriculture/03_harvest_quality/` |
+| C-118 | 自動車・整備業 | 整備案件・部品在庫管理ダッシュボード | ★★☆ | A | `16_automotive/02_service_inventory/` |
+| C-119 | ホテル・観光 | 宴会・イベント収益管理 | ★★☆ | B | `13_hotel/03_banquet_revenue/` |
+| C-120 | ホテル・観光 | 顧客満足度・リピート分析 | ★★☆ | B | `13_hotel/04_guest_satisfaction/` |
+| C-121 | 建設・ゼネコン | 安全管理・ヒヤリハット集計 | ★★☆ | A | `12_construction/04_safety_hazard/` |
+| C-122 | 建設・ゼネコン | 資材コスト・発注管理 | ★★☆ | B | `12_construction/05_material_cost/` |
+| C-123 | 農業・食品加工 | 農薬・肥料コスト分析 | ★★☆ | B | `15_agriculture/04_agri_cost/` |
+| C-124 | 農業・食品加工 | 出荷先別単価・販売分析 | ★★☆ | B | `15_agriculture/05_sales_channel/` |
+| C-125 | 自動車・整備業 | 顧客車検リマインダー管理 | ★★☆ | A | `16_automotive/03_inspection_reminder/` |
+| C-126 | 自動車・整備業 | 整備士別生産性・売上分析 | ★★☆ | B | `16_automotive/04_mechanic_performance/` |
 | C-16 | 医療・介護 | シフト希望・配置分析パイプライン |  | C | `03_healthcare/02_shift_optimization` |
 | C-17 | 物流・倉庫 | 配送コスト分析パイプライン |  | C | `05_logistics/02_delivery_cost` |
 | C-18 | 製造 | 原価差異分析パイプライン |  | C | `02_manufacturing/03_cost_variance` |
@@ -106,7 +106,7 @@
 | C-21 | サービス | サービス別売上・原価分析パイプライン |  | C | `10_service/02_revenue_cost` |
 | C-22 | 物流・倉庫 | ドライバー勤怠・拘束時間管理パイプライン |  | C | `05_logistics/03_driver_attendance` |
 | C-23 | 不動産 | 不動産 管理費・修繕費コスト分析パイプライン |  | C | `07_realestate/03_maintenance_cost` |
-| C-24 | 教育・研修 | 講師稼働・コマ数管理パイプライン |  | C | `09_education/02_instructor_workload` |
+| C-24 | 教育・研修 | 講師稼働・コマ数管理パイプライン |  | C | `09_education/03_instructor_workload` |
 | C-25 | 製造 | 生産計画 vs 実績 差異分析パイプライン |  | C | `02_manufacturing/04_production_variance` |
 | C-26 | 金融・保険 | 請求書突合・差異検出パイプライン |  | C | `04_finance/03_invoice_reconciliation` |
 | C-27 | 小売 | 顧客購買履歴 RFM 分析パイプライン |  | C | `01_retail/04_rfm_analysis` |
@@ -118,30 +118,30 @@
 | C-33 | 人事・採用 | 採用歩留まり率分析パイプライン |  | C | `08_hr/03_recruitment_funnel` |
 | C-34 | 小売 | 返品・クレームデータ集計レポート |  | C | `01_retail/05_returns_claims` |
 | C-35 | 製造 | 作業員別生産性レポート |  | C | `02_manufacturing/06_worker_productivity` |
-| C-36 | サービス | 顧客満足度スコア集計・トレンド分析 |  | C | `10_service/03_customer_satisfaction` |
+| C-36 | サービス | 顧客満足度スコア集計・トレンド分析 |  | C | `10_service/04_customer_satisfaction` |
 | C-37 | 医療・介護 | 来院スループット分析パイプライン |  | C | `03_healthcare/04_reception_throughput` |
-| C-38 | 飲食 | 予約キャンセル集計・傾向分析パイプライン |  | C | `06_restaurant/03_reservation_cancel` |
+| C-38 | 飲食 | 予約キャンセル集計・傾向分析パイプライン |  | C | `06_restaurant/04_reservation_cancel` |
 | C-39 | 不動産 | 入居者対応履歴・クレーム集計パイプライン |  | C | `07_realestate/04_tenant_claims` |
-| C-40 | 飲食・外食 | アルバイトシフト管理・人件費集計パイプライン |  | C | `06_restaurant/04_shift_labor` |
+| C-40 | 飲食・外食 | アルバイトシフト管理・人件費集計パイプライン |  | C | `06_restaurant/06_shift_labor` |
 | C-41 | 人事・採用 | 採用チャネル別コスト分析パイプライン |  | C | `08_hr/04_recruitment_cost` |
-| C-42 | 教育・研修 | 受講率・修了率レポートパイプライン |  | C | `09_education/03_completion_rate` |
+| C-42 | 教育・研修 | 受講率・修了率レポートパイプライン |  | C | `09_education/04_completion_rate` |
 | C-43 | 小売 | シフト充足率・人件費最適化レポート |  | C | `01_retail/06_shift_optimization` |
-| C-44 | 物流・倉庫 | 荷役作業員KPI集計パイプライン |  | C | `11_logistics/01_worker_kpi` |
-| C-45 | サービス | サービス別売上・原価レポートパイプライン |  | C | `10_service/04_service_revenue` |
+| C-44 | 物流・倉庫 | 荷役作業員KPI集計パイプライン |  | C | `05_logistics/06_worker_kpi` |
+| C-45 | サービス | サービス別売上・原価レポートパイプライン |  | C | `10_service/06_service_revenue` |
 | C-46 | 建設・ゼネコン | 工程進捗・作業員稼働KPI集計パイプライン |  | C | `12_construction/01_progress_kpi` |
 | C-47 | ホテル・観光 | 宿泊予約・稼働率分析パイプライン |  | C | `13_hotel/01_occupancy_rate` |
 | C-48 | IT・SaaS | サブスクリプション解約率（チャーン）分析パイプライン |  | C | `14_it_saas/01_churn_analysis` |
 | C-49 | 農業・食品加工 | 作物収量・品質検査レポートパイプライン |  | C | `15_agriculture/01_yield_quality` |
 | C-50 | 自動車・整備業 | 車両整備依頼・完了率分析パイプライン |  | C | `16_automotive/01_repair_analysis` |
 | C-51 | 医療・介護 | 診療報酬・請求分析パイプライン |  | C | `03_healthcare/05_billing_analysis` |
-| C-52 | 金融・保険 | 保険問い合わせ・対応履歴分析パイプライン |  | C | `04_finance/04_inquiry_analysis` |
+| C-52 | 金融・保険 | 保険問い合わせ・対応履歴分析パイプライン |  | C | `04_finance/05_inquiry_analysis` |
 | C-53 | 不動産 | 物件内見予約・成約率分析パイプライン |  | C | `07_realestate/05_viewing_conversion` |
-| C-54 | 飲食 | 店舗別損益・原価率管理パイプライン |  | C | `06_restaurant/05_pl_management` |
-| C-55 | 教育 | 生徒入学申込・入学率分析パイプライン |  | C | `15_education/02_enrollment_analysis` |
-| C-56 | 物流 | 配送コスト・利益率管理パイプライン |  | C | `09_logistics/05_cost_margin` |
+| C-54 | 飲食 | 店舗別損益・原価率管理パイプライン |  | C | `06_restaurant/07_pl_management` |
+| C-55 | 教育 | 生徒入学申込・入学率分析パイプライン |  | C | `09_education/05_enrollment_analysis` |
+| C-56 | 物流 | 配送コスト・利益率管理パイプライン |  | C | `05_logistics/05_cost_margin` |
 | C-57 | 医療・介護 | 医療スタッフ勤怠・稼働率分析パイプライン |  | C | `03_healthcare/06_staff_attendance` |
-| C-58 | 建設 | 工事原価・予算実績管理パイプライン |  | C | `11_construction/05_cost_budget` |
-| C-59 | 農業 | 農場スタッフ勤怠・作業効率分析パイプライン |  | C | `12_agriculture/02_staff_efficiency` |
+| C-58 | 建設 | 工事原価・予算実績管理パイプライン |  | C | `12_construction/02_cost_budget` |
+| C-59 | 農業 | 農場スタッフ勤怠・作業効率分析パイプライン |  | C | `15_agriculture/02_staff_efficiency` |
 | C-60 | IT・SaaS | CSチケット分析パイプライン |  | C | `14_it_saas/02_support_ticket` |
 | C-61 | 製造 | 製造業品質管理ポータル（統合） |  | C | `02_manufacturing/07_quality_portal` |
 | C-62 | 製造 | 工程能力指数（Cp/Cpk）分析システム | ★★☆ | B | `02_manufacturing/08_cp_cpk` |
